@@ -1,0 +1,50 @@
+{
+  "page": {
+    "titleFirst": "Our",
+    "titleSecond": "Categories",
+    "exploreOurDiverseRange": "Explore our diverse range of race categories designed for participants of all fitness levels. Whether you're an elite athlete or a beginner, we have the perfect challenge for you.",
+    "faqFirst": "Common",
+    "faqSecond": "Questions"
+  },
+  "cards": {
+    "n18Years": "18+ years",
+    "n16Years": "16+ years",
+    "n14Years": "14+ years",
+    "allAges": "All ages",
+    "tbd": "TBD",
+    "failedToLoadRace": "Failed to load race categories",
+    "anErrorOccurredWhile": "An error occurred while loading race categories",
+    "pleaseTryAgainLater": "Please try again later or contact support if the problem persists.",
+    "entryFee": "Entry Fee",
+    "foreignEntryFee": "Foreign Entry Fee",
+    "kidsEntryFee": "Kids Entry Fee",
+    "ageRequirement": "Age Requirement",
+    "register": "Register",
+    "defaultDescription": "Join us for this exciting race category.",
+    "fullMarathon": "Full Marathon",
+    "fullMarathonDesc": "Challenge yourself with our flagship event. The full marathon route takes you through the scenic landscapes of Mwanga.",
+    "halfMarathon": "Half Marathon",
+    "halfMarathonDesc": "A perfect balance of challenge and accessibility. Experience the beauty of Mwanga in this popular distance.",
+    "race10k": "10K Race",
+    "race10kDesc": "An ideal distance for recreational runners looking to push themselves in a competitive environment.",
+    "funRun5k": "5K Fun Run",
+    "funRun5kDesc": "Perfect for beginners and families. Enjoy a fun, non-competitive atmosphere while still being part of the event."
+  },
+  "faq": {
+    "howDoIChoose": "How do I choose the right race category?",
+    "considerYourFitnessLevel": "Consider your fitness level, running experience, and goals. If you're new to running, the 5K Fun Run is a great starting point. For experienced runners, the Half or Full Marathon offers a greater challenge. The 10K is a good middle ground for those with some running experience.",
+    "canISwitchMy": "Can I switch my race category after registration?",
+    "yesYouCanSwitch": "Yes, you can switch your race category up to 14 days before the event. Please contact our support team to make the change. Additional fees may apply if switching to a higher-priced category.",
+    "areThereAgeRestrictions": "Are there age restrictions for the different categories?",
+    "yesTheFullMarathon": "Yes, the Full Marathon is open to participants 18 years and older, the Half Marathon for 16+, and the 10K for 14+. The 5K Fun Run is open to all ages, though children under 12 must be accompanied by a registered adult participant.",
+    "whatIsIncludedIn": "What is included in my race registration?",
+    "allRegistrationsIncludeA": "All registrations include a race bib with timing chip, finisher medal, event t-shirt, access to water stations and medical support during the race, and entry to the post-race celebration. Full and Half Marathon participants also receive a gear check service.",
+    "isThereATime": "Is there a time limit to complete the races?",
+    "yesTheFullMarathon2": "Yes, the Full Marathon has a 6-hour time limit, the Half Marathon has a 4-hour limit, the 10K has a 2-hour limit, and the 5K has a 1.5-hour limit. These limits ensure the safety of all participants and allow for timely reopening of roads."
+  },
+  "cta": {
+    "readyToJoinUs": "Ready to join us?",
+    "registerNowToSecure": "Register now to secure your spot in your preferred race category.",
+    "registerNow": "Register Now"
+  }
+}

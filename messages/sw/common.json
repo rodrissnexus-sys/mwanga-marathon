@@ -1,0 +1,35 @@
+{
+  "backToTop": {
+    "label": "Rudi juu",
+    "text": "Rudi juu"
+  },
+  "modal": {
+    "close": "Funga dirisha"
+  },
+  "notFound": {
+    "title": "Ukurasa Haupatikani",
+    "text": "Ukurasa unaoutafuta haupo au umehamishwa.",
+    "backHome": "Rudi Mwanzo"
+  },
+  "preloader": {
+    "text": "Inapakia matukio ya kusisimua..."
+  },
+  "auth": {
+    "loading": "Inapakia..."
+  },
+  "login": {
+    "fillAll": "Tafadhali jaza sehemu zote",
+    "failed": "Imeshindwa kuingia. Tafadhali hakiki taarifa zako.",
+    "invalid": "Barua pepe au nenosiri si sahihi. Tafadhali jaribu tena.",
+    "tooMany": "Majaribio mengi mno ya kuingia. Tafadhali jaribu tena baadaye.",
+    "serverError": "Hitilafu ya seva. Tafadhali jaribu tena baadaye au wasiliana na msaada.",
+    "unexpected": "Hitilafu isiyotarajiwa imetokea. Tafadhali jaribu tena.",
+    "title": "Ingia kwenye Dashibodi",
+    "subtitle": "Ingiza taarifa zako kufikia dashibodi",
+    "email": "Barua Pepe",
+    "password": "Nenosiri",
+    "loggingIn": "Inaingia...",
+    "login": "Ingia",
+    "forgot": "Umesahau Nenosiri? <link>weka upya</link>"
+  }
+}

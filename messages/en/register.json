@@ -1,0 +1,27 @@
+{
+  "payment": {
+    "fastAndSecureMobile": "Fast and secure mobile money transfer",
+    "dial15000": "Dial *150*00#",
+    "selectPayWithLipa": "Select Pay with Lipa namba",
+    "select1EnterLipa": "Select 1 ( Enter Lipa Number)",
+    "enterLipaNumber58136742": "Enter Lipa Number: 58136742",
+    "enterAmountBasedOn": "Enter Amount based on your selected event category",
+    "enterMPesaPin": "Enter M-Pesa pin",
+    "quickAndReliablePayments": "Quick and reliable payments",
+    "dial15001": "Dial *150*01#",
+    "enterLipaNumber18403062": "Enter Lipa Number: 18403062",
+    "confirmWithYourPin": "Confirm with your PIN",
+    "multiplePaymentOptionsIn": "Multiple payment options in one place",
+    "payWithPesapal": "Pay with Pesapal",
+    "clickOnThePay": "Click on the 'Pay with Pesapal' button below",
+    "chooseYourPreferredPayment": "Choose your preferred payment method",
+    "enterTheAmountFor": "Enter the amount for your selected event category",
+    "completeTheTransaction": "Complete the transaction",
+    "titleFirst": "Payment",
+    "titleSecond": "Methods",
+    "importantInformation": "Important Information",
+    "keepYourPaymentConfirmation": "Keep your payment confirmation for reference",
+    "paymentConfirmationMayTake": "Payment confirmation may take up to 24 hours",
+    "forSupportInfoMwafem": "For support: info@mwafem.com"
+  }
+}

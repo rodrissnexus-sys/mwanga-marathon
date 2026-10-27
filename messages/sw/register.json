@@ -1,0 +1,27 @@
+{
+  "payment": {
+    "fastAndSecureMobile": "Njia ya haraka na salama ya kutuma pesa",
+    "dial15000": "Bonyeza *150*00#",
+    "selectPayWithLipa": "Chagua Lipa kwa namba ya Lipa",
+    "select1EnterLipa": "Chagua 1 (Ingiza Namba ya Lipa)",
+    "enterLipaNumber58136742": "Ingiza Namba ya Lipa: 58136742",
+    "enterAmountBasedOn": "Ingiza Kiasi kulingana na aina ya tukio ulichochagua",
+    "enterMPesaPin": "Ingiza namba ya siri ya M-Pesa",
+    "quickAndReliablePayments": "Malipo ya haraka na ya kuaminika",
+    "dial15001": "Bonyeza *150*01#",
+    "enterLipaNumber18403062": "Ingiza Namba ya Lipa: 18403062",
+    "confirmWithYourPin": "Thibitisha kwa PIN yako",
+    "multiplePaymentOptionsIn": "Njia nyingi za malipo katika sehemu moja",
+    "payWithPesapal": "Lipa kwa Pesapal",
+    "clickOnThePay": "Bonyeza kitufe cha 'Lipa kwa Pesapal' hapo chini",
+    "chooseYourPreferredPayment": "Chagua njia yako unayopendelea ya malipo",
+    "enterTheAmountFor": "Ingiza kiasi cha aina ya tukio ulichochagua",
+    "completeTheTransaction": "Kamilisha muamala",
+    "titleFirst": "Njia za",
+    "titleSecond": "Malipo",
+    "importantInformation": "Taarifa Muhimu",
+    "keepYourPaymentConfirmation": "Hifadhi uthibitisho wa malipo yako kwa ajili ya kumbukumbu",
+    "paymentConfirmationMayTake": "Uthibitisho wa malipo unaweza kuchukua hadi masaa 24",
+    "forSupportInfoMwafem": "Kwa msaada: info@mwafem.com"
+  }
+}

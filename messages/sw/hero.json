@@ -1,0 +1,32 @@
+{
+  "about": {
+    "title": "Kuhusu Mwanga Festival & Marathon",
+    "subtitle": "Kusherehekea Utamaduni, Jamii, na Ubora wa Michezo",
+    "description": "Fahamu dhamira yetu, maono yetu, na timu iliyo nyuma ya tukio bunifu zaidi la marathon ya kitamaduni nchini Tanzania.",
+    "cta": "Jiunge na Jamii Yetu"
+  },
+  "events": {
+    "title": "Matukio ya Mwanga Festival & Marathon",
+    "subtitle": "Shiriki Katika Sherehe Yetu ya Siku Mbili ya Michezo, Utamaduni na Jamii",
+    "description": "Pata ratiba kamili ya matukio ya Mwanga Festival & Marathon, ikiwa ni pamoja na maelezo ya mbio, burudani, na shughuli za huduma za jamii.",
+    "cta": "Jiandikishe Sasa"
+  },
+  "raceCategories": {
+    "title": "Aina za Mashindano",
+    "subtitle": "Chagua shindano na uwe sehemu ya tukio hili la kipekee",
+    "description": "Chunguza aina mbalimbali za mashindano zinazopatikana katika Mwanga Festival & Marathon. Kuanzia marathon nzima hadi mbio za burudani, kuna jambo kwa kila mtu.",
+    "cta": "Jiandikishe Sasa"
+  },
+  "register": {
+    "title": "Jiandikishe kwa Mwanga Festival & Marathon",
+    "subtitle": "Jiunge nasi katika sherehe hii ya kipekee ya utamaduni na michezo",
+    "description": "Jiandikishe kwa Mwanga Festival & Marathon. Chagua aina mbalimbali za mbio na uwe sehemu ya tukio hili la kipekee la kitamaduni na michezo.",
+    "cta": "Anza usajili wako sasa"
+  },
+  "sponsors": {
+    "title": "Shirikiana na Ubora",
+    "subtitle": "Jiunge nasi kujenga uzoefu usiosahaulika unaosherehekea mafanikio ya michezo na urithi wa kitamaduni. Msaada wako unaleta mabadiliko.",
+    "description": "Kuwa mdhamini wa Mwanga Festival & Marathon na utusaidie kuleta matokeo ya kudumu katika jamii yetu.",
+    "cta": "Gundua Fursa"
+  }
+}

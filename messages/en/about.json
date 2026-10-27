@@ -1,0 +1,57 @@
+{
+  "festival": {
+    "welcome": "Welcome to the Mwanga Festival and Marathon",
+    "intro1": "A vibrant celebration of our beautiful district nestled within the heart of the Kilimanjaro region. This unique event is more than just a race; it's a testament to our community's spirit and a showcase of Mwanga's hidden gems.",
+    "intro2": "Born from a desire to share the rich culture and stunning landscapes of our home, the festival and marathon aim to boost internal tourism, inviting Tanzanians from across the nation to experience the warmth and wonder of Mwanga.",
+    "communityTitle": "Our Community",
+    "communityText": "The event is proudly organized by <link>Kisangara Tours Ltd</link>, a Tanzania-based tour operator, in collaboration with <org>Mberesero Group</org>, <org>Osaka Royal Classic</org>, <org>Mwanga District Office</org>, and <org>Mwanga Community</org> members, fostering a sense of unity and pride.",
+    "invitationTitle": "Our Invitation",
+    "invitationText": "Join us as we celebrate our heritage, embrace the breathtaking scenery, and stride towards a brighter future for Mwanga.",
+    "keyInfo": "Key Information",
+    "regionalFocus": "Regional Focus:",
+    "regionalFocusText": "Centered within the Mwanga district of the Kilimanjaro region, with a strong local emphasis on promoting internal tourism and health supports to mothers and children.",
+    "organization": "Organizational Involvement:",
+    "organizationText": "The event is proudly organized by <link>Kisangara Tours Ltd</link>, a Tanzania-based tour operator, in collaboration with <org>Mberesero Group</org>, <org>Osaka Royal Classic</org>, <org>Mwanga District Office</org>, and <org>Mwanga Community</org> members.",
+    "purpose": "Purpose:",
+    "purposeText": "The primary goal is to boost domestic tourism within the Mwanga district, showcasing the region's attractions to Tanzanian residents and promoting health supports to mothers and children.",
+    "distinction": "Distinction:",
+    "distinctionText": "This event is distinct from the well-known Kilimanjaro Marathon in Mwanga District. The Mwanga Festival and Marathon is a separate, localized event."
+  },
+  "facts": {
+    "expectedParticipants": "Expected Participants",
+    "culturalEvents": "Cultural Events",
+    "daysOfFestivities": "Days of Festivities",
+    "titleFirst": "Event",
+    "titleSecond": "Facts"
+  },
+  "purpose": {
+    "titleFirst": "Our",
+    "titleSecond": "Purpose",
+    "mission": "Our Mission",
+    "missionText": "To create an unforgettable experience that celebrates athletic excellence while promoting cultural exchange and community development in Mwanga and beyond.",
+    "vision": "Our Vision",
+    "visionText": "To become Tanzania's premier marathon event, known for its unique blend of sports, culture, and community engagement, inspiring future generations."
+  },
+  "cta": {
+    "title": "Ready to Join the Marathon?",
+    "text": "Be part of this extraordinary event celebrating sports, culture, and community. Register now to secure your spot in the Mwanga Festival & Marathon!",
+    "registerNow": "Register Now"
+  },
+  "page": {
+    "titleFirst": "About",
+    "titleSecond": "Our Festival"
+  },
+  "sponsors": {
+    "titleFirst": "Our",
+    "titleSecond": "Sponsors",
+    "weAreProudTo": "We are proud to partner with these exceptional organizations who share our vision for promoting sports and culture in Tanzania.",
+    "allOurAmazingPartners": "All Our Amazing Partners",
+    "proudSponsorOfMwafem": "Proud sponsor of MWAFEM events, supporting our mission to promote sports and culture in Tanzania.",
+    "learnMore": "Learn More",
+    "visitWebsite": "Visit Website",
+    "becomeASponsor": "Become a Sponsor",
+    "joinOurGrowingFamily": "Join our growing family of sponsors and be part of this extraordinary journey. Together, we can make a lasting impact on sports and culture in Tanzania.",
+    "partnerWithUs": "Partner With Us",
+    "goToSponsor": "Go to sponsor {number}"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "page": {
+    "titleFirst": "Aina",
+    "titleSecond": "Zetu",
+    "exploreOurDiverseRange": "Chunguza aina mbalimbali za mashindano yaliyoandaliwa kwa washiriki wa viwango vyote vya afya. Iwapo wewe ni mwanariadha wa kiwango cha juu au mwanzo, tuna changamoto inayofaa kwako.",
+    "faqFirst": "Maswali",
+    "faqSecond": "ya Kawaida"
+  },
+  "cards": {
+    "n18Years": "Miaka 18+",
+    "n16Years": "Miaka 16+",
+    "n14Years": "Miaka 14+",
+    "allAges": "Umri wowote",
+    "tbd": "Itafahamishwa",
+    "failedToLoadRace": "Imeshindwa kupakia aina za mbio",
+    "anErrorOccurredWhile": "Hitilafu imetokea wakati wa kupakia aina za mbio",
+    "pleaseTryAgainLater": "Tafadhali jaribu tena baadaye au wasiliana na msaada ikiwa tatizo linaendelea.",
+    "entryFee": "Ada ya Ushiriki",
+    "foreignEntryFee": "Ada ya Ushiriki kwa Wageni",
+    "kidsEntryFee": "Ada ya Ushiriki kwa Watoto",
+    "ageRequirement": "Sharti la Umri",
+    "register": "Jiandikishe",
+    "defaultDescription": "Jiunge nasi katika aina hii ya mbio ya kusisimua.",
+    "fullMarathon": "Marathon Nzima",
+    "fullMarathonDesc": "Jipe changamoto katika tukio letu kuu. Njia ya marathon nzima inakupitisha katika mandhari ya kuvutia ya Mwanga.",
+    "halfMarathon": "Nusu Marathon",
+    "halfMarathonDesc": "Uwiano mzuri kati ya changamoto na urahisi. Furahia uzuri wa Mwanga katika umbali huu maarufu.",
+    "race10k": "Mbio za 10K",
+    "race10kDesc": "Umbali unaofaa kwa wakimbiaji wa burudani wanaotaka kujipima katika mazingira ya ushindani.",
+    "funRun5k": "Mbio za Burudani za 5K",
+    "funRun5kDesc": "Inafaa kwa wanaoanza na familia. Furahia mazingira ya burudani yasiyo ya ushindani huku ukiwa sehemu ya tukio."
+  },
+  "faq": {
+    "howDoIChoose": "Ninawezaje kuchagua aina sahihi ya mbio?",
+    "considerYourFitnessLevel": "Zingatia kiwango chako cha afya, uzoefu wa mbio, na malengo. Ikiwa unaanza kupiga mbio, Mbio za Burudani za 5K ni mahali pazuri pa kuanzia. Kwa wapiga mbio wenye uzoefu, Nusu Marathon au Marathon Nzima hutoa changamoto kubwa zaidi. Mbio za 10K ni njia nzuri ya kati kwa wale wenye uzoefu wa mbio. Mwanga Festival & Marathon inatoa mbio za kutosha kwa kila aina ya mpiga mbio.",
+    "canISwitchMy": "Naweza kubadilisha aina yangu ya mbio baada ya kujiandikisha?",
+    "yesYouCanSwitch": "Ndio, unaweza kubadilisha aina yako ya mbio hadi siku 14 kabla ya tukio. Tafadhali wasiliana na timu yetu ya msaada kufanya mabadiliko. Ada za ziada zinaweza kutumika ikiwa unabadilisha kwenda aina ya mbio yenye bei ya juu zaidi.",
+    "areThereAgeRestrictions": "Je, kuna vikwazo vya umri kwa aina tofauti za mbio?",
+    "yesTheFullMarathon": "Ndio, Marathon Nzima iko wazi kwa washiriki wenye umri wa miaka 18 na zaidi, Nusu Marathon kwa miaka 16+, na 10K kwa miaka 14+. Mbio za Burudani za 5K ziko wazi kwa umri wote, ingawa watoto chini ya miaka 12 lazima waambatane na mshiriki mzima aliyejiandikisha.",
+    "whatIsIncludedIn": "Nini kinahusishwa katika usajili wangu wa mbio?",
+    "allRegistrationsIncludeA": "Usajili wote unajumuisha kibandiko cha mbio chenye chipu ya muda, medali ya mshindi, fulana ya tukio, ufikiaji wa vituo vya maji na msaada wa matibabu wakati wa mbio, na uingizaji kwenye sherehe baada ya mbio. Washiriki wa Marathon Nzima na Nusu Marathon pia wanapokea huduma ya uhakiki wa vifaa.",
+    "isThereATime": "Je, kuna kikomo cha muda cha kukamilisha mbio?",
+    "yesTheFullMarathon2": "Ndio, Marathon Nzima ina kikomo cha muda wa saa 6, Nusu Marathon ina kikomo cha saa 4, mbio za 10K zina kikomo cha saa 2, na 5K ina kikomo cha saa 1.5. Vikomo hivi vinahakikisha usalama wa washiriki wote na kuruhusu ufunguzi wa barabara kwa wakati."
+  },
+  "cta": {
+    "readyToJoinUs": "Uko tayari kujiunga nasi?",
+    "registerNowToSecure": "Jiandikishe sasa kuhakikisha nafasi yako katika aina ya mbio unayopendelea.",
+    "registerNow": "Jiandikishe Sasa"
+  }
+}

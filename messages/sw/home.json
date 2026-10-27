@@ -1,0 +1,286 @@
+{
+  "heroImages": {
+    "desktop": [
+      {
+        "alt": "Changamoto ya Marathon",
+        "title": "Ubora"
+      },
+      {
+        "alt": "YAS na Mkimbiaji Wakati wa Kukimbia",
+        "title": "Michezo"
+      },
+      {
+        "alt": "Roho ya Jamii",
+        "title": "Jamii"
+      },
+      {
+        "alt": "Picha ya Mdhamini YAS 1",
+        "title": "Ushirikiano"
+      },
+      {
+        "alt": "Fahari ya Michezo",
+        "title": "Fahari"
+      },
+      {
+        "alt": "Picha ya Mdhamini YAS 2",
+        "title": "Msaada"
+      },
+      {
+        "alt": "Tuzo za Marathon",
+        "title": "Ubora"
+      },
+      {
+        "alt": "Picha ya Mdhamini YAS 3",
+        "title": "Pamoja"
+      },
+      {
+        "alt": "Picha ya Mdhamini YAS 4",
+        "title": "Umoja"
+      },
+      {
+        "alt": "Sherehe za Washiriki",
+        "title": "Ushindi"
+      },
+      {
+        "alt": "Mwisho wa Marathon",
+        "title": "Mafanikio"
+      },
+      {
+        "alt": "Picha ya Mdhamini YAS 5",
+        "title": "Roho"
+      },
+      {
+        "alt": "Sherehe za Washiriki 2",
+        "title": "Furaha"
+      },
+      {
+        "alt": "Washiriki Wanaocheza",
+        "title": "Tamasha"
+      }
+    ],
+    "mobile": [
+      {
+        "alt": "Changamoto ya Marathon",
+        "title": "Ubora"
+      },
+      {
+        "alt": "Picha ya Mdhamini YAS 6",
+        "title": "Ushirikiano"
+      },
+      {
+        "alt": "Roho ya Jamii",
+        "title": "Jamii"
+      },
+      {
+        "alt": "Picha ya Mdhamini YAS 7",
+        "title": "Roho"
+      },
+      {
+        "alt": "Picha ya Kuanza Pamoja",
+        "title": "Pamoja"
+      },
+      {
+        "alt": "Fahari ya Michezo",
+        "title": "Michezo"
+      },
+      {
+        "alt": "Picha ya Mstari wa Mwisho",
+        "title": "Ushindi"
+      },
+      {
+        "alt": "Tuzo za Marathon",
+        "title": "Mafanikio"
+      },
+      {
+        "alt": "Tukio la MWAFEM",
+        "title": "Tamasha"
+      },
+      {
+        "alt": "Mwisho wa Marathon",
+        "title": "Mafanikio"
+      },
+      {
+        "alt": "Wanachama wa MWAFEM",
+        "title": "Umoja"
+      }
+    ]
+  },
+  "hero": {
+    "experience": "Furahia Tukio",
+    "currentView": "Mtazamo wa Sasa",
+    "tagline": "Jiunge na msisimko Tanzania tunaposherehekea utamaduni, jamii, na michezo.",
+    "registerNow": "Jiandikishe Sasa",
+    "aboutMwafem": "Kuhusu MWAFEM",
+    "previousImage": "Picha iliyotangulia",
+    "nextImage": "Picha inayofuata",
+    "goToImage": "Nenda kwa picha {number}"
+  },
+  "about": {
+    "participants": "Washiriki",
+    "runnersFromAllOver": "Wakimbiaji kutoka kila mahali wanajiunga na marathon",
+    "partners": "Washirika",
+    "supportingOrganizationsAndSponsors": "Mashirika na wadhamini wanaotusaidia",
+    "prizePool": "Tuzo za Zawadi",
+    "totalPrizeMoneyFor": "Jumla ya pesa za zawadi kwa washindi",
+    "volunteers": "Waojitoaji",
+    "dedicatedCommunityVolunteers": "Waojitoaji wanaojitoa kwa jamii",
+    "empoweringGrowth": "Kukuza Ukuaji",
+    "supportingLocalTalentAnd": "Kusaidia vipaji vya ndani na kukuza maendeleo ya jamii kupitia michezo na shughuli za kitamaduni.",
+    "communityImpact": "Athari kwa Jamii",
+    "creatingLastingPositiveChange": "Kuunda mabadiliko chanya ya kudumu katika Mwanga kupitia miradi endelevu na ushirikiano.",
+    "supportingHealth": "Kusaidia Afya",
+    "improvingTheHealthAnd": "Kuboresha afya na ustawi wa akina mama na watoto katika Mwanga kupitia elimu ya afya na miradi ya usaidizi.",
+    "promotingGreenEnvironment": "Kukuza Mazingira ya Kijani",
+    "reducingOurEcologicalFootprint": "Kupunguza athari zetu za ikolojia na kukuza uendelevu wa mazingira kupitia mazoea rafiki kwa mazingira.",
+    "about": "Kuhusu",
+    "us": "Sisi",
+    "theMwangaFestivalMarathon": "Mwanga Festival & Marathon ni zaidi ya mbio tu—ni sherehe ya jamii, utamaduni, na ubora wa wanariadha. Tunawakutanisha wakimbiaji, wasanii, na wanajamii kwa uzoefu usiosahaulika ambao unaonyesha ubora wa eneo letu.",
+    "ourFullStory": "Hadithi Yetu Kamili"
+  },
+  "highlights": {
+    "marathonEvent": "Tukio la Marathon",
+    "joinThousandsOfRunners": "Jiunge na maelfu ya wakimbiaji katika marathon yetu inayotambulika kimataifa kupitia njia zenye mandhari mazuri.",
+    "culturalPerformances": "Maonyesho ya Kitamaduni",
+    "experienceBreathtakingTraditionalDances": "Pata uzoefu wa ngoma za asili zenye kuvutia, muziki, na sanaa zinazoonyesha urithi wetu wa kipekee.",
+    "supportingHealthForMothers": "Kusaidia Afya ya Akina Mama na Watoto",
+    "weSupportHealthEducation": "Tunasaidia elimu ya afya na miradi inayoboresha ustawi wa akina mama na watoto.",
+    "festival": "Tamasha",
+    "highlights": "Mwangaza"
+  },
+  "schedule": {
+    "failedToFetchSchedule": "Imeshindwa kupata data ya ratiba",
+    "anErrorOccurredWhile": "Hitilafu imetokea wakati wa kupata data ya ratiba",
+    "titleFirst": "Ratiba",
+    "titleSecond": "ya Matukio",
+    "scheduleInformationUnavailable": "Taarifa za Ratiba Hazipatikani",
+    "weReCurrentlyUpdating": "Tunasasisha ratiba yetu ya matukio kwa sasa.",
+    "visitOurRegistrationPage": "Tembelea ukurasa wetu wa usajili kujifunza jinsi ya kushiriki na kupata taarifa mpya za matukio.",
+    "learnHowToParticipate": "Jifunze Jinsi ya Kushiriki"
+  },
+  "eventTypes": {
+    "failedToFetchEvent": "Imeshindwa kupata aina za matukio",
+    "anErrorOccurredWhile": "Hitilafu imetokea wakati wa kupata aina za matukio",
+    "titleFirst": "Mpango",
+    "titleSecond": "wa Matukio",
+    "eventProgramInformationUnavailable": "Taarifa za Programu ya Matukio Hazipatikani",
+    "weReCurrentlyUpdating": "Tunasasisha maelezo ya programu yetu ya matukio kwa sasa.",
+    "visitOurRegistrationPage": "Tembelea ukurasa wetu wa usajili kujifunza jinsi ya kushiriki na kupata taarifa mpya za shughuli zote za matukio.",
+    "learnHowToParticipate": "Jifunze Jinsi ya Kushiriki"
+  },
+  "banner": {
+    "marathonEvent": "Tukio la Marathon",
+    "marathonEventLower": "Tukio la marathon",
+    "funRun": "Fun Run (5km)",
+    "halfMarathon": "Nusu Marathon (21km)",
+    "fullMarathon": "Marathon Nzima (42km)",
+    "loading": "Inapakia...",
+    "startingAt": "Kuanzia {time}",
+    "limitedTo": "Nafasi ni kwa washiriki {count} pekee",
+    "days": "Siku",
+    "hours": "Saa",
+    "minutes": "Dakika",
+    "seconds": "Sekunde",
+    "loadingDetails": "Inapakia maelezo ya tukio...",
+    "localPrice": "Bei kwa Watanzania: Tsh. {price}",
+    "noPackageDetails": "Hakuna maelezo ya kifurushi yanayopatikana",
+    "registerNow": "Jiandikishe Sasa",
+    "registrationClosed": "Usajili Umefungwa",
+    "openUntil": "Usajili uko wazi hadi {date}",
+    "currentlyClosed": "Usajili umefungwa kwa sasa"
+  },
+  "registration": {
+    "kidsEventName": "Mbio za Watoto (chini ya miaka 10)",
+    "eventEntryAndOfficial": "Ushiriki wa tukio na kifaa rasmi cha kupima muda",
+    "exclusiveFestivalAccessFor": "Fursa ya kipekee ya kuhudhuria tamasha kwa siku zote 3",
+    "commemorativeTShirtAnd": "T-shirt ya ukumbusho na medali",
+    "foodAndDrinkVouchers": "Vocha za chakula na vinywaji",
+    "firstNameIsRequired": "Jina la kwanza linahitajika",
+    "lastNameIsRequired": "Jina la familia linahitajika",
+    "emailIsRequired": "Barua pepe inahitajika",
+    "emailIsInvalid": "Barua pepe si sahihi",
+    "phoneNumberIsRequired": "Namba ya simu inahitajika",
+    "collectionVenueIsRequired": "Kituo cha kukusanya kinahitajika",
+    "eventIsRequired": "Tukio linahitajika",
+    "shirtSizeIsRequired": "Ukubwa wa shati unahitajika",
+    "registrationSuccessfulThankYou": "Usajili umefanikiwa! Asante kwa kujisajili.",
+    "loadingFormOptions": "Inapakia chaguo za fomu...",
+    "errorLoadingFormOptions": "Hitilafu katika kupakia chaguo za fomu. Tafadhali onyesha upya ukurasa.",
+    "titleFirst": "Usajili",
+    "titleSecond": "wa Mwanga Festival & Marathon",
+    "registerNowFor": "Jiandikishe Sasa kwa",
+    "earlyBirdDiscounts": "Ofa Kabambe",
+    "secureYourSpotIn": "Jihakikishie nafasi yako katika Mwanga Festival & Marathon. Watakao jisajili mapema watapata ofa za kipekee na nafasi nzuri za kutazama maonyesho yote ya kitamaduni.",
+    "personalInformation": "Taarifa Binafsi",
+    "eventDetails": "Maelezo ya Tukio",
+    "additionalInformation": "Taarifa za Ziada",
+    "emergencyContact": "Mawasiliano ya Dharura",
+    "registrationForm": "Fomu ya Usajili",
+    "nextStepsMembershipPayment": "Hatua za Kufuata ili Kufanya Malipo ya Uanachama",
+    "pleaseMakeYourPayment": "Tafadhali fanya malipo yako kupitia M-Pesa, Tigo Pesa, Pesapal, au benki",
+    "yourRegistrationWillBe": "Usajili wako utathibitishwa mara tu malipo yatakapopokelewa",
+    "forPaymentSupportContact": "Kwa msaada wa malipo, wasiliana nasi kupitia",
+    "forPesapalPaymentUse": "Kwa malipo ya Pesapal, tumia kiungo (Link) hiki:",
+    "learnHowToPay": "Jifunze jinsi ya kulipa",
+    "here": "hapa",
+    "back": "Rudi Nyuma",
+    "processing": "Inachakata...",
+    "completeRegistration": "Kamilisha Usajili",
+    "next": "Endelea",
+    "errors": {
+      "nationalityRequired": "Utaifa unahitajika",
+      "nationalityAgain": "Tafadhali chagua kundi la utaifa tena",
+      "nationalityAndCountry": "Tafadhali chagua kundi la utaifa na nchi",
+      "dobRequired": "Tarehe ya kuzaliwa inahitajika",
+      "genderRequired": "Jinsia inahitajika",
+      "emergencyNameRequired": "Jina la mawasiliano ya dharura linahitajika",
+      "emergencyNumberRequired": "Namba ya mawasiliano ya dharura inahitajika",
+      "nationalityIncomplete": "Taarifa za utaifa hazijakamilika. Tafadhali rudi nyuma uchague utaifa wako tena."
+    },
+    "nationality": {
+      "tz_ea": "Raia wa Tanzania na Afrika Mashariki",
+      "tz_resident_sadc": "Wakazi wa Tanzania & Wenye Vibali vya Kazi & Raia wa SADC",
+      "international": "Washiriki wa Kimataifa"
+    }
+  },
+  "form": {
+    "nationalityCategory": "Utaifa",
+    "selectNationalityCategory": "Chagua Utaifa",
+    "idNumber": "Namba ya Kitambulisho",
+    "enterIdNumber": "Ingiza namba ya kitambulisho",
+    "passportNumber": "Namba ya Pasipoti",
+    "enterPassportNumber": "Ingiza namba ya pasipoti",
+    "dateOfBirth": "Tarehe ya Kuzaliwa",
+    "gender": "Jinsia",
+    "selectGender": "Chagua Jinsia",
+    "country": "Nchi",
+    "selectCountry": "Chagua Nchi",
+    "searchCountry": "Tafuta nchi...",
+    "noCountriesFound": "Hakuna nchi zilizopatikana",
+    "firstName": "Jina la Kwanza",
+    "enterFirstName": "Ingiza jina la kwanza",
+    "lastName": "Jina la Familia",
+    "enterLastName": "Ingiza jina la familia",
+    "email": "Barua Pepe",
+    "enterEmail": "Ingiza barua pepe",
+    "phoneNumber": "Namba ya Simu",
+    "enterPhoneNumber": "Ingiza namba ya simu",
+    "eventSelection": "Uchaguzi wa Aina Ya Mbio",
+    "selectEvent": "Chagua Tukio",
+    "localPrice": "Bei ya Ndani",
+    "foreignPrice": "Bei ya Nje",
+    "kidsPriceLocal": "Bei ya Watoto (Ndani)",
+    "collectionVenue": "Kituo cha Kupokea T-shirt",
+    "selectCollectionVenue": "Chagua Kituo cha Kupokea T-shirt",
+    "address": "Anwani:",
+    "tShirtSize": "Ukubwa wa T-Shirt",
+    "kidsTShirtSize": "Ukubwa wa T-Shirt ya Watoto",
+    "enterVoucherCodeIf": "Ingiza msimbo wa vocha kama unao",
+    "emergencyContactName": "Jina la Mawasiliano ya Dharura",
+    "enterEmergencyContactName": "Ingiza jina la mawasiliano ya dharura",
+    "emergencyContactNumber": "Namba ya Mawasiliano ya Dharura",
+    "enterEmergencyContactNumber": "Ingiza namba ya mawasiliano ya dharura",
+    "postalCode": "Msimbo wa Posta",
+    "enterPostalCode": "Ingiza msimbo wa posta",
+    "voucherCode": "Msimbo wa Vocha (Si Lazima)"
+  }
+}

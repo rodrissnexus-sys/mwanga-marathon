@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MWAFEM — Mwanga Festival & Marathon
 
-## Getting Started
+Bilingual (English / Swahili) website and admin dashboard. Next.js 16 on Vercel.
 
-First, run the development server:
-
+## Run locally
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000  (Swahili: /sw)
+npm run build && npm start
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
+| Path | What |
+|---|---|
+| `src/app/[locale]/(site)/` | public pages (header/footer layout) |
+| `src/app/[locale]/login`, `dashboard/` | staff area (client-rendered) |
+| `src/views/`, `src/components/`, `src/layouts/` | page and UI components (ported from the Vite app) |
+| `src/i18n/` | languages, routing, message loading |
+| `src/proxy.ts` | language routing |
+| `messages/en/*.json`, `messages/sw/*.json` | all interface text |
+| `src/api/` | calls to the current Laravel APIs (until the Supabase migration) |
+| `docs/` | audit, phase notes, translation review, live-server fixes |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editing text / translations
+Every visible string is in `messages/<locale>/<section>.json`; both languages
+use the same keys. Change the value, keep the key and any `{placeholders}` or
+`<tags>`. To add a new section file, also add its name to `NAMESPACES` in
+`src/i18n/messages.ts`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`scripts/i18n-extract.py` is the helper used to move hard-coded strings into
+the message files (see its docstring).

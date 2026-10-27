@@ -1,0 +1,35 @@
+{
+  "backToTop": {
+    "label": "Back to top",
+    "text": "Back to top"
+  },
+  "modal": {
+    "close": "Close modal"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "text": "The page you are looking for doesn't exist or has been moved.",
+    "backHome": "Back to Home"
+  },
+  "preloader": {
+    "text": "Loading amazing experiences..."
+  },
+  "auth": {
+    "loading": "Loading..."
+  },
+  "login": {
+    "fillAll": "Please fill in all fields",
+    "failed": "Login failed. Please check your credentials.",
+    "invalid": "Invalid email or password. Please try again.",
+    "tooMany": "Too many login attempts. Please try again later.",
+    "serverError": "Server error. Please try again later or contact support.",
+    "unexpected": "An unexpected error occurred. Please try again.",
+    "title": "Login to Dashboard",
+    "subtitle": "Enter your credentials to access the dashboard",
+    "email": "Email Address",
+    "password": "Password",
+    "loggingIn": "Logging in...",
+    "login": "Login",
+    "forgot": "Forgot Password? <link>reset</link>"
+  }
+}

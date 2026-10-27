@@ -1,0 +1,57 @@
+{
+  "festival": {
+    "welcome": "Karibu Mwanga Festival and Marathon",
+    "intro1": "Sherehe ya kusisimua ya wilaya yetu nzuri iliyo katikati ya mkoa wa Kilimanjaro. Tukio hili la kipekee ni zaidi ya mbio tu; ni ushahidi wa moyo wa jamii yetu na onyesho la hazina zilizofichika za Mwanga.",
+    "intro2": "Likiwa limezaliwa kutokana na hamu ya kushiriki utamaduni tajiri na mandhari ya kuvutia ya nyumbani kwetu, tamasha na mbio hizi zinalenga kukuza utalii wa ndani, zikiwakaribisha Watanzania kutoka kote nchini kufurahia ukarimu na maajabu ya Mwanga.",
+    "communityTitle": "Jamii Yetu",
+    "communityText": "Tukio hili limeandaliwa kwa fahari na <link>Kisangara Tours Ltd</link>, kampuni ya utalii ya Kitanzania, kwa kushirikiana na <org>Mberesero Group</org>, <org>Osaka Royal Classic</org>, <org>Ofisi ya Wilaya ya Mwanga</org>, na wanajamii wa <org>Mwanga</org>, likijenga hali ya umoja na fahari.",
+    "invitationTitle": "Mwaliko Wetu",
+    "invitationText": "Jiunge nasi tunaposherehekea urithi wetu, kufurahia mandhari ya kuvutia, na kupiga hatua kuelekea mustakabali mwema wa Mwanga.",
+    "keyInfo": "Taarifa Muhimu",
+    "regionalFocus": "Eneo Lengwa:",
+    "regionalFocusText": "Limejikita katika wilaya ya Mwanga mkoani Kilimanjaro, likiwa na msisitizo mkubwa wa kukuza utalii wa ndani na kusaidia afya ya akina mama na watoto.",
+    "organization": "Waandaaji:",
+    "organizationText": "Tukio hili limeandaliwa kwa fahari na <link>Kisangara Tours Ltd</link>, kampuni ya utalii ya Kitanzania, kwa kushirikiana na <org>Mberesero Group</org>, <org>Osaka Royal Classic</org>, <org>Ofisi ya Wilaya ya Mwanga</org>, na wanajamii wa <org>Mwanga</org>.",
+    "purpose": "Lengo:",
+    "purposeText": "Lengo kuu ni kukuza utalii wa ndani katika wilaya ya Mwanga, kuonyesha vivutio vya eneo hili kwa wakazi wa Tanzania na kusaidia afya ya akina mama na watoto.",
+    "distinction": "Utofauti:",
+    "distinctionText": "Tukio hili ni tofauti na Kilimanjaro Marathon inayojulikana sana. Mwanga Festival and Marathon ni tukio la kipekee la kijamii linalojitegemea."
+  },
+  "facts": {
+    "expectedParticipants": "Washiriki Wanaotarajiwa",
+    "culturalEvents": "Matukio ya Kitamaduni",
+    "daysOfFestivities": "Siku za Sherehe",
+    "titleFirst": "Taarifa",
+    "titleSecond": "za Tukio"
+  },
+  "purpose": {
+    "titleFirst": "Lengo",
+    "titleSecond": "Letu",
+    "mission": "Dhamira Yetu",
+    "missionText": "Kujenga uzoefu usiosahaulika unaosherehekea ubora wa michezo huku tukikuza ubadilishanaji wa tamaduni na maendeleo ya jamii katika Mwanga na kwingineko.",
+    "vision": "Maono Yetu",
+    "visionText": "Kuwa tukio bora zaidi la marathon nchini Tanzania, linalojulikana kwa mchanganyiko wake wa kipekee wa michezo, utamaduni, na ushiriki wa jamii, likihamasisha vizazi vijavyo."
+  },
+  "cta": {
+    "title": "Uko Tayari Kujiunga na Marathon?",
+    "text": "Kuwa sehemu ya tukio hili la kipekee linalosherehekea michezo, utamaduni, na jamii. Jiandikishe sasa kujihakikishia nafasi yako katika Mwanga Festival & Marathon!",
+    "registerNow": "Jiandikishe Sasa"
+  },
+  "page": {
+    "titleFirst": "Kuhusu",
+    "titleSecond": "Tamasha Letu"
+  },
+  "sponsors": {
+    "titleFirst": "Wadhamini",
+    "titleSecond": "Wetu",
+    "weAreProudTo": "Tunajivunia kushirikiana na mashirika haya ya kipekee ambayo yanashiriki maono yetu ya kukuza michezo na utamaduni nchini Tanzania.",
+    "allOurAmazingPartners": "Washirika Wetu Wote Bora",
+    "proudSponsorOfMwafem": "Mdhamini mwenye fahari wa matukio ya MWAFEM, akisaidia dhamira yetu ya kukuza michezo na utamaduni nchini Tanzania.",
+    "learnMore": "Jifunze Zaidi",
+    "visitWebsite": "Tembelea Tovuti",
+    "becomeASponsor": "Kuwa Mdhamini",
+    "joinOurGrowingFamily": "Jiunge na familia yetu inayokua ya wadhamini na uwe sehemu ya safari hii ya kipekee. Pamoja, tunaweza kuwa na athari ya kudumu kwenye michezo na utamaduni nchini Tanzania.",
+    "partnerWithUs": "Shiriki Nasi",
+    "goToSponsor": "Nenda kwa mdhamini {number}"
+  }
+}

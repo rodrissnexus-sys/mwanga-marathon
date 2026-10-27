@@ -1,26 +1,102 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Add scroll padding to account for fixed header */
+html {
+    scroll-padding-top: 120px; /* Adjust based on header height */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+    --color-*: initial;
+    --color-primary: #221751;
+    --color-secondary: #bffc00;
+    --color-tertiary: #ffffff;
+    --color-success: #14b31e;
+    --color-black: #000000;
+    --color-red: #ff0000;
+    --color-text-primary: #000000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Custom breakpoint for exactly 1390px */
+@media (min-width: 1390px) {
+    .show-desktop-1390 {
+        display: flex !important;
+    }
+    .show-desktop-1390-block {
+        display: block !important;
+    }
+    .hide-mobile-1390 {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1389px) {
+    .show-desktop-1390, .show-desktop-1390-block {
+        display: none !important;
+    }
+    .hide-mobile-1390 {
+        display: block !important;
+    }
+}
+
+@keyframes raceAcross {
+  0% {
+    transform: translateX(-100px) translateY(0);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px)) translateY(20px);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Ken Burns effect - slow zoom and pan animation for hero images */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.15) translate(-2%, -2%);
+  }
+}
+
+/* Apply Ken Burns animation */
+.animate-ken-burns {
+  animation: ken-burns 6000ms ease-out forwards;
 }

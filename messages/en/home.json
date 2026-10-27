@@ -1,0 +1,286 @@
+{
+  "heroImages": {
+    "desktop": [
+      {
+        "alt": "Marathon Challenge",
+        "title": "Excellence"
+      },
+      {
+        "alt": "YAS and Runner While Running",
+        "title": "Athletic"
+      },
+      {
+        "alt": "Community Spirit",
+        "title": "Community"
+      },
+      {
+        "alt": "YAS Sponsor Picture 1",
+        "title": "Partnership"
+      },
+      {
+        "alt": "Athletic Pride",
+        "title": "Pride"
+      },
+      {
+        "alt": "YAS Sponsor Picture 2",
+        "title": "Support"
+      },
+      {
+        "alt": "Marathon Awards",
+        "title": "Excellence"
+      },
+      {
+        "alt": "YAS Sponsor Picture 3",
+        "title": "Together"
+      },
+      {
+        "alt": "YAS Sponsor Picture 4",
+        "title": "Unity"
+      },
+      {
+        "alt": "Participant Celebration",
+        "title": "Victory"
+      },
+      {
+        "alt": "Marathon Finish",
+        "title": "Triumph"
+      },
+      {
+        "alt": "YAS Sponsor Picture 5",
+        "title": "Spirit"
+      },
+      {
+        "alt": "Participant Celebration 2",
+        "title": "Joy"
+      },
+      {
+        "alt": "Dancing Participants",
+        "title": "Festival"
+      }
+    ],
+    "mobile": [
+      {
+        "alt": "Marathon Challenge",
+        "title": "Excellence"
+      },
+      {
+        "alt": "YAS Sponsor Picture 6",
+        "title": "Partnership"
+      },
+      {
+        "alt": "Community Spirit",
+        "title": "Community"
+      },
+      {
+        "alt": "YAS Sponsor Picture 7",
+        "title": "Spirit"
+      },
+      {
+        "alt": "Start Picture Together",
+        "title": "Together"
+      },
+      {
+        "alt": "Athletic Pride",
+        "title": "Athletic"
+      },
+      {
+        "alt": "Finish Line Picture",
+        "title": "Victory"
+      },
+      {
+        "alt": "Marathon Awards",
+        "title": "Achievement"
+      },
+      {
+        "alt": "MWAFEM Event",
+        "title": "Festival"
+      },
+      {
+        "alt": "Marathon Finish",
+        "title": "Triumph"
+      },
+      {
+        "alt": "MWAFEM Members",
+        "title": "Unity"
+      }
+    ]
+  },
+  "hero": {
+    "experience": "Experience The Event",
+    "currentView": "Current View",
+    "tagline": "Join the excitement in Tanzania as we celebrate culture, community, and athleticism.",
+    "registerNow": "Register Now",
+    "aboutMwafem": "About MWAFEM",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "goToImage": "Go to image {number}"
+  },
+  "about": {
+    "participants": "Participants",
+    "runnersFromAllOver": "Runners from all over joining the marathon",
+    "partners": "Partners",
+    "supportingOrganizationsAndSponsors": "Supporting organizations and sponsors",
+    "prizePool": "Prize Pool",
+    "totalPrizeMoneyFor": "Total prize money for winners",
+    "volunteers": "Volunteers",
+    "dedicatedCommunityVolunteers": "Dedicated community volunteers",
+    "empoweringGrowth": "Empowering Growth",
+    "supportingLocalTalentAnd": "Supporting local talent and fostering community development through sports and cultural activities.",
+    "communityImpact": "Community Impact",
+    "creatingLastingPositiveChange": "Creating lasting positive change in Mwanga through sustainable initiatives and partnerships.",
+    "supportingHealth": "Supporting Health",
+    "improvingTheHealthAnd": "Improving the health and well-being of mothers and children in Mwanga through health education and support initiatives.",
+    "promotingGreenEnvironment": "Promoting Green Environment",
+    "reducingOurEcologicalFootprint": "Reducing our ecological footprint and promoting environmental sustainability through eco-friendly practices.",
+    "about": "About",
+    "us": "Us",
+    "theMwangaFestivalMarathon": "The Mwanga Festival & Marathon is more than just a race—it's a celebration of community, culture, and athletic excellence. We bring together runners, artists, and community members for an unforgettable experience that showcases the best of our region.",
+    "ourFullStory": "Our Full Story"
+  },
+  "highlights": {
+    "marathonEvent": "Marathon Event",
+    "joinThousandsOfRunners": "Join thousands of runners in our internationally recognized marathon through scenic routes.",
+    "culturalPerformances": "Cultural Performances",
+    "experienceBreathtakingTraditionalDances": "Experience breathtaking traditional dances, music, and art that showcase our rich heritage.",
+    "supportingHealthForMothers": "Supporting Health for Mothers and Children",
+    "weSupportHealthEducation": "We support health education and initiatives that improve the well-being of mothers and children.",
+    "festival": "Festival",
+    "highlights": "Highlights"
+  },
+  "schedule": {
+    "failedToFetchSchedule": "Failed to fetch schedule data",
+    "anErrorOccurredWhile": "An error occurred while fetching schedule data",
+    "titleFirst": "Event",
+    "titleSecond": "Schedule",
+    "scheduleInformationUnavailable": "Schedule Information Unavailable",
+    "weReCurrentlyUpdating": "We're currently updating our event schedule.",
+    "visitOurRegistrationPage": "Visit our registration page to learn how to participate and stay updated on event details.",
+    "learnHowToParticipate": "Learn How to Participate"
+  },
+  "eventTypes": {
+    "failedToFetchEvent": "Failed to fetch event types",
+    "anErrorOccurredWhile": "An error occurred while fetching event types",
+    "titleFirst": "Event",
+    "titleSecond": "Program",
+    "eventProgramInformationUnavailable": "Event Program Information Unavailable",
+    "weReCurrentlyUpdating": "We're currently updating our event program details.",
+    "visitOurRegistrationPage": "Visit our registration page to learn how to participate and stay updated on all event activities.",
+    "learnHowToParticipate": "Learn How to Participate"
+  },
+  "banner": {
+    "marathonEvent": "Marathon Event",
+    "marathonEventLower": "Marathon event",
+    "funRun": "Fun Run (5km)",
+    "halfMarathon": "Half Marathon (21km)",
+    "fullMarathon": "Full Marathon (42km)",
+    "loading": "Loading...",
+    "startingAt": "Starting at {time}",
+    "limitedTo": "Limited to {count} participants",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "loadingDetails": "Loading event details...",
+    "localPrice": "Local Price: Tsh. {price}",
+    "noPackageDetails": "No package details available",
+    "registerNow": "Register Now",
+    "registrationClosed": "Registration Closed",
+    "openUntil": "Registration is open until {date}",
+    "currentlyClosed": "Registration is currently closed"
+  },
+  "registration": {
+    "kidsEventName": "Kids Fun Run (under 10yrs)",
+    "eventEntryAndOfficial": "Event entry and official timing chip",
+    "exclusiveFestivalAccessFor": "Exclusive festival access for all 3 days",
+    "commemorativeTShirtAnd": "Commemorative t-shirt and medal",
+    "foodAndDrinkVouchers": "Food and drink vouchers",
+    "firstNameIsRequired": "First name is required",
+    "lastNameIsRequired": "Last name is required",
+    "emailIsRequired": "Email is required",
+    "emailIsInvalid": "Email is invalid",
+    "phoneNumberIsRequired": "Phone number is required",
+    "collectionVenueIsRequired": "Collection venue is required",
+    "eventIsRequired": "Event is required",
+    "shirtSizeIsRequired": "Shirt size is required",
+    "registrationSuccessfulThankYou": "Registration successful! Thank you for registering.",
+    "loadingFormOptions": "Loading form options...",
+    "errorLoadingFormOptions": "Error loading form options. Please refresh the page.",
+    "titleFirst": "Event",
+    "titleSecond": "Registration",
+    "registerNowFor": "Register Now for",
+    "earlyBirdDiscounts": "Early Bird Discounts",
+    "secureYourSpotIn": "Secure your spot in the Mwanga Marathon and Festival. Early registrants receive exclusive merchandise and prime viewing spots for all cultural performances.",
+    "personalInformation": "Personal Information",
+    "eventDetails": "Event Details",
+    "additionalInformation": "Additional Information",
+    "emergencyContact": "Emergency Contact",
+    "registrationForm": "Registration Form",
+    "nextStepsMembershipPayment": "Next Steps - Membership Payment",
+    "pleaseMakeYourPayment": "Please make your payment via M-Pesa, Tigo Pesa, Pesapal, or bank transfer",
+    "yourRegistrationWillBe": "Your registration will be confirmed once payment is received",
+    "forPaymentSupportContact": "For payment support, contact us at",
+    "forPesapalPaymentUse": "For Pesapal payment, use this link:",
+    "learnHowToPay": "Learn how to pay",
+    "here": "here",
+    "back": "Back",
+    "processing": "Processing...",
+    "completeRegistration": "Complete Registration",
+    "next": "Next",
+    "errors": {
+      "nationalityRequired": "Nationality category is required",
+      "nationalityAgain": "Please select a nationality category again",
+      "nationalityAndCountry": "Please select a nationality category and country",
+      "dobRequired": "Date of birth is required",
+      "genderRequired": "Gender is required",
+      "emergencyNameRequired": "Emergency contact name is required",
+      "emergencyNumberRequired": "Emergency contact number is required",
+      "nationalityIncomplete": "Nationality information is incomplete. Please go back and select your nationality again."
+    },
+    "nationality": {
+      "tz_ea": "Tanzania and East Africa Citizens",
+      "tz_resident_sadc": "Tanzania Residents & Work Permit & SADC Citizens",
+      "international": "International Runners"
+    }
+  },
+  "form": {
+    "nationalityCategory": "Nationality Category",
+    "selectNationalityCategory": "Select Nationality Category",
+    "idNumber": "ID Number",
+    "enterIdNumber": "Enter ID number",
+    "passportNumber": "Passport Number",
+    "enterPassportNumber": "Enter passport number",
+    "dateOfBirth": "Date of Birth",
+    "gender": "Gender",
+    "selectGender": "Select Gender",
+    "country": "Country",
+    "selectCountry": "Select Country",
+    "searchCountry": "Search country...",
+    "noCountriesFound": "No countries found",
+    "firstName": "First Name",
+    "enterFirstName": "Enter first name",
+    "lastName": "Last Name",
+    "enterLastName": "Enter last name",
+    "email": "Email",
+    "enterEmail": "Enter email",
+    "phoneNumber": "Phone Number",
+    "enterPhoneNumber": "Enter phone number",
+    "eventSelection": "Event Selection",
+    "selectEvent": "Select Event",
+    "localPrice": "Local Price",
+    "foreignPrice": "Foreign Price",
+    "kidsPriceLocal": "Kids Price (Local)",
+    "collectionVenue": "Collection Venue",
+    "selectCollectionVenue": "Select Collection Venue",
+    "address": "Address:",
+    "tShirtSize": "T-Shirt Size",
+    "kidsTShirtSize": "Kids T-Shirt Size",
+    "enterVoucherCodeIf": "Enter voucher code if you have one",
+    "emergencyContactName": "Emergency Contact Name",
+    "enterEmergencyContactName": "Enter emergency contact name",
+    "emergencyContactNumber": "Emergency Contact Number",
+    "enterEmergencyContactNumber": "Enter emergency contact number",
+    "postalCode": "Postal Code",
+    "enterPostalCode": "Enter postal code",
+    "voucherCode": "Voucher Code (Optional)"
+  }
+}

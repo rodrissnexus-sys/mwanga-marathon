@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "raceCategories": "Race Categories",
+    "highlights": "Highlights",
+    "events": "Events",
+    "schedule": "Schedule",
+    "register": "Register",
+    "sponsors": "Sponsors"
+  },
+  "officeNote": "( Kisangara Tours Ltd Office)",
+  "switchLanguage": "Switch language",
+  "languageWord": "| Language",
+  "currentLanguage": "Language: English",
+  "languages": { "en": "English", "sw": "Swahili" },
+  "joinNow": "Join Now",
+  "toggleMenu": "Toggle mobile menu",
+  "logoAlt": "MWAFEM Logo"
+}

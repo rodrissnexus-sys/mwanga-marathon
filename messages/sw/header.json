@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Mwanzo",
+    "about": "Kuhusu",
+    "raceCategories": "Aina za Mbio",
+    "highlights": "Matukio Makuu",
+    "events": "Matukio",
+    "schedule": "Ratiba",
+    "register": "Jiandikishe",
+    "sponsors": "Wadhamini"
+  },
+  "officeNote": "(Ofisi ya Kisangara Tours Ltd)",
+  "switchLanguage": "Badili lugha",
+  "languageWord": "| Lugha",
+  "currentLanguage": "Lugha: Kiswahili",
+  "languages": { "en": "Kiingereza", "sw": "Kiswahili" },
+  "joinNow": "Jiandikishe Sasa",
+  "toggleMenu": "Fungua/funga menyu",
+  "logoAlt": "Nembo ya MWAFEM"
+}
