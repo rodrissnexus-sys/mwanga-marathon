@@ -99,7 +99,7 @@ Vercel → Settings → Environment Variables → add
 ### 5. Change every credential shared in chat
 | What | Where |
 |---|---|
-| GitHub token `ghp_Whg1…` | GitHub → Settings → Developer settings → Personal access tokens → delete |
+| The GitHub token shared in chat | GitHub → Settings → Developer settings → Personal access tokens → delete |
 | Supabase database password | Supabase → Project Settings → Database → Reset password → update `DATABASE_URL` in `.env.local` |
 | Supabase secret key | Supabase → Project Settings → API Keys → create a new secret key, delete the old one → update `.env.local` **and** Vercel `SUPABASE_SERVICE_ROLE_KEY` → redeploy |
 | Your admin password | log in → change it (or Supabase → Authentication → Users → send password recovery) |
