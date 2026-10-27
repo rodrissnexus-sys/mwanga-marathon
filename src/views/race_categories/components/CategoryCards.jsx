@@ -28,20 +28,8 @@ const CategoryCards = () => {
             const textColors = ['text-tertiary', 'text-text-primary', 'text-text-primary', 'text-tertiary'];
             const ageLimits = [t("n18Years"), t("n16Years"), t("n14Years"), t("allAges")];
             
-            // Extract distance from name or use default
-            let distance = '';
-            if (event.name.includes('Full') || event.name.includes('Marathon')) {
-              distance = '42.195 km';
-            } else if (event.name.includes('Half')) {
-              distance = '21.0975 km';
-            } else if (event.name.includes('10K')) {
-              distance = '10 km';
-            } else if (event.name.includes('5K')) {
-              distance = '5 km';
-            } else {
-              // Default distance if not found in name
-              distance = t("tbd");
-            }
+            // Distance is stored per event (km); unknown ones show "TBD"
+            const distance = event.distance_km ? `${Number(event.distance_km)} km` : t("tbd");
             
             return {
               id: event.id,

@@ -1,359 +1,236 @@
-import { getTokenKey } from '@/api/config';
-import { api } from './client';
-import { ENDPOINTS, getApiBaseUrl } from './config';
+import { createClient } from '@/lib/supabase/client';
+import { currentLocale, failure, localize, toLocaleColumns } from '@/lib/content';
 
-// Cache for API responses to prevent redundant requests
-const apiCache = {
-    eventTypes: null,
-    schedule: null,
-    cacheTime: {
-        eventTypes: null,
-        schedule: null
-    },
-    // Cache expiration time in milliseconds (5 minutes)
-    CACHE_EXPIRATION: 5 * 60 * 1000
-};
+const EVENT_TYPE_TEXT = ['title', 'subtitle', 'description', 'highlight'];
+const EVENT_TYPE_SHARED = ['icon', 'color', 'image', 'is_active', 'sort_order'];
+const FEATURE_TEXT = ['text'];
+const FEATURE_SHARED = ['icon', 'sort_order', 'is_active'];
+
+const DAY_TEXT = ['day', 'date'];
+const DAY_SHARED = ['day_identifier', 'is_active', 'sort_order'];
+const SCHEDULE_EVENT_TEXT = ['title', 'location', 'description'];
+const SCHEDULE_EVENT_SHARED = ['time', 'icon', 'sort_order', 'is_active'];
+
+const pick = (values, fields) =>
+    Object.fromEntries(fields.filter((field) => values[field] !== undefined).map((field) => [field, values[field]]));
+
+// Visitors only receive active rows (RLS). Signed-in staff also get inactive
+// ones so the dashboard can re-enable them.
+const isSignedIn = async (supabase) => Boolean((await supabase.auth.getSession()).data.session);
+
+const bySortOrder = (rows) =>
+    [...(rows ?? [])].sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0) || a.id - b.id);
+
+// Event types keep the old API's `event_id` name for their slug.
+const toEventType = (row) => ({ ...row, event_id: row.slug, features: bySortOrder(row.features) });
+const toScheduleDay = (row) => ({ ...row, events: bySortOrder(row.events) });
+
+/**
+ * Keep a parent's child rows (features / schedule events) in line with the
+ * submitted list: update rows that have an id, insert new ones, delete the rest.
+ */
+async function syncChildren(supabase, { table, parentColumn, parentId, items, textFields, sharedFields, locale }) {
+    const { data: existing, error } = await supabase.from(table).select('id').eq(parentColumn, parentId);
+    if (error) throw error;
+
+    const keep = new Set();
+    for (const item of items) {
+        const shared = pick(item, sharedFields);
+        if (item.id) {
+            keep.add(item.id);
+            const { error: updateError } = await supabase
+                .from(table)
+                .update({ ...shared, ...toLocaleColumns(item, textFields, { locale }) })
+                .eq('id', item.id)
+                .eq(parentColumn, parentId);
+            if (updateError) throw updateError;
+        } else {
+            const { error: insertError } = await supabase.from(table).insert({
+                ...shared,
+                ...toLocaleColumns(item, textFields, { locale, isNew: true }),
+                [parentColumn]: parentId,
+            });
+            if (insertError) throw insertError;
+        }
+    }
+
+    const stale = (existing ?? []).map((row) => row.id).filter((id) => !keep.has(id));
+    if (stale.length) {
+        const { error: deleteError } = await supabase.from(table).delete().in('id', stale);
+        if (deleteError) throw deleteError;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Event types ("Event Program" on the home page)
+// ---------------------------------------------------------------------------
+
+const EVENT_TYPE_SELECT = '*, features:event_features(*)';
 
 /**
  * Fetch all event types with their features
- * 
- * @param {boolean} forceRefresh - Whether to bypass cache and force a new request
- * @returns {Promise<Object>} Response with event types data
+ * @returns {Promise<Object>} { success, data: [{ id, event_id, title, ..., features: [...] }] }
  */
-export const fetchEventTypes = async (forceRefresh = false) => {
+export const fetchEventTypes = async () => {
     try {
-        // Check cache first if not forcing refresh
-        if (!forceRefresh && 
-            apiCache.eventTypes && 
-            apiCache.cacheTime.eventTypes && 
-            (Date.now() - apiCache.cacheTime.eventTypes) < apiCache.CACHE_EXPIRATION) {
-            console.log('Using cached event types data');
-            return apiCache.eventTypes;
-        }
-        
-        // Set a longer timeout for this request
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
-        
-        const response = await api.get(ENDPOINTS.EVENT_DATA.EVENT_TYPES, {
-            signal: controller.signal,
-            timeout: 15000 // 15 seconds
-        }).json();
-        
-        clearTimeout(timeoutId);
-        
-        // Cache the successful response
-        apiCache.eventTypes = response;
-        apiCache.cacheTime.eventTypes = Date.now();
-        
-        return response;
+        const supabase = createClient();
+        let query = supabase.from('event_types').select(EVENT_TYPE_SELECT);
+        if (!(await isSignedIn(supabase))) query = query.eq('is_active', true);
+        const { data, error } = await query.order('sort_order').order('id');
+        if (error) throw error;
+        return { success: true, data: localize(data).map(toEventType) };
     } catch (error) {
-        console.error('Error fetching event types:', error);
-        
-        // If we have cached data, return it on error
-        if (apiCache.eventTypes) {
-            console.log('Returning cached event types data after error');
-            return apiCache.eventTypes;
-        }
-        
-        return {
-            success: false,
-            error: error.name === 'AbortError' 
-                ? 'Request timed out' 
-                : (error.message || 'Failed to fetch event types')
-        };
+        return failure(error, 'Failed to fetch event types');
     }
 };
 
-/**
- * Fetch a specific event type by ID
- * 
- * @param {number} id - The ID of the event type to fetch
- * @returns {Promise<Object>} Response with event type data
- */
 export const fetchEventTypeById = async (id) => {
     try {
-        // Check if we have it in cache first
-        if (apiCache.eventTypes && apiCache.eventTypes.success) {
-            const cachedEventType = apiCache.eventTypes.data.find(item => item.id === id || item.event_id === id);
-            if (cachedEventType) {
-                console.log('Using cached event type data for ID:', id);
-                return {
-                    success: true,
-                    data: cachedEventType
-                };
-            }
-        }
-        
-        const response = await api.get(`${ENDPOINTS.EVENT_DATA.EVENT_TYPES}/${id}`, {
-            timeout: 10000 // 10 seconds
-        }).json();
-        
-        return response;
+        const { data, error } = await createClient().from('event_types').select(EVENT_TYPE_SELECT).eq('id', id).single();
+        if (error) throw error;
+        return { success: true, data: toEventType(localize(data)) };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch event type'
-        };
+        return failure(error, 'Failed to fetch event type');
     }
 };
 
-/**
- * Fetch all schedule days with their events
- * 
- * @param {boolean} forceRefresh - Whether to bypass cache and force a new request
- * @returns {Promise<Object>} Response with schedule days data
- */
-export const fetchSchedule = async (forceRefresh = false) => {
-    try {
-        // Check cache first if not forcing refresh
-        if (!forceRefresh && 
-            apiCache.schedule && 
-            apiCache.cacheTime.schedule && 
-            (Date.now() - apiCache.cacheTime.schedule) < apiCache.CACHE_EXPIRATION) {
-            console.log('Using cached schedule data');
-            return apiCache.schedule;
-        }
-        
-        // Set a longer timeout for this request
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
-        
-        const response = await api.get(ENDPOINTS.EVENT_DATA.SCHEDULE, {
-            signal: controller.signal,
-            timeout: 15000 // 15 seconds
-        }).json();
-        
-        clearTimeout(timeoutId);
-        
-        // Cache the successful response
-        apiCache.schedule = response;
-        apiCache.cacheTime.schedule = Date.now();
-        
-        return response;
-    } catch (error) {
-        console.error('Error fetching schedule:', error);
-        
-        // If we have cached data, return it on error
-        if (apiCache.schedule) {
-            console.log('Returning cached schedule data after error');
-            return apiCache.schedule;
-        }
-        
-        return {
-            success: false,
-            error: error.name === 'AbortError' 
-                ? 'Request timed out' 
-                : (error.message || 'Failed to fetch schedule')
-        };
+const saveEventType = async (id, values) => {
+    const supabase = createClient();
+    const locale = currentLocale();
+    const isNew = !id;
+    const row = {
+        ...pick(values, EVENT_TYPE_SHARED),
+        ...(values.event_id !== undefined ? { slug: values.event_id } : {}),
+        ...toLocaleColumns(values, EVENT_TYPE_TEXT, { locale, isNew }),
+    };
+
+    const { data, error } = isNew
+        ? await supabase.from('event_types').insert(row).select('id').single()
+        : await supabase.from('event_types').update(row).eq('id', id).select('id').single();
+    if (error) throw error;
+
+    if (Array.isArray(values.features)) {
+        await syncChildren(supabase, {
+            table: 'event_features', parentColumn: 'event_type_id', parentId: data.id,
+            items: values.features, textFields: FEATURE_TEXT, sharedFields: FEATURE_SHARED, locale,
+        });
     }
+    return (await fetchEventTypeById(data.id)).data;
 };
 
-/**
- * Fetch a specific schedule day by ID
- * 
- * @param {number} id - The ID of the schedule day to fetch
- * @returns {Promise<Object>} Response with schedule day data
- */
-export const fetchScheduleDayById = async (id) => {
-    try {
-        const response = await api.get(`${ENDPOINTS.EVENT_DATA.SCHEDULE}/${id}`, {
-            timeout: 10000 // 10 seconds
-        }).json();
-        
-        return response;
-    } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch schedule day'
-        };
-    }
-};
-
-// Admin functions (protected by auth:sanctum)
-
-/**
- * Create a new event type
- * 
- * @param {Object} eventTypeData - The event type data to create
- * @returns {Promise<Object>} Response with created event type
- */
 export const createEventType = async (eventTypeData) => {
     try {
-        // Get auth token from localStorage
-        const token = localStorage.getItem(getTokenKey());
-        
-        const response = await api.post(ENDPOINTS.EVENT_DATA.EVENT_TYPES, {
-            json: eventTypeData,
-            headers: token ? {
-                'Authorization': `Bearer ${token}`
-            } : {}
-        }).json();
-        
-        return response;
+        const data = await saveEventType(null, eventTypeData);
+        return { success: true, message: 'Event type created successfully', data };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to create event type'
-        };
+        return failure(error, 'Failed to create event type');
     }
 };
 
-/**
- * Update an existing event type
- * 
- * @param {number} id - The ID of the event type to update
- * @param {Object} eventTypeData - The updated event type data
- * @returns {Promise<Object>} Response with updated event type
- */
 export const updateEventType = async (id, eventTypeData) => {
     try {
-        // Get auth token from localStorage
-        const token = localStorage.getItem(getTokenKey());
-        
-        const response = await api.put(`${ENDPOINTS.EVENT_DATA.EVENT_TYPES}/${id}`, {
-            json: eventTypeData,
-            headers: token ? {
-                'Authorization': `Bearer ${token}`
-            } : {}
-        }).json();
-        
-        return response;
+        const data = await saveEventType(id, eventTypeData);
+        return { success: true, message: 'Event type updated successfully', data };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to update event type'
-        };
+        return failure(error, 'Failed to update event type');
     }
 };
 
-/**
- * Delete an event type
- * 
- * @param {number} id - The ID of the event type to delete
- * @returns {Promise<Object>} Response with success message
- */
 export const deleteEventType = async (id) => {
     try {
-        // Get auth token from localStorage
-        const token = localStorage.getItem(getTokenKey());
-        
-        const response = await api.delete(`${ENDPOINTS.EVENT_DATA.EVENT_TYPES}/${id}`, {
-            headers: token ? {
-                'Authorization': `Bearer ${token}`
-            } : {}
-        }).json();
-        
-        return response;
+        const { error } = await createClient().from('event_types').delete().eq('id', id);
+        if (error) throw error;
+        return { success: true, message: 'Event type deleted successfully' };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to delete event type'
-        };
+        return failure(error, 'Failed to delete event type');
     }
 };
 
+// ---------------------------------------------------------------------------
+// Schedule (days with their events)
+// ---------------------------------------------------------------------------
+
+const DAY_SELECT = '*, events:schedule_events(*)';
+
 /**
- * Create a new schedule day
- * 
- * @param {Object} scheduleDayData - The schedule day data to create
- * @returns {Promise<Object>} Response with created schedule day
+ * Fetch the schedule: days with their events
+ * @returns {Promise<Object>} { success, data: [{ id, day, date, events: [...] }] }
  */
-export const createScheduleDay = async (scheduleDayData) => {
+export const fetchSchedule = async () => {
     try {
-        // Get auth token from localStorage
-        const token = localStorage.getItem(getTokenKey());
-        
-        // Debug: Log token status
-        console.log('Auth token present:', !!token);
-        
-        // Use apiClient instead of direct api call to ensure proper authentication
-        const response = await fetch(`${getApiBaseUrl()}/${ENDPOINTS.EVENT_DATA.SCHEDULE}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-            },
-            body: JSON.stringify(scheduleDayData)
-        });
-        
-        // Debug: Log response status
-        console.log('API Response Status:', response.status);
-        
-        const data = await response.json();
-        
-        if (!response.ok) {
-            console.error('API Error:', data);
-            return {
-                success: false,
-                error: data.message || 'Failed to create schedule day'
-            };
-        }
-        
+        const supabase = createClient();
+        const signedIn = await isSignedIn(supabase);
+        let query = supabase.from('schedule_days').select(DAY_SELECT);
+        if (!signedIn) query = query.eq('is_active', true);
+        const { data, error } = await query.order('sort_order').order('id');
+        if (error) throw error;
         return {
             success: true,
-            ...data
+            data: localize(data).map((day) => {
+                const shaped = toScheduleDay(day);
+                // The public schedule only lists active events (as before).
+                return signedIn ? shaped : { ...shaped, events: shaped.events.filter((event) => event.is_active) };
+            }),
         };
     } catch (error) {
-        console.error('Schedule day creation error:', error);
-        return {
-            success: false,
-            error: error.message || 'Failed to create schedule day'
-        };
+        return failure(error, 'Failed to fetch schedule');
     }
 };
 
-/**
- * Update an existing schedule day
- * 
- * @param {number} id - The ID of the schedule day to update
- * @param {Object} scheduleDayData - The updated schedule day data
- * @returns {Promise<Object>} Response with updated schedule day
- */
+export const fetchScheduleDayById = async (id) => {
+    try {
+        const { data, error } = await createClient().from('schedule_days').select(DAY_SELECT).eq('id', id).single();
+        if (error) throw error;
+        return { success: true, data: toScheduleDay(localize(data)) };
+    } catch (error) {
+        return failure(error, 'Failed to fetch schedule day');
+    }
+};
+
+const saveScheduleDay = async (id, values) => {
+    const supabase = createClient();
+    const locale = currentLocale();
+    const isNew = !id;
+    const row = { ...pick(values, DAY_SHARED), ...toLocaleColumns(values, DAY_TEXT, { locale, isNew }) };
+
+    const { data, error } = isNew
+        ? await supabase.from('schedule_days').insert(row).select('id').single()
+        : await supabase.from('schedule_days').update(row).eq('id', id).select('id').single();
+    if (error) throw error;
+
+    if (Array.isArray(values.events)) {
+        await syncChildren(supabase, {
+            table: 'schedule_events', parentColumn: 'schedule_day_id', parentId: data.id,
+            items: values.events, textFields: SCHEDULE_EVENT_TEXT, sharedFields: SCHEDULE_EVENT_SHARED, locale,
+        });
+    }
+    return (await fetchScheduleDayById(data.id)).data;
+};
+
+export const createScheduleDay = async (scheduleDayData) => {
+    try {
+        const data = await saveScheduleDay(null, scheduleDayData);
+        return { success: true, message: 'Schedule day created successfully', data };
+    } catch (error) {
+        return failure(error, 'Failed to create schedule day');
+    }
+};
+
 export const updateScheduleDay = async (id, scheduleDayData) => {
     try {
-        // Get auth token from localStorage
-        const token = localStorage.getItem(getTokenKey());
-        
-        const response = await api.put(`${ENDPOINTS.EVENT_DATA.SCHEDULE}/${id}`, {
-            json: scheduleDayData,
-            headers: token ? {
-                'Authorization': `Bearer ${token}`
-            } : {}
-        }).json();
-        
-        return response;
+        const data = await saveScheduleDay(id, scheduleDayData);
+        return { success: true, message: 'Schedule day updated successfully', data };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to update schedule day'
-        };
+        return failure(error, 'Failed to update schedule day');
     }
 };
 
-/**
- * Delete a schedule day
- * 
- * @param {number} id - The ID of the schedule day to delete
- * @returns {Promise<Object>} Response with success message
- */
 export const deleteScheduleDay = async (id) => {
     try {
-        // Get auth token from localStorage
-        const token = localStorage.getItem(getTokenKey());
-        
-        const response = await api.delete(`${ENDPOINTS.EVENT_DATA.SCHEDULE}/${id}`, {
-            headers: token ? {
-                'Authorization': `Bearer ${token}`
-            } : {}
-        }).json();
-        
-        return response;
+        const { error } = await createClient().from('schedule_days').delete().eq('id', id);
+        if (error) throw error;
+        return { success: true, message: 'Schedule day deleted successfully' };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to delete schedule day'
-        };
+        return failure(error, 'Failed to delete schedule day');
     }
 };

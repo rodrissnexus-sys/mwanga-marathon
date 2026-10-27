@@ -45,3 +45,7 @@ next-env.d.ts
 
 # MySQL exports with participants' personal data — never commit
 /data-import/
+
+# Playwright
+/test-results/
+/playwright-report/

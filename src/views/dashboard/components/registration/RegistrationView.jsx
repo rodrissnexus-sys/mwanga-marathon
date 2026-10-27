@@ -15,7 +15,10 @@ import {
   faTrash,
   faSpinner
 } from '@fortawesome/free-solid-svg-icons';
-import { getAllRegistrations, confirmPayment } from '../../../../api/marathon/registration';
+import { getRegistrationsPage, confirmPayment, exportRegistrationsCsv } from '../../../../api/marathon/registration';
+import { fetchEvents } from '../../../../api/dropdowns';
+
+const PAGE_SIZE = 25;
 
 const RegistrationView = () => {
   const { theme } = useTheme();
@@ -28,32 +31,67 @@ const RegistrationView = () => {
   const [error, setError] = useState(null);
   const [processingPayment, setProcessingPayment] = useState(false);
   const [paymentNotes, setPaymentNotes] = useState('');
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [searchInput, setSearchInput] = useState('');
+  const [filters, setFilters] = useState({ search: '', eventId: '', paymentStatus: '', locale: '' });
+  const [showFilters, setShowFilters] = useState(false);
+  const [events, setEvents] = useState([]);
+  const [exporting, setExporting] = useState(false);
+
+  // Options for the race filter
+  useEffect(() => {
+    fetchEvents().then((response) => response.success && setEvents(response.data));
+  }, []);
+
+  // Search after the user stops typing for a moment
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFilters((prev) => (prev.search === searchInput ? prev : { ...prev, search: searchInput }));
+      setPage(1);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
 
   useEffect(() => {
     fetchRegistrations();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, filters]);
 
   const fetchRegistrations = async () => {
     setLoading(true);
     try {
-      const response = await getAllRegistrations();
+      const response = await getRegistrationsPage({ page, pageSize: PAGE_SIZE, ...filters });
       if (response.success) {
         setRegistrations(response.data || []);
+        setTotal(response.total);
         setError(null);
       } else {
         setError(response.error || 'Failed to fetch registrations');
-        // Use mock data if API fails
-        setRegistrations(mockRegistrations);
+        setRegistrations([]);
       }
     } catch (err) {
       setError('An unexpected error occurred');
       console.error(err);
-      // Use mock data if API fails
-      setRegistrations(mockRegistrations);
+      setRegistrations([]);
     } finally {
       setLoading(false);
     }
   };
+
+  const updateFilter = (name, value) => {
+    setFilters((prev) => ({ ...prev, [name]: value }));
+    setPage(1);
+  };
+
+  const handleExport = async () => {
+    setExporting(true);
+    const result = await exportRegistrationsCsv(filters);
+    if (!result.success) setError(result.error);
+    setExporting(false);
+  };
+
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   const handleViewDetails = (registration) => {
     setSelectedRegistration(registration);
@@ -134,8 +172,10 @@ const RegistrationView = () => {
   const calculateEventPrice = (registration) => {
     if (!registration || !registration.event) return 'N/A';
     
-    const isTanzanian = registration.nationality?.name === 'Tanzania';
-    const isKidsEvent = registration.event.name.toLowerCase().includes('kids');
+    const isTanzanian = registration.nationality_category
+      ? registration.nationality_category !== 'international'
+      : registration.nationality?.code === 'TZA';
+    const isKidsEvent = registration.event.is_kids_event;
     
     if (isKidsEvent) {
       return `TZS ${registration.event.local_kids_price.toLocaleString()}`;
@@ -145,25 +185,6 @@ const RegistrationView = () => {
       return `USD ${registration.event.foreign_price.toLocaleString()}`;
     }
   };
-
-  // Mock data for registrations (fallback if API fails)
-  const mockRegistrations = [
-    {
-      id: 0,
-      first_name: 'Not found',
-      last_name: 'Not found',
-      email: 'Not found',
-      phone_number: 'Not found',
-      event: { name: 'Not found' },
-      created_at: new Date().toISOString(),
-      status: 'Not found',
-      nationality: { name: 'Not found' },
-      country: { name: 'Not found' },
-      gender: { name: 'Not found' },
-      shirtSize: { name: 'Not found' },
-      collectionVenue: { name: 'Not found' }
-    }
-  ];
 
   return (
     <div className="space-y-6">
@@ -180,21 +201,53 @@ const RegistrationView = () => {
             <input
               type="text"
               placeholder="Search registrations..."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
               className={`pl-10 pr-4 py-2 rounded-md w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-secondary ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-primary/10 text-primary'}`}
             />
           </div>
           <div className="flex gap-2">
-            <button className={`px-4 py-2 rounded-md flex items-center justify-center ${isDark ? 'bg-primary/50 text-tertiary hover:bg-primary/20' : 'bg-white text-primary hover:bg-primary/20'} border border-primary/20 dark:border-primary/15`}>
+            <button
+              onClick={() => setShowFilters((open) => !open)}
+              className={`px-4 py-2 rounded-md flex items-center justify-center ${isDark ? 'bg-primary/50 text-tertiary hover:bg-primary/20' : 'bg-white text-primary hover:bg-primary/20'} border border-primary/20 dark:border-primary/15`}
+            >
               <FontAwesomeIcon icon={faFilter} className="mr-2" />
               Filter
             </button>
-            <button className="px-4 py-2 bg-secondary text-primary rounded-md hover:bg-opacity-90 transition-opacity flex items-center">
-              <FontAwesomeIcon icon={faFileExport} className="mr-2" />
+            <button
+              onClick={handleExport}
+              disabled={exporting}
+              className="px-4 py-2 bg-secondary text-primary rounded-md hover:bg-opacity-90 transition-opacity flex items-center disabled:opacity-60"
+            >
+              <FontAwesomeIcon icon={exporting ? faSpinner : faFileExport} className={`mr-2 ${exporting ? 'animate-spin' : ''}`} />
               Export
             </button>
           </div>
         </div>
       </div>
+
+      {/* Filters */}
+      {showFilters && (
+        <div className={`flex flex-col sm:flex-row gap-3 p-4 rounded-md ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20`}>
+          {[
+            ['eventId', 'All races', events.map((event) => [event.id, event.name])],
+            ['paymentStatus', 'All payment statuses', [['pending', 'Pending'], ['confirmed', 'Confirmed'], ['failed', 'Failed']]],
+            ['locale', 'Both site languages', [['en', 'English site'], ['sw', 'Swahili site']]],
+          ].map(([name, allLabel, options]) => (
+            <select
+              key={name}
+              value={filters[name]}
+              onChange={(e) => updateFilter(name, e.target.value)}
+              className={`px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary ${isDark ? 'bg-primary text-tertiary' : 'bg-primary/10 text-primary'}`}
+            >
+              <option value="">{allLabel}</option>
+              {options.map(([value, label]) => (
+                <option key={value} value={value}>{label}</option>
+              ))}
+            </select>
+          ))}
+        </div>
+      )}
 
       {/* Error Message */}
       {error && (
@@ -292,16 +345,24 @@ const RegistrationView = () => {
         {!loading && registrations.length > 0 && (
           <div className={`px-6 py-4 flex justify-between items-center ${isDark ? 'bg-primary' : 'bg-gray-50'}`}>
             <div className={`text-sm ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-              Showing <span className="font-medium">1</span> to <span className="font-medium">{registrations.length}</span> of <span className="font-medium">{registrations.length}</span> results
+              Showing <span className="font-medium">{(page - 1) * PAGE_SIZE + 1}</span> to <span className="font-medium">{(page - 1) * PAGE_SIZE + registrations.length}</span> of <span className="font-medium">{total}</span> results
             </div>
             <div className="flex space-x-1">
-              <button className={`px-3 py-1 rounded-md ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}>
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className={`px-3 py-1 rounded-md disabled:opacity-50 ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}
+              >
                 Previous
               </button>
-              <button className="px-3 py-1 rounded-md bg-secondary text-primary">
-                1
-              </button>
-              <button className={`px-3 py-1 rounded-md ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}>
+              <span className="px-3 py-1 rounded-md bg-secondary text-primary">
+                {page} / {totalPages}
+              </span>
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page >= totalPages}
+                className={`px-3 py-1 rounded-md disabled:opacity-50 ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}
+              >
                 Next
               </button>
             </div>

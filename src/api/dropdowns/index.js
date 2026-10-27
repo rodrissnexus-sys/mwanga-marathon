@@ -1,63 +1,34 @@
-import { api } from '../client';
-import { ENDPOINTS } from '../config';
+import { createClient } from '@/lib/supabase/client';
+import { failure, localize } from '@/lib/content';
 
-export const fetchEvents = async () => {
+// Active rows of a dropdown table, in display order, in the page's language.
+const fetchActive = async (table, filter, fallbackError) => {
     try {
-        const response = await api.get(ENDPOINTS.DROPDOWNS.EVENTS).json();
-        return response;
+        let query = createClient().from(table).select('*').eq('is_active', true);
+        if (filter) query = filter(query);
+        const { data, error } = await query.order('sort_order').order('id');
+        if (error) throw error;
+        return { success: true, data: localize(data) };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch events'
-        };
+        return failure(error, fallbackError);
     }
 };
 
-export const fetchShirtSizes = async (isKids = false) => {
-    try {
-        const url = `${ENDPOINTS.DROPDOWNS.SHIRT_SIZES}${isKids ? '?is_kids_size=true' : ''}`;
-        const response = await api.get(url).json();
-        return response;
-    } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch shirt sizes'
-        };
-    }
-};
+/**
+ * Fetch all active events (race categories)
+ * @returns {Promise<Object>} { success, data: [{ id, name, description, local_price, ..., is_kids_event, distance_km }] }
+ */
+export const fetchEvents = () => fetchActive('events', null, 'Failed to fetch events');
 
-export const fetchCollectionVenues = async () => {
-    try {
-        const response = await api.get(ENDPOINTS.DROPDOWNS.COLLECTION_VENUES).json();
-        return response;
-    } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch collection venues'
-        };
-    }
-};
+/**
+ * Fetch adult or kids shirt sizes
+ * @param {boolean} isKids - true for kids sizes, false for adult sizes
+ */
+export const fetchShirtSizes = (isKids = false) =>
+    fetchActive('shirt_sizes', (query) => query.eq('is_kids_size', isKids), 'Failed to fetch shirt sizes');
 
-export const fetchCountries = async () => {
-    try {
-        const response = await api.get(ENDPOINTS.DROPDOWNS.COUNTRIES).json();
-        return response;
-    } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch countries'
-        };
-    }
-};
+export const fetchCollectionVenues = () => fetchActive('collection_venues', null, 'Failed to fetch collection venues');
 
-export const fetchGenders = async () => {
-    try {
-        const response = await api.get(ENDPOINTS.DROPDOWNS.GENDERS).json();
-        return response;
-    } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch genders'
-        };
-    }
-};
+export const fetchCountries = () => fetchActive('countries', null, 'Failed to fetch countries');
+
+export const fetchGenders = () => fetchActive('genders', null, 'Failed to fetch genders');

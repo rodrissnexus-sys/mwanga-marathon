@@ -123,7 +123,7 @@ const RegistrationSection = () => {
     setErrors(prev => ({ ...prev, [name]: "" }));
 
     if (name === "event") {
-      setShowKidsSizes(value === t("kidsEventName"));
+      setShowKidsSizes(Boolean(events.find((event) => event.name === value)?.isKidsEvent));
     }
     if (name === "shirtSize") {
       setSelectedSize(value);

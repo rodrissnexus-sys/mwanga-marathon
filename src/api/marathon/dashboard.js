@@ -1,82 +1,60 @@
-import { api } from '../client';
-import { ENDPOINTS } from '../config';
+import { createClient } from '@/lib/supabase/client';
+import { failure, localize } from '@/lib/content';
 
 /**
  * Get recent registrations for dashboard
  * @param {number} limit - Number of registrations to return
- * @returns {Promise<Object>} - Response with recent registrations
  */
 export const getRecentRegistrations = async (limit = 5) => {
     try {
-        const response = await api.get(`${ENDPOINTS.MARATHON.REGISTRATIONS}?limit=${limit}&sort=desc`).json();
-        
-        return {
-            success: true,
-            data: response.data
-        };
+        const { data, error } = await createClient()
+            .from('registrations')
+            .select('*, event:events(*)')
+            .is('deleted_at', null)
+            .order('created_at', { ascending: false })
+            .limit(limit);
+        if (error) throw error;
+        return { success: true, data: localize(data) };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch recent registrations'
-        };
+        return failure(error, 'Failed to fetch recent registrations');
     }
 };
 
 /**
- * Get event statistics for dashboard
- * @returns {Promise<Object>} - Response with event statistics
+ * Registrations and confirmed payments per race category, plus the
+ * male/female split. (The old API compared registrations against the home
+ * page "event types", which never matched; this uses the race categories.)
  */
 export const getEventStatistics = async () => {
     try {
-        // First get event types
-        const eventTypesResponse = await api.get(ENDPOINTS.EVENT_DATA.EVENT_TYPES).json();
-        
-        // Then get all registrations to calculate statistics
-        const registrationsResponse = await api.get(ENDPOINTS.MARATHON.REGISTRATIONS).json();
-        
-        // Process data to get statistics by event type
-        const eventTypes = eventTypesResponse.data || [];
-        const registrations = registrationsResponse.data || [];
-        
-        const statistics = eventTypes.map(eventType => {
-            // Count registrations for this event type
-            const eventRegistrations = registrations.filter(reg => reg.event_id === eventType.id);
-            
-            // Count completed payments
-            const completedPayments = eventRegistrations.filter(
-                reg => reg.payment_status === 'completed' || reg.payment_confirmed === true
-            ).length;
-            
+        const supabase = createClient();
+        const [{ data: events, error: eventsError }, { data: registrations, error: regError }] = await Promise.all([
+            supabase.from('events').select('*').order('sort_order'),
+            supabase.from('registrations').select('event_id, payment_status, gender:genders(code)').is('deleted_at', null),
+        ]);
+        if (eventsError) throw eventsError;
+        if (regError) throw regError;
+
+        const statistics = localize(events).map((event) => {
+            const forEvent = registrations.filter((reg) => reg.event_id === event.id);
             return {
-                id: eventType.id,
-                name: eventType.name,
-                registered: eventRegistrations.length,
-                capacity: eventType.capacity || 300, // Default capacity if not specified
-                completedPayments: completedPayments
+                id: event.id,
+                name: event.name,
+                registered: forEvent.length,
+                capacity: 300, // no capacity per category yet (same default as before)
+                completedPayments: forEvent.filter((reg) => reg.payment_status === 'confirmed').length,
             };
         });
-        
-        // Calculate gender distribution
-        const maleRegistrations = registrations.filter(reg => reg.gender_id === 1).length;
-        const femaleRegistrations = registrations.filter(reg => reg.gender_id === 2).length;
-        const totalRegistrations = registrations.length;
-        
-        const genderDistribution = {
-            male: totalRegistrations > 0 ? Math.round((maleRegistrations / totalRegistrations) * 100) : 0,
-            female: totalRegistrations > 0 ? Math.round((femaleRegistrations / totalRegistrations) * 100) : 0
-        };
-        
+
+        const total = registrations.length;
+        const share = (code) =>
+            total > 0 ? Math.round((registrations.filter((reg) => reg.gender?.code === code).length / total) * 100) : 0;
+
         return {
             success: true,
-            data: {
-                events: statistics,
-                genderDistribution
-            }
+            data: { events: statistics, genderDistribution: { male: share('M'), female: share('F') } },
         };
     } catch (error) {
-        return {
-            success: false,
-            error: error.message || 'Failed to fetch event statistics'
-        };
+        return failure(error, 'Failed to fetch event statistics');
     }
 };

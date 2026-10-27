@@ -12,7 +12,10 @@ import {
   faSpinner,
   faReceipt
 } from '@fortawesome/free-solid-svg-icons';
-import { getConfirmedPayments } from '../../../../api/marathon/registration';
+import { getRegistrationsPage, exportRegistrationsCsv } from '../../../../api/marathon/registration';
+import { fetchEvents } from '../../../../api/dropdowns';
+
+const PAGE_SIZE = 25;
 
 const PaymentsView = () => {
   const { theme } = useTheme();
@@ -23,31 +26,70 @@ const PaymentsView = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [searchInput, setSearchInput] = useState('');
+  const [filters, setFilters] = useState({ search: '', eventId: '', locale: '' });
+  const [showFilters, setShowFilters] = useState(false);
+  const [events, setEvents] = useState([]);
+  const [exporting, setExporting] = useState(false);
+
+  useEffect(() => {
+    fetchEvents().then((response) => response.success && setEvents(response.data));
+  }, []);
+
+  // Search after the user stops typing for a moment
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFilters((prev) => (prev.search === searchInput ? prev : { ...prev, search: searchInput }));
+      setPage(1);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
   useEffect(() => {
     fetchConfirmedPayments();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, filters]);
+
+  const paymentFilters = { ...filters, paymentStatus: 'confirmed' };
 
   const fetchConfirmedPayments = async () => {
     setLoading(true);
     try {
-      const response = await getConfirmedPayments();
+      const response = await getRegistrationsPage({
+        page, pageSize: PAGE_SIZE, orderBy: 'payment_confirmed_at', ...paymentFilters,
+      });
       if (response.success) {
         setPayments(response.data || []);
+        setTotal(response.total);
         setError(null);
       } else {
         setError(response.error || 'Failed to fetch confirmed payments');
-        // Use mock data if API fails
-        setPayments(mockPayments);
+        setPayments([]);
       }
     } catch (err) {
       setError('An unexpected error occurred');
       console.error(err);
-      // Use mock data if API fails
-      setPayments(mockPayments);
+      setPayments([]);
     } finally {
       setLoading(false);
     }
   };
+
+  const updateFilter = (name, value) => {
+    setFilters((prev) => ({ ...prev, [name]: value }));
+    setPage(1);
+  };
+
+  const handleExport = async () => {
+    setExporting(true);
+    const result = await exportRegistrationsCsv(paymentFilters);
+    if (!result.success) setError(result.error);
+    setExporting(false);
+  };
+
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   const handleViewDetails = (payment) => {
     setSelectedPayment(payment);
@@ -81,28 +123,6 @@ const PaymentsView = () => {
     }
   };
 
-  // Mock data for payments (fallback if API fails)
-  const mockPayments = [
-    {
-      id: 0,
-      first_name: 'Not found',
-      last_name: 'Not found',
-      email: 'Not found',
-      phone_number: 'Not found',
-      event: { name: 'Not found' },
-      created_at: new Date().toISOString(),
-      payment_status: 'confirmed',
-      payment_confirmed_at: new Date().toISOString(),
-      payment_confirmation_by: 'System',
-      payment_notes: 'Mock data',
-      nationality: { name: 'Not found' },
-      country: { name: 'Not found' },
-      gender: { name: 'Not found' },
-      shirt_size: { name: 'Not found' },
-      collection_venue: { name: 'Not found' }
-    }
-  ];
-
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -118,21 +138,52 @@ const PaymentsView = () => {
             <input
               type="text"
               placeholder="Search payments..."
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
               className={`pl-10 pr-4 py-2 rounded-md w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-secondary ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-primary/10 text-primary'}`}
             />
           </div>
           <div className="flex gap-2">
-            <button className={`px-4 py-2 rounded-md flex items-center justify-center ${isDark ? 'bg-primary/50 text-tertiary hover:bg-primary/20' : 'bg-white text-primary hover:bg-primary/20'} border border-primary/20 dark:border-primary/15`}>
+            <button
+              onClick={() => setShowFilters((open) => !open)}
+              className={`px-4 py-2 rounded-md flex items-center justify-center ${isDark ? 'bg-primary/50 text-tertiary hover:bg-primary/20' : 'bg-white text-primary hover:bg-primary/20'} border border-primary/20 dark:border-primary/15`}
+            >
               <FontAwesomeIcon icon={faFilter} className="mr-2" />
               Filter
             </button>
-            <button className="px-4 py-2 bg-secondary text-primary rounded-md hover:bg-opacity-90 transition-opacity flex items-center">
+            <button
+              onClick={handleExport}
+              disabled={exporting}
+              className="px-4 py-2 bg-secondary text-primary rounded-md hover:bg-opacity-90 transition-opacity flex items-center disabled:opacity-60"
+            >
               <FontAwesomeIcon icon={faFileExport} className="mr-2" />
-              Export
+              {exporting ? 'Exporting…' : 'Export'}
             </button>
           </div>
         </div>
       </div>
+
+      {/* Filters */}
+      {showFilters && (
+        <div className={`flex flex-col sm:flex-row gap-3 p-4 rounded-md ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20`}>
+          {[
+            ['eventId', 'All races', events.map((event) => [event.id, event.name])],
+            ['locale', 'Both site languages', [['en', 'English site'], ['sw', 'Swahili site']]],
+          ].map(([name, allLabel, options]) => (
+            <select
+              key={name}
+              value={filters[name]}
+              onChange={(e) => updateFilter(name, e.target.value)}
+              className={`px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary ${isDark ? 'bg-primary text-tertiary' : 'bg-primary/10 text-primary'}`}
+            >
+              <option value="">{allLabel}</option>
+              {options.map(([value, label]) => (
+                <option key={value} value={value}>{label}</option>
+              ))}
+            </select>
+          ))}
+        </div>
+      )}
 
       {/* Error Message */}
       {error && (
@@ -219,16 +270,24 @@ const PaymentsView = () => {
         {!loading && payments.length > 0 && (
           <div className={`px-6 py-4 flex justify-between items-center ${isDark ? 'bg-primary' : 'bg-gray-50'}`}>
             <div className={`text-sm ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-              Showing <span className="font-medium">1</span> to <span className="font-medium">{payments.length}</span> of <span className="font-medium">{payments.length}</span> results
+              Showing <span className="font-medium">{(page - 1) * PAGE_SIZE + 1}</span> to <span className="font-medium">{(page - 1) * PAGE_SIZE + payments.length}</span> of <span className="font-medium">{total}</span> results
             </div>
             <div className="flex space-x-1">
-              <button className={`px-3 py-1 rounded-md ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}>
+              <button
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className={`px-3 py-1 rounded-md disabled:opacity-50 ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}
+              >
                 Previous
               </button>
-              <button className="px-3 py-1 rounded-md bg-secondary text-primary">
-                1
-              </button>
-              <button className={`px-3 py-1 rounded-md ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}>
+              <span className="px-3 py-1 rounded-md bg-secondary text-primary">
+                {page} / {totalPages}
+              </span>
+              <button
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page >= totalPages}
+                className={`px-3 py-1 rounded-md disabled:opacity-50 ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}
+              >
                 Next
               </button>
             </div>

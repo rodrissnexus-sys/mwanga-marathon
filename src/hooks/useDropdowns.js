@@ -50,7 +50,9 @@ export const useDropdowns = () => {
                             description: event.description,
                             localPrice,
                             foreignPrice,
-                            localKidsPrice
+                            localKidsPrice,
+                            isKidsEvent: Boolean(event.is_kids_event),
+                            distanceKm: event.distance_km
                         };
                     });
                     setEvents(transformedEvents);

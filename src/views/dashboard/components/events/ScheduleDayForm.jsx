@@ -1,5 +1,4 @@
 "use client";
-import { getTokenKey } from '@/api/config';
 
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -56,7 +55,6 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
   // Check authentication status on mount
   useEffect(() => {
     console.log('Current user:', currentUser);
-    console.log('Auth token:', localStorage.getItem(getTokenKey()));
   }, [currentUser]);
 
   // Initialize form with schedule day data if editing

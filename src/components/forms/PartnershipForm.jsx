@@ -1,10 +1,12 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { submitContactMessage } from '@/server/messages';
 import React, { useState } from 'react';
 import PrimaryButton from '../common/buttons/PrimaryButton';
 
 const PartnershipForm = ({ onClose }) => {
+  const locale = useLocale();
   const t = useTranslations("forms.partnership");
   const [formData, setFormData] = useState({
     companyName: '',
@@ -69,10 +71,22 @@ const PartnershipForm = ({ onClose }) => {
     
     setIsSubmitting(true);
     
-    // Simulate API call
     try {
-      // Replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const result = await submitContactMessage({
+        kind: 'partnership',
+        name: formData.contactPerson,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.companyName,
+        website: formData.website,
+        sponsorship_tier: formData.sponsorshipTier,
+        message: formData.message,
+      }, locale);
+      if (!result.success) {
+        setIsSubmitting(false);
+        setErrors({ form: t("submitFailed") });
+        return;
+      }
       setSubmitSuccess(true);
       
       // Reset form after successful submission
