@@ -10,7 +10,8 @@
     "db:types": "node --env-file=.env.local -e \"require('child_process').execSync('npx supabase gen types typescript --schema public --db-url ' + JSON.stringify(process.env.DATABASE_URL) + ' > src/lib/supabase/database.types.ts', {stdio: 'inherit'})\"",
     "db:check-rls": "node --env-file=.env.local scripts/check-rls.mjs",
     "test": "vitest run",
-    "test:e2e": "node --env-file=.env.local node_modules/@playwright/test/cli.js test"
+    "test:e2e": "node --env-file=.env.local node_modules/@playwright/test/cli.js test",
+    "db:import": "node --env-file=.env.local scripts/import-mysql/index.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
