@@ -15,7 +15,19 @@ import { useAuth } from '../../../../contexts/AuthContext';
  */
 const categorizeEvent = (event) => {
   const name = event.name.toLowerCase();
-  
+
+  // 2026 categories; checked first because their names also contain
+  // "5km" / "fun" (2.5 km Walking Safari) or no "10km" (Trail Run)
+  if (name.includes('kids')) {
+    return 'kids_run';
+  }
+  if (name.includes('walking')) {
+    return 'walking_safari';
+  }
+  if (name.includes('trail')) {
+    return 'trail_run';
+  }
+
   // Check for full marathon (42km, marathon) - must check before half marathon
   if ((name.includes('42km') || name.includes('marathon')) && !name.includes('half')) {
     return 'full_marathon';

@@ -22,6 +22,12 @@
     "importantInformation": "Taarifa Muhimu",
     "keepYourPaymentConfirmation": "Hifadhi uthibitisho wa malipo yako kwa ajili ya kumbukumbu",
     "paymentConfirmationMayTake": "Uthibitisho wa malipo unaweza kuchukua hadi masaa 24",
-    "forSupportInfoMwafem": "Kwa msaada: info@mwafem.com"
+    "forSupportInfoMwafem": "Kwa msaada: info@mwafem.com",
+    "bankTransfer": "BENKI",
+    "bankTransferDesc": "Lipa kupitia akaunti zetu za benki",
+    "sendPaymentSlip": "Tuma risiti ya malipo",
+    "accountName": "Jina la akaunti: Kisangara Tours Ltd",
+    "useRegistrationId": "Tumia namba yako ya usajili (MWF-…) kama kumbukumbu ya malipo",
+    "sendSlip": "Tuma risiti ya malipo kwa info@mwafem.com au 0755 002 886"
   }
 }

@@ -22,6 +22,12 @@
     "importantInformation": "Important Information",
     "keepYourPaymentConfirmation": "Keep your payment confirmation for reference",
     "paymentConfirmationMayTake": "Payment confirmation may take up to 24 hours",
-    "forSupportInfoMwafem": "For support: info@mwafem.com"
+    "forSupportInfoMwafem": "For support: info@mwafem.com",
+    "bankTransfer": "BANK TRANSFER",
+    "bankTransferDesc": "Pay into any of our bank accounts",
+    "sendPaymentSlip": "Send payment slip",
+    "accountName": "Account name: Kisangara Tours Ltd",
+    "useRegistrationId": "Use your registration ID (MWF-…) as the payment reference",
+    "sendSlip": "Send the payment slip to info@mwafem.com or 0755 002 886"
   }
 }

@@ -760,7 +760,7 @@ export default function MarathonBanner({ bannerData, isLoading = false }) {
                 {isRegistrationOpen ? (
                   <div className="text-green-300">
                     <span className="inline-block w-2 h-2 bg-green-300 rounded-full mr-2"></span>
-                    {t('openUntil', { date: bannerData?.registration_end_date ? new Date(bannerData.registration_end_date).toLocaleDateString(dateLocale) : 'N/A' })}
+                    {t('openUntil', { date: bannerData?.registration_end_date ? new Date(bannerData.registration_end_date).toLocaleDateString(dateLocale === 'en-US' ? 'en-GB' : dateLocale, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Africa/Dar_es_Salaam' }) : 'N/A' })}
                   </div>
                 ) : (
                   <div className="text-red-300">
