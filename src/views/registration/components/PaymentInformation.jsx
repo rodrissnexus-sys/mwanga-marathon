@@ -12,6 +12,7 @@ const PaymentInformation = () => {
       name: "M-PESA",
       description: t("fastAndSecureMobile"),
       link: "tel:*150*00%23",
+      buttonIcon: "phone",
       linkText: t("dial15000"),
       instructions: [
         t("dial15000"),
@@ -22,7 +23,7 @@ const PaymentInformation = () => {
         t("enterMPesaPin")
       ],
       icon: (
-        <svg className="w-12 h-12 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8 text-secondary" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
@@ -31,6 +32,7 @@ const PaymentInformation = () => {
       name: "MIXX BY YAS",
       description: t("quickAndReliablePayments"),
       link: "tel:*150*01%23",
+      buttonIcon: "phone",
       linkText: t("dial15001"),
       instructions: [
         t("dial15001"),
@@ -41,7 +43,7 @@ const PaymentInformation = () => {
         t("confirmWithYourPin"),
       ],
       icon: (
-        <svg className="w-12 h-12 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8 text-secondary" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       ),
@@ -58,7 +60,7 @@ const PaymentInformation = () => {
         t("completeTheTransaction"),
       ],
       icon: (
-        <svg className="w-12 h-12 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8 text-secondary" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
         </svg>
       ),
@@ -68,6 +70,7 @@ const PaymentInformation = () => {
       name: t("bankTransfer"),
       description: t("bankTransferDesc"),
       link: "mailto:info@mwafem.com?subject=Mwanga%20Marathon%202026%20payment",
+      buttonIcon: "mail",
       linkText: t("sendPaymentSlip"),
       instructions: [
         "Mwanga Hakika Bank: 2290060000001",
@@ -78,7 +81,7 @@ const PaymentInformation = () => {
         t("sendSlip"),
       ],
       icon: (
-        <svg className="w-12 h-12 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8 text-secondary" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10l9-6 9 6M4 10v8m4-8v8m4-8v8m4-8v8m4-8v8M3 20h18" />
         </svg>
       ),
@@ -114,60 +117,66 @@ const PaymentInformation = () => {
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary opacity-5 rounded-full -ml-48 -mb-48 blur-2xl" />
       <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-tertiary opacity-5 rounded-full transform -translate-x-1/2 -translate-y-1/2 blur-xl" />
 
-      <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
         <SectionHeader firstWord={t("titleFirst")} secondWord={t("titleSecond")} />
         
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mt-12"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-12 items-stretch"
         >
           {paymentMethods.map((method) => (
             <motion.div
               key={method.name}
               variants={itemVariants}
-              className="bg-gradient-to-b from-tertiary/10 to-primary/5 rounded-2xl p-8 shadow-xl border border-tertiary/10 backdrop-blur-sm transform hover:scale-105 transition-all duration-300 hover:shadow-2xl flex flex-col justify-between"
+              className="h-full bg-tertiary rounded-2xl p-6 shadow-lg border border-primary/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-secondary/60 flex flex-col"
             >
               <div>
                 <div className="flex flex-col items-center text-center mb-6">
-                  <div className="mb-4 bg-gradient-to-br from-primary/10 to-secondary/10 p-3 rounded-full shadow-inner">
+                  <div className="mb-4 bg-primary p-3 rounded-full shadow-md">
                     {method.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-primary mb-2">{method.name}</h3>
-                  <p className="text-sm text-primary/70">{method.description}</p>
+                  <h3 className="text-xl font-bold text-primary mb-2 tracking-wide">{method.name}</h3>
+                  <p className="text-sm text-primary/75 min-h-[2.5rem]">{method.description}</p>
                 </div>
                 <div className="space-y-3">
                   {method.instructions.map((instruction, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <span className="text-secondary font-medium h-6 w-6 flex items-center justify-center bg-secondary/10 rounded-full text-xs">{idx + 1}</span>
-                      <p className="text-primary/80 text-sm pt-1">{instruction}</p>
+                    <div key={idx} className="flex items-start gap-3">
+                      <span className="shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-primary text-secondary text-xs font-semibold">{idx + 1}</span>
+                      <p className="text-primary/85 text-sm leading-6 break-words min-w-0">{instruction}</p>
                     </div>
                   ))}
                 </div>
               </div>
               
-              <div className="mt-6 flex justify-center">
+              <div className="mt-auto pt-6">
                 {method.isWebLink ? (
                   <a 
                     href={method.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-secondary to-secondary/80 text-primary px-6 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 transform hover:-translate-y-1 w-full justify-center"
+                    className="w-full min-h-12 px-5 py-3 rounded-full bg-secondary text-primary text-sm font-semibold whitespace-nowrap shadow-md hover:shadow-lg hover:bg-secondary/90 transition-all duration-300 flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
                     {method.linkText}
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </a>
                 ) : (
                   <a 
                     href={method.link}
-                    className="text-primary border-2 border-primary/30 bg-tertiary/5 px-5 py-2 rounded-full font-medium shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 hover:bg-primary/5"
+                    className="w-full min-h-12 px-5 py-3 rounded-full border-2 border-primary/25 text-primary text-sm font-semibold whitespace-nowrap hover:border-primary hover:bg-primary hover:text-tertiary transition-all duration-300 flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
+                    {method.buttonIcon === "mail" ? (
+                      <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    ) : (
+                      <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                    )}
                     {method.linkText}
                   </a>
                 )}
