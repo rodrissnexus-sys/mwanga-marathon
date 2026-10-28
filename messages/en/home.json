@@ -259,17 +259,10 @@
       "checkStatus": "Check my registration",
       "registerAnother": "Register another person"
     },
-    "steps": {
-      "aboutYou": "About you",
-      "yourRace": "Your race",
-      "confirm": "Confirm"
-    },
     "stepOf": "Step {current} of {total}",
     "progress": "Registration progress",
     "optional": "optional",
-    "kitTitle": "Your race kit",
     "haveVoucher": "Have a voucher code?",
-    "emergencyText": "Who should we call if something happens on race day?",
     "tooMany": "Too many attempts. Please try again in {minutes} minutes.",
     "nationalityHints": {
       "tz_ea": "Pay in Tanzanian shillings",
@@ -277,16 +270,10 @@
       "international": "Pay USD 30 (children and elders pay in shillings)"
     },
     "summary": {
-      "title": "Check your details",
-      "name": "Name",
-      "race": "Race",
-      "type": "Participant",
-      "size": "T-shirt",
-      "venue": "Kit collection",
-      "phone": "Phone",
       "fee": "Entry fee",
       "payAfter": "You pay after registering — you will get your registration ID to use as the payment reference."
-    }
+    },
+    "foreignShort": "Visitors from outside East Africa and SADC pay USD 30."
   },
   "form": {
     "nationalityCategory": "Nationality Category",
@@ -341,7 +328,11 @@
       "senior": "65 and over"
     },
     "proofNote": "Club members and students: bring your club card or student ID when you collect your kit.",
-    "foreignNote": "Participants from outside East Africa and SADC pay {fee}."
+    "foreignNote": "Participants from outside East Africa and SADC pay {fee}.",
+    "genders": {
+      "M": "Male",
+      "F": "Female"
+    }
   },
   "heroEvent": {
     "dateVenue": "20 December 2026 · C.D. Msuya Stadium, Mwanga",

@@ -92,6 +92,7 @@ export const useDropdowns = () => {
                 if (gendersResponse.success) {
                     setGenders(gendersResponse.data.map(gender => ({
                         id: gender.id,
+                        code: gender.code,
                         name: gender.name
                     })));
                 }

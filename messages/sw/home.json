@@ -259,17 +259,10 @@
       "checkStatus": "Angalia usajili wangu",
       "registerAnother": "Sajili mtu mwingine"
     },
-    "steps": {
-      "aboutYou": "Taarifa zako",
-      "yourRace": "Mbio zako",
-      "confirm": "Thibitisha"
-    },
     "stepOf": "Hatua {current} kati ya {total}",
     "progress": "Hatua za usajili",
     "optional": "si lazima",
-    "kitTitle": "Vifaa vya mbio utakavyopata",
     "haveVoucher": "Una msimbo wa vocha?",
-    "emergencyText": "Tumpigie nani ikitokea dharura siku ya mbio?",
     "tooMany": "Majaribio mengi mno. Tafadhali jaribu tena baada ya dakika {minutes}.",
     "nationalityHints": {
       "tz_ea": "Unalipa kwa shilingi za Kitanzania",
@@ -277,16 +270,10 @@
       "international": "Unalipa USD 30 (watoto na wazee hulipa kwa shilingi)"
     },
     "summary": {
-      "title": "Hakiki taarifa zako",
-      "name": "Jina",
-      "race": "Mbio",
-      "type": "Mshiriki",
-      "size": "T-shirt",
-      "venue": "Kituo cha kuchukua vifaa",
-      "phone": "Simu",
       "fee": "Ada ya kushiriki",
       "payAfter": "Unalipa baada ya kujisajili — utapata namba ya usajili ya kutumia kama kumbukumbu ya malipo."
-    }
+    },
+    "foreignShort": "Washiriki kutoka nje ya Afrika Mashariki na SADC hulipa USD 30."
   },
   "form": {
     "nationalityCategory": "Utaifa",
@@ -341,7 +328,11 @@
       "senior": "Miaka 65 na zaidi"
     },
     "proofNote": "Wanachama wa vilabu na wanafunzi: leteni kadi ya klabu au kitambulisho cha mwanafunzi mnapochukua vifaa.",
-    "foreignNote": "Washiriki kutoka nje ya Afrika Mashariki na SADC hulipa {fee}."
+    "foreignNote": "Washiriki kutoka nje ya Afrika Mashariki na SADC hulipa {fee}.",
+    "genders": {
+      "M": "Mwanaume",
+      "F": "Mwanamke"
+    }
   },
   "heroEvent": {
     "dateVenue": "20 Desemba 2026 · Uwanja wa C.D. Msuya, Mwanga",

@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight, faCheck, faCircleInfo, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faArrowRight, faCheck, faCircleExclamation, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import SectionHeader from "@/components/common/SectionHeader";
 import { ageOnRaceDay, categoriesForAge, categoryFee, formatMoney } from "@/lib/payments";
 import { EVENT } from "@/lib/event";
@@ -18,12 +18,12 @@ const EMPTY = {
   email: "",
   dateOfBirth: "",
   gender_id: "",
-  nationality: "",
-  country_id: "",
-  idOrPassport: "",
   event_id: "",
   participantCategory: "",
   shirt_size_id: "",
+  nationality: "",
+  country_id: "",
+  idOrPassport: "",
   collection_venue_id: "",
   voucherCode: "",
   emergencyContactName: "",
@@ -31,19 +31,35 @@ const EMPTY = {
 };
 
 const NATIONALITIES = ["tz_ea", "tz_resident_sadc", "international"];
-const STEPS = ["aboutYou", "yourRace", "confirm"];
+const STEPS = ["personalInformation", "eventDetails", "additionalInformation", "emergencyContact"];
+const GENDER_CODES = ["M", "F"];
 
 const inputClass = (error) =>
-  `w-full min-h-12 px-4 scroll-mt-36 rounded-lg border bg-tertiary text-primary placeholder:text-primary/45 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-primary ${
-    error ? "border-negative" : "border-primary/25"
+  `w-full min-h-12 px-4 scroll-mt-36 rounded-lg bg-tertiary text-primary placeholder:text-primary/45 border-2 focus:outline-none focus:border-secondary ${
+    error ? "border-secondary" : "border-transparent"
   }`;
 
+const Label = ({ htmlFor, children, as: Tag = "label" }) => (
+  <Tag {...(htmlFor ? { htmlFor } : {})} className="flex items-center gap-2 text-sm font-semibold text-tertiary mb-1.5">
+    <span aria-hidden="true" className="w-1 h-3.5 rounded-full bg-secondary" />
+    {children}
+  </Tag>
+);
+
+const ErrorText = ({ id, children }) =>
+  children ? (
+    <p id={id} className="mt-1.5 flex items-center gap-1.5 text-sm font-medium text-secondary">
+      <FontAwesomeIcon icon={faCircleExclamation} className="text-xs" />
+      {children}
+    </p>
+  ) : null;
+
 // Text input with its label and error message.
-const Field = ({ name, label, error, optional, optionalText, ...props }) => (
+const Field = ({ name, label, error, hint, ...props }) => (
   <div>
-    <label htmlFor={`reg-${name}`} className="block text-sm font-semibold text-primary mb-1.5">
-      {label} {optional && <span className="font-normal text-primary/60">({optionalText})</span>}
-    </label>
+    <Label htmlFor={`reg-${name}`}>
+      {label} {hint && <span className="font-normal text-tertiary/60">({hint})</span>}
+    </Label>
     <input
       id={`reg-${name}`}
       name={name}
@@ -52,43 +68,68 @@ const Field = ({ name, label, error, optional, optionalText, ...props }) => (
       className={inputClass(error)}
       {...props}
     />
-    {error && <p id={`reg-${name}-error`} className="mt-1 text-sm font-medium text-negative">{error}</p>}
+    <ErrorText id={`reg-${name}-error`}>{error}</ErrorText>
+  </div>
+);
+
+// Native select (the phone's own picker) with label and error.
+const SelectField = ({ name, label, error, placeholder, options, ...props }) => (
+  <div>
+    <Label htmlFor={`reg-${name}`}>{label}</Label>
+    <div className="relative">
+      <select
+        id={`reg-${name}`}
+        name={name}
+        aria-invalid={error ? true : undefined}
+        className={`${inputClass(error)} appearance-none pr-10 cursor-pointer`}
+        {...props}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>{o.label}</option>
+        ))}
+      </select>
+      <svg aria-hidden="true" className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-primary pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+    <ErrorText>{error}</ErrorText>
   </div>
 );
 
 // A group of tap-to-choose cards (radio buttons underneath).
 const Choices = ({ name, legend, value, onChange, options, error, columns = "sm:grid-cols-2" }) => (
   <fieldset>
-    <legend className="block text-sm font-semibold text-primary mb-1.5">{legend}</legend>
+    <Label as="legend">{legend}</Label>
     <div className={`grid gap-2 ${columns}`}>
       {options.map((option) => {
         const checked = String(value) === String(option.value);
         return (
           <label
             key={option.value}
-            className={`relative flex items-start gap-3 p-3 min-h-12 rounded-lg border cursor-pointer transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-secondary ${
-              checked ? "border-primary bg-secondary/25" : "border-primary/20 hover:border-primary/50"
+            className={`flex items-center gap-3 px-3 py-2.5 min-h-12 rounded-lg border-2 cursor-pointer transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-secondary ${
+              checked ? "border-secondary bg-secondary/15" : "border-tertiary/20 hover:border-tertiary/50"
             }`}
           >
             <input type="radio" name={name} value={option.value} checked={checked} onChange={() => onChange(name, option.value)} className="sr-only" />
             <span
               aria-hidden="true"
-              className={`mt-0.5 w-5 h-5 shrink-0 rounded-full border-2 flex items-center justify-center ${checked ? "border-primary bg-primary text-secondary" : "border-primary/35"}`}
+              className={`w-5 h-5 shrink-0 rounded-full border-2 flex items-center justify-center ${checked ? "border-secondary bg-secondary text-primary" : "border-tertiary/50"}`}
             >
               {checked && <FontAwesomeIcon icon={faCheck} className="text-[10px]" />}
             </span>
             <span className="min-w-0 flex-1">
               <span className="flex flex-wrap items-baseline justify-between gap-x-3">
-                <span className="font-semibold text-primary">{option.label}</span>
-                {option.aside && <span className="font-bold text-primary">{option.aside}</span>}
+                <span className="font-semibold text-tertiary">{option.label}</span>
+                {option.aside && <span className="font-bold text-secondary">{option.aside}</span>}
               </span>
-              {option.hint && <span className="block text-sm text-primary/70 mt-0.5">{option.hint}</span>}
+              {option.hint && <span className="block text-xs text-tertiary/70 mt-0.5">{option.hint}</span>}
             </span>
           </label>
         );
       })}
     </div>
-    {error && <p className="mt-1 text-sm font-medium text-negative">{error}</p>}
+    <ErrorText>{error}</ErrorText>
   </fieldset>
 );
 
@@ -157,16 +198,18 @@ const RegistrationSection = () => {
       if (!form.dateOfBirth) e.dateOfBirth = t("errors.dobRequired");
       else if (ageOnRaceDay(form.dateOfBirth) < 0) e.dateOfBirth = t("errors.dobInvalid");
       required("gender_id", t("errors.genderRequired"));
-      required("nationality", t("errors.nationalityRequired"));
-      if (form.nationality) required("country_id", t("errors.countryRequired"));
     }
     if (index === 1) {
       required("event_id", t("eventIsRequired"));
       required("participantCategory", t("participantTypeRequired"));
       required("shirt_size_id", t("shirtSizeIsRequired"));
-      required("collection_venue_id", t("collectionVenueIsRequired"));
     }
     if (index === 2) {
+      required("nationality", t("errors.nationalityRequired"));
+      if (form.nationality) required("country_id", t("errors.countryRequired"));
+      required("collection_venue_id", t("collectionVenueIsRequired"));
+    }
+    if (index === 3) {
       required("emergencyContactName", t("errors.emergencyNameRequired"));
       required("emergencyContactNumber", t("errors.emergencyNumberRequired"));
     }
@@ -176,7 +219,7 @@ const RegistrationSection = () => {
   // after a failed check, put the cursor on the first field with a problem
   const showErrors = (found) => {
     setErrors(found);
-    setTimeout(() => cardRef.current?.querySelector('[aria-invalid="true"], fieldset:has(.text-negative) input')?.focus(), 0);
+    setTimeout(() => cardRef.current?.querySelector('[aria-invalid="true"], fieldset:has(.text-secondary) input')?.focus(), 0);
   };
 
   const goTo = (index) => {
@@ -231,75 +274,34 @@ const RegistrationSection = () => {
   const venue = byId(collectionVenues, form.collection_venue_id);
   const fee = form.participantCategory ? categoryFee(form.participantCategory, local) : null;
 
-  const optional = { optional: true, optionalText: t("optional") };
-
   const steps = [
-    // 1. About you
-    <div key="about" className="space-y-5">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field name="firstName" label={tf("firstName")} value={form.firstName} onChange={onInput} error={errors.firstName} autoComplete="given-name" />
-        <Field name="lastName" label={tf("lastName")} value={form.lastName} onChange={onInput} error={errors.lastName} autoComplete="family-name" />
-        <Field name="phoneNumber" label={tf("phoneNumber")} value={form.phoneNumber} onChange={onInput} error={errors.phoneNumber} type="tel" inputMode="tel" autoComplete="tel" placeholder="07XX XXX XXX" />
-        <Field name="email" label={tf("email")} value={form.email} onChange={onInput} error={errors.email} type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" />
-        <Field name="dateOfBirth" label={tf("dateOfBirth")} value={form.dateOfBirth} onChange={onInput} error={errors.dateOfBirth} type="date" max={EVENT.startsAt.slice(0, 10)} autoComplete="bday" />
-      </div>
+    // 1. Personal information
+    <div key="personal" className="grid gap-4 sm:grid-cols-2">
+      <Field name="firstName" label={tf("firstName")} value={form.firstName} onChange={onInput} error={errors.firstName} autoComplete="given-name" placeholder={tf("enterFirstName")} />
+      <Field name="lastName" label={tf("lastName")} value={form.lastName} onChange={onInput} error={errors.lastName} autoComplete="family-name" placeholder={tf("enterLastName")} />
+      <Field name="phoneNumber" label={tf("phoneNumber")} value={form.phoneNumber} onChange={onInput} error={errors.phoneNumber} type="tel" inputMode="tel" autoComplete="tel" placeholder="07XX XXX XXX" />
+      <Field name="email" label={tf("email")} value={form.email} onChange={onInput} error={errors.email} type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" />
+      <Field name="dateOfBirth" label={tf("dateOfBirth")} value={form.dateOfBirth} onChange={onInput} error={errors.dateOfBirth} type="date" max={EVENT.startsAt.slice(0, 10)} autoComplete="bday" />
       <Choices
         name="gender_id"
         legend={tf("gender")}
         value={form.gender_id}
         onChange={set}
         error={errors.gender_id}
-        columns="grid-cols-2 sm:grid-cols-4"
-        options={genders.map((g) => ({ value: g.id, label: g.name }))}
+        columns="grid-cols-2"
+        options={genders.filter((g) => GENDER_CODES.includes(g.code)).map((g) => ({ value: g.id, label: tf(`genders.${g.code}`) }))}
       />
-      <Choices
-        name="nationality"
-        legend={tf("nationalityCategory")}
-        value={form.nationality}
-        onChange={set}
-        error={errors.nationality}
-        columns=""
-        options={NATIONALITIES.map((n) => ({ value: n, label: t(`nationality.${n}`), hint: t(`nationalityHints.${n}`) }))}
-      />
-      {form.nationality && (
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div>
-            <label htmlFor="reg-country_id" className="block text-sm font-semibold text-primary mb-1.5">{tf("country")}</label>
-            <select
-              id="reg-country_id"
-              name="country_id"
-              value={form.country_id}
-              onChange={onInput}
-              aria-invalid={errors.country_id ? true : undefined}
-              className={`${inputClass(errors.country_id)} cursor-pointer`}
-            >
-              <option value="">{tf("selectCountry")}</option>
-              {countries.map((c) => (
-                <option key={c.id} value={c.id}>{c.name}</option>
-              ))}
-            </select>
-            {errors.country_id && <p className="mt-1 text-sm font-medium text-negative">{errors.country_id}</p>}
-          </div>
-          <Field
-            name="idOrPassport"
-            label={local ? tf("idNumber") : tf("passportNumber")}
-            value={form.idOrPassport}
-            onChange={onInput}
-            {...optional}
-          />
-        </div>
-      )}
     </div>,
 
-    // 2. Your race
-    <div key="race" className="space-y-6">
+    // 2. Event details
+    <div key="event" className="space-y-5">
       <Choices
         name="event_id"
         legend={tf("eventSelection")}
         value={form.event_id}
         onChange={set}
         error={errors.event_id}
-        options={events.map((e) => ({ value: e.id, label: e.name, hint: e.description }))}
+        options={events.map((e) => ({ value: e.id, label: e.name }))}
       />
       <div>
         <Choices
@@ -314,18 +316,18 @@ const RegistrationSection = () => {
             return { value: c, label: tf(`categories.${c}`), hint: tf(`categoryHints.${c}`), aside: formatMoney(price.amount, price.currency) };
           })}
         />
-        {allowedCategories.length > 1 && <p className="mt-2 text-sm text-primary/70">{tf("proofNote")}</p>}
+        {allowedCategories.length > 1 && <p className="mt-2 text-xs text-tertiary/70">{tf("proofNote")} {t("foreignShort")}</p>}
       </div>
       <fieldset>
-        <legend className="block text-sm font-semibold text-primary mb-1.5">{isChild ? tf("kidsTShirtSize") : tf("tShirtSize")}</legend>
+        <Label as="legend">{isChild ? tf("kidsTShirtSize") : tf("tShirtSize")}</Label>
         <div className="flex flex-wrap gap-2">
           {sizes.map((size) => {
             const checked = String(form.shirt_size_id) === String(size.id);
             return (
               <label
                 key={size.id}
-                className={`min-w-14 min-h-12 px-4 rounded-lg border flex items-center justify-center font-bold cursor-pointer transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-secondary ${
-                  checked ? "border-primary bg-primary text-secondary" : "border-primary/25 text-primary hover:border-primary/60"
+                className={`min-w-12 min-h-11 px-3 rounded-lg border-2 flex items-center justify-center font-bold cursor-pointer transition-colors has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-secondary ${
+                  checked ? "border-secondary bg-secondary text-primary" : "border-tertiary/25 text-tertiary hover:border-tertiary/60"
                 }`}
               >
                 <input type="radio" name={isChild ? "kidsShirtSize" : "shirtSize"} value={size.code} checked={checked} onChange={() => set("shirt_size_id", size.id)} className="sr-only" />
@@ -334,58 +336,74 @@ const RegistrationSection = () => {
             );
           })}
         </div>
-        {errors.shirt_size_id && <p className="mt-1 text-sm font-medium text-negative">{errors.shirt_size_id}</p>}
+        <ErrorText>{errors.shirt_size_id}</ErrorText>
       </fieldset>
-      <Choices
-        name="collection_venue_id"
-        legend={tf("collectionVenue")}
-        value={form.collection_venue_id}
-        onChange={set}
-        error={errors.collection_venue_id}
-        options={collectionVenues.map((v) => ({ value: v.id, label: v.name, hint: v.address }))}
+    </div>,
+
+    // 3. Additional information
+    <div key="additional" className="grid gap-4 sm:grid-cols-2">
+      <div className="sm:col-span-2">
+        <SelectField
+          name="nationality"
+          label={tf("nationalityCategory")}
+          placeholder={tf("selectNationalityCategory")}
+          value={form.nationality}
+          onChange={onInput}
+          error={errors.nationality}
+          options={NATIONALITIES.map((n) => ({ value: n, label: t(`nationality.${n}`) }))}
+        />
+        {form.nationality && <p className="mt-1.5 text-xs text-tertiary/70">{t(`nationalityHints.${form.nationality}`)}</p>}
+      </div>
+      <SelectField
+        name="country_id"
+        label={tf("country")}
+        placeholder={tf("selectCountry")}
+        value={form.country_id}
+        onChange={onInput}
+        error={errors.country_id}
+        options={countries.map((c) => ({ value: c.id, label: c.name }))}
       />
+      <Field name="idOrPassport" label={local ? tf("idNumber") : tf("passportNumber")} hint={t("optional")} value={form.idOrPassport} onChange={onInput} />
+      <div className="sm:col-span-2">
+        <SelectField
+          name="collection_venue_id"
+          label={tf("collectionVenue")}
+          placeholder={tf("selectCollectionVenue")}
+          value={form.collection_venue_id}
+          onChange={onInput}
+          error={errors.collection_venue_id}
+          options={collectionVenues.map((v) => ({ value: v.id, label: v.name }))}
+        />
+        {venue?.address && <p className="mt-1.5 text-xs text-tertiary/70">{venue.address}</p>}
+      </div>
+    </div>,
+
+    // 4. Emergency contact + summary
+    <div key="emergency" className="space-y-5">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field name="emergencyContactName" label={tf("emergencyContactName")} value={form.emergencyContactName} onChange={onInput} error={errors.emergencyContactName} autoComplete="off" placeholder={tf("enterEmergencyContactName")} />
+        <Field name="emergencyContactNumber" label={tf("emergencyContactNumber")} value={form.emergencyContactNumber} onChange={onInput} error={errors.emergencyContactNumber} type="tel" inputMode="tel" placeholder="07XX XXX XXX" />
+      </div>
       {showVoucher ? (
         <Field name="voucherCode" label={tf("voucherCode")} value={form.voucherCode} onChange={onInput} placeholder={tf("enterVoucherCodeIf")} />
       ) : (
-        <button type="button" onClick={() => setShowVoucher(true)} className="text-sm font-semibold text-primary underline underline-offset-4 cursor-pointer">
+        <button type="button" onClick={() => setShowVoucher(true)} className="text-sm font-semibold text-secondary underline underline-offset-4 cursor-pointer">
           {t("haveVoucher")}
         </button>
       )}
-    </div>,
-
-    // 3. Emergency contact + summary
-    <div key="confirm" className="space-y-6">
-      <div>
-        <p className="text-sm text-primary/75 mb-3">{t("emergencyText")}</p>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Field name="emergencyContactName" label={tf("emergencyContactName")} value={form.emergencyContactName} onChange={onInput} error={errors.emergencyContactName} autoComplete="off" />
-          <Field name="emergencyContactNumber" label={tf("emergencyContactNumber")} value={form.emergencyContactNumber} onChange={onInput} error={errors.emergencyContactNumber} type="tel" inputMode="tel" placeholder="07XX XXX XXX" />
-        </div>
-      </div>
-      <div className="rounded-xl bg-primary/[0.04] border border-primary/10 p-4 md:p-5">
-        <h4 className="font-bold text-primary mb-3">{t("summary.title")}</h4>
-        <dl className="grid gap-x-6 gap-y-3 sm:grid-cols-2 text-sm">
-          {[
-            [t("summary.name"), `${form.firstName} ${form.lastName}`],
-            [t("summary.race"), event?.name],
-            [t("summary.type"), form.participantCategory ? tf(`categories.${form.participantCategory}`) : ""],
-            [t("summary.size"), byId(sizes, form.shirt_size_id)?.code],
-            [t("summary.venue"), venue?.name],
-            [t("summary.phone"), form.phoneNumber],
-          ].map(([label, value]) => (
-            <div key={label}>
-              <dt className="text-xs font-bold uppercase tracking-wide text-primary/60">{label}</dt>
-              <dd className="font-semibold text-primary break-words">{value || "—"}</dd>
-            </div>
-          ))}
-        </dl>
+      <div className="rounded-xl border border-tertiary/15 bg-tertiary/5 p-4">
+        <p className="text-sm text-tertiary/85">
+          <span className="font-semibold text-tertiary">{form.firstName} {form.lastName}</span>
+          {event && <> · {event.name}</>}
+          {byId(sizes, form.shirt_size_id) && <> · T-shirt {byId(sizes, form.shirt_size_id).code}</>}
+        </p>
         {fee && (
-          <p className="mt-4 pt-4 border-t border-primary/10 flex flex-wrap items-baseline justify-between gap-2">
-            <span className="font-semibold text-primary/80">{t("summary.fee")}</span>
-            <span className="text-2xl font-extrabold text-primary">{formatMoney(fee.amount, fee.currency)}</span>
+          <p className="mt-3 pt-3 border-t border-tertiary/15 flex flex-wrap items-baseline justify-between gap-2">
+            <span className="text-sm font-semibold text-tertiary/80">{t("summary.fee")}</span>
+            <span className="text-2xl font-extrabold text-secondary">{formatMoney(fee.amount, fee.currency)}</span>
           </p>
         )}
-        <p className="mt-2 text-xs text-primary/65">{t("summary.payAfter")}</p>
+        <p className="mt-1 text-xs text-tertiary/65">{t("summary.payAfter")}</p>
       </div>
     </div>,
   ];
@@ -394,6 +412,9 @@ const RegistrationSection = () => {
 
   return (
     <section id="register" className="py-16 md:py-20 bg-primary overflow-hidden relative">
+      <div className="absolute top-0 left-0 w-64 h-64 bg-secondary opacity-5 rounded-full -ml-32 -mt-32" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-tertiary opacity-5 rounded-full -mr-48 -mb-48" />
+
       <div className="max-w-6xl mx-auto px-4 relative">
         <SectionHeader firstWord={t("titleFirst")} secondWord={t("titleSecond")} tone="dark" />
 
@@ -404,8 +425,7 @@ const RegistrationSection = () => {
               {t("earlyBirdDiscounts")}
             </p>
             <p className="mt-4 text-tertiary/90 leading-relaxed">{t("secureYourSpotIn")}</p>
-            <h3 className="mt-6 text-sm font-bold uppercase tracking-wider text-secondary">{t("kitTitle")}</h3>
-            <ul className="mt-3 grid grid-cols-2 gap-2">
+            <ul className="mt-5 grid grid-cols-2 gap-2">
               {kit.map((item) => (
                 <li key={item} className="flex items-start gap-2 rounded-lg bg-tertiary/10 px-3 py-2.5 text-sm">
                   <FontAwesomeIcon icon={faCheck} className="mt-1 text-secondary text-xs" />
@@ -416,67 +436,60 @@ const RegistrationSection = () => {
           </aside>
 
           {/* The form */}
-          <div ref={cardRef} className="rounded-2xl bg-tertiary text-primary shadow-2xl overflow-hidden scroll-mt-32">
+          <div ref={cardRef} className="rounded-2xl border border-tertiary/15 border-t-4 border-t-secondary bg-tertiary/[0.06] backdrop-blur-sm scroll-mt-32">
             {loading ? (
-              <div className="p-10 text-center text-primary/75">
+              <div className="p-10 text-center text-tertiary/80">
                 <FontAwesomeIcon icon={faSpinner} spin className="mr-2" />
                 {t("loadingFormOptions")}
               </div>
             ) : loadError ? (
-              <p role="alert" className="p-10 text-center font-medium text-negative">{t("errorLoadingFormOptions")}</p>
+              <p role="alert" className="p-10 text-center font-medium text-secondary">{t("errorLoadingFormOptions")}</p>
             ) : registered ? (
-              <div className="bg-primary p-5 md:p-8">
+              <div className="p-5 md:p-8">
                 <RegistrationConfirmation registration={registered} onRegisterAnother={() => setRegistered(null)} />
               </div>
             ) : (
-              <form onSubmit={submit} noValidate>
-                {/* Progress */}
-                <div className="px-5 md:px-8 pt-5 md:pt-6">
-                  <ol className="grid grid-cols-3 gap-2" aria-label={t("progress")}>
-                    {STEPS.map((name, i) => (
-                      <li key={name}>
-                        <button
-                          type="button"
-                          disabled={i >= step}
-                          onClick={() => goTo(i)}
-                          aria-current={i === step ? "step" : undefined}
-                          className="w-full text-left disabled:cursor-default cursor-pointer"
-                        >
-                          <span className={`block h-1.5 rounded-full ${i <= step ? "bg-secondary" : "bg-primary/10"}`} />
-                          <span className={`mt-2 flex items-start gap-1.5 text-xs font-semibold ${i === step ? "text-primary" : "text-primary/55"}`}>
-                            <span
-                              className={`w-5 h-5 shrink-0 rounded-full flex items-center justify-center text-[10px] font-bold ${
-                                i < step ? "bg-primary text-secondary" : i === step ? "bg-secondary text-primary" : "bg-primary/10 text-primary/60"
-                              }`}
-                            >
-                              {i < step ? <FontAwesomeIcon icon={faCheck} /> : i + 1}
-                            </span>
-                            <span className="leading-tight">{t(`steps.${name}`)}</span>
-                          </span>
-                        </button>
-                      </li>
-                    ))}
-                  </ol>
-                  <h3 className="mt-5 text-xl md:text-2xl font-extrabold text-primary">{t(`steps.${STEPS[step]}`)}</h3>
-                  <p className="text-sm text-primary/60">{t("stepOf", { current: step + 1, total: STEPS.length })}</p>
+              <form onSubmit={submit} noValidate className="p-5 md:p-8">
+                {/* Progress: numbered steps, done steps can be revisited */}
+                <ol className="flex items-center" aria-label={t("progress")}>
+                  {STEPS.map((name, i) => (
+                    <li key={name} className={`flex items-center ${i < STEPS.length - 1 ? "flex-1" : ""}`}>
+                      <button
+                        type="button"
+                        disabled={i >= step}
+                        onClick={() => goTo(i)}
+                        aria-current={i === step ? "step" : undefined}
+                        aria-label={`${i + 1}. ${t(name)}`}
+                        className={`w-9 h-9 shrink-0 rounded-full flex items-center justify-center text-sm font-bold transition-colors disabled:cursor-default cursor-pointer ${
+                          i < step ? "bg-secondary text-primary" : i === step ? "bg-secondary text-primary ring-4 ring-secondary/25" : "bg-tertiary/10 text-tertiary/70"
+                        }`}
+                      >
+                        {i < step ? <FontAwesomeIcon icon={faCheck} /> : i + 1}
+                      </button>
+                      {i < STEPS.length - 1 && <span className={`flex-1 h-0.5 mx-2 rounded-full ${i < step ? "bg-secondary" : "bg-tertiary/15"}`} />}
+                    </li>
+                  ))}
+                </ol>
+                <div className="mt-5 mb-6 flex items-baseline justify-between gap-3">
+                  <h3 className="text-xl md:text-2xl font-bold text-tertiary">{t(STEPS[step])}</h3>
+                  <span className="shrink-0 text-xs font-semibold text-tertiary/60">{t("stepOf", { current: step + 1, total: STEPS.length })}</span>
                 </div>
 
-                <div className="px-5 md:px-8 py-6">
-                  {(apiError || retryAfter) && (
-                    <p role="alert" className="mb-5 flex gap-3 rounded-lg border border-negative/30 bg-negative/10 text-negative px-4 py-3 text-sm font-medium">
-                      <FontAwesomeIcon icon={faCircleInfo} className="mt-0.5" />
-                      {retryAfter ? t("tooMany", { minutes: Math.ceil(retryAfter / 60) }) : t("errors.submitFailed")}
-                    </p>
-                  )}
-                  {steps[step]}
-                </div>
+                {(apiError || retryAfter) && (
+                  <p role="alert" className="mb-5 flex gap-2 rounded-lg border border-secondary/40 bg-secondary/10 text-secondary px-4 py-3 text-sm font-medium">
+                    <FontAwesomeIcon icon={faCircleExclamation} className="mt-0.5" />
+                    {retryAfter ? t("tooMany", { minutes: Math.ceil(retryAfter / 60) }) : t("errors.submitFailed")}
+                  </p>
+                )}
 
-                <div className="px-5 md:px-8 pb-6 flex gap-3">
+                {steps[step]}
+
+                <div className="mt-8 flex gap-3">
                   {step > 0 && (
                     <button
                       type="button"
                       onClick={() => goTo(step - 1)}
-                      className="min-h-12 px-5 rounded-lg border border-primary/25 text-primary font-semibold inline-flex items-center justify-center gap-2 hover:bg-primary/5 cursor-pointer"
+                      className="min-h-12 px-5 rounded-lg border-2 border-tertiary/30 text-tertiary font-semibold inline-flex items-center justify-center gap-2 hover:border-secondary hover:text-secondary cursor-pointer"
                     >
                       <FontAwesomeIcon icon={faArrowLeft} />
                       <span className="sr-only sm:not-sr-only">{t("back")}</span>
@@ -485,9 +498,7 @@ const RegistrationSection = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting || Boolean(retryAfter)}
-                    className={`flex-1 min-h-12 px-5 rounded-lg font-bold inline-flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
-                      step === STEPS.length - 1 ? "bg-secondary text-primary" : "bg-primary text-tertiary hover:bg-primary/90"
-                    }`}
+                    className="flex-1 min-h-12 px-5 rounded-lg bg-secondary text-primary font-bold uppercase tracking-wide text-sm inline-flex items-center justify-center gap-2 hover:bg-tertiary cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
