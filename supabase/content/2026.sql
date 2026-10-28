@@ -34,7 +34,7 @@ values
    'Walking Safari ya kilomita 2.5 kwa watoto (chini ya miaka 10), pamoja na T-shirt ya watoto.',
    20000, 15, 20000, 2.5, true, true, 5);
 
--- Home page banner (shows while registration is open).
+-- Home page banner (replaces the photo hero while active and registration is open).
 update public.marathon_banners set is_active = false where is_active;
 
 with banner as (
@@ -51,7 +51,7 @@ with banner as (
      '2026-10-28 00:00:00+03',
      '2026-12-10 23:59:59+03',
      '2026-12-20 06:00:00+03',
-     true)
+     false)  -- kept off: the home page shows the photo hero; switch on in the dashboard if wanted
   returning id
 ),
 package as (
