@@ -11,7 +11,8 @@
     "db:check-rls": "node --env-file=.env.local scripts/check-rls.mjs",
     "test": "vitest run",
     "test:e2e": "node --env-file=.env.local node_modules/@playwright/test/cli.js test",
-    "db:import": "node --env-file=.env.local scripts/import-mysql/index.mjs"
+    "db:import": "node --env-file=.env.local scripts/import-mysql/index.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",

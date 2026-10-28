@@ -28,7 +28,8 @@
     "race10k": "Mbio za 10K",
     "race10kDesc": "Umbali unaofaa kwa wakimbiaji wa burudani wanaotaka kujipima katika mazingira ya ushindani.",
     "funRun5k": "Mbio za Burudani za 5K",
-    "funRun5kDesc": "Inafaa kwa wanaoanza na familia. Furahia mazingira ya burudani yasiyo ya ushindani huku ukiwa sehemu ya tukio."
+    "funRun5kDesc": "Inafaa kwa wanaoanza na familia. Furahia mazingira ya burudani yasiyo ya ushindani huku ukiwa sehemu ya tukio.",
+    "under10": "Chini ya miaka 10"
   },
   "faq": {
     "howDoIChoose": "Ninawezaje kuchagua aina sahihi ya mbio?",

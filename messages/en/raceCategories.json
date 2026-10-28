@@ -28,7 +28,8 @@
     "race10k": "10K Race",
     "race10kDesc": "An ideal distance for recreational runners looking to push themselves in a competitive environment.",
     "funRun5k": "5K Fun Run",
-    "funRun5kDesc": "Perfect for beginners and families. Enjoy a fun, non-competitive atmosphere while still being part of the event."
+    "funRun5kDesc": "Perfect for beginners and families. Enjoy a fun, non-competitive atmosphere while still being part of the event.",
+    "under10": "Under 10 years"
   },
   "faq": {
     "howDoIChoose": "How do I choose the right race category?",

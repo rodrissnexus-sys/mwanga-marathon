@@ -189,7 +189,7 @@ const Header = () => {
             >
               <FontAwesomeIcon icon={faGlobe} className="mr-1 text-primary/80 text-[10px]" />
               <span className="font-medium mr-0.5 text-[11px]">{locale.toUpperCase()}</span>
-              <span className="hidden md:inline text-[10px] text-black/50 mr-0.5">{t("languageWord")}</span>
+              <span className="hidden md:inline text-[11px] text-black/70 mr-0.5">{t("languageWord")}</span>
               <FontAwesomeIcon 
                 icon={faChevronDown} 
                 className={`ml-0.5 text-[9px] transition-transform duration-300 ${languageDropdownOpen ? 'rotate-180' : ''}`} 
@@ -261,7 +261,7 @@ const Header = () => {
               />
               
               {/* Text overlay that appears on hover - only for the animation effect */}
-              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0">
+              <div aria-hidden="true" className="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0">
                 <div className="flex overflow-hidden py-1">
                   {logoLetters.map((letter, index) => (
                     <div 
@@ -279,7 +279,7 @@ const Header = () => {
           </div>
           
           {/* Tagline with enhanced reveal animation */}
-          <span className="ml-2 text-[10px] text-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 tracking-wider overflow-hidden whitespace-nowrap">
+          <span aria-hidden="true" className="ml-2 text-[10px] text-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-500 tracking-wider overflow-hidden whitespace-nowrap">
             <span className="inline-block animate-slide-in-right" style={{animationDelay: "150ms"}}>FESTIVAL</span>
             <span className="inline-block mx-1 animate-slide-in-right" style={{animationDelay: "250ms"}}>&</span>
             <span className="inline-block animate-slide-in-right" style={{animationDelay: "350ms"}}>MARATHON</span>
@@ -381,7 +381,7 @@ const Header = () => {
       {/* Enhanced Mobile Menu Dropdown */}
       <div 
         className={`fixed inset-x-0 top-[70px] z-40 bg-tertiary/40 backdrop-blur-lg shadow-md transition-all duration-500 transform ${
-          mobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+          mobileMenuOpen ? "translate-y-0 opacity-100 visible" : "-translate-y-full opacity-0 invisible pointer-events-none"
         }`}
       >
         <div className="py-3 px-4 space-y-0.5">

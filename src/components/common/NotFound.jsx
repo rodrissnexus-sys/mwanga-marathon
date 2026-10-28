@@ -17,7 +17,7 @@ const NotFound = () => {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-9xl font-bold text-primary/20">404</h1>
+          <div aria-hidden="true" className="text-9xl font-bold text-primary/20">404</div>
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <motion.div 
               className="w-32 h-32 rounded-full bg-secondary/10"
@@ -28,14 +28,14 @@ const NotFound = () => {
           </div>
         </motion.div>
         
-        <motion.h2 
+        <motion.h1 
           className="text-2xl font-bold mb-4 text-primary"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           {t("title")}
-        </motion.h2>
+        </motion.h1>
         
         <motion.p 
           className="mb-8 text-gray-600"
