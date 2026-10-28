@@ -344,7 +344,7 @@ isOneToOne: false
                            }
           }
           Enums: {
-            "app_locale": "en"|"sw","app_role": "admin"|"moderator","message_kind": "contact"|"partnership","payment_method": "mobile_money"|"bank_transfer"|"cash"|"other","payment_status": "pending"|"confirmed"|"failed"
+            "app_locale": "en"|"sw","app_role": "admin"|"moderator","message_kind": "contact"|"partnership"|"volunteer","payment_method": "mobile_money"|"bank_transfer"|"cash"|"other","payment_status": "pending"|"confirmed"|"failed"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -460,7 +460,7 @@ export type CompositeTypes<
 export const Constants = {
   "public": {
           Enums: {
-            "app_locale": ["en", "sw"],"app_role": ["admin", "moderator"],"message_kind": ["contact", "partnership"],"payment_method": ["mobile_money", "bank_transfer", "cash", "other"],"payment_status": ["pending", "confirmed", "failed"]
+            "app_locale": ["en", "sw"],"app_role": ["admin", "moderator"],"message_kind": ["contact", "partnership", "volunteer"],"payment_method": ["mobile_money", "bank_transfer", "cash", "other"],"payment_status": ["pending", "confirmed", "failed"]
           }
         }
 } as const

@@ -34,5 +34,25 @@
     "subtitle": "We're here to help with registration, payments, sponsorship and the festival",
     "description": "Contact the Mwanga Festival & Marathon team by phone, email or our contact form.",
     "cta": "Send a message"
+  },
+  "registrationStatus": {
+    "title": "Check My Registration",
+    "subtitle": "See whether your payment has been confirmed",
+    "description": "Check the status of your Mwanga Marathon 2026 registration and payment with your registration ID and phone number."
+  },
+  "volunteer": {
+    "title": "Volunteer With Us",
+    "subtitle": "Help make Mwanga Marathon 2026 unforgettable",
+    "description": "Sign up to volunteer at Mwanga Marathon 2026 — race-day support, registration, culture, community and media."
+  },
+  "raceDay": {
+    "title": "Race-Day Guide",
+    "subtitle": "Everything you need for 20 December 2026",
+    "description": "Races, programme, kit collection and practical tips for Mwanga Marathon 2026 at C.D. Msuya Stadium."
+  },
+  "visit": {
+    "title": "Plan Your Visit",
+    "subtitle": "Getting to Mwanga, where to stay and what to explore",
+    "description": "Travel to Mwanga for the marathon: getting there, places to stay and attractions in Mwanga District, Kilimanjaro."
   }
 }

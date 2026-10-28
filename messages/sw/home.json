@@ -242,7 +242,20 @@
     "kitTShirt": "T-shirt rasmi ya Mwanga Marathon",
     "kitBag": "Drawstring bag na wristband",
     "kitBib": "Namba ya kukimbilia (bib)",
-    "kitMedal": "Medali ya ushiriki"
+    "kitMedal": "Medali ya ushiriki",
+    "confirmation": {
+      "title": "Umesajiliwa, {name}!",
+      "yourId": "Namba yako ya usajili",
+      "copy": "Nakili",
+      "copied": "Imenakiliwa",
+      "amountToPay": "Kiasi cha kulipa",
+      "step1": "Lipa kwa simu au kwa benki na tumia {id} kama kumbukumbu ya malipo.",
+      "step2": "Timu yetu huhakiki kila malipo, kwa kawaida ndani ya saa 24, na kuthibitisha nafasi yako.",
+      "step3": "Hifadhi namba yako ya usajili — utaihitaji kuangalia hali ya usajili na kuchukua vifaa vya mbio.",
+      "howToPay": "Jinsi ya kulipa",
+      "checkStatus": "Angalia usajili wangu",
+      "registerAnother": "Sajili mtu mwingine"
+    }
   },
   "form": {
     "nationalityCategory": "Utaifa",

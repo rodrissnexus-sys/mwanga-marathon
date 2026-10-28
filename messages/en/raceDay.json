@@ -1,0 +1,64 @@
+{
+  "facts": {
+    "date": "Race day",
+    "dateValue": "Sunday, 20 December 2026",
+    "venue": "Venue",
+    "venueValue": "C.D. Msuya Stadium, Mwanga",
+    "closes": "Registration closes",
+    "closesValue": "10 December 2026"
+  },
+  "racesFirst": "The",
+  "racesSecond": "Races",
+  "routesTitle": "Route maps:",
+  "routesText": "the routes for each race will be published here before race day.",
+  "kitFirst": "Kit",
+  "kitSecond": "Collection",
+  "kitIntro": "Collect your race kit at the place you chose when registering:",
+  "kitDates": "Collection dates and times will be announced here and sent to registered participants.",
+  "kitContentsTitle": "In your race kit",
+  "kitContents": [
+    "Official Mwanga Marathon T-shirt",
+    "Drawstring bag and wristband",
+    "Race number (bib)",
+    "Participation medal at the finish"
+  ],
+  "bringTitle": "Bring with you",
+  "bring": [
+    "Your registration ID (MWF-2026-…)",
+    "The phone number you registered with",
+    "Proof of payment if your payment is not yet confirmed",
+    "Student ID or club card if you registered as a student or club member",
+    "For children: a parent or guardian collects the kit"
+  ],
+  "dayFirst": "On the",
+  "daySecond": "Day",
+  "tips": [
+    {
+      "title": "Arrive early",
+      "text": "Give yourself time to park, warm up and find your start area at C.D. Msuya Stadium."
+    },
+    {
+      "title": "Wear your race number",
+      "text": "Pin your bib on the front of your T-shirt so marshals and photographers can see it."
+    },
+    {
+      "title": "Run safely",
+      "text": "Follow the marshals, drink water, and stop if you feel unwell — your health comes first."
+    },
+    {
+      "title": "Children with their family",
+      "text": "Children walk or run the 2.5 km Walking Safari together with a parent or guardian."
+    },
+    {
+      "title": "Stay for the awards",
+      "text": "Medals and prizes for the winners at midday, then tug of war and the Mwanga Utalii Festival."
+    },
+    {
+      "title": "Explore Mwanga",
+      "text": "Make a weekend of it — discover the mountains, lakes, food and culture around Mwanga."
+    }
+  ],
+  "ctaTitle": "Not sure your payment arrived?",
+  "ctaText": "Check your registration with your ID and phone number, or call us.",
+  "ctaStatus": "Check my registration"
+}

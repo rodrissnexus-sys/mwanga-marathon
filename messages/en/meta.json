@@ -13,5 +13,9 @@
   "login": "Login",
   "dashboard": "Dashboard",
   "notFound": "Page Not Found",
-  "contact": "Contact"
+  "contact": "Contact",
+  "registrationStatus": "Check My Registration",
+  "volunteer": "Volunteer",
+  "raceDay": "Race-Day Guide",
+  "visit": "Plan Your Visit"
 }

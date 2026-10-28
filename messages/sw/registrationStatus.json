@@ -1,0 +1,32 @@
+{
+  "formTitle": "Angalia usajili wako",
+  "formText": "Weka namba yako ya usajili na namba ya simu uliyojisajilia nayo.",
+  "idLabel": "Namba ya usajili",
+  "phoneLabel": "Namba ya simu",
+  "check": "Angalia hali",
+  "errors": {
+    "notFound": "Hatukupata usajili wenye namba hii na simu hii. Hakiki zote mbili ujaribu tena, au tupigie simu.",
+    "tooMany": "Majaribio mengi mno. Tafadhali subiri dakika chache ujaribu tena."
+  },
+  "hello": "Habari {name}",
+  "status": {
+    "pending": "Inasubiri malipo",
+    "confirmed": "Malipo yamethibitishwa",
+    "failed": "Haijalipwa"
+  },
+  "explain": {
+    "pending": "Tumepokea usajili wako. Ukishalipa, timu yetu itathibitisha malipo yako — kwa kawaida ndani ya saa 24. Tumia namba yako ya usajili kama kumbukumbu ya malipo.",
+    "confirmed": "Malipo yako yamethibitishwa na nafasi yako imehakikishwa. Tukutane kwenye mstari wa kuanzia tarehe 20 Desemba 2026!",
+    "failed": "Hatujapokea malipo ya usajili huu. Kama umeshalipa, tafadhali tupigie simu ukiwa na namba ya muamala."
+  },
+  "race": "Mbio",
+  "type": "Aina ya mshiriki",
+  "fee": "Ada",
+  "toPay": "Kiasi cha kulipa",
+  "registered": "Tarehe ya usajili",
+  "confirmed": "Malipo yamethibitishwa tarehe",
+  "kit": "Kuchukua vifaa",
+  "howToPay": "Jinsi ya kulipa",
+  "raceDayGuide": "Mwongozo wa siku ya mbio",
+  "callUs": "Tupigie simu"
+}

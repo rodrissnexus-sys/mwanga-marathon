@@ -10,6 +10,10 @@ const PAGES = [
   { href: "/events", priority: 0.8, changeFrequency: "weekly" },
   { href: "/register", priority: 0.9, changeFrequency: "weekly" },
   { href: "/sponsors", priority: 0.7, changeFrequency: "monthly" },
+  { href: "/race-day", priority: 0.8, changeFrequency: "weekly" },
+  { href: "/visit", priority: 0.6, changeFrequency: "monthly" },
+  { href: "/volunteer", priority: 0.6, changeFrequency: "monthly" },
+  { href: "/registration-status", priority: 0.5, changeFrequency: "yearly" },
   { href: "/contact", priority: 0.6, changeFrequency: "yearly" },
 ] as const;
 

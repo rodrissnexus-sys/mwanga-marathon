@@ -122,7 +122,7 @@ ${rows([[t.registrationId, d.registrationId], [t.event, d.event], [t.confirmedOn
 }
 
 export function contactNotification(m: {
-  kind: "contact" | "partnership";
+  kind: "contact" | "partnership" | "volunteer";
   name: string;
   email: string;
   phone?: string | null;
@@ -132,13 +132,13 @@ export function contactNotification(m: {
   website?: string | null;
   sponsorshipTier?: string | null;
 }) {
-  const title = m.kind === "partnership" ? "New partnership request" : "New contact message";
+  const title = { partnership: "New partnership request", volunteer: "New volunteer", contact: "New contact message" }[m.kind];
   const html = layout(title, `
 ${rows([
   ["Name", m.name], ["Email", m.email], ["Phone", m.phone || "—"],
   ...(m.kind === "partnership"
     ? ([["Company", m.company || "—"], ["Website", m.website || "—"], ["Tier", m.sponsorshipTier || "—"]] as [string, string][])
-    : ([["Subject", m.subject || "—"]] as [string, string][])),
+    : ([[m.kind === "volunteer" ? "Wants to help with" : "Subject", m.subject || "—"]] as [string, string][])),
 ])}
 <p style="white-space:pre-wrap;background:#f7f7f7;padding:12px;border-radius:6px">${escape(m.message)}</p>`);
   return { subject: `${title}: ${m.kind === "partnership" ? m.company || m.name : m.subject || m.name}`, html };

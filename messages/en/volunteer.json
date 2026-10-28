@@ -1,0 +1,64 @@
+{
+  "whyFirst": "Why",
+  "whySecond": "Volunteer",
+  "why": [
+    {
+      "title": "Be part of the big day",
+      "text": "Help make Mwanga Marathon 2026 a great day for runners, families and visitors."
+    },
+    {
+      "title": "Meet people",
+      "text": "Work alongside the community, runners and partners from across Tanzania."
+    },
+    {
+      "title": "Gain experience",
+      "text": "Learn how a sports and tourism event is run — useful for school, work and your CV."
+    }
+  ],
+  "areasTitle": "Where you can help",
+  "areasText": "Choose what suits you; we will contact you before race day with details.",
+  "areas": {
+    "race": {
+      "title": "Race-day support",
+      "text": "Water points, route marshals, start and finish areas."
+    },
+    "registration": {
+      "title": "Registration & kits",
+      "text": "Welcoming runners and handing out race kits."
+    },
+    "festival": {
+      "title": "Culture & festival",
+      "text": "Helping at the cultural shows, food and exhibition areas."
+    },
+    "community": {
+      "title": "Tree planting & community",
+      "text": "Tree planting and the community programme for mothers and children."
+    },
+    "media": {
+      "title": "Photo, video & social media",
+      "text": "Capturing the day and sharing it online."
+    },
+    "any": {
+      "title": "Anywhere needed",
+      "text": ""
+    }
+  },
+  "form": {
+    "title": "Sign up as a volunteer",
+    "name": "Full name",
+    "phone": "Phone number",
+    "email": "Email",
+    "area": "I would like to help with",
+    "message": "Anything we should know? (optional)",
+    "messagePlaceholder": "e.g. languages you speak, first-aid training, when you are available",
+    "submit": "Send my sign-up",
+    "privacy": "We only use your details to organise volunteers for Mwanga Marathon.",
+    "required": "Please enter your name.",
+    "invalidEmail": "Please enter a valid email address.",
+    "invalidPhone": "Please enter a phone number we can reach you on.",
+    "chooseArea": "Please choose where you would like to help.",
+    "failed": "Something went wrong. Please try again.",
+    "thanksTitle": "Asante! Thank you for signing up.",
+    "thanksText": "Our team will contact you by phone or email before race day with your role and briefing details."
+  }
+}

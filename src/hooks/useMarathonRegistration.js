@@ -23,13 +23,13 @@ export const useMarathonRegistration = () => {
                     setRetryAfter(result.retryAfter);
                 }
                 setError(result.error);
-                return false;
+                return null;
             }
 
-            return true;
+            return result.data; // the saved registration (registration_id, event, …)
         } catch (err) {
             setError('An unexpected error occurred. Please try again.');
-            return false;
+            return null;
         } finally {
             setIsSubmitting(false);
         }

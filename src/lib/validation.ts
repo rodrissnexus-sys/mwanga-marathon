@@ -55,5 +55,17 @@ const partnershipSchema = z.object({
   message: z.string().trim().min(1).max(5000),
 });
 
-export const contactMessageSchema = z.discriminatedUnion("kind", [contactSchema, partnershipSchema]);
+export const VOLUNTEER_AREAS = ["race", "registration", "festival", "community", "media", "any"] as const;
+
+// Volunteer sign-up: the chosen area is saved as the subject.
+const volunteerSchema = z.object({
+  kind: z.literal("volunteer"),
+  name: z.string().trim().min(1).max(255),
+  email: z.email().max(255),
+  phone: z.string().trim().min(6).max(30),
+  subject: z.enum(VOLUNTEER_AREAS),
+  message: z.string().trim().max(5000).default(""),
+});
+
+export const contactMessageSchema = z.discriminatedUnion("kind", [contactSchema, partnershipSchema, volunteerSchema]);
 

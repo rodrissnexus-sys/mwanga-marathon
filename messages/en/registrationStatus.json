@@ -1,0 +1,32 @@
+{
+  "formTitle": "Check your registration",
+  "formText": "Enter your registration ID and the phone number you registered with.",
+  "idLabel": "Registration ID",
+  "phoneLabel": "Phone number",
+  "check": "Check status",
+  "errors": {
+    "notFound": "We couldn’t find a registration with this ID and phone number. Check both and try again, or call us.",
+    "tooMany": "Too many attempts. Please wait a few minutes and try again."
+  },
+  "hello": "Hello {name}",
+  "status": {
+    "pending": "Waiting for payment",
+    "confirmed": "Payment confirmed",
+    "failed": "Not paid"
+  },
+  "explain": {
+    "pending": "We have your registration. Once you have paid, our team will confirm your payment — usually within 24 hours. Use your registration ID as the payment reference.",
+    "confirmed": "Your payment is confirmed and your place is secured. See you at the start line on 20 December 2026!",
+    "failed": "We have not received a payment for this registration. If you have paid, please call us with your transaction ID."
+  },
+  "race": "Race",
+  "type": "Participant type",
+  "fee": "Entry fee",
+  "toPay": "Amount to pay",
+  "registered": "Registered on",
+  "confirmed": "Payment confirmed on",
+  "kit": "Kit collection",
+  "howToPay": "How to pay",
+  "raceDayGuide": "Race-day guide",
+  "callUs": "Call us"
+}

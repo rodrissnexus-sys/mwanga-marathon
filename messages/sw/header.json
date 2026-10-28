@@ -13,8 +13,12 @@
   "switchLanguage": "Badili lugha",
   "languageWord": "| Lugha",
   "currentLanguage": "Lugha: Kiswahili",
-  "languages": { "en": "Kiingereza", "sw": "Kiswahili" },
+  "languages": {
+    "en": "Kiingereza",
+    "sw": "Kiswahili"
+  },
   "joinNow": "Jiandikishe Sasa",
   "toggleMenu": "Fungua/funga menyu",
-  "logoAlt": "Nembo ya MWAFEM"
+  "logoAlt": "Nembo ya MWAFEM",
+  "checkRegistration": "Angalia usajili"
 }

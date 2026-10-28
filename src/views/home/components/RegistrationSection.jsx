@@ -9,6 +9,7 @@ import EventDetails from "./formSteps/EventDetails";
 import AdditionalInfo from "./formSteps/AdditionalInfo";
 import EmergencyContact from "./formSteps/EmergencyContact";
 import { ageOnRaceDay, categoriesForAge } from "@/lib/payments";
+import RegistrationConfirmation from "./RegistrationConfirmation";
 import { useMarathonRegistration } from "../../../hooks/useMarathonRegistration";
 import { useDropdowns } from "../../../hooks/useDropdowns";
 
@@ -147,7 +148,8 @@ const RegistrationSection = () => {
   }, [allowedCategories.join()]); // eslint-disable-line react-hooks/exhaustive-deps
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedKidsSize, setSelectedKidsSize] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  // the saved registration, shown instead of the form until "register another"
+  const [registered, setRegistered] = useState(null);
   const [hasSetInitialValues, setHasSetInitialValues] = useState(false);
 
   useEffect(() => {
@@ -266,7 +268,6 @@ const RegistrationSection = () => {
     
     if (Object.keys(stepErrors).length === 0) {
       setIsSubmitting(true);
-      setSuccessMessage("");
       
       // Ensure nationality_id is set
       let updatedFormData = { ...formData };
@@ -297,9 +298,10 @@ const RegistrationSection = () => {
       // Log the data being sent to the API
       console.log("Sending registration data:", registrationData);
       
-      const success = await handleRegistration(registrationData);
+      const saved = await handleRegistration(registrationData);
 
-      if (success) {
+      if (saved) {
+        setRegistered(saved);
         setFormData({
           firstName: "",
           lastName: "",
@@ -330,7 +332,6 @@ const RegistrationSection = () => {
           participantCategory: ""
         });
         setCurrentStep(1);
-        setSuccessMessage(t("registrationSuccessfulThankYou"));
       }
       setIsSubmitting(false);
     } else {
@@ -463,20 +464,6 @@ const RegistrationSection = () => {
               <span className="absolute -bottom-2 left-0 w-full h-px bg-secondary"></span>
             </h3>
             
-            {successMessage && (
-              <div className="mb-6 p-4 bg-primary/5 border-l-2 border-secondary/50">
-                <p className="mb-2 text-secondary">{successMessage}</p>
-                <p className="font-semibold mt-4 text-tertiary">{t("nextStepsMembershipPayment")}</p>
-                <ul className="list-disc ml-6 mt-2 space-y-2 text-tertiary">
-                  <li>{t("pleaseMakeYourPayment")}</li>
-                  <li>{t("yourRegistrationWillBe")}</li>
-                  <li>{t("forPaymentSupportContact")} <span className="text-secondary/90">info@mwafem.com</span></li>
-                  <li>{t("forPesapalPaymentUse")} <a className="text-secondary/95" href="https://payments.pesapal.com/kisangaratours" target="_blank" rel="noopener noreferrer">Pesapal</a></li>
-                </ul>
-                <p className="font-semibold mt-4 text-tertiary">{t("learnHowToPay")} <a href="#payment" className="text-secondary underline">{t("here")}</a></p>
-              </div>
-            )}
-
             {apiError && !retryAfter && (
               <div className="mb-6 p-4 bg-tertiary/5 border-l-2 border-secondary text-secondary">
                 {apiError}
@@ -489,6 +476,9 @@ const RegistrationSection = () => {
               </div>
             )}
             
+            {registered ? (
+              <RegistrationConfirmation registration={registered} onRegisterAnother={() => setRegistered(null)} />
+            ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               {renderStepContent()}
 
@@ -523,6 +513,7 @@ const RegistrationSection = () => {
                 </button>
               </div>
             </form>
+            )}
           </div>
         </div>
       </div>

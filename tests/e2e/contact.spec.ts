@@ -28,3 +28,17 @@ test("the footer newsletter box saves a subscriber once", async ({ page }) => {
   const { json } = await admin(`/rest/v1/newsletter_subscribers?email=eq.${encodeURIComponent(email)}&select=locale`);
   expect(json).toEqual([{ locale: "sw" }]);
 });
+
+test("a volunteer sign-up reaches the dashboard inbox", async ({ page }) => {
+  const email = `${E2E_PREFIX}volunteer-${Date.now()}@example.com`;
+  await page.goto("/volunteer", { waitUntil: "networkidle" });
+  await page.locator("#vol-name").fill("E2E Volunteer");
+  await page.locator("#vol-phone").fill("0700 000 003");
+  await page.locator("#vol-email").fill(email);
+  await page.getByLabel("Race-day support").check();
+  await page.getByRole("button", { name: "Send my sign-up" }).click();
+  await expect(page.getByText("Asante! Thank you for signing up.")).toBeVisible();
+
+  const { json } = await admin(`/rest/v1/contact_messages?email=eq.${encodeURIComponent(email)}&select=kind,subject,phone`);
+  expect(json).toEqual([{ kind: "volunteer", subject: "race", phone: "0700 000 003" }]);
+});

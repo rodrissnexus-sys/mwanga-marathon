@@ -2,12 +2,27 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelopeOpenText, faFileExport, faAt, faCheck, faRotateLeft, faReply, faHandshake, faEnvelope, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faHandsHelping, faEnvelopeOpenText, faFileExport, faAt, faCheck, faRotateLeft, faReply, faHandshake, faEnvelope, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { getMessages, setMessageHandled, getSubscribers, exportSubscribersCsv } from '../../../../api/messages';
 import { Alert, Button, Card, EmptyState, PageHeader, Pagination, Select, Spinner, Tabs, formatDateTime, timeAgo } from '../ui/kit';
 
 const PAGE_SIZE = 20;
+
+const KINDS = {
+  contact: { label: 'Contact', icon: faEnvelope, className: 'bg-primary/10 text-primary' },
+  partnership: { label: 'Partnership', icon: faHandshake, className: 'bg-secondary text-primary' },
+  volunteer: { label: 'Volunteer', icon: faHandsHelping, className: 'bg-primary text-secondary' },
+};
+
+const VOLUNTEER_AREAS = {
+  race: 'Race-day support',
+  registration: 'Registration & kit collection',
+  festival: 'Culture & festival',
+  community: 'Tree planting & community',
+  media: 'Photo, video & social media',
+  any: 'Anywhere needed',
+};
 
 const TIERS = { tanzanite: 'Tanzanite', platinum: 'Platinum', gold: 'Gold', silver: 'Silver', custom: 'Custom' };
 
@@ -120,7 +135,7 @@ const MessagesView = () => {
 
   return (
     <div>
-      <PageHeader title="Messages" description="Questions from the contact form, sponsorship requests from the Sponsors page, and newsletter sign-ups." />
+      <PageHeader title="Messages" description="Questions from the contact form, sponsorship requests, volunteers and newsletter sign-ups." />
 
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
         <Tabs
@@ -148,6 +163,7 @@ const MessagesView = () => {
             <option value="">All messages</option>
             <option value="contact">Contact</option>
             <option value="partnership">Partnership</option>
+            <option value="volunteer">Volunteers</option>
           </Select>
         </div>
         )}
@@ -174,8 +190,8 @@ const MessagesView = () => {
               <Card key={m.id} padded={false}>
                 <article className="p-5">
                   <header className="flex flex-wrap items-start gap-3">
-                    <span className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center ${m.kind === 'partnership' ? 'bg-secondary text-primary' : 'bg-primary/10 text-primary'}`}>
-                      <FontAwesomeIcon icon={m.kind === 'partnership' ? faHandshake : faEnvelope} />
+                    <span className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center ${KINDS[m.kind].className}`}>
+                      <FontAwesomeIcon icon={KINDS[m.kind].icon} />
                     </span>
                     <div className="flex-1 min-w-0">
                       <p className="font-bold text-primary">
@@ -183,7 +199,7 @@ const MessagesView = () => {
                         {m.company && <span className="font-semibold text-primary/75"> · {m.company}</span>}
                       </p>
                       <p className="text-xs text-primary/70">
-                        {m.kind === 'partnership' ? 'Partnership' : 'Contact'}
+                        {KINDS[m.kind].label}
                         {m.sponsorship_tier && ` · ${TIERS[m.sponsorship_tier]} tier`}
                         {' · '}{m.locale === 'sw' ? 'Swahili site' : 'English site'}
                         {' · '}<span title={formatDateTime(m.created_at)}>{timeAgo(m.created_at)}</span>
@@ -191,7 +207,11 @@ const MessagesView = () => {
                     </div>
                   </header>
 
-                  {m.subject && <p className="mt-3 font-semibold text-primary">{m.subject}</p>}
+                  {m.subject && (
+                    <p className="mt-3 font-semibold text-primary">
+                      {m.kind === 'volunteer' ? `Wants to help with: ${VOLUNTEER_AREAS[m.subject] ?? m.subject}` : m.subject}
+                    </p>
+                  )}
                   <p className="mt-2 text-sm text-primary/90 whitespace-pre-line">
                     {long && !open ? `${m.message.slice(0, 220)}…` : m.message}
                   </p>
@@ -203,7 +223,7 @@ const MessagesView = () => {
 
                   <div className="mt-4 flex flex-wrap items-center gap-2">
                     <a
-                      href={`mailto:${m.email}?subject=${encodeURIComponent(`Re: ${m.subject || 'Mwanga Marathon'}`)}`}
+                      href={`mailto:${m.email}?subject=${encodeURIComponent(m.kind === 'volunteer' ? 'Volunteering at Mwanga Marathon 2026' : `Re: ${m.subject || 'Mwanga Marathon'}`)}`}
                       className="inline-flex items-center gap-2 min-h-10 px-4 rounded-lg text-sm font-semibold bg-primary text-tertiary hover:bg-primary/90"
                     >
                       <FontAwesomeIcon icon={faReply} /> Reply by email

@@ -2,8 +2,8 @@ import { expect, test, type Page } from "@playwright/test";
 import { admin, E2E_PREFIX } from "./supabase";
 
 const TEXT = {
-  en: { next: "Next", country: "Select Country", submit: "Complete Registration", done: "Registration successful! Thank you for registering." },
-  sw: { next: "Endelea", country: "Chagua Nchi", submit: "Kamilisha Usajili", done: "Usajili umefanikiwa! Asante kwa kujisajili." },
+  en: { next: "Next", country: "Select Country", submit: "Complete Registration", done: "You are registered, E2E!", check: "Check status", status: "Waiting for payment", notFound: /couldn.t find a registration/ },
+  sw: { next: "Endelea", country: "Chagua Nchi", submit: "Kamilisha Usajili", done: "Umesajiliwa, E2E!", check: "Angalia hali", status: "Inasubiri malipo", notFound: /Hatukupata usajili/ },
 };
 
 // English: an adult choosing "club member"; Swahili: a child (type and kids'
@@ -55,13 +55,15 @@ async function register(page: Page, locale: "en" | "sw", email: string) {
   await form.locator('input[name="emergencyContactNumber"]').fill("+255700000002");
   await form.getByRole("button", { name: t.submit }).click();
 
+  // the confirmation shows the registration ID (the payment reference)
   await expect(page.getByText(t.done)).toBeVisible({ timeout: 20_000 });
+  return (await page.getByText(/^MWF-\d{4}-\d{5}$/).first().textContent())!.trim();
 }
 
 for (const locale of ["en", "sw"] as const) {
   test(`registers a participant on the ${locale === "en" ? "English" : "Swahili"} site`, async ({ page }) => {
     const email = `${E2E_PREFIX}runner-${locale}-${Date.now()}@example.com`;
-    await register(page, locale, email);
+    const registrationId = await register(page, locale, email);
 
     const { json } = await admin(`/rest/v1/registrations?email=eq.${encodeURIComponent(email)}&select=*`);
     expect(json).toHaveLength(1);
@@ -71,5 +73,17 @@ for (const locale of ["en", "sw"] as const) {
     expect(json[0].registration_id).toMatch(/^MWF-\d{4}-\d{5}$/);
     expect(json[0].participant_category).toBe(PERSON[locale].category);
     expect(json[0].kids_shirt_size_id !== null).toBe(PERSON[locale].category === "child");
+    expect(json[0].registration_id).toBe(registrationId);
+
+    // "check my registration": wrong phone → not found; right phone → pending
+    const t = TEXT[locale];
+    await page.goto(`${locale === "sw" ? "/sw" : ""}/registration-status?id=${registrationId}`, { waitUntil: "networkidle" });
+    await expect(page.locator("#status-id")).toHaveValue(registrationId);
+    await page.locator("#status-phone").fill("0711 111 111");
+    await page.getByRole("button", { name: t.check }).click();
+    await expect(page.getByText(t.notFound)).toBeVisible();
+    await page.locator("#status-phone").fill("0700 000 001"); // registered as +255700000001
+    await page.getByRole("button", { name: t.check }).click();
+    await expect(page.getByText(t.status)).toBeVisible();
   });
 }

@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import PrimaryButton from "../components/common/buttons/PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faHome, faCalendar, faEnvelope, faGift, faInfoCircle, faHighlighter, faRunning, faGlobe, faChevronDown, faPhone, faMapMarkerAlt, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faHome, faCalendar, faEnvelope, faGift, faInfoCircle, faHighlighter, faRunning, faGlobe, faChevronDown, faPhone, faMapMarkerAlt, faBars, faXmark, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const GradientButton = ({ children, onClick, className = '', gradientFrom = 'from-secondary/80', gradientTo = 'to-secondary', to, compact = false }) => {
   const ButtonContent = (
@@ -180,8 +180,17 @@ const Header = () => {
             </span>
           </div>
           
+          {/* Registration lookup (for people who have paid) */}
+          <Link
+            to="/registration-status"
+            className="ml-auto mr-2 flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold text-primary hover:bg-primary/10"
+          >
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="text-[10px]" />
+            <span>{t("checkRegistration")}</span>
+          </Link>
+
           {/* Language Switcher */}
-          <div className="language-switcher relative ml-auto z-[1001]">
+          <div className="language-switcher relative z-[1001]">
             <button 
               className="relative px-2 py-0.5 group cursor-pointer flex items-center text-black/70 hover:text-primary/90 transition-colors border border-primary/20 rounded-md hover:bg-tertiary/50"
               onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}

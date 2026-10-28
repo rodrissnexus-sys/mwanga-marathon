@@ -34,5 +34,25 @@
     "subtitle": "Tuko hapa kukusaidia kuhusu usajili, malipo, udhamini na tamasha",
     "description": "Wasiliana na timu ya Mwanga Festival & Marathon kwa simu, barua pepe au fomu yetu ya mawasiliano.",
     "cta": "Tuma ujumbe"
+  },
+  "registrationStatus": {
+    "title": "Angalia Usajili Wangu",
+    "subtitle": "Angalia kama malipo yako yamethibitishwa",
+    "description": "Angalia hali ya usajili na malipo yako ya Mwanga Marathon 2026 kwa namba ya usajili na simu."
+  },
+  "volunteer": {
+    "title": "Jitolee Nasi",
+    "subtitle": "Saidia kuifanya Mwanga Marathon 2026 isisahaulike",
+    "description": "Jisajili kujitolea katika Mwanga Marathon 2026 — msaada wa siku ya mbio, usajili, utamaduni, jamii na habari."
+  },
+  "raceDay": {
+    "title": "Mwongozo wa Siku ya Mbio",
+    "subtitle": "Kila kitu unachohitaji kwa tarehe 20 Desemba 2026",
+    "description": "Mbio, ratiba, kuchukua vifaa na ushauri wa Mwanga Marathon 2026 katika Uwanja wa C.D. Msuya."
+  },
+  "visit": {
+    "title": "Panga Ziara Yako",
+    "subtitle": "Jinsi ya kufika Mwanga, mahali pa kulala na vya kugundua",
+    "description": "Safari ya Mwanga kwa marathon: jinsi ya kufika, mahali pa kulala na vivutio vya Wilaya ya Mwanga, Kilimanjaro."
   }
 }

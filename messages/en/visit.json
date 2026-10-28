@@ -1,0 +1,67 @@
+{
+  "intro": "Come for the race, stay for Mwanga.",
+  "introText": "Mwanga District lies at the foot of the North Pare Mountains in Kilimanjaro Region, with views of Mount Kilimanjaro, lakes, forests and a rich culture. The festival is a chance to discover it — and to support local businesses while you are here.",
+  "travelFirst": "Getting",
+  "travelSecond": "There",
+  "travel": [
+    {
+      "title": "By air",
+      "text": "The nearest airport is Kilimanjaro International Airport (JRO), between Moshi and Arusha."
+    },
+    {
+      "title": "By bus",
+      "text": "Buses between Dar es Salaam, Moshi and Arusha pass through Mwanga town."
+    },
+    {
+      "title": "By car",
+      "text": "Mwanga is on the main road between Moshi and Same. The race is at C.D. Msuya Stadium in Mwanga town."
+    }
+  ],
+  "exploreFirst": "Explore",
+  "exploreSecond": "Mwanga",
+  "exploreText": "A few of the places and experiences around Mwanga. Ask us about guided trips before or after the race.",
+  "explore": [
+    {
+      "title": "North Pare Mountains",
+      "text": "Green hills, forests and villages above Mwanga — great for hiking and cool mountain air."
+    },
+    {
+      "title": "Nyumba ya Mungu reservoir",
+      "text": "A large lake south of Mwanga, home to fishing communities and wide open views."
+    },
+    {
+      "title": "Lake Jipe",
+      "text": "A quiet lake on the Kenya border, known for its birdlife and the mountains around it."
+    },
+    {
+      "title": "Culture & music",
+      "text": "Traditional dances, ngoma and music at the Mwanga Utalii Festival on race day."
+    },
+    {
+      "title": "Local food",
+      "text": "Taste traditional dishes from the area at the festival’s food zone."
+    }
+  ],
+  "stayFirst": "Where to",
+  "staySecond": "Stay",
+  "stay": [
+    {
+      "title": "In Mwanga town",
+      "text": "Guest houses and lodges close to the stadium — book early, as rooms fill up around race day."
+    },
+    {
+      "title": "In Moshi or Same",
+      "text": "More hotels a short drive away, with easy access to Mwanga on race morning."
+    },
+    {
+      "title": "Partner hotels",
+      "text": "Recommended places to stay will be listed here."
+    }
+  ],
+  "helpTitle": "We can help you plan",
+  "helpText": "The festival is organised by Kisangara Tours Ltd, a Tanzanian tour operator. Contact us for help with accommodation, transport and trips around Mwanga and Kilimanjaro.",
+  "helpContact": "Contact us",
+  "slogan": "“Tukijua Tanzania, tutaitembelea; tukiitembelea Tanzania, tutaithamini; tukiithamini, tutailinda.”",
+  "sloganTranslation": "When we know Tanzania, we will visit it; when we visit Tanzania, we will value it; when we value it, we will protect it.",
+  "register": "Register for the race"
+}

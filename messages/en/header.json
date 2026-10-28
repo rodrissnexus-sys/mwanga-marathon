@@ -13,8 +13,12 @@
   "switchLanguage": "Switch language",
   "languageWord": "| Language",
   "currentLanguage": "Language: English",
-  "languages": { "en": "English", "sw": "Swahili" },
+  "languages": {
+    "en": "English",
+    "sw": "Swahili"
+  },
   "joinNow": "Join Now",
   "toggleMenu": "Toggle mobile menu",
-  "logoAlt": "MWAFEM Logo"
+  "logoAlt": "MWAFEM Logo",
+  "checkRegistration": "Check registration"
 }

@@ -1,0 +1,67 @@
+{
+  "intro": "Njoo kwa mbio, baki kwa ajili ya Mwanga.",
+  "introText": "Wilaya ya Mwanga iko chini ya Milima ya Pare Kaskazini katika Mkoa wa Kilimanjaro, ikiwa na mandhari ya Mlima Kilimanjaro, maziwa, misitu na utamaduni tajiri. Tamasha ni fursa ya kuigundua — na kuunga mkono biashara za wenyeji ukiwa hapa.",
+  "travelFirst": "Jinsi ya",
+  "travelSecond": "Kufika",
+  "travel": [
+    {
+      "title": "Kwa ndege",
+      "text": "Uwanja wa ndege ulio karibu ni Kilimanjaro International Airport (JRO), kati ya Moshi na Arusha."
+    },
+    {
+      "title": "Kwa basi",
+      "text": "Mabasi kati ya Dar es Salaam, Moshi na Arusha hupita mjini Mwanga."
+    },
+    {
+      "title": "Kwa gari",
+      "text": "Mwanga iko kwenye barabara kuu kati ya Moshi na Same. Mbio ni katika Uwanja wa C.D. Msuya mjini Mwanga."
+    }
+  ],
+  "exploreFirst": "Gundua",
+  "exploreSecond": "Mwanga",
+  "exploreText": "Baadhi ya maeneo na uzoefu wa kuvutia karibu na Mwanga. Tuulize kuhusu safari za kutembelea kabla au baada ya mbio.",
+  "explore": [
+    {
+      "title": "Milima ya Pare Kaskazini",
+      "text": "Vilima vya kijani, misitu na vijiji juu ya Mwanga — pazuri kwa matembezi na hewa safi ya milimani."
+    },
+    {
+      "title": "Bwawa la Nyumba ya Mungu",
+      "text": "Ziwa kubwa kusini mwa Mwanga, lenye jamii za wavuvi na mandhari pana."
+    },
+    {
+      "title": "Ziwa Jipe",
+      "text": "Ziwa tulivu mpakani mwa Kenya, maarufu kwa ndege na milima inayolizunguka."
+    },
+    {
+      "title": "Utamaduni na muziki",
+      "text": "Ngoma za asili na muziki katika Mwanga Utalii Festival siku ya mbio."
+    },
+    {
+      "title": "Vyakula vya asili",
+      "text": "Onja vyakula vya kitamaduni vya eneo hili katika eneo la vyakula la tamasha."
+    }
+  ],
+  "stayFirst": "Mahali pa",
+  "staySecond": "Kulala",
+  "stay": [
+    {
+      "title": "Mjini Mwanga",
+      "text": "Nyumba za wageni na loji karibu na uwanja — weka nafasi mapema, vyumba hujaa karibu na siku ya mbio."
+    },
+    {
+      "title": "Moshi au Same",
+      "text": "Hoteli zaidi umbali mfupi kwa gari, na ni rahisi kufika Mwanga asubuhi ya mbio."
+    },
+    {
+      "title": "Hoteli washirika",
+      "text": "Mahali panapopendekezwa pa kulala patawekwa hapa."
+    }
+  ],
+  "helpTitle": "Tunaweza kukusaidia kupanga",
+  "helpText": "Tamasha linaandaliwa na Kisangara Tours Ltd, kampuni ya utalii ya Kitanzania. Wasiliana nasi kwa msaada wa malazi, usafiri na safari za kutembelea Mwanga na Kilimanjaro.",
+  "helpContact": "Wasiliana nasi",
+  "slogan": "“Tukijua Tanzania, tutaitembelea; tukiitembelea Tanzania, tutaithamini; tukiithamini, tutailinda.”",
+  "sloganTranslation": "",
+  "register": "Jisajili kwa mbio"
+}

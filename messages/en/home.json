@@ -242,7 +242,20 @@
     "kitTShirt": "Official Mwanga Marathon T-shirt",
     "kitBag": "Drawstring bag and wristband",
     "kitBib": "Race number (bib)",
-    "kitMedal": "Participation medal"
+    "kitMedal": "Participation medal",
+    "confirmation": {
+      "title": "You are registered, {name}!",
+      "yourId": "Your registration ID",
+      "copy": "Copy",
+      "copied": "Copied",
+      "amountToPay": "Amount to pay",
+      "step1": "Pay by mobile money or bank transfer and use {id} as the payment reference.",
+      "step2": "Our team checks every payment, usually within 24 hours, and confirms your place.",
+      "step3": "Keep your registration ID — you need it to check your status and to collect your race kit.",
+      "howToPay": "How to pay",
+      "checkStatus": "Check my registration",
+      "registerAnother": "Register another person"
+    }
   },
   "form": {
     "nationalityCategory": "Nationality Category",

@@ -1,0 +1,64 @@
+{
+  "facts": {
+    "date": "Siku ya mbio",
+    "dateValue": "Jumapili, 20 Desemba 2026",
+    "venue": "Mahali",
+    "venueValue": "Uwanja wa C.D. Msuya, Mwanga",
+    "closes": "Usajili unafungwa",
+    "closesValue": "10 Desemba 2026"
+  },
+  "racesFirst": "Mbio",
+  "racesSecond": "Zetu",
+  "routesTitle": "Ramani za njia:",
+  "routesText": "njia za kila mbio zitawekwa hapa kabla ya siku ya mbio.",
+  "kitFirst": "Kuchukua",
+  "kitSecond": "Vifaa",
+  "kitIntro": "Chukua vifaa vyako vya mbio mahali ulipochagua wakati wa kujisajili:",
+  "kitDates": "Tarehe na muda wa kuchukua vifaa vitatangazwa hapa na kutumwa kwa washiriki waliosajiliwa.",
+  "kitContentsTitle": "Vilivyomo kwenye vifaa vyako",
+  "kitContents": [
+    "T-shirt rasmi ya Mwanga Marathon",
+    "Drawstring bag na wristband",
+    "Namba ya kukimbilia (bib)",
+    "Medali ya ushiriki ukimaliza"
+  ],
+  "bringTitle": "Kuja na",
+  "bring": [
+    "Namba yako ya usajili (MWF-2026-…)",
+    "Namba ya simu uliyojisajilia nayo",
+    "Uthibitisho wa malipo kama malipo yako bado hayajathibitishwa",
+    "Kitambulisho cha mwanafunzi au kadi ya klabu kama ulijisajili hivyo",
+    "Kwa watoto: mzazi au mlezi huchukua vifaa"
+  ],
+  "dayFirst": "Siku",
+  "daySecond": "Yenyewe",
+  "tips": [
+    {
+      "title": "Fika mapema",
+      "text": "Jipe muda wa kuegesha, kupasha mwili moto na kupata eneo lako la kuanzia katika Uwanja wa C.D. Msuya."
+    },
+    {
+      "title": "Vaa namba yako",
+      "text": "Bandika bib mbele ya T-shirt yako ili waongozaji na wapiga picha waione."
+    },
+    {
+      "title": "Kimbia kwa usalama",
+      "text": "Fuata maelekezo ya waongozaji, kunywa maji, na simama ukijisikia vibaya — afya yako kwanza."
+    },
+    {
+      "title": "Watoto pamoja na familia",
+      "text": "Watoto hutembea au kukimbia Walking Safari ya km 2.5 pamoja na mzazi au mlezi."
+    },
+    {
+      "title": "Baki kwa zawadi",
+      "text": "Medali na zawadi kwa washindi mchana, kisha kuvuta kamba na Mwanga Utalii Festival."
+    },
+    {
+      "title": "Tembelea Mwanga",
+      "text": "Kaa wikendi nzima — gundua milima, maziwa, vyakula na utamaduni wa Mwanga."
+    }
+  ],
+  "ctaTitle": "Huna uhakika kama malipo yamefika?",
+  "ctaText": "Angalia usajili wako kwa namba ya usajili na simu, au tupigie.",
+  "ctaStatus": "Angalia usajili wangu"
+}

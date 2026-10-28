@@ -1,0 +1,64 @@
+{
+  "whyFirst": "Kwa nini",
+  "whySecond": "Ujitolee",
+  "why": [
+    {
+      "title": "Kuwa sehemu ya siku kubwa",
+      "text": "Saidia kuifanya Mwanga Marathon 2026 kuwa siku nzuri kwa wakimbiaji, familia na wageni."
+    },
+    {
+      "title": "Kutana na watu",
+      "text": "Fanya kazi pamoja na jamii, wakimbiaji na wadau kutoka kila pembe ya Tanzania."
+    },
+    {
+      "title": "Pata uzoefu",
+      "text": "Jifunze jinsi tukio la michezo na utalii linavyoendeshwa — muhimu kwa shule, kazi na CV yako."
+    }
+  ],
+  "areasTitle": "Unaweza kusaidia wapi",
+  "areasText": "Chagua kinachokufaa; tutawasiliana nawe kabla ya siku ya mbio na maelezo.",
+  "areas": {
+    "race": {
+      "title": "Msaada siku ya mbio",
+      "text": "Vituo vya maji, waongozaji njiani, maeneo ya kuanzia na kumalizia."
+    },
+    "registration": {
+      "title": "Usajili na vifaa",
+      "text": "Kuwapokea wakimbiaji na kugawa vifaa vya mbio."
+    },
+    "festival": {
+      "title": "Utamaduni na tamasha",
+      "text": "Kusaidia kwenye maonesho ya utamaduni, vyakula na maonesho ya biashara."
+    },
+    "community": {
+      "title": "Upandaji miti na jamii",
+      "text": "Upandaji wa miti na programu ya jamii kwa mama na watoto."
+    },
+    "media": {
+      "title": "Picha, video na mitandao",
+      "text": "Kunasa matukio ya siku na kuyashirikisha mtandaoni."
+    },
+    "any": {
+      "title": "Popote nitakapohitajika",
+      "text": ""
+    }
+  },
+  "form": {
+    "title": "Jisajili kama mjitolea",
+    "name": "Jina kamili",
+    "phone": "Namba ya simu",
+    "email": "Barua pepe",
+    "area": "Ningependa kusaidia katika",
+    "message": "Kuna jambo tunalopaswa kujua? (si lazima)",
+    "messagePlaceholder": "mf. lugha unazozungumza, mafunzo ya huduma ya kwanza, muda unaopatikana",
+    "submit": "Tuma usajili wangu",
+    "privacy": "Tunatumia taarifa zako kupanga wajitolea wa Mwanga Marathon tu.",
+    "required": "Tafadhali weka jina lako.",
+    "invalidEmail": "Tafadhali weka barua pepe sahihi.",
+    "invalidPhone": "Tafadhali weka namba ya simu tunayoweza kukupata.",
+    "chooseArea": "Tafadhali chagua unapopenda kusaidia.",
+    "failed": "Kuna tatizo. Tafadhali jaribu tena.",
+    "thanksTitle": "Asante kwa kujisajili!",
+    "thanksText": "Timu yetu itawasiliana nawe kwa simu au barua pepe kabla ya siku ya mbio kukupa jukumu lako na maelekezo."
+  }
+}
