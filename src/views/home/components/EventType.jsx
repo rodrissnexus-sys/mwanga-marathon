@@ -278,10 +278,7 @@ const EventTypes = () => {
                           className="relative group/feature p-4 rounded-xl bg-primary/[0.03] hover:bg-primary/10 transition-colors duration-300"
                         >
                           <div className="flex flex-col items-center text-center space-y-2">
-                            <FontAwesomeIcon 
-                              icon={feature.icon} 
-                              className={`text-lg bg-gradient-to-r ${event.color} text-transparent bg-clip-text`}
-                            />
+                            <FontAwesomeIcon icon={feature.icon} className="text-lg text-primary" aria-hidden="true" />
                             <span className="text-sm text-primary/75 group-hover/feature:text-primary transition-colors duration-300">
                               {feature.text}
                             </span>

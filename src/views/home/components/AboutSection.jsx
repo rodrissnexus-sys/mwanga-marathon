@@ -24,28 +24,24 @@ const AboutSection = () => {
     {
       value: "2K+",
       label: t("participants"),
-      color: "from-primary to-secondary",
       icon: faRunning,
       description: t("runnersFromAllOver")
     },
     {
       value: "20+",
       label: t("partners"),
-      color: "from-secondary to-tertiary",
       icon: faHandshakeAngle,
       description: t("supportingOrganizationsAndSponsors")
     },
     {
       value: "50K+",
       label: t("prizePool"),
-      color: "from-tertiary to-primary",
       icon: faTrophy,
       description: t("totalPrizeMoneyFor")
     },
     {
       value: "100+",
       label: t("volunteers"),
-      color: "from-primary to-secondary",
       icon: faUsers,
       description: t("dedicatedCommunityVolunteers")
     }
@@ -129,15 +125,12 @@ const AboutSection = () => {
                   <div className="relative z-10 bg-tertiary p-6 rounded-xl shadow-sm border border-primary/15 hover:shadow-md transition-shadow duration-300">
                     <div className="flex items-center space-x-4">
                       <div className="flex-shrink-0">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center group-hover:from-primary/20 group-hover:to-secondary/20 transition-colors duration-300">
-                          <FontAwesomeIcon 
-                            icon={stat.icon} 
-                            className={`text-xl bg-gradient-to-r ${stat.color} text-transparent bg-clip-text`}
-                          />
+                        <div className="w-12 h-12 rounded-full bg-secondary/50 text-primary flex items-center justify-center group-hover:bg-secondary transition-colors duration-300">
+                          <FontAwesomeIcon icon={stat.icon} className="text-xl" aria-hidden="true" />
                         </div>
                       </div>
                       <div>
-                        <h3 className={`text-4xl font-bold mb-1 bg-gradient-to-r ${stat.color} text-transparent bg-clip-text`}>
+                        <h3 className="text-4xl font-extrabold mb-1 text-primary">
                           {stat.value}
                         </h3>
                         <p className="text-primary font-medium">{stat.label}</p>

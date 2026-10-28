@@ -60,9 +60,10 @@ const NewsletterForm = () => {
           type="submit"
           disabled={status === "sending"}
           aria-label={t("subscribe")}
-          className="h-full px-5 flex items-center gap-2 bg-secondary text-primary font-bold hover:bg-tertiary transition-colors cursor-pointer disabled:opacity-70"
+          className="h-full px-4 md:px-3.5 flex items-center gap-2 shrink-0 bg-secondary text-primary font-bold hover:bg-tertiary transition-colors cursor-pointer disabled:opacity-70"
         >
-          <span className="hidden sm:inline">{t("subscribe")}</span>
+          {/* the label fits when the footer column is full width (phones and tablets) */}
+          <span className="md:hidden">{t("subscribe")}</span>
           <FontAwesomeIcon icon={status === "sending" ? faSpinner : faArrowRight} spin={status === "sending"} />
         </button>
       </div>

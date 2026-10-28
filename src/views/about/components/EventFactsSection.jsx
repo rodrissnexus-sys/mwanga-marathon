@@ -5,7 +5,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import SectionHeader from '../../../components/common/SectionHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faBolt, faGlobe, faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import { faUsers, faGlobe, faPersonRunning } from '@fortawesome/free-solid-svg-icons';
 
 const EventFactsSection = () => {
   const t = useTranslations("about.facts");
@@ -13,17 +13,17 @@ const EventFactsSection = () => {
     {
       title: '2000+',
       description: t("expectedParticipants"),
-      icon: <FontAwesomeIcon icon={faUsers} className="w-16 h-16 text-4xl text-secondary" />,
+      icon: <FontAwesomeIcon icon={faUsers} className="w-16 h-16 text-4xl text-primary" />,
     },
     {
       title: '4+',
       description: t("culturalEvents"),
-      icon: <FontAwesomeIcon icon={faGlobe} className="w-16 h-16 text-4xl text-secondary" />,
+      icon: <FontAwesomeIcon icon={faGlobe} className="w-16 h-16 text-4xl text-primary" />,
     },
     {
-      title: '2+',
+      title: '4',
       description: t("daysOfFestivities"),
-      icon: <FontAwesomeIcon icon={faCalendarDays} className="w-16 h-16 text-4xl text-secondary" />,
+      icon: <FontAwesomeIcon icon={faPersonRunning} className="w-16 h-16 text-4xl text-primary" />,
     },
   ];
 
