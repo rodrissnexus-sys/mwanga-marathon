@@ -407,7 +407,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
             }
           }}
           className={`w-full p-2 border rounded-md ${
-            theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+            theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'
           } ${hasError ? 'border-primary' : ''}`}
           disabled={isLoadingEvents || eventsError}
         >
@@ -430,14 +430,14 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
   };
 
   return (
-    <div className={`rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
-      <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+    <div className={`rounded-lg ${theme === 'dark' ? 'bg-primary' : 'bg-tertiary'} shadow-lg`}>
+      <div className="flex justify-between items-center p-4 border-b border-primary/15">
         <h2 className="text-xl font-semibold">
           {banner ? 'Edit Marathon Banner' : 'Create New Marathon Banner'}
         </h2>
         <button 
           onClick={onCancel}
-          className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          className="text-primary/70 hover:text-primary"
         >
           <X size={24} />
         </button>
@@ -445,14 +445,14 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
       
       <div className="p-4">
         {/* Tab Navigation */}
-        <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4 overflow-x-auto">
+        <div className="flex border-b border-primary/15 mb-4 overflow-x-auto">
           {tabs.map(tab => (
             <button
               key={tab.id}
               className={`px-4 py-2 font-medium text-sm transition-colors ${
                 activeTab === tab.id 
                   ? 'border-b-2 border-secondary text-secondary' 
-                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+                  : 'text-primary/70 hover:text-primary'
               }`}
               onClick={() => setActiveTab(tab.id)}
             >
@@ -488,7 +488,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
                     value={formData.title}
                     onChange={handleChange}
                     className={`w-full p-2 border rounded-md ${
-                      theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                      theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'
                     } ${errors.title ? 'border-primary' : ''}`}
                     placeholder="Marathon 2025"
                   />
@@ -503,7 +503,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
                     value={formData.subtitle}
                     onChange={handleChange}
                     className={`w-full p-2 border rounded-md ${
-                      theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                      theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'
                     }`}
                     placeholder="Run for a Cause"
                   />
@@ -519,7 +519,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
                     value={formData.location}
                     onChange={handleChange}
                     className={`w-full p-2 border rounded-md ${
-                      theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                      theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'
                     } ${errors.location ? 'border-primary' : ''}`}
                     placeholder="City Center, Main Street"
                   />
@@ -534,7 +534,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
                     value={formData.start_time}
                     onChange={handleChange}
                     className={`w-full p-2 border rounded-md ${
-                      theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                      theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'
                     } ${errors.start_time ? 'border-primary' : ''}`}
                     placeholder="6:00 AM"
                   />
@@ -551,7 +551,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
                   onChange={handleChange}
                   min="1"
                   className={`w-full p-2 border rounded-md ${
-                    theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                    theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'
                   } ${errors.max_participants ? 'border-primary' : ''}`}
                 />
                 {errors.max_participants && <p className="text-primary text-xs mt-1">{errors.max_participants}</p>}
@@ -566,7 +566,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
                     value={formData.registration_start_date}
                     onChange={handleChange}
                     className={`w-full p-2 border rounded-md ${
-                      theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                      theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'
                     } ${errors.registration_start_date ? 'border-primary' : ''}`}
                   />
                   {errors.registration_start_date && <p className="text-primary text-xs mt-1">{errors.registration_start_date}</p>}
@@ -580,7 +580,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
                     value={formData.registration_end_date}
                     onChange={handleChange}
                     className={`w-full p-2 border rounded-md ${
-                      theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                      theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'
                     } ${errors.registration_end_date ? 'border-primary' : ''}`}
                   />
                   {errors.registration_end_date && <p className="text-primary text-xs mt-1">{errors.registration_end_date}</p>}
@@ -594,7 +594,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
                     value={formData.event_date}
                     onChange={handleChange}
                     className={`w-full p-2 border rounded-md ${
-                      theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                      theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'
                     } ${errors.event_date ? 'border-primary' : ''}`}
                   />
                   {errors.event_date && <p className="text-primary text-xs mt-1">{errors.event_date}</p>}
@@ -612,7 +612,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
                   />
                   <span className="text-sm font-medium">Set as active banner</span>
                 </label>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <p className="text-xs text-primary/70 mt-1">
                   Only one banner can be active at a time. Activating this banner will deactivate all others.
                 </p>
               </div>
@@ -645,7 +645,7 @@ const BannerForm = ({ banner, onSubmit, onCancel }) => {
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium bg-white text-gray-700 hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-600"
+              className="px-4 py-2 border border-primary/15 rounded-md shadow-sm text-sm font-medium bg-tertiary text-primary hover:bg-primary/[0.03]"
             >
               Cancel
             </button>

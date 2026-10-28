@@ -1,5 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
-import { accounts, admin, E2E_PREFIX, PUBLISHABLE, URL } from "./supabase";
+import { accounts, admin, E2E_PREFIX, PUBLISHABLE, request, URL } from "./supabase";
 
 async function login(page: Page, who: keyof typeof accounts) {
   await page.goto("/login", { waitUntil: "networkidle" });
@@ -99,17 +99,17 @@ test("only an admin can undo a confirmed payment", async ({ page }) => {
   await admin(`/rest/v1/registrations?id=eq.${id}`, { method: "PATCH", body: JSON.stringify({ payment_status: "confirmed" }) });
 
   // the database refuses a moderator, even when called directly
-  const token = await fetch(`${URL}/auth/v1/token?grant_type=password`, {
+  const { json: token } = await request(`${URL}/auth/v1/token?grant_type=password`, {
     method: "POST",
     headers: { apikey: PUBLISHABLE, "Content-Type": "application/json" },
     body: JSON.stringify({ email: accounts.moderator.email, password: accounts.moderator.password }),
-  }).then((r) => r.json());
-  const direct = await fetch(`${URL}/rest/v1/registrations?id=eq.${id}`, {
+  });
+  const direct = await request(`${URL}/rest/v1/registrations?id=eq.${id}`, {
     method: "PATCH",
     headers: { apikey: PUBLISHABLE, Authorization: `Bearer ${token.access_token}`, "Content-Type": "application/json" },
     body: JSON.stringify({ payment_status: "pending" }),
   });
-  expect(direct.ok).toBe(false);
+  expect(direct.status).toBeGreaterThanOrEqual(400);
 
   await login(page, "admin");
   await page.goto("/dashboard/payments");
@@ -157,5 +157,5 @@ test("an admin can open staff accounts", async ({ page }) => {
   await login(page, "admin");
   await page.goto("/dashboard/user-management");
   await expect(page).toHaveURL(/\/dashboard\/users$/);
-  await expect(page.getByText(accounts.moderator.email)).toBeVisible();
+  await expect(page.getByText(accounts.moderator.email)).toBeVisible({ timeout: 15_000 });
 });

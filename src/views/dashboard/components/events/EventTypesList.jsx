@@ -149,7 +149,7 @@ const EventTypesList = () => {
             placeholder="Search event types..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className={`w-full py-2 pl-10 pr-4 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/50 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+            className={`w-full py-2 pl-10 pr-4 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/50 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
           />
           <FontAwesomeIcon 
             icon={faSearch} 
@@ -161,7 +161,7 @@ const EventTypesList = () => {
             setCurrentEventType(null);
             setShowForm(true);
           }}
-          className="px-4 py-2 bg-secondary text-primary rounded-lg hover:bg-opacity-90 transition-colors flex items-center"
+          className="px-4 py-2 bg-secondary text-primary rounded-lg hover:opacity-90 transition-colors flex items-center"
         >
           <FontAwesomeIcon icon={faPlus} className="mr-2" />
           Add Event Type
@@ -170,7 +170,7 @@ const EventTypesList = () => {
 
       {/* Error message */}
       {error && (
-        <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
+        <div className="mb-6 p-4 bg-negative/10 text-negative rounded-lg">
           {error}
         </div>
       )}
@@ -181,7 +181,7 @@ const EventTypesList = () => {
           <FontAwesomeIcon icon={faSpinner} spin className="text-3xl text-secondary" />
         </div>
       ) : filteredEventTypes.length === 0 ? (
-        <div className={`text-center py-12 ${theme === 'dark' ? 'text-tertiary' : 'text-gray-500'}`}>
+        <div className={`text-center py-12 ${theme === 'dark' ? 'text-tertiary' : 'text-primary/70'}`}>
           {searchTerm ? 'No event types match your search' : 'No event types found. Add your first one!'}
         </div>
       ) : (
@@ -189,7 +189,7 @@ const EventTypesList = () => {
           {filteredEventTypes.map((eventType) => (
             <div 
               key={eventType.id} 
-              className={`rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20' : 'bg-tertiary border-gray-200'} overflow-hidden shadow-sm hover:shadow-md transition-shadow`}
+              className={`rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20' : 'bg-tertiary border-primary/15'} overflow-hidden shadow-sm hover:shadow-md transition-shadow`}
             >
               {/* Card header with color from event type */}
               <div className={`h-3 bg-gradient-to-r ${eventType.color}`}></div>
@@ -200,7 +200,7 @@ const EventTypesList = () => {
                     <h3 className={`font-semibold text-lg ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
                       {eventType.title}
                     </h3>
-                    <p className={`text-sm ${theme === 'dark' ? 'text-tertiary/70' : 'text-gray-500'}`}>
+                    <p className={`text-sm ${theme === 'dark' ? 'text-tertiary/70' : 'text-primary/70'}`}>
                       {eventType.subtitle}
                     </p>
                   </div>
@@ -211,7 +211,7 @@ const EventTypesList = () => {
                   )}
                 </div>
                 
-                <p className={`text-sm mb-4 line-clamp-2 ${theme === 'dark' ? 'text-tertiary/80' : 'text-gray-600'}`}>
+                <p className={`text-sm mb-4 line-clamp-2 ${theme === 'dark' ? 'text-tertiary/80' : 'text-primary/70'}`}>
                   {eventType.description}
                 </p>
                 
@@ -220,7 +220,7 @@ const EventTypesList = () => {
                     {eventType.features.slice(0, 3).map((feature, idx) => (
                       <div 
                         key={idx} 
-                        className={`w-8 h-8 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-primary text-tertiary' : 'bg-gray-100 text-primary'} border ${theme === 'dark' ? 'border-secondary/20' : 'border-tertiary'}`}
+                        className={`w-8 h-8 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-primary text-tertiary' : 'bg-primary/5 text-primary'} border ${theme === 'dark' ? 'border-secondary/20' : 'border-tertiary'}`}
                         title={feature.text}
                       >
                         <FontAwesomeIcon icon={iconMap[feature.icon] || faEye} className="text-xs" />
@@ -228,7 +228,7 @@ const EventTypesList = () => {
                     ))}
                     {eventType.features.length > 3 && (
                       <div 
-                        className={`w-8 h-8 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-primary text-tertiary' : 'bg-gray-100 text-primary'} border ${theme === 'dark' ? 'border-secondary/20' : 'border-tertiary'}`}
+                        className={`w-8 h-8 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-primary text-tertiary' : 'bg-primary/5 text-primary'} border ${theme === 'dark' ? 'border-secondary/20' : 'border-tertiary'}`}
                       >
                         <span className="text-xs font-medium">+{eventType.features.length - 3}</span>
                       </div>
@@ -238,13 +238,13 @@ const EventTypesList = () => {
                   <div className="flex space-x-2">
                     <button 
                       onClick={() => handleEdit(eventType)}
-                      className={`p-2 rounded-md ${theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-gray-100 text-primary'}`}
+                      className={`p-2 rounded-md ${theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-primary/5 text-primary'}`}
                     >
                       <FontAwesomeIcon icon={faEdit} />
                     </button>
                     <button 
                       onClick={() => handleDelete(eventType.id)}
-                      className={`p-2 rounded-md ${confirmDelete === eventType.id ? 'bg-red text-tertiary' : theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-primary/20 text-primary'}`}
+                      className={`p-2 rounded-md ${confirmDelete === eventType.id ? 'bg-negative text-tertiary' : theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-primary/20 text-primary'}`}
                     >
                       <FontAwesomeIcon icon={faTrash} />
                     </button>
@@ -258,7 +258,7 @@ const EventTypesList = () => {
 
       {/* Event Type Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-primary/50 flex items-center justify-center z-50">
           <div 
             className={`w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-lg ${theme === 'dark' ? 'bg-primary' : 'bg-tertiary'}`}
           >

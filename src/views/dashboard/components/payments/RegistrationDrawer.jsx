@@ -190,8 +190,12 @@ const RegistrationDrawer = ({ registration, onClose, onChange }) => {
   const [notice, setNotice] = useState('');
   const [copied, setCopied] = useState(false);
 
+  // a different registration: clear the last success message
   useEffect(() => {
     setNotice('');
+  }, [registration?.id]);
+
+  useEffect(() => {
     if (registration) getPaymentHistory(registration.id).then((r) => r.success && setHistory(r.data));
   }, [registration?.id, registration?.payment_status]); // eslint-disable-line react-hooks/exhaustive-deps
 

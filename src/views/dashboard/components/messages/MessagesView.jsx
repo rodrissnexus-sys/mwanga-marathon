@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText, faCheck, faRotateLeft, faReply, faHandshake, faEnvelope, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../../contexts/AuthContext';
@@ -23,9 +23,15 @@ const MessagesView = () => {
   const [busy, setBusy] = useState(null);
   const [expanded, setExpanded] = useState(null);
 
+  // only the latest request may update the list (an older, slower one could
+  // otherwise overwrite newer search results)
+  const latest = useRef(0);
+
   const load = useCallback(async () => {
+    const request = ++latest.current;
     setLoading(true);
     const result = await getMessages({ page, pageSize: PAGE_SIZE, kind: kind || undefined, handled: view === 'handled' });
+    if (request !== latest.current) return;
     if (result.success) {
       setRows(result.data);
       setTotal(result.total);

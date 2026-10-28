@@ -41,17 +41,17 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
   if (isLoading) {
     return (
       <div className="flex justify-center items-center p-8">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   return (
-    <div className={`rounded-lg overflow-hidden border ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
+    <div className={`rounded-lg overflow-hidden border ${theme === 'dark' ? 'border-primary/15' : 'border-primary/15'}`}>
       {/* Desktop Table View */}
       <div className="hidden lg:block overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-          <thead className={`${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'}`}>
+        <table className="min-w-full divide-y divide-primary/15">
+          <thead className={`${theme === 'dark' ? 'bg-primary' : 'bg-primary/[0.03]'}`}>
             <tr>
               <th 
                 scope="col" 
@@ -86,7 +86,7 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
               </th>
             </tr>
           </thead>
-          <tbody className={`divide-y ${theme === 'dark' ? 'divide-gray-700' : 'divide-gray-200'}`}>
+          <tbody className={`divide-y ${theme === 'dark' ? 'divide-primary/15' : 'divide-primary/15'}`}>
             {sortedBanners.length === 0 ? (
               <tr>
                 <td colSpan="5" className="px-6 py-4 text-center">
@@ -97,13 +97,13 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
               sortedBanners.map((banner) => (
                 <tr 
                   key={banner.id} 
-                  className={`${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-50'} transition-colors`}
+                  className={`${theme === 'dark' ? 'hover:bg-primary' : 'hover:bg-primary/[0.03]'} transition-colors`}
                 >
                   <td className="px-6 py-4">
                     <div className="text-sm font-medium max-w-xs">
                       <div className="truncate" title={banner.title}>{banner.title}</div>
                       {banner.subtitle && (
-                        <div className="text-xs text-gray-500 dark:text-gray-400 truncate" title={banner.subtitle}>
+                        <div className="text-xs text-primary/70 truncate" title={banner.subtitle}>
                           {banner.subtitle}
                         </div>
                       )}
@@ -119,8 +119,8 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
                     <span 
                       className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                         banner.is_active 
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-                          : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+                          ? 'bg-positive/10 text-positive' 
+                          : 'bg-primary/5 text-primary'
                       }`}
                     >
                       {banner.is_active ? 'Active' : 'Inactive'}
@@ -130,14 +130,14 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
                     <div className="flex justify-end gap-2">
                       <button
                         onClick={() => onView(banner)}
-                        className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-200"
+                        className="text-primary hover:text-primary"
                         title="View"
                       >
                         <Eye size={18} />
                       </button>
                       <button
                         onClick={() => onEdit(banner)}
-                        className="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-200"
+                        className="text-primary hover:text-primary"
                         title="Edit"
                       >
                         <Edit size={18} />
@@ -146,8 +146,8 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
                         onClick={() => onToggleActive(banner)}
                         className={`${
                           banner.is_active 
-                            ? 'text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-200' 
-                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                            ? 'text-positive hover:text-positive' 
+                            : 'text-primary/70 hover:text-primary'
                         }`}
                         title={banner.is_active ? 'Deactivate' : 'Activate'}
                       >
@@ -155,7 +155,7 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
                       </button>
                       <button
                         onClick={() => onDelete(banner)}
-                        className="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-200"
+                        className="text-negative hover:text-negative"
                         title="Delete"
                       >
                         <Trash2 size={18} />
@@ -176,17 +176,17 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
             No marathon banners found. Create one to get started.
           </div>
         ) : (
-          <div className="divide-y divide-gray-200 dark:divide-gray-700">
+          <div className="divide-y divide-primary/15">
             {sortedBanners.map((banner) => (
               <div 
                 key={banner.id} 
-                className={`p-4 ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-50'} transition-colors`}
+                className={`p-4 ${theme === 'dark' ? 'hover:bg-primary' : 'hover:bg-primary/[0.03]'} transition-colors`}
               >
                 {/* Title and Subtitle */}
                 <div className="mb-3">
                   <h3 className="text-base font-semibold mb-1 break-words">{banner.title}</h3>
                   {banner.subtitle && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2">
+                    <p className="text-sm text-primary/70 line-clamp-2">
                       {banner.subtitle}
                     </p>
                   )}
@@ -197,8 +197,8 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
                   <span 
                     className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
                       banner.is_active 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-                        : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+                        ? 'bg-positive/10 text-positive' 
+                        : 'bg-primary/5 text-primary'
                     }`}
                   >
                     {banner.is_active ? 'Active' : 'Inactive'}
@@ -208,27 +208,27 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
                 {/* Dates */}
                 <div className="space-y-2 mb-4 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Event Date:</span>
+                    <span className="text-primary/70">Event Date:</span>
                     <span className="font-medium">{formatDate(banner.event_date)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-400">Registration Ends:</span>
+                    <span className="text-primary/70">Registration Ends:</span>
                     <span className="font-medium">{formatDate(banner.registration_end_date)}</span>
                   </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex justify-end gap-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex justify-end gap-3 pt-3 border-t border-primary/15">
                   <button
                     onClick={() => onView(banner)}
-                    className="p-2 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-md transition-colors"
+                    className="p-2 text-primary hover:bg-primary rounded-md transition-colors"
                     title="View"
                   >
                     <Eye size={20} />
                   </button>
                   <button
                     onClick={() => onEdit(banner)}
-                    className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-md transition-colors"
+                    className="p-2 text-primary hover:bg-primary rounded-md transition-colors"
                     title="Edit"
                   >
                     <Edit size={20} />
@@ -237,8 +237,8 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
                     onClick={() => onToggleActive(banner)}
                     className={`p-2 rounded-md transition-colors ${
                       banner.is_active 
-                        ? 'text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20' 
-                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        ? 'text-positive hover:bg-positive/10' 
+                        : 'text-primary/70 hover:bg-primary/5'
                     }`}
                     title={banner.is_active ? 'Deactivate' : 'Activate'}
                   >
@@ -246,7 +246,7 @@ const BannerList = ({ banners, onView, onEdit, onDelete, onToggleActive, isLoadi
                   </button>
                   <button
                     onClick={() => onDelete(banner)}
-                    className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-colors"
+                    className="p-2 text-negative hover:bg-negative/10 rounded-md transition-colors"
                     title="Delete"
                   >
                     <Trash2 size={20} />

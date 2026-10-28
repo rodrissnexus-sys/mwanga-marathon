@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileExport, faInbox, faChevronDown, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getRegistrationsPage, exportRegistrationsCsv, countByPaymentStatus } from '../../../../api/marathon/registration';
@@ -81,12 +81,18 @@ const PaymentsView = () => {
     return () => clearTimeout(timer);
   }, [searchInput]);
 
+  // only the latest request may update the list (an older, slower one could
+  // otherwise overwrite newer search results)
+  const latest = useRef(0);
+
   const load = useCallback(async () => {
+    const request = ++latest.current;
     setLoading(true);
     const [list, totals] = await Promise.all([
       getRegistrationsPage({ page, pageSize: PAGE_SIZE, ...ORDER[status], ...filters, paymentStatus: status }),
       countByPaymentStatus(filters),
     ]);
+    if (request !== latest.current) return;
     if (list.success) {
       setRows(list.data);
       setTotal(list.total);

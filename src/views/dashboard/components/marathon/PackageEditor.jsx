@@ -44,7 +44,7 @@ const PackageEditor = ({ packageType, features = [], onChange, errors = {} }) =>
   const hasError = errors[`${packageType}_features`];
 
   return (
-    <div className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+    <div className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-primary border-primary/15' : 'bg-tertiary border-primary/15'}`}>
       <h3 className="text-lg font-semibold mb-4">{formatPackageType(packageType)} Features</h3>
       
       <div className="mb-4">
@@ -61,8 +61,8 @@ const PackageEditor = ({ packageType, features = [], onChange, errors = {} }) =>
             onKeyPress={handleKeyPress}
             className={`flex-grow p-2 rounded-l border-y border-l ${
               theme === 'dark' 
-                ? 'bg-gray-800 border-gray-700 text-white' 
-                : 'bg-white border-gray-200'
+                ? 'bg-primary border-primary/15 text-tertiary' 
+                : 'bg-tertiary border-primary/15'
             } ${hasError ? 'border-primary' : ''}`}
             placeholder="Add a feature (e.g., T-shirt, Medal, Refreshments)"
           />
@@ -79,14 +79,14 @@ const PackageEditor = ({ packageType, features = [], onChange, errors = {} }) =>
         
         <ul className={`rounded border ${
           theme === 'dark' 
-            ? 'bg-gray-800 border-gray-700' 
-            : 'bg-gray-50 border-gray-200'
+            ? 'bg-primary border-primary/15' 
+            : 'bg-primary/[0.03] border-primary/15'
         } divide-y ${
-          theme === 'dark' ? 'divide-gray-700' : 'divide-gray-200'
+          theme === 'dark' ? 'divide-primary/15' : 'divide-primary/15'
         } max-h-48 overflow-y-auto`}
         >
           {features.length === 0 ? (
-            <li className="p-3 text-sm text-gray-500 dark:text-gray-400">No features added yet</li>
+            <li className="p-3 text-sm text-primary/70">No features added yet</li>
           ) : (
             features.map((feature, index) => (
               <li key={index} className="p-2 flex justify-between items-center">
@@ -104,7 +104,7 @@ const PackageEditor = ({ packageType, features = [], onChange, errors = {} }) =>
         </ul>
       </div>
       
-      <p className="text-xs text-gray-500 dark:text-gray-400">
+      <p className="text-xs text-primary/70">
         Add features that will be included in this package. These will be displayed to participants during registration.
       </p>
     </div>

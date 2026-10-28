@@ -164,13 +164,13 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
   return (
     <div>
       {/* Form header */}
-      <div className={`p-4 border-b ${theme === 'dark' ? 'border-secondary/20' : 'border-gray-200'} flex justify-between items-center`}>
+      <div className={`p-4 border-b ${theme === 'dark' ? 'border-secondary/20' : 'border-primary/15'} flex justify-between items-center`}>
         <h2 className={`text-xl font-semibold ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
           {scheduleDay ? 'Edit Schedule Day' : 'Add New Schedule Day'}
         </h2>
         <button 
           onClick={onClose}
-          className={`p-2 rounded-md ${theme === 'dark' ? 'hover:bg-primary/50 text-tertiary' : 'hover:bg-gray-100 text-primary'}`}
+          className={`p-2 rounded-md ${theme === 'dark' ? 'hover:bg-primary/50 text-tertiary' : 'hover:bg-primary/5 text-primary'}`}
         >
           <FontAwesomeIcon icon={faTimes} />
         </button>
@@ -180,7 +180,7 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
       <form onSubmit={handleSubmit} className="p-6 space-y-6">
         {/* Error message */}
         {error && (
-          <div className="p-4 bg-red-100 text-red-700 rounded-lg">
+          <div className="p-4 bg-negative/10 text-negative rounded-lg">
             {error}
           </div>
         )}
@@ -196,7 +196,7 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
               name="day"
               value={formData.day}
               onChange={handleChange}
-              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
               placeholder="e.g., Day 1"
               required
             />
@@ -210,7 +210,7 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
               name="date"
               value={formData.date}
               onChange={handleChange}
-              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
               placeholder="e.g., June 28, 2025"
               required
             />
@@ -237,7 +237,7 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
             {formData.events.map((event, index) => (
               <div 
                 key={index} 
-                className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20' : 'bg-tertiary border-gray-200'}`}
+                className={`p-4 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20' : 'bg-tertiary border-primary/15'}`}
               >
                 <div className="flex justify-between items-center mb-3">
                   <h4 className={`font-medium ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
@@ -246,7 +246,7 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
                   <button
                     type="button"
                     onClick={() => removeEvent(index)}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-negative hover:text-negative"
                   >
                     <FontAwesomeIcon icon={faTrash} />
                   </button>
@@ -254,27 +254,27 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-gray-600'}`}>
+                    <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-primary/70'}`}>
                       Time *
                     </label>
                     <input
                       type="text"
                       value={event.time}
                       onChange={(e) => handleEventChange(index, 'time', e.target.value)}
-                      className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+                      className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
                       placeholder="e.g., 4:00 PM - 8:00 PM"
                       required
                     />
                   </div>
                   <div>
-                    <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-gray-600'}`}>
+                    <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-primary/70'}`}>
                       Title *
                     </label>
                     <input
                       type="text"
                       value={event.title}
                       onChange={(e) => handleEventChange(index, 'title', e.target.value)}
-                      className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+                      className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
                       placeholder="e.g., Pre-Marathon Registration"
                       required
                     />
@@ -282,40 +282,40 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
                 </div>
                 
                 <div className="mt-3">
-                  <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-gray-600'}`}>
+                  <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-primary/70'}`}>
                     Location *
                   </label>
                   <input
                     type="text"
                     value={event.location}
                     onChange={(e) => handleEventChange(index, 'location', e.target.value)}
-                    className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+                    className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
                     placeholder="e.g., CD MSUYA Square"
                     required
                   />
                 </div>
                 
                 <div className="mt-3">
-                  <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-gray-600'}`}>
+                  <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-primary/70'}`}>
                     Description
                   </label>
                   <textarea
                     value={event.description}
                     onChange={(e) => handleEventChange(index, 'description', e.target.value)}
                     rows="2"
-                    className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+                    className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
                     placeholder="Describe this event..."
                   ></textarea>
                 </div>
                 
                 <div className="mt-3">
-                  <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-gray-600'}`}>
+                  <label className={`block mb-1 text-xs font-medium ${theme === 'dark' ? 'text-tertiary/80' : 'text-primary/70'}`}>
                     Icon
                   </label>
                   <select
                     value={event.icon}
                     onChange={(e) => handleEventChange(index, 'icon', e.target.value)}
-                    className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+                    className={`w-full p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
                   >
                     {availableIcons.map((iconOption) => (
                       <option key={iconOption.name} value={iconOption.name}>
@@ -328,7 +328,7 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
             ))}
             
             {formData.events.length === 0 && (
-              <div className={`text-center p-4 border border-dashed rounded-lg ${theme === 'dark' ? 'border-secondary/20 text-tertiary/50' : 'border-gray-200 text-gray-400'}`}>
+              <div className={`text-center p-4 border border-dashed rounded-lg ${theme === 'dark' ? 'border-secondary/20 text-tertiary/50' : 'border-primary/15 text-primary/70'}`}>
                 No events added. Click "Add Event" to add one.
               </div>
             )}
@@ -336,18 +336,18 @@ const ScheduleDayForm = ({ scheduleDay, onClose, onSubmit }) => {
         </div>
 
         {/* Form actions */}
-        <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+        <div className="flex justify-end space-x-3 pt-4 border-t border-primary/15">
           <button
             type="button"
             onClick={onClose}
-            className={`px-4 py-2 rounded-lg ${theme === 'dark' ? 'bg-primary/50 text-tertiary hover:bg-primary' : 'bg-gray-100 text-primary hover:bg-gray-200'}`}
+            className={`px-4 py-2 rounded-lg ${theme === 'dark' ? 'bg-primary/50 text-tertiary hover:bg-primary' : 'bg-primary/5 text-primary hover:bg-primary/10'}`}
             disabled={loading}
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-secondary text-primary rounded-lg hover:bg-opacity-90 flex items-center"
+            className="px-4 py-2 bg-secondary text-primary rounded-lg hover:opacity-90 flex items-center"
             disabled={loading}
           >
             {loading ? (

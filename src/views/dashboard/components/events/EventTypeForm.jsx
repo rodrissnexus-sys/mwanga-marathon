@@ -179,13 +179,13 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
   return (
     <div>
       {/* Form header */}
-      <div className={`p-4 border-b ${theme === 'dark' ? 'border-secondary/20' : 'border-gray-200'} flex justify-between items-center`}>
+      <div className={`p-4 border-b ${theme === 'dark' ? 'border-secondary/20' : 'border-primary/15'} flex justify-between items-center`}>
         <h2 className={`text-xl font-semibold ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
           {eventType ? 'Edit Event Type' : 'Add New Event Type'}
         </h2>
         <button 
           onClick={onClose}
-          className={`p-2 rounded-md ${theme === 'dark' ? 'hover:bg-primary/50 text-tertiary' : 'hover:bg-gray-100 text-primary'}`}
+          className={`p-2 rounded-md ${theme === 'dark' ? 'hover:bg-primary/50 text-tertiary' : 'hover:bg-primary/5 text-primary'}`}
         >
           <FontAwesomeIcon icon={faTimes} />
         </button>
@@ -195,7 +195,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
       <form onSubmit={handleSubmit} className="p-6 space-y-6">
         {/* Error message */}
         {error && (
-          <div className="p-4 bg-red-100 text-red-700 rounded-lg">
+          <div className="p-4 bg-negative/10 text-negative rounded-lg">
             {error}
           </div>
         )}
@@ -210,11 +210,11 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
             name="event_id"
             value={formData.event_id}
             onChange={handleChange}
-            className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+            className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
             placeholder="e.g., marathon-day-1"
             required
           />
-          <p className={`mt-1 text-xs ${theme === 'dark' ? 'text-tertiary/70' : 'text-gray-500'}`}>
+          <p className={`mt-1 text-xs ${theme === 'dark' ? 'text-tertiary/70' : 'text-primary/70'}`}>
             A unique identifier for this event type. Will be auto-generated if left empty.
           </p>
         </div>
@@ -230,7 +230,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
               placeholder="e.g., Day 1: Marathon & Festival"
               required
             />
@@ -244,7 +244,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
               name="subtitle"
               value={formData.subtitle}
               onChange={handleChange}
-              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
               placeholder="e.g., Saturday, June 28, 2025"
               required
             />
@@ -257,7 +257,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
             <label className={`block mb-2 text-sm font-medium ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
               Icon
             </label>
-            <div className={`grid grid-cols-6 gap-2 p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20' : 'bg-tertiary border-gray-200'}`}>
+            <div className={`grid grid-cols-6 gap-2 p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20' : 'bg-tertiary border-primary/15'}`}>
               {availableIcons.map((iconOption) => (
                 <button
                   key={iconOption.name}
@@ -265,7 +265,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
                   onClick={() => setFormData(prev => ({ ...prev, icon: iconOption.name }))}
                   className={`p-2 rounded-md flex items-center justify-center ${formData.icon === iconOption.name 
                     ? 'bg-secondary text-primary' 
-                    : theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-gray-100 text-primary'}`}
+                    : theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-primary/5 text-primary'}`}
                   title={iconOption.label}
                 >
                   <FontAwesomeIcon icon={iconOption.icon} />
@@ -281,7 +281,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
               name="color"
               value={formData.color}
               onChange={handleChange}
-              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+              className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
             >
               {availableColors.map((colorOption) => (
                 <option key={colorOption.value} value={colorOption.value}>
@@ -303,7 +303,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
             value={formData.description}
             onChange={handleChange}
             rows="4"
-            className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+            className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
             placeholder="Describe this event type..."
             required
           ></textarea>
@@ -319,7 +319,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
             name="highlight"
             value={formData.highlight}
             onChange={handleChange}
-            className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+            className={`w-full p-3 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
             placeholder="e.g., Main Event Day"
           />
         </div>
@@ -335,15 +335,15 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
               name="image"
               value={formData.image}
               onChange={handleChange}
-              className={`flex-1 p-3 rounded-l-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+              className={`flex-1 p-3 rounded-l-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
               placeholder="e.g., /assets/images/2026/runners-group.jpg"
             />
-            <div className={`p-3 rounded-r-lg border-t border-r border-b ${theme === 'dark' ? 'bg-primary/70 border-secondary/20 text-tertiary' : 'bg-gray-100 border-gray-200 text-primary'}`}>
+            <div className={`p-3 rounded-r-lg border-t border-r border-b ${theme === 'dark' ? 'bg-primary/70 border-secondary/20 text-tertiary' : 'bg-primary/5 border-primary/15 text-primary'}`}>
               <FontAwesomeIcon icon={faImage} />
             </div>
           </div>
           {formData.image && (
-            <div className="mt-2 relative h-32 bg-gray-100 rounded-lg overflow-hidden">
+            <div className="mt-2 relative h-32 bg-primary/5 rounded-lg overflow-hidden">
               <img 
                 src={formData.image} 
                 alt="Preview" 
@@ -379,7 +379,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
                 <select
                   value={feature.icon}
                   onChange={(e) => handleFeatureChange(index, 'icon', e.target.value)}
-                  className={`p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+                  className={`p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
                 >
                   {availableIcons.map((iconOption) => (
                     <option key={iconOption.name} value={iconOption.name}>
@@ -391,13 +391,13 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
                   type="text"
                   value={feature.text}
                   onChange={(e) => handleFeatureChange(index, 'text', e.target.value)}
-                  className={`flex-1 p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+                  className={`flex-1 p-2 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
                   placeholder="Feature description"
                 />
                 <button
                   type="button"
                   onClick={() => removeFeature(index)}
-                  className="p-2 text-red-500 hover:text-red-700"
+                  className="p-2 text-negative hover:text-negative"
                 >
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
@@ -405,7 +405,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
             ))}
             
             {formData.features.length === 0 && (
-              <div className={`text-center p-4 border border-dashed rounded-lg ${theme === 'dark' ? 'border-secondary/20 text-tertiary/50' : 'border-gray-200 text-gray-400'}`}>
+              <div className={`text-center p-4 border border-dashed rounded-lg ${theme === 'dark' ? 'border-secondary/20 text-tertiary/50' : 'border-primary/15 text-primary/70'}`}>
                 No features added. Click "Add Feature" to add one.
               </div>
             )}
@@ -413,18 +413,18 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
         </div>
 
         {/* Form actions */}
-        <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+        <div className="flex justify-end space-x-3 pt-4 border-t border-primary/15">
           <button
             type="button"
             onClick={onClose}
-            className={`px-4 py-2 rounded-lg ${theme === 'dark' ? 'bg-primary/50 text-tertiary hover:bg-primary' : 'bg-gray-100 text-primary hover:bg-gray-200'}`}
+            className={`px-4 py-2 rounded-lg ${theme === 'dark' ? 'bg-primary/50 text-tertiary hover:bg-primary' : 'bg-primary/5 text-primary hover:bg-primary/10'}`}
             disabled={loading}
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-secondary text-primary rounded-lg hover:bg-opacity-90 flex items-center"
+            className="px-4 py-2 bg-secondary text-primary rounded-lg hover:opacity-90 flex items-center"
             disabled={loading}
           >
             {loading ? (

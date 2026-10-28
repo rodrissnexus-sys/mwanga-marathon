@@ -133,9 +133,9 @@ const MarathonBannerManagement = () => {
     if (!confirmDelete) return null;
     
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className={`max-w-md w-full p-6 rounded-lg shadow-xl ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-          <div className="flex items-center text-red-500 mb-4">
+      <div className="fixed inset-0 bg-primary/50 flex items-center justify-center z-50 p-4">
+        <div className={`max-w-md w-full p-6 rounded-lg shadow-xl ${theme === 'dark' ? 'bg-primary' : 'bg-tertiary'}`}>
+          <div className="flex items-center text-negative mb-4">
             <AlertTriangle className="mr-2" size={24} />
             <h3 className="text-lg font-bold">Confirm Deletion</h3>
           </div>
@@ -147,15 +147,15 @@ const MarathonBannerManagement = () => {
               onClick={() => setConfirmDelete(null)}
               className={`px-4 py-2 rounded ${
                 theme === 'dark' 
-                  ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                  : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
+                  ? 'bg-primary hover:bg-primary text-tertiary' 
+                  : 'bg-primary/10 hover:bg-primary/15 text-primary'
               }`}
             >
               Cancel
             </button>
             <button
               onClick={handleDeleteConfirmed}
-              className="px-4 py-2 bg-red-600 text-white font-medium rounded hover:bg-red-700 transition-colors"
+              className="px-4 py-2 bg-negative text-tertiary font-medium rounded hover:bg-negative transition-colors"
             >
               Delete
             </button>
@@ -182,7 +182,7 @@ const MarathonBannerManagement = () => {
       </div>
       
       {error && (
-        <div className="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 dark:bg-red-900/30 dark:text-red-300">
+        <div className="mb-6 p-4 bg-negative/10 border-l-4 border-negative text-negative">
           <p className="font-medium">Error</p>
           <p>{error}</p>
         </div>

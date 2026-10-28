@@ -25,12 +25,12 @@ const EventsView = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-200 mb-6">
+      <div className="flex border-b border-primary/15 mb-6">
         <button
           onClick={() => setActiveTab('eventTypes')}
           className={`py-3 px-6 font-medium text-sm flex items-center ${activeTab === 'eventTypes' 
             ? `border-b-2 border-secondary ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}` 
-            : `${theme === 'dark' ? 'text-tertiary/70 hover:text-tertiary' : 'text-gray-500 hover:text-gray-700'}`
+            : `${theme === 'dark' ? 'text-tertiary/70 hover:text-tertiary' : 'text-primary/70 hover:text-primary'}`
           }`}
         >
           <FontAwesomeIcon icon={faList} className="mr-2" />
@@ -40,7 +40,7 @@ const EventsView = () => {
           onClick={() => setActiveTab('schedule')}
           className={`py-3 px-6 font-medium text-sm flex items-center ${activeTab === 'schedule' 
             ? `border-b-2 border-secondary ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}` 
-            : `${theme === 'dark' ? 'text-tertiary/70 hover:text-tertiary' : 'text-gray-500 hover:text-gray-700'}`
+            : `${theme === 'dark' ? 'text-tertiary/70 hover:text-tertiary' : 'text-primary/70 hover:text-primary'}`
           }`}
         >
           <FontAwesomeIcon icon={faCalendarDay} className="mr-2" />

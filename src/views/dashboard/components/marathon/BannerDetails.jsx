@@ -47,7 +47,7 @@ const BannerDetails = ({ banner, onClose }) => {
     }
     
     return (
-      <div className={`p-4 rounded-lg ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-50'} shadow`}>
+      <div className={`p-4 rounded-lg ${theme === 'dark' ? 'bg-primary' : 'bg-primary/[0.03]'} shadow`}>
         <div className="flex justify-between items-start mb-3">
           <div>
             {distance && (
@@ -58,13 +58,13 @@ const BannerDetails = ({ banner, onClose }) => {
             <h3 className="text-lg font-bold mt-1">{eventName}</h3>
           </div>
           <div className="text-right">
-            <p className="text-xs text-gray-500 dark:text-gray-400">Registration Fee</p>
+            <p className="text-xs text-primary/70">Registration Fee</p>
             <p className="text-xl font-bold">${eventPrice}</p>
           </div>
         </div>
         
         {eventDescription && (
-          <div className="mb-3 text-sm text-gray-600 dark:text-gray-300">
+          <div className="mb-3 text-sm text-primary/70">
             {eventDescription}
           </div>
         )}
@@ -81,7 +81,7 @@ const BannerDetails = ({ banner, onClose }) => {
               ))}
             </ul>
           ) : (
-            <p className="text-sm text-gray-500 dark:text-gray-400">No features specified</p>
+            <p className="text-sm text-primary/70">No features specified</p>
           )}
         </div>
       </div>
@@ -89,16 +89,16 @@ const BannerDetails = ({ banner, onClose }) => {
   };
 
   return (
-    <div className={`rounded-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
+    <div className={`rounded-lg ${theme === 'dark' ? 'bg-primary' : 'bg-tertiary'} shadow-lg`}>
       <div className="p-6">
         <div className="mb-6">
           <h2 className="text-2xl font-bold">{banner.title}</h2>
-          {banner.subtitle && <p className="text-gray-500 dark:text-gray-400 mt-1">{banner.subtitle}</p>}
+          {banner.subtitle && <p className="text-primary/70 mt-1">{banner.subtitle}</p>}
           
           <div className={`mt-3 inline-flex items-center px-3 py-1 rounded-full text-sm ${
             banner.is_active 
-              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-              : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300'
+              ? 'bg-positive/10 text-positive' 
+              : 'bg-primary/5 text-primary'
           }`}>
             {banner.is_active ? 'Active' : 'Inactive'}
           </div>
@@ -114,7 +114,7 @@ const BannerDetails = ({ banner, onClose }) => {
                   <Calendar className="text-secondary" size={16} />
                 </div>
                 <div className="ml-3">
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Event Date</p>
+                  <p className="text-xs text-primary/70">Event Date</p>
                   <p className="text-sm font-medium">{formatDate(banner.event_date)}</p>
                 </div>
               </div>
@@ -124,7 +124,7 @@ const BannerDetails = ({ banner, onClose }) => {
                   <MapPin className="text-secondary" size={16} />
                 </div>
                 <div className="ml-3">
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Location</p>
+                  <p className="text-xs text-primary/70">Location</p>
                   <p className="text-sm font-medium">{banner.location}</p>
                 </div>
               </div>
@@ -134,7 +134,7 @@ const BannerDetails = ({ banner, onClose }) => {
                   <Clock className="text-secondary" size={16} />
                 </div>
                 <div className="ml-3">
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Starting Time</p>
+                  <p className="text-xs text-primary/70">Starting Time</p>
                   <p className="text-sm font-medium">{banner.start_time}</p>
                 </div>
               </div>
@@ -144,7 +144,7 @@ const BannerDetails = ({ banner, onClose }) => {
                   <Users className="text-secondary" size={16} />
                 </div>
                 <div className="ml-3">
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Participants</p>
+                  <p className="text-xs text-primary/70">Participants</p>
                   <p className="text-sm font-medium">Limited to {banner.max_participants.toLocaleString()} Runners</p>
                 </div>
               </div>
@@ -154,14 +154,14 @@ const BannerDetails = ({ banner, onClose }) => {
           <div>
             <h3 className="text-lg font-semibold mb-3">Registration Period</h3>
             
-            <div className={`p-4 rounded-lg ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-50'}`}>
+            <div className={`p-4 rounded-lg ${theme === 'dark' ? 'bg-primary' : 'bg-primary/[0.03]'}`}>
               <div className="flex justify-between mb-3">
                 <div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Opens</p>
+                  <p className="text-xs text-primary/70">Opens</p>
                   <p className="text-sm font-medium">{formatDate(banner.registration_start_date)}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Closes</p>
+                  <p className="text-xs text-primary/70">Closes</p>
                   <p className="text-sm font-medium">{formatDate(banner.registration_end_date)}</p>
                 </div>
               </div>
@@ -174,9 +174,9 @@ const BannerDetails = ({ banner, onClose }) => {
                     </span>
                   </div>
                 </div>
-                <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-300 dark:bg-gray-600">
+                <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-primary/15">
                   <div 
-                    className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-secondary"
+                    className="shadow-none flex flex-col text-center whitespace-nowrap text-tertiary justify-center bg-secondary"
                     style={{ width: '100%' }}
                   ></div>
                 </div>

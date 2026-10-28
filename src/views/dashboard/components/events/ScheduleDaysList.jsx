@@ -188,7 +188,7 @@ const ScheduleDaysList = () => {
             placeholder="Search schedule days..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className={`w-full py-2 pl-10 pr-4 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/50 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
+            className={`w-full py-2 pl-10 pr-4 rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/50 text-tertiary' : 'bg-tertiary border-primary/15 text-primary'}`}
           />
           <FontAwesomeIcon 
             icon={faSearch} 
@@ -200,7 +200,7 @@ const ScheduleDaysList = () => {
             setCurrentScheduleDay(null);
             setShowForm(true);
           }}
-          className="px-4 py-2 bg-secondary text-primary rounded-lg hover:bg-opacity-90 transition-colors flex items-center"
+          className="px-4 py-2 bg-secondary text-primary rounded-lg hover:opacity-90 transition-colors flex items-center"
         >
           <FontAwesomeIcon icon={faPlus} className="mr-2" />
           Add Schedule Day
@@ -209,7 +209,7 @@ const ScheduleDaysList = () => {
 
       {/* Error message */}
       {error && (
-        <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
+        <div className="mb-6 p-4 bg-negative/10 text-negative rounded-lg">
           {error}
         </div>
       )}
@@ -220,7 +220,7 @@ const ScheduleDaysList = () => {
           <FontAwesomeIcon icon={faSpinner} spin className="text-3xl text-secondary" />
         </div>
       ) : filteredScheduleDays.length === 0 ? (
-        <div className={`text-center py-12 ${theme === 'dark' ? 'text-tertiary' : 'text-gray-500'}`}>
+        <div className={`text-center py-12 ${theme === 'dark' ? 'text-tertiary' : 'text-primary/70'}`}>
           {searchTerm ? 'No schedule days match your search' : 'No schedule days found. Add your first one!'}
         </div>
       ) : (
@@ -228,10 +228,10 @@ const ScheduleDaysList = () => {
           {filteredScheduleDays.map((scheduleDay) => (
             <div 
               key={scheduleDay.id} 
-              className={`rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20' : 'bg-tertiary border-gray-200'} overflow-hidden shadow-sm hover:shadow-md transition-shadow`}
+              className={`rounded-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20' : 'bg-tertiary border-primary/15'} overflow-hidden shadow-sm hover:shadow-md transition-shadow`}
             >
               <div 
-                className={`p-4 flex justify-between items-center cursor-pointer ${expandedDay === scheduleDay.id ? (theme === 'dark' ? 'bg-primary/70' : 'bg-gray-50') : ''}`}
+                className={`p-4 flex justify-between items-center cursor-pointer ${expandedDay === scheduleDay.id ? (theme === 'dark' ? 'bg-primary/70' : 'bg-primary/[0.03]') : ''}`}
                 onClick={() => toggleExpandDay(scheduleDay.id)}
               >
                 <div className="flex items-center">
@@ -242,14 +242,14 @@ const ScheduleDaysList = () => {
                     <h3 className={`font-semibold ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
                       {scheduleDay.day}
                     </h3>
-                    <p className={`text-sm ${theme === 'dark' ? 'text-tertiary/70' : 'text-gray-500'}`}>
+                    <p className={`text-sm ${theme === 'dark' ? 'text-tertiary/70' : 'text-primary/70'}`}>
                       {scheduleDay.date}
                     </p>
                   </div>
                 </div>
                 
                 <div className="flex items-center">
-                  <span className={`mr-4 text-sm ${theme === 'dark' ? 'text-tertiary/70' : 'text-gray-500'}`}>
+                  <span className={`mr-4 text-sm ${theme === 'dark' ? 'text-tertiary/70' : 'text-primary/70'}`}>
                     {scheduleDay.events.length} {scheduleDay.events.length === 1 ? 'Event' : 'Events'}
                   </span>
                   
@@ -259,7 +259,7 @@ const ScheduleDaysList = () => {
                         e.stopPropagation();
                         handleEdit(scheduleDay);
                       }}
-                      className={`p-2 rounded-md ${theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-gray-100 text-primary'}`}
+                      className={`p-2 rounded-md ${theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-primary/5 text-primary'}`}
                     >
                       <FontAwesomeIcon icon={faEdit} />
                     </button>
@@ -268,7 +268,7 @@ const ScheduleDaysList = () => {
                         e.stopPropagation();
                         handleDelete(scheduleDay.id);
                       }}
-                      className={`p-2 rounded-md ${confirmDelete === scheduleDay.id ? 'bg-red-500 text-white' : theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-gray-100 text-primary'}`}
+                      className={`p-2 rounded-md ${confirmDelete === scheduleDay.id ? 'bg-negative text-tertiary' : theme === 'dark' ? 'hover:bg-primary text-tertiary' : 'hover:bg-primary/5 text-primary'}`}
                     >
                       <FontAwesomeIcon icon={faTrash} />
                     </button>
@@ -281,18 +281,18 @@ const ScheduleDaysList = () => {
               
               {/* Expanded content with events */}
               {expandedDay === scheduleDay.id && (
-                <div className={`p-4 border-t ${theme === 'dark' ? 'border-secondary/20' : 'border-gray-200'}`}>
-                  <h4 className={`text-sm font-medium mb-3 ${theme === 'dark' ? 'text-tertiary/80' : 'text-gray-600'}`}>
+                <div className={`p-4 border-t ${theme === 'dark' ? 'border-secondary/20' : 'border-primary/15'}`}>
+                  <h4 className={`text-sm font-medium mb-3 ${theme === 'dark' ? 'text-tertiary/80' : 'text-primary/70'}`}>
                     Events
                   </h4>
                   <div className="space-y-3">
                     {scheduleDay.events.map((event, index) => (
                       <div 
                         key={index} 
-                        className={`p-3 rounded-lg ${theme === 'dark' ? 'bg-primary/70' : 'bg-gray-50'}`}
+                        className={`p-3 rounded-lg ${theme === 'dark' ? 'bg-primary/70' : 'bg-primary/[0.03]'}`}
                       >
                         <div className="flex items-start">
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-primary text-tertiary' : 'bg-gray-100 text-primary'} mt-1 mr-3`}>
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${theme === 'dark' ? 'bg-primary text-tertiary' : 'bg-primary/5 text-primary'} mt-1 mr-3`}>
                             <FontAwesomeIcon icon={faClock} className="text-xs" />
                           </div>
                           <div className="flex-1">
@@ -300,15 +300,15 @@ const ScheduleDaysList = () => {
                               <h5 className={`font-medium ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
                                 {event.title}
                               </h5>
-                              <span className={`text-xs ${theme === 'dark' ? 'text-tertiary/70' : 'text-gray-500'}`}>
+                              <span className={`text-xs ${theme === 'dark' ? 'text-tertiary/70' : 'text-primary/70'}`}>
                                 {event.time}
                               </span>
                             </div>
-                            <p className={`text-sm ${theme === 'dark' ? 'text-tertiary/70' : 'text-gray-500'}`}>
+                            <p className={`text-sm ${theme === 'dark' ? 'text-tertiary/70' : 'text-primary/70'}`}>
                               {event.location}
                             </p>
                             {event.description && (
-                              <p className={`text-sm mt-1 ${theme === 'dark' ? 'text-tertiary/80' : 'text-gray-600'}`}>
+                              <p className={`text-sm mt-1 ${theme === 'dark' ? 'text-tertiary/80' : 'text-primary/70'}`}>
                                 {event.description}
                               </p>
                             )}
@@ -326,7 +326,7 @@ const ScheduleDaysList = () => {
 
       {/* Schedule Day Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-primary/50 flex items-center justify-center z-50">
           <div 
             className={`w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-lg shadow-lg ${theme === 'dark' ? 'bg-primary' : 'bg-tertiary'}`}
           >

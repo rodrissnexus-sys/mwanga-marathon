@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import PrimaryButton from "../components/common/buttons/PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faHome, faCalendar, faEnvelope, faGift, faInfoCircle, faHighlighter, faRunning, faGlobe, faChevronDown, faPhone, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faHome, faCalendar, faEnvelope, faGift, faInfoCircle, faHighlighter, faRunning, faGlobe, faChevronDown, faPhone, faMapMarkerAlt, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const GradientButton = ({ children, onClick, className = '', gradientFrom = 'from-secondary/80', gradientTo = 'to-secondary', to, compact = false }) => {
   const ButtonContent = (
@@ -352,35 +352,22 @@ const Header = () => {
         {/* Enhanced Mobile Menu Button */}
         <div className="hide-mobile-1390 flex items-center">
           {/* Mobile Menu Toggle Button */}
-          <button 
-            className="relative w-10 h-10 flex items-center justify-center text-primary/90 focus:outline-none"
+          <button
+            className="relative w-11 h-11 flex items-center justify-center rounded-lg text-primary hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-primary cursor-pointer"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={t("toggleMenu")}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
-            <div className={`w-6 flex flex-col items-end space-y-1.5 transition-all duration-300 transform ${mobileMenuOpen ? "rotate-180" : ""}`}>
-              <span 
-                className={`block h-0.5 rounded transition-all duration-300 transform origin-right ${
-                  mobileMenuOpen ? "w-6 bg-primary/90 rotate-45 translate-y-1.5" : "w-6 bg-black/70"
-                }`}
-              ></span>
-              <span 
-                className={`block h-0.5 rounded transition-all duration-300 ${
-                  mobileMenuOpen ? "w-0 opacity-0 bg-primary/90" : "w-4 bg-black/70"
-                }`}
-              ></span>
-              <span 
-                className={`block h-0.5 rounded transition-all duration-300 transform origin-right ${
-                  mobileMenuOpen ? "w-6 bg-primary/90 -rotate-45 -translate-y-1.5" : "w-5 bg-black/70"
-                }`}
-              ></span>
-            </div>
+            <FontAwesomeIcon icon={mobileMenuOpen ? faXmark : faBars} className="text-xl" />
           </button>
         </div>
       </nav>
 
       {/* Enhanced Mobile Menu Dropdown */}
-      <div 
-        className={`fixed inset-x-0 top-[70px] z-40 bg-tertiary/40 backdrop-blur-lg shadow-md transition-all duration-500 transform ${
+      <div
+        id="mobile-menu"
+        className={`fixed inset-x-0 top-[90px] z-40 max-h-[calc(100dvh-90px)] overflow-y-auto bg-tertiary rounded-b-2xl shadow-xl border-b border-primary/10 transition-all duration-300 transform ${
           mobileMenuOpen ? "translate-y-0 opacity-100 visible" : "-translate-y-full opacity-0 invisible pointer-events-none"
         }`}
       >
@@ -396,23 +383,19 @@ const Header = () => {
                   handleNavigation(item);
                   setMobileMenuOpen(false);
                 }}
-                className={`block w-full text-left py-3 px-4 rounded-md transition-all duration-300 ${
-                  isActive 
-                    ? "bg-gradient-to-r from-primary/50 to-secondary/50 text-primary/90 font-medium" 
-                    : "text-primary/90 hover:bg-black/5"
+                aria-current={isActive ? "page" : undefined}
+                className={`relative block w-full text-left py-3 px-4 rounded-lg font-medium transition-colors cursor-pointer ${
+                  isActive
+                    ? "bg-primary text-tertiary"
+                    : "text-primary hover:bg-primary/5"
                 }`}
               >
                 <div className="flex items-center">
-                  {/* Icon based on menu item */}
-                  <span className="mr-3 text-primary/80 opacity-80">
+                  {isActive && <span aria-hidden="true" className="absolute left-0 top-2 bottom-2 w-1 rounded-r bg-secondary"></span>}
+                  <span className={`mr-3 w-5 text-center ${isActive ? "text-secondary" : "text-primary/80"}`}>
                     <FontAwesomeIcon icon={item.icon} />
                   </span>
                   {item.label}
-                  
-                  {/* Active indicator with pulse effect */}
-                  {isActive && (
-                    <span className="ml-auto w-1.5 h-1.5 bg-secondary/40 rounded-full animate-pulse"></span>
-                  )}
                 </div>
               </button>
             );
@@ -422,9 +405,10 @@ const Header = () => {
           <div className="language-switcher pt-2 pb-1">
             <button
               onClick={() => setMobileLanguageOpen(!mobileLanguageOpen)}
-              className="flex items-center w-full py-3 px-4 text-primary/90 hover:bg-black/5 rounded-md transition-colors border border-primary/20"
+              aria-expanded={mobileLanguageOpen}
+              className="flex items-center w-full py-3 px-4 text-primary font-medium hover:bg-primary/5 rounded-lg transition-colors border border-primary/20 cursor-pointer"
             >
-              <FontAwesomeIcon icon={faGlobe} className="mr-3 text-primary/80 opacity-80" />
+              <FontAwesomeIcon icon={faGlobe} className="mr-3 w-5 text-primary/80" />
               <span>{t("currentLanguage")}</span>
               <FontAwesomeIcon 
                 icon={faChevronDown} 
@@ -454,8 +438,8 @@ const Header = () => {
             <GradientButton 
               to="/register"
               className="w-full"
-              gradientFrom="from-primary/90"
-              gradientTo="to-secondary/90"
+              gradientFrom="from-secondary"
+              gradientTo="to-secondary"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t("joinNow")}

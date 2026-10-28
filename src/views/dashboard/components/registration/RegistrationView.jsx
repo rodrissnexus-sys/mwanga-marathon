@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileExport, faUsers, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { getRegistrationsPage, exportRegistrationsCsv } from '../../../../api/marathon/registration';
@@ -34,9 +34,15 @@ const RegistrationView = () => {
     return () => clearTimeout(timer);
   }, [searchInput]);
 
+  // only the latest request may update the list (an older, slower one could
+  // otherwise overwrite newer search results)
+  const latest = useRef(0);
+
   const load = useCallback(async () => {
+    const request = ++latest.current;
     setLoading(true);
     const result = await getRegistrationsPage({ page, pageSize: PAGE_SIZE, ...filters });
+    if (request !== latest.current) return;
     if (result.success) {
       setRows(result.data);
       setTotal(result.total);

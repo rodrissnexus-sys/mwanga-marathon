@@ -7,8 +7,37 @@ const SECRET = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 export const E2E_PREFIX = "e2e-";
 
-export async function admin(path: string, init: RequestInit = {}) {
-  const res = await fetch(`${URL}${path}`, {
+type Request = { method?: string; headers?: Record<string, string>; body?: string };
+
+/**
+ * HTTP request to Supabase. With E2E_USE_CURL=1 it goes through curl instead
+ * of Node's fetch (for networks where Node can't reach Supabase but curl can).
+ */
+export async function request(url: string, { method = "GET", headers = {}, body }: Request = {}) {
+  if (process.env.E2E_USE_CURL === "1") {
+    const { execFileSync } = await import("node:child_process");
+    const args = ["-s", "-m", "30", "-X", method, "-w", "\n%{http_code}", "--data-binary", "@-"];
+    for (const [name, value] of Object.entries(headers)) args.push("-H", `${name}: ${value}`);
+    let out = "";
+    for (let attempt = 1; ; attempt++) {
+      try {
+        out = execFileSync("curl", [...args, url], { input: body ?? "", encoding: "utf8" });
+        break;
+      } catch (error) {
+        if (attempt === 3) throw error; // network error (curl gives no HTTP status)
+      }
+    }
+    const split = out.lastIndexOf("\n");
+    const text = out.slice(0, split);
+    return { status: Number(out.slice(split + 1)), json: text ? JSON.parse(text) : null };
+  }
+  const res = await fetch(url, { method, headers, body });
+  const text = await res.text();
+  return { status: res.status, json: text ? JSON.parse(text) : null };
+}
+
+export async function admin(path: string, init: Request = {}) {
+  return request(`${URL}${path}`, {
     ...init,
     headers: {
       apikey: SECRET,
@@ -17,8 +46,6 @@ export async function admin(path: string, init: RequestInit = {}) {
       ...(init.headers ?? {}),
     },
   });
-  const text = await res.text();
-  return { status: res.status, json: text ? JSON.parse(text) : null };
 }
 
 export const accounts = {
