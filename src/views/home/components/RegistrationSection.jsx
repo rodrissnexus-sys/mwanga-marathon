@@ -242,16 +242,16 @@ const RegistrationSection = () => {
         <Field name="phoneNumber" label={tf("phoneNumber")} value={form.phoneNumber} onChange={onInput} error={errors.phoneNumber} type="tel" inputMode="tel" autoComplete="tel" placeholder="07XX XXX XXX" />
         <Field name="email" label={tf("email")} value={form.email} onChange={onInput} error={errors.email} type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" />
         <Field name="dateOfBirth" label={tf("dateOfBirth")} value={form.dateOfBirth} onChange={onInput} error={errors.dateOfBirth} type="date" max={EVENT.startsAt.slice(0, 10)} autoComplete="bday" />
-        <Choices
-          name="gender_id"
-          legend={tf("gender")}
-          value={form.gender_id}
-          onChange={set}
-          error={errors.gender_id}
-          columns="grid-cols-2"
-          options={genders.map((g) => ({ value: g.id, label: g.name }))}
-        />
       </div>
+      <Choices
+        name="gender_id"
+        legend={tf("gender")}
+        value={form.gender_id}
+        onChange={set}
+        error={errors.gender_id}
+        columns="grid-cols-2 sm:grid-cols-4"
+        options={genders.map((g) => ({ value: g.id, label: g.name }))}
+      />
       <Choices
         name="nationality"
         legend={tf("nationalityCategory")}
@@ -399,7 +399,7 @@ const RegistrationSection = () => {
 
         <div className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-start">
           {/* What you get */}
-          <aside className="text-tertiary">
+          <aside className="text-tertiary lg:sticky lg:top-32">
             <p className="inline-block px-3 py-1 rounded-full bg-secondary text-primary text-xs font-bold uppercase tracking-wider">
               {t("earlyBirdDiscounts")}
             </p>
