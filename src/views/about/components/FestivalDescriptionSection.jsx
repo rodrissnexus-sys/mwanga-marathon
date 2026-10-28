@@ -76,7 +76,7 @@ const FestivalDescriptionSection = () => {
         {/* Main description card with elegant design */}
         <motion.div 
           variants={itemVariants} 
-          className="relative z-10 bg-gradient-to-br from-tertiary to-tertiary/90 rounded-lg p-8 md:p-10 overflow-hidden"
+          className="relative z-10 bg-gradient-to-br from-tertiary to-tertiary/90 rounded-2xl px-4 py-6 md:p-10 overflow-hidden"
         >
           {/* Decorative elements */}
           <div className="absolute -top-16 -right-16 w-32 h-32 bg-secondary opacity-10 rounded-full transform rotate-45"></div>
@@ -97,19 +97,19 @@ const FestivalDescriptionSection = () => {
                   className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-secondary to-secondary/30"
                 ></motion.span>
               </h3>
-              <p className="text-lg text-text-primary/80 leading-relaxed mb-6">
+              <p className="text-base md:text-lg text-text-primary/80 leading-relaxed mb-6">
                 {t("intro1")}
               </p>
-              <p className="text-lg text-text-primary/80 leading-relaxed">
+              <p className="text-base md:text-lg text-text-primary/80 leading-relaxed">
                 {t("intro2")}
               </p>
             </motion.div>
 
             <motion.div 
               variants={itemVariants}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-8"
             >
-              <div className="bg-tertiary/50 backdrop-blur-sm p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 group">
+              <div className="bg-tertiary/50 backdrop-blur-sm p-5 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 group">
                 <h4 className="text-xl font-medium text-primary mb-3 group-hover:text-secondary transition-colors duration-300">{t("communityTitle")}</h4>
                 <p className="text-text-primary/70">
                   {t.rich("communityText", {
@@ -120,7 +120,7 @@ const FestivalDescriptionSection = () => {
                 <div className="w-12 h-0.5 bg-secondary mt-4 group-hover:w-full transition-all duration-500"></div>
               </div>
               
-              <div className="bg-tertiary/50 backdrop-blur-sm p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 group">
+              <div className="bg-tertiary/50 backdrop-blur-sm p-5 md:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 group">
                 <h4 className="text-xl font-medium text-primary mb-3 group-hover:text-secondary transition-colors duration-300">{t("invitationTitle")}</h4>
                 <p className="text-text-primary/70">
                   {t("invitationText")}
@@ -130,7 +130,7 @@ const FestivalDescriptionSection = () => {
             </motion.div>
 
             {/* Key points with elegant styling */}
-            <motion.div variants={itemVariants} className="bg-primary/5 backdrop-blur-sm p-6 rounded-lg">
+            <motion.div variants={itemVariants} className="bg-primary/5 backdrop-blur-sm p-4 md:p-6 rounded-xl">
               <h4 className="text-xl font-medium text-primary mb-4 flex items-center">
                 <span className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center mr-3">
                   <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -141,19 +141,17 @@ const FestivalDescriptionSection = () => {
               </h4>
               
               <ul className="space-y-4">
-                <li className="flex items-start">
-                  <span aria-hidden="true" className="text-primary mr-2">•</span>
+                <li className="border-l-4 border-secondary pl-3">
                   <div>
-                    <span className="font-medium text-lg text-primary">{t("regionalFocus")}</span>
-                    <p className="text-text-primary/70 ml-1">{t("regionalFocusText")}</p>
+                    <span className="block font-semibold text-base md:text-lg text-primary">{t("regionalFocus")}</span>
+                    <p className="mt-1 text-text-primary/75">{t("regionalFocusText")}</p>
                   </div>
                 </li>
                 
-                <li className="flex items-start">
-                  <span aria-hidden="true" className="text-primary mr-2">•</span>
+                <li className="border-l-4 border-secondary pl-3">
                   <div>
-                    <span className="font-medium text-lg text-primary">{t("organization")}</span>
-                    <p className="text-text-primary/70 ml-1">
+                    <span className="block font-semibold text-base md:text-lg text-primary">{t("organization")}</span>
+                    <p className="mt-1 text-text-primary/75">
                       {t.rich("organizationText", {
                         org: (chunks) => <b>{chunks}</b>,
                         link: (chunks) => <a className="text-primary underline hover:no-underline" href="https://kisangaratours.net" target="_blank" rel="noopener noreferrer">{chunks}</a>,
@@ -162,21 +160,19 @@ const FestivalDescriptionSection = () => {
                   </div>
                 </li>
                 
-                <li className="flex items-start">
-                  <span aria-hidden="true" className="text-primary mr-2">•</span>
+                <li className="border-l-4 border-secondary pl-3">
                   <div>
-                    <span className="font-medium text-lg text-primary">{t("purpose")}</span>
-                    <p className="text-text-primary/70 ml-1">
+                    <span className="block font-semibold text-base md:text-lg text-primary">{t("purpose")}</span>
+                    <p className="mt-1 text-text-primary/75">
                       {t("purposeText")}
                     </p>
                   </div>
                 </li>
                 
-                <li className="flex items-start">
-                  <span aria-hidden="true" className="text-primary mr-2">•</span>
+                <li className="border-l-4 border-secondary pl-3">
                   <div>
-                    <span className="font-medium text-lg text-primary">{t("distinction")}</span>
-                    <p className="text-text-primary/70 ml-1">{t("distinctionText")}</p>
+                    <span className="block font-semibold text-base md:text-lg text-primary">{t("distinction")}</span>
+                    <p className="mt-1 text-text-primary/75">{t("distinctionText")}</p>
                   </div>
                 </li>
               </ul>

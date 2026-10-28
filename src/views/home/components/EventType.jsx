@@ -47,7 +47,7 @@ const EventTypeSkeleton = () => {
       {[1, 2, 3, 4].map((item) => (
         <div key={item} className="animate-pulse">
           <div className="rounded-2xl bg-tertiary shadow-md border border-primary/10 p-8">
-            <div className="flex items-start justify-between mb-8">
+            <div className="flex items-start justify-between gap-3 mb-6 md:mb-8">
               <div className="flex-1">
                 <div className="flex items-center space-x-4 mb-3">
                   <div className="w-12 h-12 rounded-xl bg-primary/20"></div>
@@ -237,13 +237,13 @@ const EventTypes = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="relative p-8">
+                  <div className="relative p-5 md:p-8">
                     {/* Header */}
-                    <div className="flex items-start justify-between mb-8">
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-4 mb-3">
+                    <div className="flex items-start justify-between gap-3 mb-6 md:mb-8">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-4 mb-3">
                           <div className={`
-                            w-12 h-12 rounded-xl flex items-center justify-center
+                            w-12 h-12 shrink-0 rounded-xl flex items-center justify-center
                             bg-gradient-to-br ${event.color}
                             transform transition-transform duration-500
                             group-hover:scale-110 group-hover:rotate-6
@@ -255,10 +255,14 @@ const EventTypes = () => {
                             <p className="text-sm text-primary/75">{event.subtitle}</p>
                           </div>
                         </div>
-                        <p className="text-primary/75 leading-relaxed pr-6">{event.description}</p>
+                        <p className="text-primary/75 leading-relaxed md:pr-6">{event.description}</p>
                       </div>
-                      <button className={`
-                        w-8 h-8 rounded-full flex items-center justify-center
+                      <button
+                        type="button"
+                        aria-expanded={activeType === event.id}
+                        aria-label={event.title}
+                        className={`
+                        w-10 h-10 shrink-0 rounded-full flex items-center justify-center
                         transition-all duration-500 border border-primary/20
                         ${activeType === event.id ? 'bg-primary text-tertiary rotate-90' : 'text-primary/75'}
                         group-hover:border-primary/20
@@ -269,32 +273,32 @@ const EventTypes = () => {
 
                     {/* Features */}
                     <div className={`
-                      grid grid-cols-3 gap-4 transition-all duration-500 overflow-hidden
-                      ${activeType === event.id ? 'opacity-100 max-h-96' : 'opacity-0 max-h-0'}
+                      transition-all duration-500 overflow-hidden
+                      ${activeType === event.id ? 'opacity-100 max-h-[48rem]' : 'opacity-0 max-h-0'}
                     `}>
+                      {/* Highlight tag, in the flow so it never covers the title */}
+                      {event.highlight && (
+                        <p className="inline-flex items-center px-4 py-1.5 mb-4 rounded-full text-sm font-bold bg-secondary text-primary">
+                          {event.highlight}
+                        </p>
+                      )}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {event.features.map((feature, idx) => (
                         <div 
                           key={idx}
-                          className="relative group/feature p-4 rounded-xl bg-primary/[0.03] hover:bg-primary/10 transition-colors duration-300"
+                          className="relative group/feature p-4 rounded-xl bg-primary/[0.04] hover:bg-primary/10 transition-colors duration-300"
                         >
-                          <div className="flex flex-col items-center text-center space-y-2">
-                            <FontAwesomeIcon icon={feature.icon} className="text-lg text-primary" aria-hidden="true" />
-                            <span className="text-sm text-primary/75 group-hover/feature:text-primary transition-colors duration-300">
+                          <div className="flex items-center gap-3">
+                            <span className="w-9 h-9 shrink-0 rounded-lg bg-primary text-secondary flex items-center justify-center">
+                              <FontAwesomeIcon icon={feature.icon} className="text-sm" aria-hidden="true" />
+                            </span>
+                            <span className="text-sm font-medium text-primary/85 group-hover/feature:text-primary transition-colors duration-300">
                               {feature.text}
                             </span>
                           </div>
                         </div>
                       ))}
-                    </div>
-
-                    {/* Highlight Tag */}
-                    <div className={`
-                      absolute top-4 right-4 px-4 py-1.5 rounded-full text-xs font-medium
-                      transition-all duration-500 bg-gradient-to-r ${event.color}
-                      text-tertiary transform
-                      ${activeType === event.id ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}
-                    `}>
-                      {event.highlight}
+                      </div>
                     </div>
                   </div>
 
