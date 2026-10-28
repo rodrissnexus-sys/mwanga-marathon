@@ -62,7 +62,7 @@ const Footer = async () => {
                   { name: t("links.register"), path: "/register" },
                   { name: t("links.contact"), path: "/contact" },
                   { name: t("links.sponsors"), path: "/sponsors" },
-                  { name: t("links.faqs"), path: "/faqs" }
+                  { name: t("links.faqs"), path: "/race-categories#faq" }
                 ].map(
                   (link) => (
                     <li key={link.name} className="flex items-center group">

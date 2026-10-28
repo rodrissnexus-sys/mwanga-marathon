@@ -78,10 +78,11 @@ const GeneralContactForm = ({ onClose }) => {
           message: ''
         });
         setIsSubmitting(false);
-        // Close modal after 2 seconds
+        // In a modal: close after 2 seconds. On the contact page: show the form again.
         setTimeout(() => {
-          onClose();
-        }, 2000);
+          if (onClose) onClose();
+          else setSubmitSuccess(false);
+        }, onClose ? 2000 : 5000);
       }, 1000);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -184,13 +185,15 @@ const GeneralContactForm = ({ onClose }) => {
       </div>
       
       <div className="flex justify-end space-x-4">
-        <button
-          type="button"
-          onClick={onClose}
-          className="px-6 border border-primary/30 text-primary/90 rounded-md hover:bg-primary/10 transition-colors cursor-pointer"
-        >
-          {t("cancel")}
-        </button>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-6 border border-primary/30 text-primary/90 rounded-md hover:bg-primary/10 transition-colors cursor-pointer"
+          >
+            {t("cancel")}
+          </button>
+        )}
         <PrimaryButton type="submit" disabled={isSubmitting}>
           {isSubmitting ? (
             <>

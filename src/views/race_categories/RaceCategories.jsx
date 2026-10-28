@@ -44,8 +44,8 @@ const RaceCategories = () => {
               <CategoryCards />
             </div>
 
-            {/* FAQ Section */}
-            <div className="mb-20">
+            {/* FAQ Section (linked from the footer as /race-categories#faq) */}
+            <div className="mb-20" id="faq">
               <SectionHeader firstWord={t("faqFirst")} secondWord={t("faqSecond")} />
               <CategoryFAQ />
             </div>

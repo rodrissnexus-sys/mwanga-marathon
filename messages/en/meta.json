@@ -12,5 +12,6 @@
   "events": "Events",
   "login": "Login",
   "dashboard": "Dashboard",
-  "notFound": "Page Not Found"
+  "notFound": "Page Not Found",
+  "contact": "Contact"
 }
