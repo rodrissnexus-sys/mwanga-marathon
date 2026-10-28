@@ -126,14 +126,73 @@ export async function registerParticipant(input: RegistrationInput, locale: Loca
   return { success: true, data: registration };
 }
 
+const confirmSchema = z.object({
+  method: z.enum(["mobile_money", "bank_transfer", "cash", "other"]),
+  reference: z.string().trim().min(3, "Enter the transaction or bank reference.").max(100),
+  amount: z.coerce.number().positive("Enter the amount received.").max(100_000_000),
+  currency: z.enum(["TZS", "USD"]),
+  notes: z.string().trim().max(1000).optional().default(""),
+  // set after staff have seen the "reference already used" warning
+  allowDuplicate: z.boolean().optional().default(false),
+});
+
+const reasonSchema = z.string().trim().min(3, "Please give a short reason.").max(1000);
+
+export type ConfirmPaymentInput = z.input<typeof confirmSchema>;
+
+type PaymentResult = {
+  success: boolean;
+  data?: Record<string, unknown>;
+  error?: string;
+  errors?: Record<string, string[]>;
+  duplicates?: { id: number; registration_id: string; name: string }[];
+};
+
+function paymentFailure(error: unknown, fallback: string): PaymentResult {
+  if (error instanceof AuthError) return { success: false, error: error.message };
+  // raised by the database guard (a moderator changing a confirmed payment)
+  if ((error as { code?: string })?.code === "42501") {
+    return { success: false, error: "Only an admin can change a confirmed payment." };
+  }
+  console.error(`[payments] ${fallback}`, error);
+  return { success: false, error: fallback };
+}
+
 /**
- * Dashboard: mark a registration as paid (admins and moderators) and email
- * the participant.
+ * Dashboard: mark a registration as paid (admins and moderators) after
+ * matching it with the mobile-money / bank record, and email the participant.
+ * Warns (instead of saving) when the reference was already used for another
+ * registration, until staff confirm it's intended (e.g. a parent paying for
+ * two children in one transfer).
  */
-export async function confirmPayment(registrationId: number, notes = "") {
+export async function confirmPayment(registrationId: number, input: ConfirmPaymentInput): Promise<PaymentResult> {
   try {
     const { supabase, profile } = await requireStaff();
-    const parsedNotes = z.string().max(1000).parse(notes ?? "");
+    const parsed = confirmSchema.safeParse(input);
+    if (!parsed.success) {
+      const errors: Record<string, string[]> = {};
+      for (const issue of parsed.error.issues) (errors[String(issue.path[0] ?? "form")] ??= []).push(issue.message);
+      return { success: false, error: "Please check the payment details.", errors };
+    }
+    const { method, reference, amount, currency, notes, allowDuplicate } = parsed.data;
+
+    if (!allowDuplicate) {
+      const { data: used, error: usedError } = await supabase
+        .from("registrations")
+        .select("id, registration_id, first_name, last_name")
+        .ilike("payment_reference", reference.replace(/[\\%_]/g, (c) => `\\${c}`))
+        .neq("id", registrationId)
+        .is("deleted_at", null)
+        .limit(5);
+      if (usedError) throw usedError;
+      if (used.length) {
+        return {
+          success: false,
+          error: "This reference was already used for another registration.",
+          duplicates: used.map((r) => ({ id: r.id, registration_id: r.registration_id, name: `${r.first_name} ${r.last_name}` })),
+        };
+      }
+    }
 
     const { data, error } = await supabase
       .from("registrations")
@@ -142,11 +201,19 @@ export async function confirmPayment(registrationId: number, notes = "") {
         payment_confirmed_at: new Date().toISOString(),
         payment_confirmed_by: profile.id,
         payment_confirmed_by_name: profile.name,
-        payment_notes: parsedNotes || null,
+        payment_method: method,
+        payment_reference: reference,
+        payment_amount: amount,
+        payment_currency: currency,
+        payment_notes: notes || null,
       })
       .eq("id", registrationId)
+      .eq("payment_status", "pending") // two staff can't confirm the same payment twice
       .select(RELATIONS)
       .single();
+    if (error?.code === "PGRST116") {
+      return { success: false, error: "This payment is no longer pending — refresh to see who handled it." };
+    }
     if (error || !data) throw error ?? new Error("Registration not found");
 
     const locale = data.locale as Locale;
@@ -168,10 +235,77 @@ export async function confirmPayment(registrationId: number, notes = "") {
       await sendEmail({ to: data.email, ...email });
     });
 
-    return { success: true, data, message: "Payment confirmed successfully" };
+    return { success: true, data };
   } catch (error) {
-    const message = error instanceof AuthError ? error.message : "Failed to confirm payment";
-    if (!(error instanceof AuthError)) console.error("[confirmPayment]", error);
-    return { success: false, error: message };
+    return paymentFailure(error, "Failed to confirm payment");
+  }
+}
+
+/** Dashboard: no matching payment could be found (admins and moderators). */
+export async function markPaymentFailed(registrationId: number, reason: string): Promise<PaymentResult> {
+  try {
+    const { supabase } = await requireStaff();
+    const parsed = reasonSchema.safeParse(reason);
+    if (!parsed.success) return { success: false, error: parsed.error.issues[0].message };
+
+    const { data, error } = await supabase
+      .from("registrations")
+      .update({ payment_status: "failed", payment_notes: parsed.data })
+      .eq("id", registrationId)
+      .eq("payment_status", "pending")
+      .select(RELATIONS)
+      .single();
+    if (error?.code === "PGRST116") {
+      return { success: false, error: "This payment is no longer pending — refresh to see who handled it." };
+    }
+    if (error || !data) throw error ?? new Error("Registration not found");
+    return { success: true, data };
+  } catch (error) {
+    return paymentFailure(error, "Failed to update payment");
+  }
+}
+
+/**
+ * Dashboard: put a payment back to pending — a mistaken confirmation or a
+ * late payment after "failed". Undoing a confirmation is admin-only (also
+ * enforced by the database); the old details stay in the payment log.
+ */
+export async function reopenPayment(registrationId: number, reason: string): Promise<PaymentResult> {
+  try {
+    const { supabase, profile } = await requireStaff();
+    const parsed = reasonSchema.safeParse(reason);
+    if (!parsed.success) return { success: false, error: parsed.error.issues[0].message };
+
+    const { data: current, error: readError } = await supabase
+      .from("registrations")
+      .select("payment_status")
+      .eq("id", registrationId)
+      .single();
+    if (readError) throw readError;
+    if (current.payment_status === "confirmed" && profile.role !== "admin") {
+      return { success: false, error: "Only an admin can change a confirmed payment." };
+    }
+
+    const { data, error } = await supabase
+      .from("registrations")
+      .update({
+        payment_status: "pending",
+        payment_confirmed_at: null,
+        payment_confirmed_by: null,
+        payment_confirmed_by_name: null,
+        payment_method: null,
+        payment_reference: null,
+        payment_amount: null,
+        payment_currency: null,
+        payment_notes: parsed.data,
+      })
+      .eq("id", registrationId)
+      .eq("payment_status", current.payment_status)
+      .select(RELATIONS)
+      .single();
+    if (error || !data) throw error ?? new Error("Registration not found");
+    return { success: true, data };
+  } catch (error) {
+    return paymentFailure(error, "Failed to reopen payment");
   }
 }

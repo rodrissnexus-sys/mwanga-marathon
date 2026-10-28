@@ -14,9 +14,7 @@ const RELATIONS = `*,
 
 const PAGE = 1000; // Supabase returns at most 1000 rows per request
 
-// Localized rows, plus the old column name the dashboard still reads.
-const shape = (rows) =>
-    localize(rows).map((row) => ({ ...row, payment_confirmation_by: row.payment_confirmed_by_name }));
+const shape = (rows) => localize(rows);
 
 /**
  * Register a participant for the marathon (public form)
@@ -89,18 +87,18 @@ export const getAllRegistrations = async (filters) => {
 
 /**
  * One page of registrations for the dashboard table.
- * @param {Object} options - { page (1-based), pageSize, orderBy, search, eventId, paymentStatus, locale }
+ * @param {Object} options - { page (1-based), pageSize, orderBy, ascending, search, eventId, paymentStatus, locale }
  * @returns {Promise<Object>} { success, data, total }
  */
-export const getRegistrationsPage = async ({ page = 1, pageSize = 25, orderBy = 'created_at', ...filters } = {}) => {
+export const getRegistrationsPage = async ({ page = 1, pageSize = 25, orderBy = 'created_at', ascending = false, ...filters } = {}) => {
     try {
         const from = (page - 1) * pageSize;
         const { data, error, count } = await applyFilters(
             createClient().from('registrations').select(RELATIONS, { count: 'exact' }),
             filters,
         )
-            .order(orderBy, { ascending: false })
-            .order('id', { ascending: false })
+            .order(orderBy, { ascending })
+            .order('id', { ascending })
             .range(from, from + pageSize - 1);
         if (error) throw error;
         return { success: true, data: shape(data), total: count ?? 0 };
@@ -109,29 +107,76 @@ export const getRegistrationsPage = async ({ page = 1, pageSize = 25, orderBy = 
     }
 };
 
+const shapeResult = (result) => (result.success ? { ...result, data: shape([result.data])[0] } : result);
+
 /**
- * Confirm payment for a registration (admins and moderators)
+ * Confirm a payment (admins and moderators).
+ * @param {Object} details - { method, reference, amount, currency, notes, allowDuplicate }
  */
-export const confirmPayment = async (registrationId, notes = '') => {
+export const confirmPayment = async (registrationId, details) => {
     try {
-        const result = await server.confirmPayment(registrationId, notes);
-        return result.success ? { ...result, data: shape([result.data])[0] } : result;
+        return shapeResult(await server.confirmPayment(registrationId, details));
     } catch (error) {
         return failure(error, 'Failed to confirm payment');
     }
 };
 
-/**
- * Registrations with a confirmed payment, newest confirmation first
- */
-export const getConfirmedPayments = async (filters = {}) => {
+/** No matching payment was found. */
+export const markPaymentFailed = async (registrationId, reason) => {
     try {
-        return {
-            success: true,
-            data: await fetchAll({ ...filters, paymentStatus: 'confirmed' }, 'payment_confirmed_at'),
-        };
+        return shapeResult(await server.markPaymentFailed(registrationId, reason));
     } catch (error) {
-        return failure(error, 'Failed to fetch confirmed payments');
+        return failure(error, 'Failed to update payment');
+    }
+};
+
+/** Back to pending (undoing a confirmation is admin-only). */
+export const reopenPayment = async (registrationId, reason) => {
+    try {
+        return shapeResult(await server.reopenPayment(registrationId, reason));
+    } catch (error) {
+        return failure(error, 'Failed to reopen payment');
+    }
+};
+
+/** Number of registrations per payment status for the current search/filters. */
+export const countByPaymentStatus = async (filters = {}) => {
+    try {
+        const supabase = createClient();
+        const statuses = ['pending', 'confirmed', 'failed'];
+        const results = await Promise.all(statuses.map((paymentStatus) =>
+            applyFilters(supabase.from('registrations').select('id', { count: 'exact', head: true }), { ...filters, paymentStatus })));
+        const failed = results.find((r) => r.error);
+        if (failed) throw failed.error;
+        return { success: true, data: Object.fromEntries(statuses.map((s, i) => [s, results[i].count ?? 0])) };
+    } catch (error) {
+        return failure(error, 'Failed to count payments');
+    }
+};
+
+/** Every payment status change for one registration, newest first. */
+export const getPaymentHistory = async (registrationId) => {
+    try {
+        const { data, error } = await createClient()
+            .from('payment_events')
+            .select('*')
+            .eq('registration_id', registrationId)
+            .order('created_at', { ascending: false });
+        if (error) throw error;
+        return { success: true, data };
+    } catch (error) {
+        return failure(error, 'Failed to load payment history');
+    }
+};
+
+/** One registration with everything the receipt needs. */
+export const getRegistration = async (id) => {
+    try {
+        const { data, error } = await createClient().from('registrations').select(RELATIONS).eq('id', id).single();
+        if (error) throw error;
+        return { success: true, data: shape([data])[0] };
+    } catch (error) {
+        return failure(error, 'Failed to load registration');
     }
 };
 
@@ -160,6 +205,10 @@ const CSV_COLUMNS = [
     ['Payment status', (r) => r.payment_status],
     ['Payment confirmed at', (r) => r.payment_confirmed_at],
     ['Confirmed by', (r) => r.payment_confirmed_by_name],
+    ['Payment method', (r) => r.payment_method],
+    ['Payment reference', (r) => r.payment_reference],
+    ['Amount received', (r) => r.payment_amount],
+    ['Currency', (r) => r.payment_currency],
     ['Payment notes', (r) => r.payment_notes],
 ];
 

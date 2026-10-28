@@ -1,10 +1,6 @@
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import UserManagement from "@/views/dashboard/components/users/UserManagement";
+import { Navigate } from "@/lib/router";
 
+// Old address of the staff page.
 export default function Page() {
-  return (
-    <ProtectedRoute requiredRole="admin">
-      <UserManagement />
-    </ProtectedRoute>
-  );
+  return <Navigate to="/dashboard/users" replace />;
 }

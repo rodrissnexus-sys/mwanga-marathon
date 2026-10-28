@@ -47,14 +47,14 @@ isOneToOne: false
                   ]
                 },"contact_messages": {
                   Row: {
-                    "company": string | null,"created_at": string,"email": string,"handled_at": string | null,"handled_by": string | null,"id": number,"kind": Database["public"]['Enums']["message_kind"],"locale": Database["public"]['Enums']["app_locale"],"message": string,"name": string,"phone": string | null,"sponsorship_tier": string | null,"subject": string | null,"updated_at": string,"website": string | null
+                    "company": string | null,"created_at": string,"email": string,"handled_at": string | null,"handled_by": string | null,"handled_by_name": string | null,"id": number,"kind": Database["public"]['Enums']["message_kind"],"locale": Database["public"]['Enums']["app_locale"],"message": string,"name": string,"phone": string | null,"sponsorship_tier": string | null,"subject": string | null,"updated_at": string,"website": string | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "company"?: string | null,"created_at"?: string,"email": string,"handled_at"?: string | null,"handled_by"?: string | null,"id"?: number,"kind": Database["public"]['Enums']["message_kind"],"locale"?: Database["public"]['Enums']["app_locale"],"message": string,"name": string,"phone"?: string | null,"sponsorship_tier"?: string | null,"subject"?: string | null,"updated_at"?: string,"website"?: string | null
+                    "company"?: string | null,"created_at"?: string,"email": string,"handled_at"?: string | null,"handled_by"?: string | null,"handled_by_name"?: string | null,"id"?: number,"kind": Database["public"]['Enums']["message_kind"],"locale"?: Database["public"]['Enums']["app_locale"],"message": string,"name": string,"phone"?: string | null,"sponsorship_tier"?: string | null,"subject"?: string | null,"updated_at"?: string,"website"?: string | null
                   }
                   Update: {
-                    "company"?: string | null,"created_at"?: string,"email"?: string,"handled_at"?: string | null,"handled_by"?: string | null,"id"?: number,"kind"?: Database["public"]['Enums']["message_kind"],"locale"?: Database["public"]['Enums']["app_locale"],"message"?: string,"name"?: string,"phone"?: string | null,"sponsorship_tier"?: string | null,"subject"?: string | null,"updated_at"?: string,"website"?: string | null
+                    "company"?: string | null,"created_at"?: string,"email"?: string,"handled_at"?: string | null,"handled_by"?: string | null,"handled_by_name"?: string | null,"id"?: number,"kind"?: Database["public"]['Enums']["message_kind"],"locale"?: Database["public"]['Enums']["app_locale"],"message"?: string,"name"?: string,"phone"?: string | null,"sponsorship_tier"?: string | null,"subject"?: string | null,"updated_at"?: string,"website"?: string | null
                   }
                   Relationships: [
                     {
@@ -155,6 +155,32 @@ isOneToOne: false
                   Relationships: [
                     
                   ]
+                },"payment_events": {
+                  Row: {
+                    "actor_id": string | null,"actor_name": string | null,"amount": number | null,"created_at": string,"currency": string | null,"id": number,"method": Database["public"]['Enums']["payment_method"] | null,"notes": string | null,"previous_status": Database["public"]['Enums']["payment_status"] | null,"reference": string | null,"registration_id": number,"status": Database["public"]['Enums']["payment_status"]
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "actor_id"?: string | null,"actor_name"?: string | null,"amount"?: number | null,"created_at"?: string,"currency"?: string | null,"id"?: number,"method"?: Database["public"]['Enums']["payment_method"] | null,"notes"?: string | null,"previous_status"?: Database["public"]['Enums']["payment_status"] | null,"reference"?: string | null,"registration_id": number,"status": Database["public"]['Enums']["payment_status"]
+                  }
+                  Update: {
+                    "actor_id"?: string | null,"actor_name"?: string | null,"amount"?: number | null,"created_at"?: string,"currency"?: string | null,"id"?: number,"method"?: Database["public"]['Enums']["payment_method"] | null,"notes"?: string | null,"previous_status"?: Database["public"]['Enums']["payment_status"] | null,"reference"?: string | null,"registration_id"?: number,"status"?: Database["public"]['Enums']["payment_status"]
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "payment_events_actor_id_fkey"
+      columns: ["actor_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "payment_events_registration_id_fkey"
+      columns: ["registration_id"]
+isOneToOne: false
+      referencedRelation: "registrations"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"profiles": {
                   Row: {
                     "created_at": string,"email": string,"id": string,"name": string,"role": Database["public"]['Enums']["app_role"],"updated_at": string
@@ -185,14 +211,14 @@ isOneToOne: false
                   ]
                 },"registrations": {
                   Row: {
-                    "collection_venue_id": number,"country_id": number,"created_at": string,"date_of_birth": string,"deleted_at": string | null,"email": string,"emergency_contact_name": string,"emergency_contact_number": string,"event_id": number,"first_name": string,"gender_id": number,"id": number,"id_number": string | null,"kids_shirt_size_id": number | null,"last_name": string,"locale": Database["public"]['Enums']["app_locale"],"nationality_category": string | null,"nationality_id": number,"passport_number": string | null,"payment_confirmed_at": string | null,"payment_confirmed_by": string | null,"payment_confirmed_by_name": string | null,"payment_notes": string | null,"payment_status": Database["public"]['Enums']["payment_status"],"phone_number": string,"postal_code": string | null,"registration_id": string,"search_text": string | null,"shirt_size_id": number,"updated_at": string,"voucher_code": string | null
+                    "collection_venue_id": number,"country_id": number,"created_at": string,"date_of_birth": string,"deleted_at": string | null,"email": string,"emergency_contact_name": string,"emergency_contact_number": string,"event_id": number,"first_name": string,"gender_id": number,"id": number,"id_number": string | null,"kids_shirt_size_id": number | null,"last_name": string,"locale": Database["public"]['Enums']["app_locale"],"nationality_category": string | null,"nationality_id": number,"passport_number": string | null,"payment_amount": number | null,"payment_confirmed_at": string | null,"payment_confirmed_by": string | null,"payment_confirmed_by_name": string | null,"payment_currency": string | null,"payment_method": Database["public"]['Enums']["payment_method"] | null,"payment_notes": string | null,"payment_reference": string | null,"payment_status": Database["public"]['Enums']["payment_status"],"phone_number": string,"postal_code": string | null,"registration_id": string,"search_text": string | null,"shirt_size_id": number,"updated_at": string,"voucher_code": string | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "collection_venue_id": number,"country_id": number,"created_at"?: string,"date_of_birth": string,"deleted_at"?: string | null,"email": string,"emergency_contact_name": string,"emergency_contact_number": string,"event_id": number,"first_name": string,"gender_id": number,"id"?: number,"id_number"?: string | null,"kids_shirt_size_id"?: number | null,"last_name": string,"locale"?: Database["public"]['Enums']["app_locale"],"nationality_category"?: string | null,"nationality_id": number,"passport_number"?: string | null,"payment_confirmed_at"?: string | null,"payment_confirmed_by"?: string | null,"payment_confirmed_by_name"?: string | null,"payment_notes"?: string | null,"payment_status"?: Database["public"]['Enums']["payment_status"],"phone_number": string,"postal_code"?: string | null,"registration_id"?: string,"search_text"?: never,"shirt_size_id": number,"updated_at"?: string,"voucher_code"?: string | null
+                    "collection_venue_id": number,"country_id": number,"created_at"?: string,"date_of_birth": string,"deleted_at"?: string | null,"email": string,"emergency_contact_name": string,"emergency_contact_number": string,"event_id": number,"first_name": string,"gender_id": number,"id"?: number,"id_number"?: string | null,"kids_shirt_size_id"?: number | null,"last_name": string,"locale"?: Database["public"]['Enums']["app_locale"],"nationality_category"?: string | null,"nationality_id": number,"passport_number"?: string | null,"payment_amount"?: number | null,"payment_confirmed_at"?: string | null,"payment_confirmed_by"?: string | null,"payment_confirmed_by_name"?: string | null,"payment_currency"?: string | null,"payment_method"?: Database["public"]['Enums']["payment_method"] | null,"payment_notes"?: string | null,"payment_reference"?: string | null,"payment_status"?: Database["public"]['Enums']["payment_status"],"phone_number": string,"postal_code"?: string | null,"registration_id"?: string,"search_text"?: never,"shirt_size_id": number,"updated_at"?: string,"voucher_code"?: string | null
                   }
                   Update: {
-                    "collection_venue_id"?: number,"country_id"?: number,"created_at"?: string,"date_of_birth"?: string,"deleted_at"?: string | null,"email"?: string,"emergency_contact_name"?: string,"emergency_contact_number"?: string,"event_id"?: number,"first_name"?: string,"gender_id"?: number,"id"?: number,"id_number"?: string | null,"kids_shirt_size_id"?: number | null,"last_name"?: string,"locale"?: Database["public"]['Enums']["app_locale"],"nationality_category"?: string | null,"nationality_id"?: number,"passport_number"?: string | null,"payment_confirmed_at"?: string | null,"payment_confirmed_by"?: string | null,"payment_confirmed_by_name"?: string | null,"payment_notes"?: string | null,"payment_status"?: Database["public"]['Enums']["payment_status"],"phone_number"?: string,"postal_code"?: string | null,"registration_id"?: string,"search_text"?: never,"shirt_size_id"?: number,"updated_at"?: string,"voucher_code"?: string | null
+                    "collection_venue_id"?: number,"country_id"?: number,"created_at"?: string,"date_of_birth"?: string,"deleted_at"?: string | null,"email"?: string,"emergency_contact_name"?: string,"emergency_contact_number"?: string,"event_id"?: number,"first_name"?: string,"gender_id"?: number,"id"?: number,"id_number"?: string | null,"kids_shirt_size_id"?: number | null,"last_name"?: string,"locale"?: Database["public"]['Enums']["app_locale"],"nationality_category"?: string | null,"nationality_id"?: number,"passport_number"?: string | null,"payment_amount"?: number | null,"payment_confirmed_at"?: string | null,"payment_confirmed_by"?: string | null,"payment_confirmed_by_name"?: string | null,"payment_currency"?: string | null,"payment_method"?: Database["public"]['Enums']["payment_method"] | null,"payment_notes"?: string | null,"payment_reference"?: string | null,"payment_status"?: Database["public"]['Enums']["payment_status"],"phone_number"?: string,"postal_code"?: string | null,"registration_id"?: string,"search_text"?: never,"shirt_size_id"?: number,"updated_at"?: string,"voucher_code"?: string | null
                   }
                   Relationships: [
                     {
@@ -304,7 +330,7 @@ isOneToOne: false
                            }
           }
           Enums: {
-            "app_locale": "en"|"sw","app_role": "admin"|"moderator","message_kind": "contact"|"partnership","payment_status": "pending"|"confirmed"|"failed"
+            "app_locale": "en"|"sw","app_role": "admin"|"moderator","message_kind": "contact"|"partnership","payment_method": "mobile_money"|"bank_transfer"|"cash"|"other","payment_status": "pending"|"confirmed"|"failed"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -420,7 +446,7 @@ export type CompositeTypes<
 export const Constants = {
   "public": {
           Enums: {
-            "app_locale": ["en", "sw"],"app_role": ["admin", "moderator"],"message_kind": ["contact", "partnership"],"payment_status": ["pending", "confirmed", "failed"]
+            "app_locale": ["en", "sw"],"app_role": ["admin", "moderator"],"message_kind": ["contact", "partnership"],"payment_method": ["mobile_money", "bank_transfer", "cash", "other"],"payment_status": ["pending", "confirmed", "failed"]
           }
         }
 } as const

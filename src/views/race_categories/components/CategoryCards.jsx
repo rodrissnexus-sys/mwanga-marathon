@@ -12,7 +12,7 @@ const THEMES = [
   { card: 'bg-primary', text: 'text-tertiary', muted: 'text-tertiary/75', panel: 'bg-tertiary/10', button: 'bg-secondary text-primary hover:bg-secondary/90' },
   { card: 'bg-secondary', text: 'text-primary', muted: 'text-primary/75', panel: 'bg-primary/10', button: 'bg-primary text-tertiary hover:bg-primary/90' },
   { card: 'bg-tertiary', text: 'text-primary', muted: 'text-primary/75', panel: 'bg-primary/5', button: 'bg-secondary text-primary hover:bg-secondary/90' },
-  { card: 'bg-primary/85', text: 'text-tertiary', muted: 'text-tertiary/75', panel: 'bg-tertiary/10', button: 'bg-secondary text-primary hover:bg-secondary/90' },
+  { card: 'bg-primary', text: 'text-tertiary', muted: 'text-tertiary/75', panel: 'bg-tertiary/10', button: 'bg-secondary text-primary hover:bg-secondary/90' },
 ];
 
 const formatMoney = (currency, amount) => `${currency} ${Number(amount).toLocaleString('en-US')}`;

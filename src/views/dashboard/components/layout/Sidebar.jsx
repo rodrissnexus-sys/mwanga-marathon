@@ -1,129 +1,135 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from '@/lib/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faChartBar,
-  faUsers,
+  faChartPie,
   faClipboardList,
-  faCalendarAlt,
   faCreditCard,
-  faCog,
-  faBars,
+  faEnvelope,
+  faCalendarAlt,
   faFlagCheckered,
-  faUserCog
+  faUserShield,
+  faArrowUpRightFromSquare,
+  faXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../../../contexts/AuthContext';
+import { countUnhandledMessages } from '../../../../api/messages';
 
-const Sidebar = ({ collapsed, toggleSidebar }) => {
-  const { theme } = useTheme();
-  const { user } = useAuth();
-  const location = useLocation();
-  const currentPath = location.pathname;
+// Moderators work with registrations, payments and messages. Site content
+// and staff accounts can only be changed by admins (enforced by the database
+// too), so those pages are only listed for admins.
+const SECTIONS = [
+  {
+    items: [
+      { icon: faChartPie, label: 'Overview', path: '/dashboard' },
+      { icon: faClipboardList, label: 'Registrations', path: '/dashboard/registration' },
+      { icon: faCreditCard, label: 'Payments', path: '/dashboard/payments' },
+      { icon: faEnvelope, label: 'Messages', path: '/dashboard/messages', badge: 'messages' },
+    ],
+  },
+  {
+    title: 'Website content',
+    adminOnly: true,
+    items: [
+      { icon: faCalendarAlt, label: 'Events & schedule', path: '/dashboard/events' },
+      { icon: faFlagCheckered, label: 'Marathon banners', path: '/dashboard/marathon-banners' },
+    ],
+  },
+  {
+    title: 'Admin',
+    adminOnly: true,
+    items: [{ icon: faUserShield, label: 'Staff accounts', path: '/dashboard/users' }],
+  },
+];
 
-  const menuItems = [
-    { icon: faChartBar, label: 'Dashboard', path: '/dashboard' },
-    { icon: faClipboardList, label: 'Registration', path: '/dashboard/registration' },
-    { icon: faUsers, label: 'Users', path: '/dashboard/users' },
-    { icon: faCalendarAlt, label: 'Events', path: '/dashboard/events' },
-    { icon: faCreditCard, label: 'Payments', path: '/dashboard/payments' },
-    // Add Marathon Banners to the main menu
-    { icon: faFlagCheckered, label: 'Marathon Banners', path: '/dashboard/marathon-banners/' },
-    { icon: faCog, label: 'Settings', path: '/dashboard/settings' },
-  ];
+const Sidebar = ({ open, onClose }) => {
+  const { currentUser } = useAuth();
+  const { pathname } = useLocation();
+  const isAdmin = currentUser?.role === 'admin';
+  const [unhandled, setUnhandled] = useState(0);
 
-  // Admin-only menu items
-  const adminMenuItems = [
-    { icon: faUserCog, label: 'User Management', path: '/dashboard/user-management' },
-  ];
-
-  const isActive = (path) => {
-    if (path === '/dashboard') {
-      return currentPath === '/dashboard' || currentPath === '/dashboard/';
-    }
-    return currentPath.startsWith(path);
-  };
-
-  // Close sidebar when clicking outside on mobile
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      // Only apply this behavior on mobile screens
-      if (window.innerWidth < 1024 && !collapsed) {
-        // Check if the click is outside the sidebar
-        const sidebar = document.getElementById('sidebar');
-        if (sidebar && !sidebar.contains(event.target)) {
-          toggleSidebar();
-        }
-      }
-    };
+    countUnhandledMessages().then(setUnhandled).catch(() => {});
+  }, [pathname]);
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [collapsed, toggleSidebar]);
+  // close the phone menu after navigating
+  useEffect(() => {
+    onClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  const isActive = (path) =>
+    path === '/dashboard' ? pathname === '/dashboard' : pathname.startsWith(path);
 
   return (
-    <div
-      id="sidebar"
-      className={`fixed left-0 top-0 h-screen transition-all duration-300 ${theme === 'dark' ? 'bg-primary text-tertiary' : 'bg-tertiary text-primary'} ${collapsed ? 'w-16' : 'w-64'} border-r ${theme === 'dark' ? 'border-secondary/20' : 'border-gray-200'} z-20 shadow-lg`}
-    >
-      <div className="p-4 flex items-center justify-between">
-        {!collapsed && (
-          <h1 className={`text-xl font-bold ${theme === 'dark' ? 'text-secondary' : 'text-primary'}`}>MWAFEM</h1>
-        )}
-        <button
-          onClick={toggleSidebar}
-          className={`p-2 rounded-md ${theme === 'dark' ? 'hover:bg-primary/50' : 'hover:bg-gray-100'}`}
-        >
-          <FontAwesomeIcon icon={faBars} />
-        </button>
-      </div>
+    <>
+      {open && <div className="fixed inset-0 z-30 bg-primary/50 lg:hidden" onClick={onClose} aria-hidden="true" />}
+      <aside
+        id="dashboard-sidebar"
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-primary text-tertiary flex flex-col transition-transform duration-200 print:hidden ${open ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
+      >
+        <div className="flex items-center justify-between gap-3 px-5 h-16 border-b border-tertiary/10">
+          <Link to="/dashboard" className="flex items-center gap-3">
+            <img src="/assets/logo/logo.png" alt="" className="w-9 h-9 object-contain" />
+            <span className="leading-tight">
+              <span className="block font-extrabold tracking-wider">MWAFEM</span>
+              <span className="block text-xs text-tertiary/75">Staff dashboard</span>
+            </span>
+          </Link>
+          <button type="button" onClick={onClose} aria-label="Close menu" className="lg:hidden w-10 h-10 rounded-lg hover:bg-tertiary/10 cursor-pointer">
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
+        </div>
 
-      <nav className="mt-8">
-        <ul className="space-y-2 px-2">
-          {menuItems.map((item, index) => (
-            <li key={index}>
-              <Link
-                to={item.path}
-                className={`flex items-center ${collapsed ? 'justify-center' : 'justify-start'} p-3 rounded-md transition-colors ${isActive(item.path) ? (theme === 'dark' ? 'bg-secondary text-primary' : 'bg-primary/10 text-primary') : (theme === 'dark' ? 'text-tertiary hover:bg-primary/50' : 'hover:bg-gray-100')}`}
-              >
-                <FontAwesomeIcon icon={item.icon} className={`${collapsed ? 'text-xl' : 'text-lg'}`} />
-                {!collapsed && <span className="ml-3">{item.label}</span>}
-              </Link>
-            </li>
-          ))}
-          
-          {/* Admin-only menu items */}
-          {user && user.role === 'admin' && (
-            <>
-              {!collapsed && (
-                <li className="pt-4 pb-2">
-                  <div className="px-3">
-                    <p className="text-xs uppercase font-semibold text-gray-500 dark:text-gray-400">Admin</p>
-                    <div className="mt-1 h-px bg-gray-300 dark:bg-gray-700"></div>
-                  </div>
-                </li>
+        <nav className="flex-1 overflow-y-auto px-3 py-5 space-y-6" aria-label="Dashboard">
+          {SECTIONS.filter((section) => !section.adminOnly || isAdmin).map((section, i) => (
+            <div key={i}>
+              {section.title && (
+                <p className="px-3 mb-2 text-xs font-bold uppercase tracking-wider text-tertiary/70">{section.title}</p>
               )}
-              
-              {adminMenuItems.map((item, index) => (
-                <li key={`admin-${index}`}>
-                  <Link
-                    to={item.path}
-                    className={`flex items-center ${collapsed ? 'justify-center' : 'justify-start'} p-3 rounded-md transition-colors ${isActive(item.path) ? (theme === 'dark' ? 'bg-secondary text-primary' : 'bg-primary/10 text-primary') : (theme === 'dark' ? 'text-tertiary hover:bg-primary/50' : 'hover:bg-gray-100')}`}
-                  >
-                    <FontAwesomeIcon icon={item.icon} className={`${collapsed ? 'text-xl' : 'text-lg'}`} />
-                    {!collapsed && <span className="ml-3">{item.label}</span>}
-                  </Link>
-                </li>
-              ))}
-            </>
-          )}
-        </ul>
-      </nav>
-    </div>
+              <ul className="space-y-1">
+                {section.items.map((item) => {
+                  const active = isActive(item.path);
+                  return (
+                    <li key={item.path}>
+                      <Link
+                        to={item.path}
+                        aria-current={active ? 'page' : undefined}
+                        className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors ${active ? 'bg-tertiary/10 text-secondary' : 'text-tertiary/85 hover:bg-tertiary/5 hover:text-tertiary'}`}
+                      >
+                        {active && <span aria-hidden="true" className="absolute left-0 top-2 bottom-2 w-1 rounded-r bg-secondary" />}
+                        <FontAwesomeIcon icon={item.icon} className="w-4" />
+                        <span className="flex-1">{item.label}</span>
+                        {item.badge === 'messages' && unhandled > 0 && (
+                          <span className="min-w-6 px-1.5 py-0.5 rounded-full bg-secondary text-primary text-xs font-bold text-center">
+                            {unhandled}
+                            <span className="sr-only"> new</span>
+                          </span>
+                        )}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        <div className="px-3 py-4 border-t border-tertiary/10">
+          <a
+            href="/"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-tertiary/85 hover:bg-tertiary/5 hover:text-tertiary"
+          >
+            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="w-4" />
+            View website
+          </a>
+        </div>
+      </aside>
+    </>
   );
 };
 

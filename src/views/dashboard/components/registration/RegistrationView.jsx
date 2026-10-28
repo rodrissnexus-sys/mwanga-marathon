@@ -1,629 +1,181 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { useTheme } from '../../contexts/ThemeContext';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSearch,
-  faFilter,
-  faCheckCircle,
-  faTimesCircle,
-  faEllipsisV,
-  faCreditCard,
-  faFileExport,
-  faEye,
-  faTrash,
-  faSpinner
-} from '@fortawesome/free-solid-svg-icons';
-import { getRegistrationsPage, confirmPayment, exportRegistrationsCsv } from '../../../../api/marathon/registration';
+import { faFileExport, faUsers, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { getRegistrationsPage, exportRegistrationsCsv } from '../../../../api/marathon/registration';
 import { fetchEvents } from '../../../../api/dropdowns';
+import { Alert, Button, Card, EmptyState, PageHeader, Pagination, SearchInput, Select, Spinner, StatusBadge, formatDate } from '../ui/kit';
+import RegistrationDrawer from '../payments/RegistrationDrawer';
 
 const PAGE_SIZE = 25;
 
 const RegistrationView = () => {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-  const [selectedRegistration, setSelectedRegistration] = useState(null);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [registrations, setRegistrations] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [processingPayment, setProcessingPayment] = useState(false);
-  const [paymentNotes, setPaymentNotes] = useState('');
-  const [page, setPage] = useState(1);
+  const [rows, setRows] = useState([]);
   const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
   const [searchInput, setSearchInput] = useState('');
   const [filters, setFilters] = useState({ search: '', eventId: '', paymentStatus: '', locale: '' });
-  const [showFilters, setShowFilters] = useState(false);
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [exporting, setExporting] = useState(false);
+  const [selected, setSelected] = useState(null);
 
-  // Options for the race filter
   useEffect(() => {
-    fetchEvents().then((response) => response.success && setEvents(response.data));
+    fetchEvents().then((r) => r.success && setEvents(r.data));
   }, []);
 
-  // Search after the user stops typing for a moment
   useEffect(() => {
     const timer = setTimeout(() => {
-      setFilters((prev) => (prev.search === searchInput ? prev : { ...prev, search: searchInput }));
+      setFilters((f) => (f.search === searchInput ? f : { ...f, search: searchInput }));
       setPage(1);
     }, 300);
     return () => clearTimeout(timer);
   }, [searchInput]);
 
-  useEffect(() => {
-    fetchRegistrations();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  const load = useCallback(async () => {
+    setLoading(true);
+    const result = await getRegistrationsPage({ page, pageSize: PAGE_SIZE, ...filters });
+    if (result.success) {
+      setRows(result.data);
+      setTotal(result.total);
+      setError('');
+    } else {
+      setError(result.error);
+    }
+    setLoading(false);
   }, [page, filters]);
 
-  const fetchRegistrations = async () => {
-    setLoading(true);
-    try {
-      const response = await getRegistrationsPage({ page, pageSize: PAGE_SIZE, ...filters });
-      if (response.success) {
-        setRegistrations(response.data || []);
-        setTotal(response.total);
-        setError(null);
-      } else {
-        setError(response.error || 'Failed to fetch registrations');
-        setRegistrations([]);
-      }
-    } catch (err) {
-      setError('An unexpected error occurred');
-      console.error(err);
-      setRegistrations([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    load();
+  }, [load]);
 
-  const updateFilter = (name, value) => {
-    setFilters((prev) => ({ ...prev, [name]: value }));
+  const setFilter = (name) => (e) => {
+    setFilters((f) => ({ ...f, [name]: e.target.value }));
     setPage(1);
   };
 
-  const handleExport = async () => {
+  const exportCsv = async () => {
     setExporting(true);
     const result = await exportRegistrationsCsv(filters);
     if (!result.success) setError(result.error);
     setExporting(false);
   };
 
-  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-
-  const handleViewDetails = (registration) => {
-    setSelectedRegistration(registration);
-    setShowDetailsModal(true);
-  };
-
-  const handleConfirmPayment = (registration) => {
-    setSelectedRegistration(registration);
-    setShowPaymentModal(true);
-  };
-
-  const processPayment = async () => {
-    if (!selectedRegistration) return;
-    
-    setProcessingPayment(true);
-    try {
-      const response = await confirmPayment(selectedRegistration.id, paymentNotes);
-      if (response.success) {
-        // Update the registration in the local state
-        const updatedRegistrations = registrations.map(reg => 
-          reg.id === selectedRegistration.id 
-            ? { ...reg, payment_status: 'confirmed', payment_confirmed_at: new Date().toISOString() } 
-            : reg
-        );
-        setRegistrations(updatedRegistrations);
-        setShowPaymentModal(false);
-        setSelectedRegistration(null);
-        setPaymentNotes('');
-      } else {
-        setError(response.error || 'Failed to confirm payment');
-      }
-    } catch (err) {
-      setError('An unexpected error occurred while processing payment');
-      console.error(err);
-    } finally {
-      setProcessingPayment(false);
-    }
-  };
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'confirmed':
-        return 'text-green-500 bg-green-100 dark:bg-green-900/20';
-      case 'pending':
-        return 'text-yellow-500 bg-yellow-100 dark:bg-yellow-900/20';
-      case 'failed':
-        return 'text-red-500 bg-red-100 dark:bg-red-900/20';
-      default:
-        return 'text-gray-500 bg-primary/10 dark:bg-gray-800';
-    }
-  };
-
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case 'confirmed':
-        return <FontAwesomeIcon icon={faCheckCircle} className="mr-2 text-success" />;
-      case 'pending':
-        return <FontAwesomeIcon icon={faEllipsisV} className="mr-2 text-secondary" />;
-      case 'failed':
-        return <FontAwesomeIcon icon={faTimesCircle} className="mr-2 text-red" />;
-      default:
-        return null;
-    }
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return 'Not available';
-    return new Intl.DateTimeFormat('en-GB', {
-      year: 'numeric',
-      month: 'long',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    }).format(new Date(dateString));
-  };
-
-  // Calculate event price based on nationality
-  const calculateEventPrice = (registration) => {
-    if (!registration || !registration.event) return 'N/A';
-    
-    const isTanzanian = registration.nationality_category
-      ? registration.nationality_category !== 'international'
-      : registration.nationality?.code === 'TZA';
-    const isKidsEvent = registration.event.is_kids_event;
-    
-    if (isKidsEvent) {
-      return `TZS ${registration.event.local_kids_price.toLocaleString()}`;
-    } else if (isTanzanian) {
-      return `TZS ${registration.event.local_price.toLocaleString()}`;
-    } else {
-      return `USD ${registration.event.foreign_price.toLocaleString()}`;
-    }
-  };
-
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-        <h1 className={`text-2xl font-bold ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-          Registration Management
-        </h1>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-              <FontAwesomeIcon icon={faSearch} />
-            </span>
-            <input
-              type="text"
-              placeholder="Search registrations..."
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              className={`pl-10 pr-4 py-2 rounded-md w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-secondary ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-primary/10 text-primary'}`}
-            />
-          </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setShowFilters((open) => !open)}
-              className={`px-4 py-2 rounded-md flex items-center justify-center ${isDark ? 'bg-primary/50 text-tertiary hover:bg-primary/20' : 'bg-white text-primary hover:bg-primary/20'} border border-primary/20 dark:border-primary/15`}
-            >
-              <FontAwesomeIcon icon={faFilter} className="mr-2" />
-              Filter
-            </button>
-            <button
-              onClick={handleExport}
-              disabled={exporting}
-              className="px-4 py-2 bg-secondary text-primary rounded-md hover:bg-opacity-90 transition-opacity flex items-center disabled:opacity-60"
-            >
-              <FontAwesomeIcon icon={exporting ? faSpinner : faFileExport} className={`mr-2 ${exporting ? 'animate-spin' : ''}`} />
-              Export
-            </button>
-          </div>
+    <div>
+      <PageHeader
+        title="Registrations"
+        description={`${total.toLocaleString()} ${total === 1 ? 'registration matches' : 'registrations match'} the filters. Open one to see all details or handle its payment.`}
+        actions={<Button icon={faFileExport} loading={exporting} onClick={exportCsv}>Export CSV</Button>}
+      />
+
+      <div className="flex flex-col lg:flex-row gap-3 mb-4">
+        <SearchInput
+          placeholder="Name, phone, email or MWF-…"
+          aria-label="Search registrations"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 lg:flex">
+          <Select aria-label="Race" value={filters.eventId} onChange={setFilter('eventId')}>
+            <option value="">All races</option>
+            {events.map((event) => (
+              <option key={event.id} value={event.id}>{event.name}</option>
+            ))}
+          </Select>
+          <Select aria-label="Payment" value={filters.paymentStatus} onChange={setFilter('paymentStatus')}>
+            <option value="">Any payment status</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Paid</option>
+            <option value="failed">Not paid</option>
+          </Select>
+          <Select aria-label="Site language" value={filters.locale} onChange={setFilter('locale')}>
+            <option value="">Both site languages</option>
+            <option value="en">English site</option>
+            <option value="sw">Swahili site</option>
+          </Select>
         </div>
       </div>
 
-      {/* Filters */}
-      {showFilters && (
-        <div className={`flex flex-col sm:flex-row gap-3 p-4 rounded-md ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20`}>
-          {[
-            ['eventId', 'All races', events.map((event) => [event.id, event.name])],
-            ['paymentStatus', 'All payment statuses', [['pending', 'Pending'], ['confirmed', 'Confirmed'], ['failed', 'Failed']]],
-            ['locale', 'Both site languages', [['en', 'English site'], ['sw', 'Swahili site']]],
-          ].map(([name, allLabel, options]) => (
-            <select
-              key={name}
-              value={filters[name]}
-              onChange={(e) => updateFilter(name, e.target.value)}
-              className={`px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary ${isDark ? 'bg-primary text-tertiary' : 'bg-primary/10 text-primary'}`}
-            >
-              <option value="">{allLabel}</option>
-              {options.map(([value, label]) => (
-                <option key={value} value={value}>{label}</option>
+      {error && <div className="mb-4"><Alert onClose={() => setError('')}>{error}</Alert></div>}
+
+      <Card padded={false} className="overflow-hidden">
+        {loading && !rows.length ? (
+          <Spinner />
+        ) : rows.length === 0 ? (
+          <EmptyState icon={faUsers} title="No registrations found">Try clearing the search or filters.</EmptyState>
+        ) : (
+          <>
+            <ul className="md:hidden divide-y divide-primary/10">
+              {rows.map((r) => (
+                <li key={r.id}>
+                  <button type="button" onClick={() => setSelected(r)} className="w-full text-left px-4 py-4 flex items-center gap-3 cursor-pointer hover:bg-primary/[0.03]">
+                    <div className="flex-1 min-w-0">
+                      <p className="font-bold text-primary truncate">{r.first_name} {r.last_name}</p>
+                      <p className="text-xs text-primary/70 font-mono">{r.registration_id}</p>
+                      <p className="text-sm text-primary/80 mt-1 mb-2">{r.event?.name}</p>
+                      <StatusBadge status={r.payment_status} />
+                    </div>
+                    <FontAwesomeIcon icon={faArrowRight} className="text-primary/70" />
+                  </button>
+                </li>
               ))}
-            </select>
-          ))}
-        </div>
-      )}
+            </ul>
 
-      {/* Error Message */}
-      {error && (
-        <div className="p-4 mb-4 rounded-md bg-red/20 text-red border border-red/50">
-          <p>{error}</p>
-        </div>
-      )}
-
-      {/* Registration Table */}
-      <div className={`rounded-xl overflow-hidden w-[90vw] mb-[100px] ${isDark ? 'bg-primary/50 border border-primary' : 'bg-tertiary shadow-md'}`}>
-        <div className="relative overflow-x-auto w-full scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
-          {loading ? (
-            <div className="flex justify-center items-center p-12">
-              <FontAwesomeIcon icon={faSpinner} className={`text-3xl ${isDark ? 'text-tertiary' : 'text-primary'} animate-spin`} />
-            </div>
-          ) : (
-            <table className="w-full table-auto border-collapse">
-              <thead className={`sticky top-0 z-10 ${isDark ? 'bg-primary' : 'bg-gray-50'}`}>
-                <tr className={`${isDark ? 'bg-primary text-tertiary' : 'bg-gray-50 text-primary'}`}>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap">Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap">Email</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap">Event</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap">Registration Date</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap">Shirt Size</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider whitespace-nowrap">Payment Status</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider whitespace-nowrap">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-primary/20 dark:divide-primary/20">
-                {registrations.length === 0 ? (
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-primary/[0.03] text-left text-xs uppercase tracking-wide text-primary/70">
                   <tr>
-                    <td colSpan="7" className={`px-6 py-8 text-center ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                      No registrations found
-                    </td>
+                    <th scope="col" className="px-5 py-3 font-semibold">Participant</th>
+                    <th scope="col" className="px-5 py-3 font-semibold">Contact</th>
+                    <th scope="col" className="px-5 py-3 font-semibold">Race</th>
+                    <th scope="col" className="px-5 py-3 font-semibold">T-shirt</th>
+                    <th scope="col" className="px-5 py-3 font-semibold">Registered</th>
+                    <th scope="col" className="px-5 py-3 font-semibold">Payment</th>
+                    <th scope="col" className="px-5 py-3"><span className="sr-only">Action</span></th>
                   </tr>
-                ) : (
-                  registrations.map((registration) => (
-                    <tr 
-                      key={registration.id} 
-                      className={`${isDark ? 'hover:bg-primary' : 'hover:bg-primary/20'} transition-colors`}
-                    >
-                      <td className={`px-6 py-4 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                        {registration.first_name} {registration.last_name}
+                </thead>
+                <tbody className="divide-y divide-primary/10 text-primary">
+                  {rows.map((r) => (
+                    <tr key={r.id} className="hover:bg-primary/[0.03]">
+                      <td className="px-5 py-3">
+                        <p className="font-semibold">{r.first_name} {r.last_name}</p>
+                        <p className="text-xs text-primary/70 font-mono">{r.registration_id}</p>
                       </td>
-                      <td className={`px-6 py-4 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                        {registration.email}
+                      <td className="px-5 py-3">
+                        <p className="whitespace-nowrap">{r.phone_number}</p>
+                        <p className="text-xs text-primary/70 break-all">{r.email}</p>
                       </td>
-                      <td className={`px-6 py-4 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                        {registration.event?.name}
+                      <td className="px-5 py-3">{r.event?.name}</td>
+                      <td className="px-5 py-3">{(r.kids_shirt_size ?? r.shirt_size)?.code}</td>
+                      <td className="px-5 py-3 whitespace-nowrap">
+                        {formatDate(r.created_at)}
+                        <span className="ml-2 px-1.5 py-0.5 rounded bg-primary/10 text-xs font-semibold uppercase">{r.locale}</span>
                       </td>
-                      <td className={`px-6 py-4 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                        {formatDate(registration.created_at)}
-                      </td>
-                      <td className={`px-6 py-4 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                        {registration.shirt_size?.code}
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center">
-                          {getStatusIcon(registration.payment_status)}
-                          <span className={`px-2 py-1 rounded-full text-sm ${
-                            registration.payment_status === 'confirmed' ? 'text-success bg-success/10' : 
-                            registration.payment_status === 'failed' ? 'text-red bg-red/10' : 'text-secondary bg-secondary/10'
-                          }`}>
-                            {registration.payment_status?.charAt(0).toUpperCase() + registration.payment_status?.slice(1)}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center space-x-2">
-                          <button 
-                            onClick={() => handleViewDetails(registration)}
-                            className={`p-1 rounded-full ${isDark ? 'text-secondary hover:bg-primary/20' : 'text-secondary hover:bg-primary/10'}`}
-                            title="View Details"
-                          >
-                            <FontAwesomeIcon icon={faEye} />
-                          </button>
-                          {registration.payment_status === 'pending' && (
-                            <button 
-                              onClick={() => handleConfirmPayment(registration)}
-                              className={`p-1 rounded-full ${isDark ? 'text-secondary hover:bg-primary/20' : 'text-secondary hover:bg-primary/10'}`}
-                              title="Confirm Payment"
-                            >
-                              <FontAwesomeIcon icon={faCreditCard} />
-                            </button>
-                          )}
-                        </div>
+                      <td className="px-5 py-3"><StatusBadge status={r.payment_status} /></td>
+                      <td className="px-5 py-3 text-right">
+                        <Button onClick={() => setSelected(r)}>Open</Button>
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          )}
-        </div>
-        {!loading && registrations.length > 0 && (
-          <div className={`px-6 py-4 flex justify-between items-center ${isDark ? 'bg-primary' : 'bg-gray-50'}`}>
-            <div className={`text-sm ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-              Showing <span className="font-medium">{(page - 1) * PAGE_SIZE + 1}</span> to <span className="font-medium">{(page - 1) * PAGE_SIZE + registrations.length}</span> of <span className="font-medium">{total}</span> results
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <div className="flex space-x-1">
-              <button
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page === 1}
-                className={`px-3 py-1 rounded-md disabled:opacity-50 ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}
-              >
-                Previous
-              </button>
-              <span className="px-3 py-1 rounded-md bg-secondary text-primary">
-                {page} / {totalPages}
-              </span>
-              <button
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                disabled={page >= totalPages}
-                className={`px-3 py-1 rounded-md disabled:opacity-50 ${isDark ? 'bg-primary/50 text-tertiary' : 'bg-white text-primary'} border border-primary/20 dark:border-gray-700`}
-              >
-                Next
-              </button>
-            </div>
-          </div>
+            <Pagination page={page} pageSize={PAGE_SIZE} total={total} onChange={setPage} />
+          </>
         )}
-      </div>
+      </Card>
 
-      {/* Payment Confirmation Modal */}
-      {showPaymentModal && selectedRegistration && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className={`w-full max-w-md p-6 rounded-lg ${isDark ? 'bg-primary' : 'bg-tertiary'} shadow-xl`}>
-            <h3 className={`text-xl font-bold mb-4 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-              Confirm Payment
-            </h3>
-            <div className="mb-6">
-              <div className={`p-4 rounded-md ${isDark ? 'bg-primary/50' : 'bg-primary/10'}`}>
-                <h3 className={`text-lg font-medium mb-2 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                  Payment Details
-                </h3>
-                <div className="space-y-2">
-                  <p className={`text-sm ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>
-                    <span className="font-medium">Registration ID:</span> {selectedRegistration.id}
-                  </p>
-                  <p className={`text-sm ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>
-                    <span className="font-medium">Member Name:</span> {selectedRegistration.first_name} {selectedRegistration.last_name}
-                  </p>
-                  <p className={`text-sm ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>
-                    <span className="font-medium">Event:</span> {selectedRegistration.event?.name}
-                  </p>
-                  <p className={`text-sm ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>
-                    <span className="font-medium">Amount:</span> {calculateEventPrice(selectedRegistration)}
-                  </p>
-                  <p className={`text-sm ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>
-                    <span className="font-medium">Registration Date:</span> {formatDate(selectedRegistration.created_at)}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="mb-6">
-              <label className={`text-sm font-medium ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                Payment Notes (Optional):
-              </label>
-              <textarea
-                value={paymentNotes}
-                onChange={(e) => setPaymentNotes(e.target.value)}
-                placeholder="Enter any additional notes about the payment..."
-                className={`w-full p-4 rounded-md mt-2 ${
-                  isDark ? 'bg-primary/50 text-tertiary placeholder-tertiary/50' : 
-                  'bg-primary/10 text-primary placeholder-primary/50'
-                }`}
-                rows="3"
-              />
-            </div>
-            <div className="flex justify-end space-x-3">
-              <button 
-                onClick={() => {
-                  setShowPaymentModal(false);
-                  setPaymentNotes('');
-                }}
-                className={`px-4 py-2 rounded-md ${
-                  isDark ? 'bg-primary/50 text-tertiary hover:bg-primary/40' : 
-                  'bg-primary/10 text-primary hover:bg-primary/20'
-                }`}
-                disabled={processingPayment}
-              >
-                Cancel
-              </button>
-              <button 
-                onClick={processPayment}
-                className={`px-4 py-2 bg-secondary text-primary rounded-md hover:bg-opacity-90 transition-opacity flex items-center ${
-                  processingPayment ? 'opacity-75 cursor-not-allowed' : ''
-                }`}
-                disabled={processingPayment}
-              >
-                {processingPayment ? (
-                  <>
-                    <FontAwesomeIcon icon={faSpinner} spin className="mr-2" />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    <FontAwesomeIcon icon={faCheckCircle} className="mr-2" />
-                    Confirm Payment
-                  </>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Registration Details Modal */}
-      {selectedRegistration && !showPaymentModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto">
-          <div className={`w-full max-w-2xl p-6 rounded-lg ${isDark ? 'bg-primary' : 'bg-tertiary'} shadow-xl m-4`}>
-            <div className="flex justify-between items-center mb-6">
-              <h3 className={`text-xl font-bold ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                Registration Details
-              </h3>
-              <button 
-                onClick={() => setSelectedRegistration(null)}
-                className={`p-1 rounded-full ${isDark ? 'text-tertiary hover:bg-primary/20' : 'text-primary hover:bg-primary/10'}`}
-              >
-                <FontAwesomeIcon icon={faTimesCircle} />
-              </button>
-            </div>
-            
-            <div className="mb-6">
-              <h4 className={`text-lg font-semibold mb-3 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                Personal Information
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Full Name</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.first_name} {selectedRegistration.last_name}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Email</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.email}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Phone</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.phone_number}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Date of Birth</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{formatDate(selectedRegistration.date_of_birth)}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Gender</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.gender?.name}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Nationality</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.nationality?.name}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Country</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.country?.name}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Postal Code</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.postal_code || 'N/A'}</p>
-                </div>
-                {selectedRegistration.id_number && (
-                  <div>
-                    <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>ID Number</p>
-                    <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.id_number}</p>
-                  </div>
-                )}
-                {selectedRegistration.passport_number && (
-                  <div>
-                    <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Passport Number</p>
-                    <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.passport_number}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <h4 className={`text-lg font-semibold mb-3 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                Event Information
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Event</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.event?.name}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Registration Date</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{formatDate(selectedRegistration.created_at)}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Shirt Size</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.shirt_size?.name}</p>
-                </div>
-                {selectedRegistration.kids_shirt_size && (
-                  <div>
-                    <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Kids Shirt Size</p>
-                    <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.kids_shirt_size?.name}</p>
-                  </div>
-                )}
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Collection Venue</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.collection_venue?.name}</p>
-                </div>
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Amount</p>
-                  <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{calculateEventPrice(selectedRegistration)}</p>
-                </div>
-                {selectedRegistration.voucher_code && (
-                  <div>
-                    <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Voucher Code</p>
-                    <p className={`${isDark ? 'text-tertiary' : 'text-primary'}`}>{selectedRegistration.voucher_code}</p>
-                  </div>
-                )}
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Status</p>
-                  <span className={`px-2 py-1 text-xs rounded-full bg-tertiary/10 inline-flex items-center ${getStatusColor(selectedRegistration.status)}`}>
-                    {getStatusIcon(selectedRegistration.status)}
-                    {selectedRegistration.status || 'Pending'}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <h4 className={`text-lg font-semibold mb-3 ${isDark ? 'text-tertiary' : 'text-primary'}`}>
-                Payment Information
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <p className={`text-sm font-medium ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>Payment Status</p>
-                  <div className="flex items-center mt-1">
-                    {getStatusIcon(selectedRegistration.payment_status)}
-                    <span className={`px-2 py-1 rounded-full text-sm ${
-                      selectedRegistration.payment_status === 'confirmed' ? 'text-success bg-success/10' : 
-                      selectedRegistration.payment_status === 'failed' ? 'text-red bg-red/10' : 'text-secondary bg-secondary/10'
-                    }`}>
-                      {selectedRegistration.payment_status?.charAt(0).toUpperCase() + selectedRegistration.payment_status?.slice(1)}
-                    </span>
-                  </div>
-                  {selectedRegistration.payment_status === 'confirmed' && (
-                    <div className="mt-2">
-                      <p className={`text-sm ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>
-                        <span className="font-medium">Confirmed by:</span> {selectedRegistration.payment_confirmation_by}
-                      </p>
-                      <p className={`text-sm ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>
-                        <span className="font-medium">Confirmed at:</span> {formatDate(selectedRegistration.payment_confirmed_at)}
-                      </p>
-                      {selectedRegistration.payment_notes && (
-                        <p className={`text-sm mt-1 ${isDark ? 'text-tertiary/70' : 'text-primary/70'}`}>
-                          <span className="font-medium">Notes:</span> {selectedRegistration.payment_notes}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-end space-x-3">
-              <button 
-                onClick={() => setSelectedRegistration(null)}
-                className={`px-4 py-2 rounded-md ${isDark ? 'bg-primary/50 text-tertiary hover:bg-primary/20' : 'bg-primary/10 text-primary hover:bg-primary/20'}`}
-              >
-                Close
-              </button>
-              {selectedRegistration.payment_status === 'pending' && (
-                <button 
-                  onClick={() => handleConfirmPayment(selectedRegistration)}
-                  className="px-4 py-2 bg-secondary text-primary rounded-md hover:bg-opacity-90 transition-opacity flex items-center ml-3"
-                >
-                  <FontAwesomeIcon icon={faCreditCard} className="mr-2" />
-                  Confirm Payment
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <RegistrationDrawer
+        registration={selected}
+        onClose={() => setSelected(null)}
+        onChange={(updated) => {
+          setSelected(updated);
+          load();
+        }}
+      />
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import { Navigate } from "@/lib/router";
 
-// Unknown dashboard paths (e.g. the sidebar's /dashboard/settings) go back
-// to the dashboard home, as before.
+// Unknown dashboard paths go back to the overview.
 export default function DashboardCatchAll() {
   return <Navigate to="/dashboard" replace />;
 }

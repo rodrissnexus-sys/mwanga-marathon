@@ -88,7 +88,10 @@ for (const [device, width, height] of SIZES) {
                 size: parseFloat(st.fontSize),
                 bold: Number(st.fontWeight) >= 700,
                 radius: parseFloat(st.borderTopLeftRadius) || 0,
-                x: r.left, y: r.top, w: r.width, h: r.height,
+                // sample inside the element's own border (e.g. outlined buttons)
+                x: r.left + parseFloat(st.borderLeftWidth), y: r.top + parseFloat(st.borderTopWidth),
+                w: r.width - parseFloat(st.borderLeftWidth) - parseFloat(st.borderRightWidth),
+                h: r.height - parseFloat(st.borderTopWidth) - parseFloat(st.borderBottomWidth),
                 visible: !clipped && r.top >= (inHeader ? 0 : header) && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth,
               };
             })

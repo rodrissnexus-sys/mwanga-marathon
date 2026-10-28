@@ -1,200 +1,205 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from '@/lib/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileExport, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import MetricsSection from './MetricsSection';
-import ChartSection from './ChartSection';
-import { useTheme } from '../../contexts/ThemeContext';
-import { getRecentRegistrations, getEventStatistics } from '../../../../api/marathon/dashboard';
+import {
+  faUsers,
+  faClock,
+  faCheckCircle,
+  faCoins,
+  faHourglassHalf,
+  faFlagCheckered,
+  faArrowRight,
+  faCalendarXmark,
+} from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../../../../contexts/AuthContext';
+import { getOverview } from '../../../../api/marathon/dashboard';
+import { expectedFee, formatMoney } from '@/lib/payments';
+import { EVENT } from '@/lib/event';
+import { Alert, Card, EmptyState, Spinner, timeAgo } from '../ui/kit';
+
+const daysUntil = (date) => Math.ceil((new Date(date) - Date.now()) / 86_400_000);
+
+const greeting = () => {
+  const hour = Number(new Date().toLocaleString('en-GB', { hour: 'numeric', hour12: false, timeZone: 'Africa/Dar_es_Salaam' }));
+  return hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+};
+
+const money = (totals) =>
+  [totals.TZS > 0 && formatMoney(totals.TZS, 'TZS'), totals.USD > 0 && formatMoney(totals.USD, 'USD')].filter(Boolean).join(' + ') || 'TZS 0';
+
+const Stat = ({ icon, label, value, detail, tone = 'default', to }) => {
+  const tones = {
+    default: 'bg-tertiary text-primary border-primary/10',
+    navy: 'bg-primary text-tertiary border-primary',
+    lime: 'bg-secondary text-primary border-secondary',
+  };
+  const body = (
+    <div className={`h-full rounded-2xl border p-5 shadow-[0_1px_3px_rgb(34_23_81/0.06)] ${tones[tone]} ${to ? 'hover:shadow-lg transition-shadow' : ''}`}>
+      <div className="flex items-center justify-between">
+        <p className={`text-sm font-semibold ${tone === 'navy' ? 'text-tertiary/80' : 'text-primary/75'}`}>{label}</p>
+        <span className={`w-9 h-9 rounded-xl flex items-center justify-center ${tone === 'navy' ? 'bg-tertiary/10 text-secondary' : 'bg-primary/10 text-primary'}`}>
+          <FontAwesomeIcon icon={icon} />
+        </span>
+      </div>
+      <p className="mt-3 text-2xl md:text-3xl font-extrabold tracking-tight break-words">{value}</p>
+      {detail && <p className={`mt-1 text-sm ${tone === 'navy' ? 'text-tertiary/80' : 'text-primary/75'}`}>{detail}</p>}
+    </div>
+  );
+  return to ? <Link to={to} className="block h-full">{body}</Link> : body;
+};
+
+const DailyChart = ({ daily }) => {
+  const max = Math.max(1, ...daily.map((d) => d.count));
+  const total = daily.reduce((sum, d) => sum + d.count, 0);
+  return (
+    <Card title="New registrations" action={<span className="text-sm text-primary/70">last 30 days · {total}</span>}>
+      <div className="flex items-end gap-[3px] h-40" role="img" aria-label={`${total} registrations in the last 30 days`}>
+        {daily.map((d) => (
+          <div key={d.date} className="flex-1 h-full flex items-end group relative">
+            <div
+              className={`w-full rounded-t ${d.count ? 'bg-primary group-hover:bg-secondary' : 'bg-primary/10'}`}
+              style={{ height: `${Math.max(4, (d.count / max) * 100)}%` }}
+            />
+            <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-1 rounded bg-primary text-tertiary text-xs whitespace-nowrap opacity-0 group-hover:opacity-100">
+              {new Date(d.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}: {d.count}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-between mt-2 text-xs text-primary/70">
+        <span>{new Date(daily[0].date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
+        <span>Today</span>
+      </div>
+    </Card>
+  );
+};
+
+const RaceProgress = ({ races }) => (
+  <Card title="By race">
+    <ul className="space-y-4">
+      {races.map((race) => {
+        const pct = (n) => (race.total ? (n / race.total) * 100 : 0);
+        return (
+          <li key={race.id}>
+            <div className="flex items-baseline justify-between gap-3 text-sm">
+              <span className="font-semibold text-primary">{race.name}</span>
+              <span className="text-primary/75 whitespace-nowrap">
+                <strong className="text-primary">{race.confirmed}</strong> paid of {race.total}
+              </span>
+            </div>
+            <div className="mt-1.5 h-2.5 rounded-full bg-primary/10 overflow-hidden flex" aria-hidden="true">
+              <div className="bg-positive" style={{ width: `${pct(race.confirmed)}%` }} />
+              <div className="bg-caution/60" style={{ width: `${pct(race.pending)}%` }} />
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+    <div className="flex gap-4 mt-5 text-xs text-primary/75">
+      <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-positive" /> Paid</span>
+      <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-sm bg-caution/60" /> Pending</span>
+    </div>
+  </Card>
+);
 
 const DashboardHome = () => {
-  const { theme } = useTheme();
-  const [timeRange, setTimeRange] = useState('last7days');
-  const [recentRegistrations, setRecentRegistrations] = useState([]);
-  const [eventStatistics, setEventStatistics] = useState({ events: [], genderDistribution: { male: 0, female: 0 } });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { currentUser } = useAuth();
+  const [data, setData] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        setLoading(true);
-        
-        // Fetch recent registrations
-        const registrationsResponse = await getRecentRegistrations(5);
-        
-        // Fetch event statistics
-        const statisticsResponse = await getEventStatistics();
-        
-        if (registrationsResponse.success && statisticsResponse.success) {
-          setRecentRegistrations(registrationsResponse.data || []);
-          setEventStatistics(statisticsResponse.data || { events: [], genderDistribution: { male: 0, female: 0 } });
-        } else {
-          setError('Failed to fetch dashboard data');
-        }
-      } catch (err) {
-        console.error('Dashboard data fetch error:', err);
-        setError('Error loading dashboard data');
-      } finally {
-        setLoading(false);
-      }
-    };
+    getOverview().then((result) => (result.success ? setData(result.data) : setError(result.error)));
+  }, []);
 
-    fetchDashboardData();
-  }, [timeRange]);
-
-  // Format date for display
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffTime = Math.abs(now - date);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
-    const diffMinutes = Math.floor(diffTime / (1000 * 60));
-    
-    if (diffDays > 0) {
-      return diffDays === 1 ? 'Yesterday' : `${diffDays} days ago`;
-    } else if (diffHours > 0) {
-      return `${diffHours} ${diffHours === 1 ? 'hour' : 'hours'} ago`;
-    } else {
-      return `${diffMinutes} ${diffMinutes === 1 ? 'minute' : 'minutes'} ago`;
-    }
-  };
+  const raceDays = daysUntil(EVENT.startsAt);
+  const closeDays = daysUntil(EVENT.registrationClosesAt);
+  const firstName = currentUser?.name?.split(' ')[0] ?? '';
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className={`text-2xl font-bold ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
-          Dashboard Overview
-        </h1>
-        <div className="flex space-x-2">
-          <select 
-            className={`px-3 py-1.5 rounded-md text-sm border ${theme === 'dark' ? 'bg-primary/50 border-secondary text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
-            value={timeRange}
-            onChange={(e) => setTimeRange(e.target.value)}
-          >
-            <option value="last7days">Last 7 days</option>
-            <option value="last30days">Last 30 days</option>
-            <option value="thisMonth">This month</option>
-            <option value="thisYear">This year</option>
-          </select>
-          <button className="px-3 py-1.5 bg-secondary text-primary rounded-md text-sm hover:opacity-90 transition-opacity flex items-center">
-            <FontAwesomeIcon icon={faFileExport} className="mr-2" />
-            Export
-          </button>
+      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-primary">{greeting()}, {firstName}</h1>
+          <p className="mt-1 text-sm text-primary/70">Mwanga Marathon {EVENT.year} at a glance.</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <span className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-primary text-tertiary text-sm font-semibold">
+            <FontAwesomeIcon icon={faFlagCheckered} className="text-secondary" />
+            {raceDays > 0 ? `${raceDays} days to race day` : raceDays === 0 ? 'Race day!' : 'Race finished'}
+          </span>
+          <span className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-tertiary border border-primary/15 text-primary text-sm font-semibold">
+            <FontAwesomeIcon icon={faCalendarXmark} />
+            {closeDays > 0 ? `Registration closes in ${closeDays} days` : 'Registration closed'}
+          </span>
         </div>
       </div>
-      
-      <MetricsSection />
-      <ChartSection />
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className={`rounded-xl p-5 ${theme === 'dark' ? 'bg-primary/50' : 'bg-tertiary shadow-md'}`}>
-          <h2 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>Recent Registrations</h2>
-          {loading ? (
-            <div className="flex justify-center items-center h-60">
-              <FontAwesomeIcon icon={faSpinner} spin className={`text-3xl ${theme === 'dark' ? 'text-secondary' : 'text-primary'}`} />
-              <span className={`ml-3 ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>Loading registrations...</span>
+
+      {error && <Alert>{error}</Alert>}
+      {!data && !error && <Spinner label="Loading the overview…" />}
+
+      {data && (
+        <>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <Stat icon={faUsers} label="Registrations" value={data.counts.total.toLocaleString()} detail={`${data.genders.M} men · ${data.genders.F} women`} to="/dashboard/registration" />
+            <Stat
+              icon={faClock}
+              label="Payments to check"
+              value={data.counts.pending.toLocaleString()}
+              detail={data.counts.pending ? 'Open the payment queue →' : 'All caught up'}
+              tone="lime"
+              to="/dashboard/payments"
+            />
+            <Stat
+              icon={faCheckCircle}
+              label="Paid"
+              value={data.counts.confirmed.toLocaleString()}
+              detail={data.counts.total ? `${Math.round((data.counts.confirmed / data.counts.total) * 100)}% of registrations` : '—'}
+            />
+            <Stat icon={faCoins} label="Money received" value={money(data.received)} detail={`Still expected: ${money(data.outstanding)}`} tone="navy" />
+          </div>
+
+          <div className="grid gap-6 xl:grid-cols-5">
+            <div className="xl:col-span-3 space-y-6">
+              <DailyChart daily={data.daily} />
+              <RaceProgress races={data.races} />
             </div>
-          ) : error ? (
-            <div className="p-4 bg-red-100 text-red-700 rounded-md">{error}</div>
-          ) : recentRegistrations.length === 0 ? (
-            <div className="text-center p-8 text-gray-500 italic">No recent registrations found</div>
-          ) : (
-            <div className="space-y-4 max-h-80 overflow-y-auto">
-              {recentRegistrations.map((registration, index) => (
-                <div 
-                  key={index} 
-                  className={`flex items-start p-3 rounded-lg ${registration.payment_status === 'completed' || registration.payment_confirmed ? 'bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500' : 'bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500'}`}
-                >
-                  <div className="flex-1">
-                    <p className={`font-medium text-sm ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
-                      {registration.first_name} {registration.last_name}
-                    </p>
-                    <p className={`text-xs ${theme === 'dark' ? 'text-tertiary opacity-70' : 'text-primary opacity-70'}`}>
-                      {registration.event ? registration.event.name : 'Unknown Event'}
-                    </p>
-                    <div className="flex justify-between mt-1">
-                      <span className={`text-xs ${theme === 'dark' ? 'text-tertiary opacity-50' : 'text-primary opacity-50'}`}>
-                        {formatDate(registration.created_at)}
-                      </span>
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${registration.payment_status === 'completed' || registration.payment_confirmed ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300'}`}>
-                        {registration.payment_status === 'completed' || registration.payment_confirmed ? 'Payment Completed' : 'Payment Pending'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        
-        <div className={`rounded-xl p-5 ${theme === 'dark' ? 'bg-primary/50' : 'bg-tertiary shadow-md'}`}>
-          <h2 className={`text-lg font-semibold mb-4 ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>Event Statistics</h2>
-          {loading ? (
-            <div className="flex justify-center items-center h-60">
-              <FontAwesomeIcon icon={faSpinner} spin className={`text-3xl ${theme === 'dark' ? 'text-secondary' : 'text-primary'}`} />
-              <span className={`ml-3 ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>Loading statistics...</span>
-            </div>
-          ) : error ? (
-            <div className="p-4 bg-red-100 text-red-700 rounded-md">{error}</div>
-          ) : eventStatistics.events.length === 0 ? (
-            <div className="text-center p-8 text-gray-500 italic">No event statistics available</div>
-          ) : (
-            <div className="space-y-4">
-              {eventStatistics.events.map((event, index) => {
-                const percentage = Math.round((event.registered / event.capacity) * 100);
-                const colors = [
-                  { bg: 'bg-blue-500', border: 'border-blue-600' },
-                  { bg: 'bg-green-500', border: 'border-green-600' },
-                  { bg: 'bg-purple-500', border: 'border-purple-600' },
-                  { bg: 'bg-orange-500', border: 'border-orange-600' },
-                  { bg: 'bg-pink-500', border: 'border-pink-600' }
-                ];
-                const colorIndex = index % colors.length;
-                
-                return (
-                  <div key={index} className="mb-4">
-                    <div className="flex justify-between items-center mb-1">
-                      <span className={`text-sm font-medium ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>{event.name}</span>
-                      <span className={`text-xs ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
-                        {event.registered}/{event.capacity} ({percentage}%)
-                      </span>
-                    </div>
-                    <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-primary">
-                      <div 
-                        className={`h-full ${colors[colorIndex].bg}`}
-                        style={{ width: `${percentage}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                );
-              })}
-              
-              <div className="mt-6 mb-15 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <h3 className={`text-sm font-medium mb-3 ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>Gender Distribution</h3>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
-                    <span className={`text-xs ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
-                      Male ({eventStatistics.genderDistribution.male}%)
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 rounded-full bg-pink-500 mr-2"></div>
-                    <span className={`text-xs ${theme === 'dark' ? 'text-tertiary' : 'text-primary'}`}>
-                      Female ({eventStatistics.genderDistribution.female}%)
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+
+            <Card
+              className="xl:col-span-2 self-start"
+              title="Waiting longest"
+              action={<Link to="/dashboard/payments" className="text-sm font-semibold text-primary underline underline-offset-4">All pending</Link>}
+            >
+              {data.oldestPending.length === 0 ? (
+                <EmptyState icon={faCheckCircle} title="No pending payments">Every registration has been checked.</EmptyState>
+              ) : (
+                <ul className="divide-y divide-primary/10 -my-2">
+                  {data.oldestPending.map((r) => {
+                    const fee = expectedFee(r);
+                    return (
+                      <li key={r.id} className="py-3 flex items-center gap-3">
+                        <span className="w-10 h-10 shrink-0 rounded-full bg-caution/10 text-caution flex items-center justify-center">
+                          <FontAwesomeIcon icon={faHourglassHalf} />
+                        </span>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-primary truncate">{r.first_name} {r.last_name}</p>
+                          <p className="text-xs text-primary/70">
+                            {r.event?.name} · {fee && formatMoney(fee.amount, fee.currency)} · {timeAgo(r.created_at)}
+                          </p>
+                        </div>
+                        <Link to="/dashboard/payments" aria-label={`Check payment of ${r.first_name} ${r.last_name}`} className="w-9 h-9 rounded-lg flex items-center justify-center text-primary hover:bg-primary/5">
+                          <FontAwesomeIcon icon={faArrowRight} />
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </Card>
+          </div>
+        </>
+      )}
     </div>
   );
 };

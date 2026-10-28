@@ -1,34 +1,15 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 
-const ThemeContext = createContext();
+// The dashboard is light only. Older pages still read `theme` to pick
+// classes, so the context stays and always says 'light'.
+const ThemeContext = createContext({ theme: 'light', toggleTheme: () => {} });
 
 export const useTheme = () => useContext(ThemeContext);
 
-export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('dashboard-theme');
-    return savedTheme || 'light';
-  });
-
-  useEffect(() => {
-    localStorage.setItem('dashboard-theme', theme);
-    // Apply theme class to body for global styling
-    if (theme === 'dark') {
-      document.body.classList.add('dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme');
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
+export const ThemeProvider = ({ children }) => (
+  <ThemeContext.Provider value={{ theme: 'light', toggleTheme: () => {} }}>
+    {children}
+  </ThemeContext.Provider>
+);
