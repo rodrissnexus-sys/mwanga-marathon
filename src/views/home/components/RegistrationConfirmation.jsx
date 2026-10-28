@@ -68,7 +68,7 @@ const RegistrationConfirmation = ({ registration, onRegisterAnother }) => {
           {t('howToPay')}
         </Link>
         <Link
-          to={`/registration-status?id=${encodeURIComponent(id)}`}
+          to="/registration-status"
           className="inline-flex items-center justify-center gap-2 min-h-12 px-5 rounded-lg border border-tertiary/40 font-semibold hover:border-secondary"
         >
           <FontAwesomeIcon icon={faMagnifyingGlass} />

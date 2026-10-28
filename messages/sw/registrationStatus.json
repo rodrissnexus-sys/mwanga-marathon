@@ -1,11 +1,10 @@
 {
   "formTitle": "Angalia usajili wako",
-  "formText": "Weka namba yako ya usajili na namba ya simu uliyojisajilia nayo.",
-  "idLabel": "Namba ya usajili",
+  "formText": "Weka jina na namba ya simu uliyojisajilia nayo.",
   "phoneLabel": "Namba ya simu",
   "check": "Angalia hali",
   "errors": {
-    "notFound": "Hatukupata usajili wenye namba hii na simu hii. Hakiki zote mbili ujaribu tena, au tupigie simu.",
+    "notFound": "Hatukupata usajili wenye jina hili na namba hii ya simu. Hakiki tahajia na namba, au tupigie simu.",
     "tooMany": "Majaribio mengi mno. Tafadhali subiri dakika chache ujaribu tena."
   },
   "hello": "Habari {name}",
@@ -28,5 +27,8 @@
   "kit": "Kuchukua vifaa",
   "howToPay": "Jinsi ya kulipa",
   "raceDayGuide": "Mwongozo wa siku ya mbio",
-  "callUs": "Tupigie simu"
+  "callUs": "Tupigie simu",
+  "nameLabel": "Jina lako",
+  "namePlaceholder": "mf. Neema Mushi",
+  "several": "Usajili {count} umepatikana kwa namba hii ya simu:"
 }

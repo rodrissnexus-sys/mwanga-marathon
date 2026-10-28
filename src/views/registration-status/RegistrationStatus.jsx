@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -30,14 +30,8 @@ const RegistrationStatus = () => {
   const tc = useTranslations('home.form.categories');
   const hero = useTranslations('hero').raw('registrationStatus');
   const locale = useLocale();
-  const [values, setValues] = useState({ registrationId: '', phone: '' });
+  const [values, setValues] = useState({ name: '', phone: '' });
   const [state, setState] = useState({ status: 'idle' }); // idle | loading | found | error
-
-  // /registration-status?id=MWF-2026-00042 (link from the registration confirmation)
-  useEffect(() => {
-    const id = new URLSearchParams(window.location.search).get('id');
-    if (id) setValues((v) => ({ ...v, registrationId: id }));
-  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -46,7 +40,6 @@ const RegistrationStatus = () => {
     setState(result.success ? { status: 'found', data: result.data } : { status: 'error', error: result.error });
   };
 
-  const r = state.data;
   const date = (value) =>
     new Date(value).toLocaleDateString(locale === 'sw' ? 'sw-TZ' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Africa/Dar_es_Salaam' });
 
@@ -62,15 +55,15 @@ const RegistrationStatus = () => {
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <div>
-                <label htmlFor="status-id" className="block text-sm font-semibold text-primary mb-1">{t('idLabel')}</label>
+                <label htmlFor="status-name" className="block text-sm font-semibold text-primary mb-1">{t('nameLabel')}</label>
                 <input
-                  id="status-id"
+                  id="status-name"
                   required
-                  autoComplete="off"
-                  value={values.registrationId}
-                  onChange={(e) => setValues((v) => ({ ...v, registrationId: e.target.value }))}
-                  placeholder="MWF-2026-00042"
-                  className={`${inputClass} font-mono uppercase`}
+                  autoComplete="name"
+                  value={values.name}
+                  onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
+                  placeholder={t('namePlaceholder')}
+                  className={inputClass}
                 />
               </div>
               <div>
@@ -106,55 +99,60 @@ const RegistrationStatus = () => {
           </form>
 
           {state.status === 'found' && (
-            <article role="status" className="mt-8 rounded-2xl bg-tertiary border border-primary/10 shadow-lg overflow-hidden">
-              <header className="bg-primary text-tertiary px-6 py-5 flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <p className="text-sm text-tertiary/80">{t('hello', { name: r.firstName })}</p>
-                  <p className="font-mono text-xl font-extrabold tracking-wide">{r.registrationId}</p>
+            <div role="status" className="mt-8 space-y-6">
+              {state.data.length > 1 && <p className="text-primary font-semibold">{t('several', { count: state.data.length })}</p>}
+              {state.data.map((r) => (
+              <article key={r.registrationId} className="rounded-2xl bg-tertiary border border-primary/10 shadow-lg overflow-hidden">
+                <header className="bg-primary text-tertiary px-6 py-5 flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm text-tertiary/80">{t('hello', { name: r.firstName })}</p>
+                    <p className="font-mono text-xl font-extrabold tracking-wide">{r.registrationId}</p>
+                  </div>
+                  <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-bold text-sm bg-tertiary ${STATUS[r.status].tone}`}>
+                    <FontAwesomeIcon icon={STATUS[r.status].icon} />
+                    {t(`status.${r.status}`)}
+                  </span>
+                </header>
+
+                <div className="p-6">
+                  <p className="text-primary">{t(`explain.${r.status}`)}</p>
+
+                  <dl className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+                    {[
+                      [t('race'), r.race[locale] || r.race.en],
+                      r.participantCategory && [t('type'), tc(r.participantCategory)],
+                      r.fee && [r.status === 'confirmed' ? t('fee') : t('toPay'), formatMoney(r.fee.amount, r.fee.currency)],
+                      [t('registered'), date(r.registeredAt)],
+                      r.confirmedAt && [t('confirmed'), date(r.confirmedAt)],
+                      r.collectionVenue && [t('kit'), r.collectionVenue[locale] || r.collectionVenue.en],
+                    ].filter(Boolean).map(([label, value]) => (
+                      <div key={label}>
+                        <dt className="text-xs font-bold uppercase tracking-wide text-primary/70">{label}</dt>
+                        <dd className="mt-0.5 font-semibold text-primary">{value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+
+                  <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                    {r.status !== 'confirmed' && (
+                      <Link to="/register#payment" className="inline-flex items-center justify-center min-h-12 px-5 rounded-lg bg-secondary text-primary font-bold">
+                        {t('howToPay')}
+                      </Link>
+                    )}
+                    {r.status === 'confirmed' && (
+                      <Link to="/race-day" className="inline-flex items-center justify-center min-h-12 px-5 rounded-lg bg-secondary text-primary font-bold">
+                        {t('raceDayGuide')}
+                      </Link>
+                    )}
+                    <a href="tel:+255755002886" className="inline-flex items-center justify-center gap-2 min-h-12 px-5 rounded-lg border border-primary/25 text-primary font-semibold hover:bg-primary/5">
+                      <FontAwesomeIcon icon={faPhone} />
+                      {t('callUs')}
+                    </a>
+                  </div>
                 </div>
-                <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-bold text-sm bg-tertiary ${STATUS[r.status].tone}`}>
-                  <FontAwesomeIcon icon={STATUS[r.status].icon} />
-                  {t(`status.${r.status}`)}
-                </span>
-              </header>
-
-              <div className="p-6">
-                <p className="text-primary">{t(`explain.${r.status}`)}</p>
-
-                <dl className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
-                  {[
-                    [t('race'), r.race[locale] || r.race.en],
-                    r.participantCategory && [t('type'), tc(r.participantCategory)],
-                    r.fee && [r.status === 'confirmed' ? t('fee') : t('toPay'), formatMoney(r.fee.amount, r.fee.currency)],
-                    [t('registered'), date(r.registeredAt)],
-                    r.confirmedAt && [t('confirmed'), date(r.confirmedAt)],
-                    r.collectionVenue && [t('kit'), r.collectionVenue[locale] || r.collectionVenue.en],
-                  ].filter(Boolean).map(([label, value]) => (
-                    <div key={label}>
-                      <dt className="text-xs font-bold uppercase tracking-wide text-primary/70">{label}</dt>
-                      <dd className="mt-0.5 font-semibold text-primary">{value}</dd>
-                    </div>
-                  ))}
-                </dl>
-
-                <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                  {r.status !== 'confirmed' && (
-                    <Link to="/register#payment" className="inline-flex items-center justify-center min-h-12 px-5 rounded-lg bg-secondary text-primary font-bold">
-                      {t('howToPay')}
-                    </Link>
-                  )}
-                  {r.status === 'confirmed' && (
-                    <Link to="/race-day" className="inline-flex items-center justify-center min-h-12 px-5 rounded-lg bg-secondary text-primary font-bold">
-                      {t('raceDayGuide')}
-                    </Link>
-                  )}
-                  <a href="tel:+255755002886" className="inline-flex items-center justify-center gap-2 min-h-12 px-5 rounded-lg border border-primary/25 text-primary font-semibold hover:bg-primary/5">
-                    <FontAwesomeIcon icon={faPhone} />
-                    {t('callUs')}
-                  </a>
-                </div>
-              </div>
-            </article>
+              </article>
+              ))}
+            </div>
           )}
         </div>
       </section>

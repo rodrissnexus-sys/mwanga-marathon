@@ -75,15 +75,17 @@ for (const locale of ["en", "sw"] as const) {
     expect(json[0].kids_shirt_size_id !== null).toBe(PERSON[locale].category === "child");
     expect(json[0].registration_id).toBe(registrationId);
 
-    // "check my registration": wrong phone → not found; right phone → pending
+    // "check my registration" with name + phone: wrong phone → not found;
+    // right phone → pending, with the registration ID shown back
     const t = TEXT[locale];
-    await page.goto(`${locale === "sw" ? "/sw" : ""}/registration-status?id=${registrationId}`, { waitUntil: "networkidle" });
-    await expect(page.locator("#status-id")).toHaveValue(registrationId);
+    await page.goto(`${locale === "sw" ? "/sw" : ""}/registration-status`, { waitUntil: "networkidle" });
+    await page.locator("#status-name").fill(`e2e ${locale}`); // any case, first + last name
     await page.locator("#status-phone").fill("0711 111 111");
     await page.getByRole("button", { name: t.check }).click();
     await expect(page.getByText(t.notFound)).toBeVisible();
     await page.locator("#status-phone").fill("0700 000 001"); // registered as +255700000001
     await page.getByRole("button", { name: t.check }).click();
-    await expect(page.getByText(t.status)).toBeVisible();
+    await expect(page.getByText(t.status).first()).toBeVisible();
+    await expect(page.getByText(registrationId)).toBeVisible(); // the ID is shown back
   });
 }
