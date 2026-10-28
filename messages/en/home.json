@@ -282,5 +282,11 @@
     "postalCode": "Postal Code",
     "enterPostalCode": "Enter postal code",
     "voucherCode": "Voucher Code (Optional)"
+  },
+  "heroEvent": {
+    "dateVenue": "20 December 2026 · C.D. Msuya Stadium, Mwanga",
+    "title": "Mwanga Marathon",
+    "theme": "Mwanga yetu, utalii wetu",
+    "countdownLabel": "Time left until race day"
   }
 }

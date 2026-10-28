@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { Link } from '@/lib/router';
 import Image from "next/image";
+import HeroEventTitle from "./HeroEventTitle";
 import { desktopImages, mobileImages } from "../data/heroData";
 
 const HeroSection = () => {
@@ -94,6 +95,9 @@ const HeroSection = () => {
           </div>
         ))}
       </div>
+
+      {/* Event title, date and countdown */}
+      <HeroEventTitle />
 
       {/* Main Content Container */}
       <div className="relative z-10 h-full flex items-end md:items-center">

@@ -282,5 +282,11 @@
     "postalCode": "Msimbo wa Posta",
     "enterPostalCode": "Ingiza msimbo wa posta",
     "voucherCode": "Msimbo wa Vocha (Si Lazima)"
+  },
+  "heroEvent": {
+    "dateVenue": "20 Desemba 2026 · Uwanja wa C.D. Msuya, Mwanga",
+    "title": "Mwanga Marathon",
+    "theme": "Mwanga yetu, utalii wetu",
+    "countdownLabel": "Muda uliobaki hadi siku ya mashindano"
   }
 }
