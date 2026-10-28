@@ -67,7 +67,7 @@ const ScheduleSkeleton = () => {
 
             {/* Event Card */}
             <div className="relative mx-5">
-              <div className="relative z-10 p-6 bg-white rounded-xl border-l-2 border-primary/20">
+              <div className="relative z-10 p-6 bg-tertiary rounded-xl border-l-2 border-primary/20">
                 {/* Content */}
                 <div className="space-y-3">
                   <div className="h-5 bg-primary/20 rounded w-3/4"></div>
@@ -188,7 +188,7 @@ const ScheduleSection = () => {
         {loading ? (
           <ScheduleSkeleton />
         ) : error || !scheduleData || scheduleData.length === 0 || scheduleData[0]?.day === "N/A" ? (
-          <div className="text-center py-16 bg-white rounded-2xl shadow-md border border-primary/10">
+          <div className="text-center py-16 bg-tertiary rounded-2xl shadow-md border border-primary/10">
             <div className="max-w-md mx-auto px-6">
               <div className="mb-6">
                 <FontAwesomeIcon icon={faCalendarDay} className="text-6xl text-primary/30 mb-4" />
@@ -214,7 +214,7 @@ const ScheduleSection = () => {
           <>
             {/* Day selection */}
             <div className="flex justify-center mb-12">
-              <div className="flex gap-1 p-1 bg-tertiary rounded-lg border border-primary/10 overflow-x-auto w-full max-w-[90vw] md:max-w-max">
+              <div className="flex gap-1 p-1 bg-tertiary rounded-lg border border-primary/10 overflow-x-auto max-w-full">
                 {scheduleData.map((day, index) => (
                   <button
                     key={index}
@@ -258,22 +258,19 @@ const ScheduleSection = () => {
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
                   {/* Time Node */}
-                  <div className="absolute left-0 top-0">
-                    <div className="relative">
-                      <div className="w-10 h-10 rounded-lg bg-white border-2 border-secondary flex items-center justify-center transform transition-transform duration-300 group-hover:rotate-45">
+                  <div className="absolute left-0 top-6 z-20">
+                    <div className="relative w-10 h-10">
+                      <div className="w-10 h-10 rounded-lg bg-tertiary border-2 border-secondary flex items-center justify-center">
                         <FontAwesomeIcon icon={event.icon || faClock} className="text-primary text-sm" />
                       </div>
-                      <div className="absolute top-1/2 left-full w-3 h-px bg-primary/30"></div>
-                    </div>
-                    <div className="mt-2 text-xs font-medium text-primary/75 text-center">
-                      {event.time}
+                      <div className="absolute top-1/2 left-full w-7 h-px bg-primary/30"></div>
                     </div>
                   </div>
 
                   {/* Event Card */}
                   <div className="relative group mx-5">
                     <div className={`
-                      relative z-10 p-6 bg-white rounded-xl
+                      relative z-10 p-5 sm:p-6 bg-tertiary rounded-xl shadow-sm
                       transition-all duration-300 transform
                       border-l-2 border-primary/20
                       hover:border-l-4 hover:border-secondary
@@ -281,7 +278,13 @@ const ScheduleSection = () => {
                     `}>
                       {/* Content */}
                       <div className="space-y-2">
-                        <h3 className="text-xl font-semibold text-text-primary group-hover:text-primary transition-colors duration-300">
+                        {event.time && (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/40 text-primary text-xs font-semibold uppercase tracking-wider">
+                            <FontAwesomeIcon icon={faClock} className="text-[10px]" />
+                            {event.time}
+                          </span>
+                        )}
+                        <h3 className="text-lg sm:text-xl font-semibold text-text-primary group-hover:text-primary transition-colors duration-300">
                           {event.title}
                         </h3>
                         <p className="text-text-primary/70">{event.description}</p>

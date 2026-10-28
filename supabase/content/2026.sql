@@ -5,6 +5,7 @@
 -- registration closes 10 December 2026.
 -- Items marked TO CONFIRM are placeholders the organiser still has to give.
 --
+-- Needs migration 20261028000001 (schedule time_en/time_sw).
 -- Run once:  psql "$DATABASE_URL" -v ON_ERROR_STOP=1 --single-transaction -f supabase/content/2026.sql
 
 -- 2025 races stay in the database (old registrations point to them) but are hidden.
@@ -136,30 +137,30 @@ with day as (
   returning id
 )
 insert into public.schedule_events
-  (schedule_day_id, time, title_en, title_sw, location_en, location_sw, description_en, description_sw, icon, sort_order)
+  (schedule_day_id, time_en, time_sw, title_en, title_sw, location_en, location_sw, description_en, description_sw, icon, sort_order)
 select day.id, e.*
 from day, (values
-  ('Morning', 'Races', 'Mashindano ya mbio',
+  ('Morning', 'Asubuhi', 'Races', 'Mashindano ya mbio',
    'C.D. Msuya Stadium', 'Uwanja wa C.D. Msuya',
    'Half Marathon (21.1 km), Trail Run (10 km), Fun Run (5 km) and the 2.5 km Walking Safari.',
    'Nusu Marathon (km 21.1), Trail Run (km 10), Fun Run (km 5) na Walking Safari ya km 2.5.',
    'faRunning', 1),
-  ('Midday', 'Awards & tug of war', 'Zawadi na kuvuta kamba',
+  ('Midday', 'Mchana', 'Awards & tug of war', 'Zawadi na kuvuta kamba',
    'C.D. Msuya Stadium', 'Uwanja wa C.D. Msuya',
    'Medals and prizes for the winners and best clubs, and the tug-of-war contest between running clubs.',
    'Medali na zawadi kwa washindi na vilabu bora, na mashindano ya kuvuta kamba kati ya vilabu.',
    'faAward', 2),
-  ('Afternoon – evening', 'Mwanga Utalii Festival', 'Mwanga Utalii Festivals',
+  ('Afternoon – evening', 'Mchana – jioni', 'Mwanga Utalii Festival', 'Mwanga Utalii Festivals',
    'C.D. Msuya Stadium', 'Uwanja wa C.D. Msuya',
    'New-generation artists, traditional ngoma, traditional food and the Ndafu Zone.',
    'Wasanii wa kizazi kipya, ngoma za asili, vyakula vya asili na Ndafu Zone.',
    'faMusic', 3),
-  ('All day', 'Exhibitions', 'Maonesho',
+  ('All day', 'Siku nzima', 'Exhibitions', 'Maonesho',
    'C.D. Msuya Stadium', 'Uwanja wa C.D. Msuya',
    'Tourism attractions of Mwanga and Kilimanjaro, crafts, local products and business opportunities.',
    'Vivutio vya utalii vya Mwanga na Kilimanjaro, kazi za mikono, bidhaa za ndani na fursa za biashara.',
    'faTree', 4)
-) as e(time, title_en, title_sw, location_en, location_sw, description_en, description_sw, icon, sort_order);
+) as e(time_en, time_sw, title_en, title_sw, location_en, location_sw, description_en, description_sw, icon, sort_order);
 
 -- What visitors now see
 select 'race: ' || name_en || ' — TZS ' || local_price || ' / USD ' || foreign_price || (case when is_kids_event then ' (kids)' else '' end)

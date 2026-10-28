@@ -8,8 +8,8 @@ const FEATURE_SHARED = ['icon', 'sort_order', 'is_active'];
 
 const DAY_TEXT = ['day', 'date'];
 const DAY_SHARED = ['day_identifier', 'is_active', 'sort_order'];
-const SCHEDULE_EVENT_TEXT = ['title', 'location', 'description'];
-const SCHEDULE_EVENT_SHARED = ['time', 'icon', 'sort_order', 'is_active'];
+const SCHEDULE_EVENT_TEXT = ['time', 'title', 'location', 'description'];
+const SCHEDULE_EVENT_SHARED = ['icon', 'sort_order', 'is_active'];
 
 const pick = (values, fields) =>
     Object.fromEntries(fields.filter((field) => values[field] !== undefined).map((field) => [field, values[field]]));

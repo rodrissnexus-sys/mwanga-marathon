@@ -261,14 +261,14 @@ isOneToOne: false
                   ]
                 },"schedule_events": {
                   Row: {
-                    "created_at": string,"description_en": string,"description_sw": string | null,"icon": string,"id": number,"is_active": boolean,"location_en": string,"location_sw": string | null,"schedule_day_id": number,"sort_order": number,"time": string,"title_en": string,"title_sw": string | null,"updated_at": string
+                    "created_at": string,"description_en": string,"description_sw": string | null,"icon": string,"id": number,"is_active": boolean,"location_en": string,"location_sw": string | null,"schedule_day_id": number,"sort_order": number,"time_en": string,"time_sw": string | null,"title_en": string,"title_sw": string | null,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "created_at"?: string,"description_en": string,"description_sw"?: string | null,"icon": string,"id"?: number,"is_active"?: boolean,"location_en": string,"location_sw"?: string | null,"schedule_day_id": number,"sort_order"?: number,"time": string,"title_en": string,"title_sw"?: string | null,"updated_at"?: string
+                    "created_at"?: string,"description_en": string,"description_sw"?: string | null,"icon": string,"id"?: number,"is_active"?: boolean,"location_en": string,"location_sw"?: string | null,"schedule_day_id": number,"sort_order"?: number,"time_en": string,"time_sw"?: string | null,"title_en": string,"title_sw"?: string | null,"updated_at"?: string
                   }
                   Update: {
-                    "created_at"?: string,"description_en"?: string,"description_sw"?: string | null,"icon"?: string,"id"?: number,"is_active"?: boolean,"location_en"?: string,"location_sw"?: string | null,"schedule_day_id"?: number,"sort_order"?: number,"time"?: string,"title_en"?: string,"title_sw"?: string | null,"updated_at"?: string
+                    "created_at"?: string,"description_en"?: string,"description_sw"?: string | null,"icon"?: string,"id"?: number,"is_active"?: boolean,"location_en"?: string,"location_sw"?: string | null,"schedule_day_id"?: number,"sort_order"?: number,"time_en"?: string,"time_sw"?: string | null,"title_en"?: string,"title_sw"?: string | null,"updated_at"?: string
                   }
                   Relationships: [
                     {
