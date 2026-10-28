@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import PrimaryButton from "../components/common/buttons/PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faHome, faCalendar, faEnvelope, faGift, faInfoCircle, faHighlighter, faRunning, faGlobe, faChevronDown, faPhone, faMapMarkerAlt, faBars, faXmark, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faHome, faCalendar, faEnvelope, faGift, faInfoCircle, faHighlighter, faRunning, faGlobe, faChevronDown, faPhone, faMapMarkerAlt, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const GradientButton = ({ children, onClick, className = '', gradientFrom = 'from-secondary/80', gradientTo = 'to-secondary', to, compact = false }) => {
   const ButtonContent = (
@@ -377,30 +377,33 @@ const Header = () => {
         <div className="hide-mobile-1390 flex items-center">
           {/* Mobile Menu Toggle Button */}
           <button
-            className="relative w-11 h-11 flex items-center justify-center rounded-lg text-primary hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-primary cursor-pointer"
+            className="relative w-11 h-11 flex items-center justify-center rounded-lg text-primary focus-visible:outline-2 focus-visible:outline-primary cursor-pointer"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={t("toggleMenu")}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-menu"
           >
-            <FontAwesomeIcon icon={mobileMenuOpen ? faXmark : faBars} className="text-xl" />
+            {/* the original three-line icon, turning into an X when open */}
+            <div className={`w-6 flex flex-col items-end space-y-1.5 transition-all duration-300 transform ${mobileMenuOpen ? "rotate-180" : ""}`}>
+              <span className={`block h-0.5 rounded transition-all duration-300 transform origin-right ${mobileMenuOpen ? "w-6 bg-primary rotate-45 translate-y-1.5" : "w-6 bg-primary"}`}></span>
+              <span className={`block h-0.5 rounded transition-all duration-300 ${mobileMenuOpen ? "w-0 opacity-0 bg-primary" : "w-4 bg-primary"}`}></span>
+              <span className={`block h-0.5 rounded transition-all duration-300 transform origin-right ${mobileMenuOpen ? "w-6 bg-primary -rotate-45 -translate-y-1.5" : "w-5 bg-primary"}`}></span>
+            </div>
           </button>
         </div>
       </nav>
 
-      {/* Backdrop behind the phone menu: tap to close */}
+      {/* Invisible layer behind the phone menu: tapping outside it closes the menu */}
       <div
         aria-hidden="true"
         onClick={() => setMobileMenuOpen(false)}
-        className={`fixed inset-0 top-[90px] z-30 bg-primary/60 backdrop-blur-[2px] transition-opacity duration-300 ${
-          mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 top-[90px] z-30 ${mobileMenuOpen ? "" : "pointer-events-none"}`}
       />
 
       {/* Enhanced Mobile Menu Dropdown */}
       <div
         id="mobile-menu"
-        className={`fixed inset-x-0 top-[90px] z-40 max-h-[calc(100dvh-90px)] overflow-y-auto overscroll-contain bg-tertiary rounded-b-2xl shadow-xl border-b border-primary/10 transition-all duration-300 transform ${
+        className={`fixed inset-x-0 top-[90px] z-40 max-h-[calc(100dvh-90px)] overflow-y-auto overscroll-contain bg-tertiary rounded-b-2xl shadow-xl border-b border-primary/10 transition-all duration-500 transform ${
           mobileMenuOpen ? "translate-y-0 opacity-100 visible" : "-translate-y-full opacity-0 invisible pointer-events-none"
         }`}
       >

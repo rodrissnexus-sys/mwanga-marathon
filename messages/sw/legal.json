@@ -1,0 +1,193 @@
+{
+  "updated": "Ilisasishwa: {date}",
+  "contents": "Kwenye ukurasa huu",
+  "questionsTitle": "Una maswali?",
+  "questionsText": "Wasiliana na timu ya MWAFEM tutakusaidia.",
+  "privacyLink": "Sera ya Faragha",
+  "termsLink": "Vigezo na Masharti",
+  "privacy": {
+    "title": "Sera ya Faragha",
+    "intro": "Sera hii inaeleza taarifa ambazo Mwanga Festival & Marathon (MWAFEM) inakusanya unapotumia tovuti hii, kwa nini tunazikusanya, nani anaweza kuziona na tunazihifadhi kwa muda gani. Tunafuata Sheria ya Ulinzi wa Taarifa Binafsi ya Tanzania, 2022.",
+    "sections": [
+      {
+        "title": "Sisi ni nani",
+        "paragraphs": [
+          "MWAFEM inaandaliwa na Kisangara Tours Ltd, Plot No. 48, Block No. 21 Colonel Middleton Rd, Arusha, Tanzania. Tunawajibika kwa taarifa unazotupa kwenye tovuti hii. Unaweza kutufikia kupitia info@mwafem.com au +255 755 002 886."
+        ]
+      },
+      {
+        "title": "Taarifa tunazokusanya",
+        "paragraphs": [
+          "Tunaomba tu kile tunachohitaji kuandaa tukio kwa usalama:"
+        ],
+        "items": [
+          "Usajili: jina la kwanza na la familia, barua pepe, namba ya simu, tarehe ya kuzaliwa, jinsia, kundi la utaifa, nchi, namba ya kitambulisho au pasipoti (si lazima), mbio ulizochagua, aina ya mshiriki, ukubwa wa T-shirt, kituo cha kuchukua vifaa, jina na namba ya mtu wa dharura, na msimbo wa vocha kama unao.",
+          "Malipo: kama umelipa, njia ya malipo, kumbukumbu ya malipo, kiasi, na mfanyakazi aliyethibitisha. Hatupokei kamwe PIN ya pesa za simu, taarifa za kuingia benki wala za kadi.",
+          "Ujumbe: jina, barua pepe, simu na ujumbe wako unapotumia fomu za mawasiliano, ushirikiano au kujitolea.",
+          "Jarida: barua pepe yako na lugha unayopendelea.",
+          "Taarifa za kiufundi: anwani yako ya IP huhifadhiwa kwa dakika chache kuzuia majaribio ya mara kwa mara au ya kiotomatiki; takwimu za matembeleo zisizokutambulisha (hakuna vidakuzi vya matangazo); na kidakuzi kinachokumbuka lugha yako."
+        ]
+      },
+      {
+        "title": "Jinsi tunavyotumia taarifa zako",
+        "items": [
+          "Kukusajili, kukupa namba ya usajili na kuandaa namba yako ya mbio na vifaa.",
+          "Kukokotoa ada yako (inategemea umri, aina ya mshiriki na kundi la utaifa) na kuthibitisha malipo yako.",
+          "Kuwasiliana nawe kuhusu tukio: malipo, kuchukua vifaa, mabadiliko ya ratiba na taarifa za usalama.",
+          "Kumpigia mtu wako wa dharura ikitokea jambo siku ya mbio.",
+          "Kukuwezesha kuangalia usajili wako kwa jina na namba ya simu. Uhakiki huu unaonyesha tu namba ya usajili, mbio na hali ya malipo — kamwe si taarifa zako nyingine.",
+          "Kujibu ujumbe wako na, kama umejiunga, kukutumia habari za tukio.",
+          "Kupanga tukio na kutoa takwimu za jumla (kwa mfano idadi ya wakimbiaji kwa kila mbio) ambazo hazikutambulishi."
+        ]
+      },
+      {
+        "title": "Nani anaweza kuona taarifa zako",
+        "paragraphs": [
+          "Hatuuzi wala kukodisha taarifa zako, na hatuzipi wadhamini au washirika kwa matangazo yao."
+        ],
+        "items": [
+          "Wafanyakazi wa MWAFEM walioidhinishwa (wasimamizi na watawala) huona usajili na ujumbe kupitia dashibodi iliyolindwa kwa nenosiri. Kila mabadiliko ya malipo hurekodiwa pamoja na jina la mfanyakazi aliyeyafanya.",
+          "Watoa huduma wanaoendesha tovuti kwa niaba yetu: Supabase (hifadhidata), Vercel (kuhifadhi tovuti na takwimu zisizokutambulisha) na mtoa huduma wetu wa barua pepe. Wanaweza kutumia taarifa hizo tu kutupa huduma yao.",
+          "Matokeo yakichapishwa, yataonyesha jina lako, mbio, kundi na muda.",
+          "Mamlaka za serikali, sheria ikihitaji au wakati wa dharura ya kiafya."
+        ]
+      },
+      {
+        "title": "Picha na video",
+        "paragraphs": [
+          "Tukio hupigwa picha na kurekodiwa. Picha zinaweza kuonekana kwenye tovuti hii na mitandao yetu ya kijamii kuripoti na kutangaza tukio. Kama hutaki picha yako itumike, wasiliana nasi na tutaiondoa pale inapowezekana."
+        ]
+      },
+      {
+        "title": "Taarifa zako zinahifadhiwa wapi",
+        "paragraphs": [
+          "Watoa huduma wetu wanaweza kuhifadhi taarifa kwenye seva salama nje ya Tanzania. Tunatumia tu watoa huduma wanaozilinda kwa usimbaji fiche na udhibiti wa ufikiaji."
+        ]
+      },
+      {
+        "title": "Tunazihifadhi kwa muda gani",
+        "items": [
+          "Usajili na kumbukumbu za malipo: hadi miaka 2 baada ya tukio, ili tuweze kujibu maswali na kutunza kumbukumbu za fedha, kisha hufutwa au kufanywa zisizokutambulisha. Baadhi ya kumbukumbu za malipo zinaweza kuhifadhiwa muda mrefu zaidi sheria ikihitaji.",
+          "Ujumbe: hadi mwaka 1 baada ya kujibiwa.",
+          "Jarida: hadi utakapoomba kuondolewa.",
+          "Anwani za IP za kuzuia majaribio ya mara kwa mara: dakika chache."
+        ]
+      },
+      {
+        "title": "Jinsi tunavyozilinda",
+        "paragraphs": [
+          "Tovuti inatumia muunganisho uliosimbwa (HTTPS). Taarifa zinahifadhiwa kwenye hifadhidata iliyolindwa ambapo kila nafasi ya mfanyakazi inaweza kufanya kile inachohitaji tu, na akaunti za wafanyakazi ni za mtu binafsi. Namba za usajili ni za nasibu, hivyo haziwezi kubashiriwa kumtafuta mtu mwingine."
+        ]
+      },
+      {
+        "title": "Haki zako",
+        "paragraphs": [
+          "Unaweza kutuomba tukuonyeshe taarifa tulizonazo kukuhusu, kuzirekebisha, kuzifuta, au kuacha kuzitumia kwa habari. Unaweza pia kuondoa ridhaa yako wakati wowote — hili haliathiri tulichofanya kabla. Wasiliana na info@mwafem.com au +255 755 002 886 na tutakujibu haraka iwezekanavyo. Kama haujaridhika, unaweza kuwasilisha malalamiko kwa Tume ya Ulinzi wa Taarifa Binafsi Tanzania."
+        ]
+      },
+      {
+        "title": "Watoto",
+        "paragraphs": [
+          "Washiriki walio chini ya miaka 18 lazima wasajiliwe na mzazi au mlezi, ambaye anatoa taarifa na kukubali sera hii kwa niaba yao."
+        ]
+      },
+      {
+        "title": "Mabadiliko ya sera hii",
+        "paragraphs": [
+          "Tunaweza kusasisha sera hii. Tarehe iliyo juu inaonyesha toleo la karibuni; mabadiliko muhimu yatatangazwa pia kwenye tovuti."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "title": "Vigezo na Masharti",
+    "intro": "Vigezo hivi vinatumika unapojisajili kwa Mwanga Festival & Marathon (MWAFEM) au kutumia tovuti hii. Kwa kujisajili wewe au mtu mwingine, unavikubali. Tafadhali visome kwa makini.",
+    "sections": [
+      {
+        "title": "Tukio",
+        "paragraphs": [
+          "Mwanga Festival & Marathon inafanyika tarehe 20 Desemba 2026 katika Uwanja wa C.D. Msuya, Mwanga, na inaandaliwa na Kisangara Tours Ltd. Mbio, muda wa kuanza na njia zimeelezwa kwenye tovuti hii."
+        ]
+      },
+      {
+        "title": "Usajili",
+        "items": [
+          "Toa taarifa za kweli na kamili. Usajili mmoja ni wa mtu mmoja.",
+          "Usajili unafungwa tarehe 10 Desemba 2026, au mapema zaidi kama mbio zimejaa.",
+          "Nafasi yako inathibitishwa tu baada ya timu yetu kuhakiki na kuthibitisha malipo yako.",
+          "Hifadhi namba yako ya usajili: unaihitaji kama kumbukumbu ya malipo na kuchukua vifaa vya mbio.",
+          "Tunaweza kukataa au kufuta usajili wenye taarifa za uongo."
+        ]
+      },
+      {
+        "title": "Ada za kushiriki na malipo",
+        "items": [
+          "Ada inategemea aina ya mshiriki (mtu mzima, mwanachama wa klabu ya mbio, mwanafunzi, mtoto au mzee) na inaonyeshwa kabla ya kujisajili.",
+          "Washiriki kutoka nje ya Afrika Mashariki na SADC hulipa USD 30; watoto na wazee hulipa kiwango cha Kitanzania kila wakati.",
+          "Wanachama wa vilabu na wanafunzi lazima waonyeshe kadi ya klabu au kitambulisho cha mwanafunzi wanapochukua vifaa; vinginevyo ada ya mtu mzima inatumika.",
+          "Lipa kwa pesa za simu au benki na utumie namba yako ya usajili kama kumbukumbu."
+        ]
+      },
+      {
+        "title": "Kurejesha ada na kuhamisha usajili",
+        "paragraphs": [
+          "Ada za kushiriki hazirejeshwi na usajili hauwezi kuhamishiwa kwa mtu mwingine. Waandaaji wakighairi tukio, tutawasiliana na kila mshiriki aliyesajiliwa kueleza njia zilizopo."
+        ]
+      },
+      {
+        "title": "Watoto na vijana",
+        "paragraphs": [
+          "Washiriki walio chini ya miaka 18 lazima wasajiliwe na mzazi au mlezi, anayekubali vigezo hivi kwa niaba yao. Watoto wa miaka 10 na chini hushiriki katika makundi ya watoto na lazima wawe na mtu mzima siku ya mbio."
+        ]
+      },
+      {
+        "title": "Afya na usalama",
+        "items": [
+          "Unashiriki kwa hatari yako mwenyewe na unathibitisha kuwa una afya ya kutosha kwa mbio ulizochagua. Ukiwa na shaka, muone daktari kwanza.",
+          "Fuata maelekezo ya wasimamizi wa njia, wahudumu wa afya na polisi. Wanaweza kukusimamisha kama wanaona si salama uendelee.",
+          "Tujulishe hali yoyote ya kiafya ambayo timu ya afya inapaswa kuijua.",
+          "Waandaaji hawawajibiki kwa mali binafsi zilizopotea au kuharibika, wala kwa majeraha au ugonjwa, isipokuwa pale sheria inaposema vinginevyo."
+        ]
+      },
+      {
+        "title": "Siku ya mbio",
+        "items": [
+          "Vaa namba yako ya mbio (bib) mbele, mahali inapoonekana.",
+          "Fuata njia iliyowekewa alama na uheshimu muda wa mwisho uliotangazwa na waandaaji.",
+          "Waheshimu washiriki wengine, jamii, wanyamapori na mazingira — tumia mapipa ya taka yaliyowekwa."
+        ]
+      },
+      {
+        "title": "Vifaa vya mbio",
+        "paragraphs": [
+          "Chukua vifaa vyako kwenye kituo ulichochagua, ukiwa na namba ya usajili na kitambulisho. Ukubwa wa T-shirt hutolewa kwa mpangilio wa usajili na malipo yaliyothibitishwa, kadri zinavyopatikana."
+        ]
+      },
+      {
+        "title": "Mabadiliko na kughairi",
+        "paragraphs": [
+          "Waandaaji wanaweza kubadilisha tarehe, ratiba, njia au mbio kwa sababu ya hali ya hewa, usalama au maelekezo ya mamlaka. Tutatangaza mabadiliko kwenye tovuti hii na, inapowezekana, kuwasiliana na washiriki kwa simu au barua pepe."
+        ]
+      },
+      {
+        "title": "Picha na video",
+        "paragraphs": [
+          "Kwa kushiriki unakubali kuwa picha na video za tukio, ambazo zinaweza kukuonyesha, zitumike kuripoti na kutangaza MWAFEM. Angalia Sera ya Faragha kujua jinsi ya kutuomba tuondoe picha."
+        ]
+      },
+      {
+        "title": "Taarifa zako",
+        "paragraphs": [
+          "Tunatumia taarifa zako kama ilivyoelezwa kwenye Sera yetu ya Faragha."
+        ]
+      },
+      {
+        "title": "Sheria",
+        "paragraphs": [
+          "Vigezo hivi vinasimamiwa na sheria za Jamhuri ya Muungano wa Tanzania."
+        ]
+      }
+    ]
+  },
+  "alsoRead": "Soma pia"
+}

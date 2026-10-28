@@ -273,7 +273,8 @@
       "fee": "Entry fee",
       "payAfter": "You pay after registering — you will get your registration ID to use as the payment reference."
     },
-    "foreignShort": "Visitors from outside East Africa and SADC pay USD 30."
+    "foreignShort": "Visitors from outside East Africa and SADC pay USD 30.",
+    "agree": "By registering you accept our <terms>Terms and Conditions</terms> and <privacy>Privacy Policy</privacy>."
   },
   "form": {
     "nationalityCategory": "Nationality Category",

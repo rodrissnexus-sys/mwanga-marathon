@@ -28,5 +28,9 @@
     "invalid": "Please enter a valid email address.",
     "tooMany": "Too many attempts. Please try again later.",
     "failed": "Something went wrong. Please try again."
+  },
+  "legal": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms and Conditions"
   }
 }

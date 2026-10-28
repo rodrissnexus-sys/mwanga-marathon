@@ -15,6 +15,8 @@ const PAGES = [
   { href: "/volunteer", priority: 0.6, changeFrequency: "monthly" },
   { href: "/registration-status", priority: 0.5, changeFrequency: "yearly" },
   { href: "/contact", priority: 0.6, changeFrequency: "yearly" },
+  { href: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+  { href: "/terms", priority: 0.3, changeFrequency: "yearly" },
 ] as const;
 
 const url = (locale: (typeof routing.locales)[number], href: string) =>

@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faCheck, faCircleExclamation, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import SectionHeader from "@/components/common/SectionHeader";
+import { Link } from "@/lib/router";
 import { ageOnRaceDay, categoriesForAge, categoryFee, formatMoney } from "@/lib/payments";
 import { EVENT } from "@/lib/event";
 import RegistrationConfirmation from "./RegistrationConfirmation";
@@ -484,7 +485,16 @@ const RegistrationSection = () => {
 
                 {steps[step]}
 
-                <div className="mt-8 flex gap-3">
+                {step === STEPS.length - 1 && (
+                  <p className="mt-6 text-xs text-tertiary/75">
+                    {t.rich("agree", {
+                      terms: (chunks) => <Link to="/terms" className="text-secondary underline underline-offset-2">{chunks}</Link>,
+                      privacy: (chunks) => <Link to="/privacy" className="text-secondary underline underline-offset-2">{chunks}</Link>,
+                    })}
+                  </p>
+                )}
+
+                <div className="mt-6 flex gap-3">
                   {step > 0 && (
                     <button
                       type="button"

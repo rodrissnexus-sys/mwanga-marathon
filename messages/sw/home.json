@@ -273,7 +273,8 @@
       "fee": "Ada ya kushiriki",
       "payAfter": "Unalipa baada ya kujisajili — utapata namba ya usajili ya kutumia kama kumbukumbu ya malipo."
     },
-    "foreignShort": "Washiriki kutoka nje ya Afrika Mashariki na SADC hulipa USD 30."
+    "foreignShort": "Washiriki kutoka nje ya Afrika Mashariki na SADC hulipa USD 30.",
+    "agree": "Kwa kujisajili unakubali <terms>Vigezo na Masharti</terms> na <privacy>Sera ya Faragha</privacy> yetu."
   },
   "form": {
     "nationalityCategory": "Utaifa",

@@ -1,0 +1,193 @@
+{
+  "updated": "Last updated: {date}",
+  "contents": "On this page",
+  "questionsTitle": "Questions?",
+  "questionsText": "Contact the MWAFEM team and we will help.",
+  "privacyLink": "Privacy Policy",
+  "termsLink": "Terms and Conditions",
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "This policy explains what information Mwanga Festival & Marathon (MWAFEM) collects when you use this website, why we collect it, who can see it and how long we keep it. We follow the Personal Data Protection Act, 2022 of Tanzania.",
+    "sections": [
+      {
+        "title": "Who we are",
+        "paragraphs": [
+          "MWAFEM is organised by Kisangara Tours Ltd, Plot No. 48, Block No. 21 Colonel Middleton Rd, Arusha, Tanzania. We are responsible for the information you give us on this website. You can reach us at info@mwafem.com or +255 755 002 886."
+        ]
+      },
+      {
+        "title": "Information we collect",
+        "paragraphs": [
+          "We only ask for what we need to organise the event safely:"
+        ],
+        "items": [
+          "Registration: first and last name, email, phone number, date of birth, gender, nationality category, country, ID or passport number (optional), chosen race, participant type, T-shirt size, kit collection point, emergency contact name and number, and voucher code if you have one.",
+          "Payments: whether you have paid, the payment method, the payment reference, the amount, and which staff member confirmed it. We never receive your mobile money PIN, bank login or card details.",
+          "Messages: your name, email, phone and message when you use the contact, partnership or volunteer forms.",
+          "Newsletter: your email address and preferred language.",
+          "Technical information: your IP address is kept for a few minutes to stop repeated or automated attempts; anonymous visit statistics (no advertising cookies); and a cookie that remembers your language."
+        ]
+      },
+      {
+        "title": "How we use your information",
+        "items": [
+          "To register you, give you a registration ID and prepare your race number and kit.",
+          "To work out your entry fee (it depends on your age, participant type and nationality category) and to confirm your payment.",
+          "To contact you about the event: payment, kit collection, schedule changes and safety information.",
+          "To call your emergency contact if something happens to you on race day.",
+          "To let you check your registration with your name and phone number. This check shows only your registration ID, race and payment status — never your other details.",
+          "To answer your messages and, if you subscribed, to send you event news.",
+          "To plan the event and produce overall statistics (for example the number of runners per race), which never identify you."
+        ]
+      },
+      {
+        "title": "Who can see your information",
+        "paragraphs": [
+          "We do not sell or rent your information, and we do not give it to sponsors or partners for their own marketing."
+        ],
+        "items": [
+          "Authorised MWAFEM staff (moderators and administrators) see registrations and messages through a password-protected dashboard. Every payment change is recorded with the name of the staff member who made it.",
+          "Service providers that run the website for us: Supabase (database), Vercel (website hosting and anonymous statistics) and our email provider. They may only use the information to provide their service to us.",
+          "If results are published, they show your name, race, category and time.",
+          "Authorities, if the law requires it or in a medical emergency."
+        ]
+      },
+      {
+        "title": "Photos and video",
+        "paragraphs": [
+          "The event is photographed and filmed. Pictures may appear on this website and our social media to report on and promote the event. If you do not want a picture of you to be used, contact us and we will remove it where possible."
+        ]
+      },
+      {
+        "title": "Where your information is stored",
+        "paragraphs": [
+          "Our service providers may store information on secure servers outside Tanzania. We only use providers that protect it with encryption and access controls."
+        ]
+      },
+      {
+        "title": "How long we keep it",
+        "items": [
+          "Registrations and payment records: up to 2 years after the event, so we can answer questions and keep financial records, then they are deleted or made anonymous. Some payment records may be kept longer if the law requires it.",
+          "Messages: up to 1 year after they are answered.",
+          "Newsletter: until you ask to be removed.",
+          "IP addresses used to stop repeated attempts: a few minutes."
+        ]
+      },
+      {
+        "title": "How we protect it",
+        "paragraphs": [
+          "The website uses encrypted connections (HTTPS). Information is stored in a protected database where each staff role can only do what it needs to, and staff accounts are personal. Registration IDs are random, so they cannot be guessed to look up someone else."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "paragraphs": [
+          "You can ask us to show you the information we hold about you, correct it, delete it, or stop using it for news. You can also withdraw your consent at any time — this does not affect what we did before. Contact info@mwafem.com or +255 755 002 886 and we will reply as soon as possible. If you are not satisfied, you may complain to the Personal Data Protection Commission of Tanzania."
+        ]
+      },
+      {
+        "title": "Children",
+        "paragraphs": [
+          "Participants under 18 must be registered by a parent or guardian, who gives the information and agrees to this policy on their behalf."
+        ]
+      },
+      {
+        "title": "Changes to this policy",
+        "paragraphs": [
+          "We may update this policy. The date at the top shows the latest version; important changes will also be announced on the website."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms and Conditions",
+    "intro": "These terms apply when you register for Mwanga Festival & Marathon (MWAFEM) or use this website. By registering yourself or someone else, you accept them. Please read them carefully.",
+    "sections": [
+      {
+        "title": "The event",
+        "paragraphs": [
+          "Mwanga Festival & Marathon takes place on 20 December 2026 at C.D. Msuya Stadium, Mwanga, and is organised by Kisangara Tours Ltd. The races, start times and routes are described on this website."
+        ]
+      },
+      {
+        "title": "Registration",
+        "items": [
+          "Give true and complete information. One registration is for one person.",
+          "Registration closes on 10 December 2026, or earlier if a race is full.",
+          "Your place is confirmed only after our team has checked and confirmed your payment.",
+          "Keep your registration ID: you need it as the payment reference and to collect your race kit.",
+          "We may refuse or cancel a registration with false information."
+        ]
+      },
+      {
+        "title": "Entry fees and payment",
+        "items": [
+          "The fee depends on the participant type (adult, running club member, student, child or elder) and is shown before you register.",
+          "Participants from outside East Africa and SADC pay USD 30; children and elders always pay the Tanzanian rate.",
+          "Club members and students must show a club card or student ID at kit collection; otherwise the adult fee applies.",
+          "Pay by mobile money or bank transfer and use your registration ID as the reference."
+        ]
+      },
+      {
+        "title": "Refunds and transfers",
+        "paragraphs": [
+          "Entry fees are not refundable and a registration cannot be transferred to another person. If the organisers cancel the event, we will contact every registered participant to explain the options."
+        ]
+      },
+      {
+        "title": "Children and young people",
+        "paragraphs": [
+          "Participants under 18 must be registered by a parent or guardian, who accepts these terms for them. Children aged 10 and under take part in the children’s categories and must be accompanied by an adult on race day."
+        ]
+      },
+      {
+        "title": "Health and safety",
+        "items": [
+          "You take part at your own risk and confirm that you are fit enough for the race you chose. If in doubt, ask a doctor first.",
+          "Follow the instructions of marshals, medical staff and the police. They may stop you if they think it is unsafe for you to continue.",
+          "Tell us about any medical condition that the medical team should know about.",
+          "The organisers are not responsible for lost or damaged personal belongings, or for injury or illness, except where the law says otherwise."
+        ]
+      },
+      {
+        "title": "On race day",
+        "items": [
+          "Wear your race number (bib) on the front, where it can be seen.",
+          "Follow the marked route and respect the cut-off times announced by the organisers.",
+          "Respect other participants, the community, wildlife and the environment — use the bins provided."
+        ]
+      },
+      {
+        "title": "Race kit",
+        "paragraphs": [
+          "Collect your kit at the collection point you chose, with your registration ID and an identity document. T-shirt sizes are reserved in the order of registration and confirmed payment, while stocks last."
+        ]
+      },
+      {
+        "title": "Changes and cancellation",
+        "paragraphs": [
+          "The organisers may change the date, programme, routes or races because of weather, safety or instructions from the authorities. We will announce changes on this website and, where possible, contact registered participants by phone or email."
+        ]
+      },
+      {
+        "title": "Photos and video",
+        "paragraphs": [
+          "By taking part you agree that photos and videos of the event, which may show you, can be used to report on and promote MWAFEM. See the Privacy Policy for how to ask us to remove a picture."
+        ]
+      },
+      {
+        "title": "Your information",
+        "paragraphs": [
+          "We use your information as explained in our Privacy Policy."
+        ]
+      },
+      {
+        "title": "Law",
+        "paragraphs": [
+          "These terms are governed by the laws of the United Republic of Tanzania."
+        ]
+      }
+    ]
+  },
+  "alsoRead": "Also read"
+}

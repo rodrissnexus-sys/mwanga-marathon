@@ -28,5 +28,9 @@
     "invalid": "Tafadhali weka barua pepe sahihi.",
     "tooMany": "Majaribio mengi mno. Tafadhali jaribu tena baadaye.",
     "failed": "Kuna tatizo. Tafadhali jaribu tena."
+  },
+  "legal": {
+    "privacy": "Sera ya Faragha",
+    "terms": "Vigezo na Masharti"
   }
 }

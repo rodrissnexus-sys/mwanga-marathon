@@ -149,6 +149,10 @@ const Footer = async () => {
           <p className="text-tertiary/50">
             {t("rights", { year })}
           </p>
+          <p className="mt-3 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            <Link to="/privacy" className="text-tertiary/75 hover:text-secondary underline-offset-4 hover:underline">{t("legal.privacy")}</Link>
+            <Link to="/terms" className="text-tertiary/75 hover:text-secondary underline-offset-4 hover:underline">{t("legal.terms")}</Link>
+          </p>
           
           {/* Decorative corner accents */}
           <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-tertiary"></div>
