@@ -238,7 +238,7 @@ const Header = () => {
       {/* Navigation */}
       <nav 
         className={`py-1 px-2 md:px-8 flex justify-between items-center w-full z-[998] transition-all duration-500 backdrop-blur-md fixed ${
-          scrolled ? "bg-tertiary/50 shadow-sm py-1" : "bg-tertiary/50"
+          scrolled ? "bg-tertiary/95 shadow-sm py-1" : "bg-tertiary/90"
         } ${showHeader ? "top-[26px]" : "-top-24"}`}
       >
         {/* Logo area with active-link-style design */}

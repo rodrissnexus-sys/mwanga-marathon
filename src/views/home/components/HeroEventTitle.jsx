@@ -35,7 +35,7 @@ function useNow() {
   return now;
 }
 
-const Countdown = ({ compact }) => {
+export const Countdown = ({ compact }) => {
   const t = useTranslations('home.heroEvent');
   const tUnits = useTranslations('home.banner');
   const now = useNow();
@@ -88,15 +88,15 @@ const HeroEventTitle = () => {
         </div>
       </motion.div>
 
-      {/* Tablet and phone: compact block at the top of the photo. Short screens
-          (small phones, landscape) drop the countdown, then the block, so it
-          never covers the card. */}
-      <div aria-hidden="true" className="lg:hidden absolute inset-x-0 top-0 h-3/5 bg-gradient-to-b from-primary/85 via-primary/50 to-transparent z-[1] [@media(max-height:729px)]:hidden" />
+      {/* Tablet: compact block at the top of the photo (phones show the date
+          and countdown inside the hero card instead). Short screens drop the
+          countdown, then the block, so it never covers the card. */}
+      <div aria-hidden="true" className="hidden md:block lg:hidden absolute inset-x-0 top-0 h-3/5 bg-gradient-to-b from-primary/85 via-primary/50 to-transparent z-[1] [@media(max-height:729px)]:hidden" />
       <motion.div
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
-        className="lg:hidden absolute inset-x-0 top-24 md:top-32 z-10 px-4 text-center [@media(max-height:729px)]:hidden"
+        className="hidden md:block lg:hidden absolute inset-x-0 top-32 z-10 px-4 text-center [@media(max-height:729px)]:hidden"
       >
         <p className={`text-secondary text-xs font-semibold uppercase tracking-[0.12em] md:tracking-[0.2em] mb-2 ${shadow}`}>
           {t('dateVenue')}

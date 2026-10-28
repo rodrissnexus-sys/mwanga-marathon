@@ -4,11 +4,13 @@ import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { Link } from '@/lib/router';
 import Image from "next/image";
-import HeroEventTitle from "./HeroEventTitle";
+import HeroEventTitle, { Countdown } from "./HeroEventTitle";
+import { EVENT } from "@/lib/event";
 import { desktopImages, mobileImages } from "../data/heroData";
 
 const HeroSection = () => {
   const t = useTranslations("home.hero");
+  const te = useTranslations("home.heroEvent");
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -57,10 +59,10 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative w-full h-screen overflow-hidden bg-primary"
+      className="relative w-full h-svh min-h-[640px] md:h-screen md:min-h-0 overflow-hidden bg-primary"
     >
       {/* Background gradient mesh */}
-      <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/50 to-secondary opacity-90"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-primary"></div>
       
       {/* Ambient color bleed */}
       <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-secondary opacity-5 blur-[150px]"></div>
@@ -89,9 +91,8 @@ const HeroSection = () => {
               />
             </div>
             {/* Multi-layer gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary/45 via-secondary/10 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-primary/40"></div>
-            <div className="absolute inset-0 bg-primary/30"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-primary/30 md:from-primary/90 md:via-transparent md:to-primary/40"></div>
+            <div className="absolute inset-0 bg-primary/20"></div>
           </div>
         ))}
       </div>
@@ -227,65 +228,25 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Mobile Layout - Bottom Compact Card */}
-          <div className="md:hidden w-full pb-16">
-            <div className="relative max-w-xs mx-auto group">
-              {/* Glass background */}
-              <div className="absolute -inset-4 glass-card rounded-xl z-0"></div>
-              
-              {/* Decorative corner accents */}
-              <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-secondary/70 rounded-tl-lg opacity-90 z-10"></div>
-              <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-secondary/70 rounded-tr-lg opacity-90 z-10"></div>
-              <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-secondary/70 rounded-bl-lg opacity-90 z-10"></div>
-              <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-secondary/70 rounded-br-lg opacity-90 z-10"></div>
-              
-              {/* Subtle decorative background circle */}
-              <div className="absolute -right-6 -bottom-6 w-16 h-16 rounded-full opacity-10 bg-gradient-to-r from-secondary to-primary blur-xl z-0"></div>
-              
-              <div className="relative px-4 py-5 rounded-lg overflow-hidden z-10">
-                {/* Overline */}
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-secondary text-xs font-semibold tracking-[0.2em] uppercase">
-                    {t("experience")}
-                  </p>
-                  <div className="flex items-center gap-1">
-                    <span className="sr-only">{t("slideOf", { current: activeIndex + 1, total: images.length })}</span>
-                    <span aria-hidden="true" className="text-secondary text-base font-normal">{images[activeIndex].subtitle}</span>
-                    <span aria-hidden="true" className="text-tertiary/75 text-xs">/{String(images.length).padStart(2, '0')}</span>
-                  </div>
-                </div>
-
-                {/* Headline */}
-                <h1 className="text-tertiary text-xl font-light leading-tight mb-2 tracking-tight">
-                  Mwanga<br />
-                  <span className="font-light text-tertiary/90">Festival</span><br />
-                  <span className="font-bold text-secondary">& Marathon</span>
-                </h1>
-
-                {/* Current view */}
-                <div className="mb-2">
-                  <p className="text-tertiary/75 text-xs font-medium uppercase tracking-[0.15em] mb-0.5">{t("currentView")}</p>
-                  <h2 className="text-tertiary text-base font-normal">{images[activeIndex].title}</h2>
-                </div>
-
-                {/* Description */}
-                <p className="text-tertiary/90 text-sm leading-relaxed mb-3">
-                  {t("tagline")}
-                </p>
-
-                {/* Divider */}
-                <div className="w-8 h-[0.5px] bg-gradient-to-r from-secondary to-transparent mb-3"></div>
-
-                {/* CTA Buttons */}
-                <div className="flex flex-col gap-1.5">
-                  <Link to="/register" className="min-h-11 flex items-center justify-center px-5 py-3 bg-secondary text-black font-bold text-xs uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
-                    {t("registerNow")}
-                  </Link>
-                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-primary text-center transition-all duration-300 hover:border-secondary hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
-                    {t("aboutMwafem")}
-                  </Link>
-                </div>
-              </div>
+          {/* Phone: title, date, countdown and both buttons on the first screen */}
+          <div className="md:hidden w-full pb-14 text-center">
+            <p className="inline-block px-3 py-1 rounded-full bg-secondary text-primary text-[11px] font-bold uppercase tracking-wider">
+              {te("dateVenue")}
+            </p>
+            <h1 className="mt-4 text-tertiary font-extrabold uppercase leading-none tracking-tight text-[2.6rem] [text-shadow:0_2px_16px_rgb(0_0_0/0.45)]">
+              {te("title")} <span className="text-secondary">{EVENT.year}</span>
+            </h1>
+            <p className="mt-3 text-tertiary/90 text-sm leading-relaxed max-w-xs mx-auto">{t("tagline")}</p>
+            <div className="mt-5">
+              <Countdown compact />
+            </div>
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <Link to="/register" className="min-h-12 flex items-center justify-center px-3 rounded-lg bg-secondary text-primary font-bold text-sm uppercase tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
+                {t("registerNow")}
+              </Link>
+              <Link to="/about" className="min-h-12 flex items-center justify-center px-3 rounded-lg border border-tertiary/60 text-tertiary font-semibold text-sm uppercase tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
+                {t("aboutMwafem")}
+              </Link>
             </div>
           </div>
         </div>
@@ -356,13 +317,14 @@ const HeroSection = () => {
       </div>
 
       {/* Minimalist Indicators - Bottom Center (Mobile Only) */}
-      <div className="md:hidden absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex items-center gap-4">
+      <div className="md:hidden absolute bottom-3 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="flex items-center gap-1">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() => handleIndicatorClick(index)}
-              className="group relative"
+              className="group relative p-1.5"
+              aria-label={t("goToImage", { number: index + 1 })}
             >
               <div className={`w-2 h-2 rounded-full transition-all duration-500 ${
                 index === activeIndex
@@ -370,7 +332,7 @@ const HeroSection = () => {
                   : 'bg-tertiary/20 hover:bg-tertiary/40'
               }`}></div>
               {index === activeIndex && (
-                <div className="absolute inset-0 w-2 h-2 rounded-full bg-secondary animate-ping opacity-30"></div>
+                <div className="absolute inset-1.5 w-2 h-2 rounded-full bg-secondary animate-ping opacity-30"></div>
               )}
             </button>
           ))}
