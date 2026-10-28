@@ -114,7 +114,7 @@ const AdditionalInfo = ({ formData, handleInputChange, errors, nationalityCatego
                 }
               }
             }}
-            className={`w-full appearance-none px-4 py-2 bg-tertiary/50 border ${errors.nationality ? 'border-red-500' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-tertiary cursor-pointer`}
+            className={`w-full appearance-none px-4 py-2 bg-tertiary border ${errors.nationality ? 'border-secondary ring-2 ring-secondary' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-primary cursor-pointer`}
           >
             <option value="" className="text-primary/70">{t("selectNationalityCategory")}</option>
             {nationalityCategories.map((nationality, index) => (
@@ -142,7 +142,7 @@ const AdditionalInfo = ({ formData, handleInputChange, errors, nationalityCatego
           name="idNumber"
           value={formData.idNumber}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 bg-tertiary/50 border border-tertiary rounded-sm focus:border-secondary focus:outline-none text-tertiary placeholder-primary/70"
+          className="w-full px-4 py-2 bg-tertiary border border-tertiary rounded-sm focus:border-secondary focus:outline-none text-primary placeholder-primary/70"
           placeholder={t("enterIdNumber")}
         />
       </div>
@@ -157,24 +157,9 @@ const AdditionalInfo = ({ formData, handleInputChange, errors, nationalityCatego
           name="passportNumber"
           value={formData.passportNumber}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 bg-tertiary/50 border border-tertiary rounded-sm focus:border-secondary focus:outline-none text-tertiary placeholder-primary/70"
+          className="w-full px-4 py-2 bg-tertiary border border-tertiary rounded-sm focus:border-secondary focus:outline-none text-primary placeholder-primary/70"
           placeholder={t("enterPassportNumber")}
         />
-      </div>
-
-      <div>
-        <label className="text-tertiary text-sm mb-2 flex items-center">
-          <span className="inline-block w-1 h-3 bg-secondary mr-2"></span>
-          {t("dateOfBirth")}
-        </label>
-        <input
-          type="date"
-          name="dateOfBirth"
-          value={formData.dateOfBirth}
-          onChange={handleInputChange}
-          className={`w-full px-4 py-2 bg-tertiary/50 border ${errors.dateOfBirth ? 'border-red-500' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-tertiary cursor-pointer`}
-        />
-        {errors.dateOfBirth && <p className="text-secondary text-xs mt-1">{errors.dateOfBirth}</p>}
       </div>
 
       <div>
@@ -187,7 +172,7 @@ const AdditionalInfo = ({ formData, handleInputChange, errors, nationalityCatego
             name="gender"
             value={formData.gender}
             onChange={handleInputChange}
-            className={`w-full appearance-none px-4 py-2 bg-tertiary/50 border ${errors.gender ? 'border-red-500' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-tertiary cursor-pointer`}
+            className={`w-full appearance-none px-4 py-2 bg-tertiary border ${errors.gender ? 'border-secondary ring-2 ring-secondary' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-primary cursor-pointer`}
           >
             <option value="" className="text-primary/70">{t("selectGender")}</option>
             {genders.map((gender) => (
@@ -213,7 +198,7 @@ const AdditionalInfo = ({ formData, handleInputChange, errors, nationalityCatego
         <div className="relative" ref={dropdownRef}>
           <div 
             onClick={() => setShowCountryDropdown(!showCountryDropdown)}
-            className={`w-full px-4 py-2 bg-tertiary/50 border ${errors.country ? 'border-red/50' : 'border-tertiary'} rounded-sm focus:border-secondary text-tertiary cursor-pointer flex justify-between items-center`}
+            className={`w-full px-4 py-2 bg-tertiary border ${errors.country ? 'border-red/50' : 'border-tertiary'} rounded-sm focus:border-secondary text-primary cursor-pointer flex justify-between items-center`}
           >
             <span className={formData.country ? "text-tertiary" : "text-primary/70"}>
               {formData.country ? getSelectedCountryName() : t("selectCountry")}
@@ -231,7 +216,7 @@ const AdditionalInfo = ({ formData, handleInputChange, errors, nationalityCatego
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder={t("searchCountry")}
-                  className="w-full p-2 border border-tertiary/50 rounded-sm focus:outline-none focus:border-secondary text-primary bg-tertiary/50"
+                  className="w-full p-2 border border-tertiary/50 rounded-sm focus:outline-none focus:border-secondary text-primary bg-tertiary"
                 />
               </div>
               <div>

@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import React, { useState, useEffect } from 'react';
+import { CATEGORY_FEES, FOREIGN_FEE, ageOnRaceDay, categoriesForAge, formatMoney } from '@/lib/payments';
 
 const EventDetails = ({ formData, handleInputChange, errors, events, showKidsSizes, sizes, kidsSizes, selectedSize, selectedKidsSize, collectionVenues, rawData }) => {
   const t = useTranslations("home.form");
@@ -56,16 +57,7 @@ const EventDetails = ({ formData, handleInputChange, errors, events, showKidsSiz
     }
   };
 
-  // Format price function
-  const formatPrice = (price, currency) => {
-    const numericPrice = parseFloat(price);
-    if (isNaN(numericPrice)) {
-      return '0';
-    }
-    return currency === 'TZS' 
-      ? numericPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })
-      : numericPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  };
+  const allowedCategories = categoriesForAge(ageOnRaceDay(formData.dateOfBirth));
 
   // Add error display for required fields
   const showError = (fieldName) => {
@@ -97,7 +89,7 @@ const EventDetails = ({ formData, handleInputChange, errors, events, showKidsSiz
             name="event"
             value={formData.event || ''}
             onChange={handleEventChange}
-            className={`w-full appearance-none px-4 py-2 bg-tertiary/50 border ${errors?.event ? 'border-red-500' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-primary cursor-pointer`}
+            className={`w-full appearance-none px-4 py-2 bg-tertiary border ${errors?.event ? 'border-secondary ring-2 ring-secondary' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-primary cursor-pointer`}
           >
             <option value="" className="bg-primary/80 text-tertiary">{t("selectEvent")}</option>
             {Array.isArray(events) && events.map((event) => (
@@ -114,36 +106,46 @@ const EventDetails = ({ formData, handleInputChange, errors, events, showKidsSiz
         </div>
         {showError('event')}
         
-        {/* Event Details Card */}
-        {selectedEvent && (
-          <div className="mt-4 p-4 bg-tertiary/10 rounded-sm border border-tertiary/20">
-            <h3 className="text-secondary font-medium mb-2">{selectedEvent.name}</h3>
-            <p className="text-tertiary text-sm mb-3">{selectedEvent.description}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <h4 className="text-tertiary text-xs uppercase mb-1">{t("localPrice")}</h4>
-                <p className="text-secondary font-medium">
-                  TZS {formatPrice(selectedEvent.localPrice, 'TZS')}
-                </p>
-              </div>
-              <div>
-                <h4 className="text-tertiary text-xs uppercase mb-1">{t("foreignPrice")}</h4>
-                <p className="text-secondary font-medium">
-                  USD {formatPrice(selectedEvent.foreignPrice, 'USD')}
-                </p>
-              </div>
-              {selectedEvent.localKidsPrice !== selectedEvent.localPrice && (
-                <div>
-                  <h4 className="text-tertiary text-xs uppercase mb-1">{t("kidsPriceLocal")}</h4>
-                  <p className="text-secondary font-medium">
-                    TZS {formatPrice(selectedEvent.localKidsPrice, 'TZS')}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
+        {selectedEvent?.description && (
+          <p className="mt-3 text-tertiary/90 text-sm">{selectedEvent.description}</p>
         )}
       </div>
+
+      {/* Participant type: sets the entry fee (children and elders follow from the date of birth) */}
+      <fieldset className="md:col-span-2">
+        <legend className="text-tertiary text-sm mb-2 flex items-center">
+          <span className="inline-block w-1 h-3 bg-secondary mr-2"></span>
+          {t("participantType")}
+        </legend>
+        <div className="grid gap-2 sm:grid-cols-3">
+          {allowedCategories.map((category) => (
+            <label
+              key={category}
+              className={`flex flex-col gap-0.5 p-3 border rounded-sm cursor-pointer transition-colors ${
+                formData.participantCategory === category ? 'border-secondary bg-secondary/15' : 'border-tertiary/60 hover:border-secondary'
+              }`}
+            >
+              <input
+                type="radio"
+                name="participantCategory"
+                value={category}
+                checked={formData.participantCategory === category}
+                onChange={handleInputChange}
+                className="sr-only"
+              />
+              <span className="text-tertiary font-semibold">{t(`categories.${category}`)}</span>
+              <span className="text-tertiary/80 text-xs">{t(`categoryHints.${category}`)}</span>
+              <span className="text-secondary font-bold mt-1">{formatMoney(CATEGORY_FEES[category], 'TZS')}</span>
+            </label>
+          ))}
+        </div>
+        {showError('participantCategory')}
+        {allowedCategories.includes('adult') && (
+          <p className="text-tertiary/80 text-xs mt-2">
+            {t("proofNote")} {t("foreignNote", { fee: formatMoney(FOREIGN_FEE.amount, FOREIGN_FEE.currency) })}
+          </p>
+        )}
+      </fieldset>
 
       <div className="md:col-span-2">
         <label className="text-tertiary text-sm mb-2 flex items-center">
@@ -155,7 +157,7 @@ const EventDetails = ({ formData, handleInputChange, errors, events, showKidsSiz
             name="collectionVenue"
             value={formData.collectionVenue || ''}
             onChange={handleVenueChange}
-            className={`w-full appearance-none px-4 py-2 bg-tertiary/50 border ${errors?.collectionVenue ? 'border-red-500' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-primary cursor-pointer`}
+            className={`w-full appearance-none px-4 py-2 bg-tertiary border ${errors?.collectionVenue ? 'border-secondary ring-2 ring-secondary' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-primary cursor-pointer`}
           >
             <option value="" className="bg-primary/80 text-tertiary">{t("selectCollectionVenue")}</option>
             {Array.isArray(collectionVenues) && collectionVenues.map((venue) => (
@@ -261,7 +263,7 @@ const EventDetails = ({ formData, handleInputChange, errors, events, showKidsSiz
           value={formData.voucherCode || ''}
           onChange={handleInputChange}
           placeholder={t("enterVoucherCodeIf")}
-          className="w-full px-4 py-2 bg-tertiary/50 border border-tertiary rounded-sm focus:border-secondary focus:outline-none text-tertiary"
+          className="w-full px-4 py-2 bg-tertiary border border-tertiary rounded-sm focus:border-secondary focus:outline-none text-primary"
         />
       </div>
     </div>

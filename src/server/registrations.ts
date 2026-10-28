@@ -4,6 +4,7 @@ import { after } from "next/server";
 import { headers } from "next/headers";
 import { z } from "zod";
 import { registrationSchema } from "@/lib/validation";
+import { expectedFee } from "@/lib/payments";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { AuthError, requireStaff } from "./auth";
 import { ADMIN_EMAIL, sendEmail } from "./email";
@@ -97,14 +98,7 @@ export async function registerParticipant(input: RegistrationInput, locale: Loca
     phone: r.phone_number,
     registrationId: r.registration_id,
     event: pickLang(event, "name", locale),
-    isKidsEvent: Boolean(event?.is_kids_event),
-    // Fixes the old check, which compared the country name to "Tanzanian"
-    isLocal: r.nationality_category
-      ? r.nationality_category !== "international"
-      : (r.nationality as { code?: string })?.code === "TZA",
-    localPrice: Number(event?.local_price ?? 0),
-    foreignPrice: Number(event?.foreign_price ?? 0),
-    localKidsPrice: Number(event?.local_kids_price ?? 0),
+    fee: expectedFee({ ...r, event }),
     shirtSize: pickLang((r.kids_shirt_size ?? r.shirt_size) as Record<string, unknown>, "name", locale),
     collectionVenue: pickLang(r.collection_venue as Record<string, unknown>, "name", locale),
     gender: pickLang(r.gender as Record<string, unknown>, "name", locale),

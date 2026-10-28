@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { confirmPayment, markPaymentFailed, reopenPayment, getPaymentHistory } from '../../../../api/marathon/registration';
-import { expectedFee, formatMoney, PAYMENT_METHODS } from '@/lib/payments';
+import { CATEGORY_LABELS, expectedFee, formatMoney, PAYMENT_METHODS } from '@/lib/payments';
 import { Alert, Button, DetailList, Drawer, Field, StatusBadge, formatDate, formatDateTime } from '../ui/kit';
 
 const EVENT_TEXT = {
@@ -247,7 +247,10 @@ const RegistrationDrawer = ({ registration, onClose, onChange }) => {
           <div>
             <p className="text-xs uppercase tracking-wide text-tertiary/75 font-semibold">Race fee</p>
             <p className="text-3xl font-extrabold mt-1">{fee ? formatMoney(fee.amount, fee.currency) : '—'}</p>
-            <p className="text-sm text-tertiary/80 mt-1">{r.event?.name}</p>
+            <p className="text-sm text-tertiary/80 mt-1">
+              {r.event?.name}
+              {r.participant_category && <> · {CATEGORY_LABELS[r.participant_category]}</>}
+            </p>
           </div>
           <span className="bg-tertiary rounded-full"><StatusBadge status={r.payment_status} /></span>
         </div>
@@ -329,6 +332,7 @@ const RegistrationDrawer = ({ registration, onClose, onChange }) => {
           items={[
             ['Registered', formatDateTime(r.created_at)],
             ['Site language', r.locale === 'sw' ? 'Kiswahili' : 'English'],
+            ['Participant type', CATEGORY_LABELS[r.participant_category]],
             ['Date of birth', formatDate(r.date_of_birth)],
             ['Gender', r.gender?.name],
             ['Nationality', r.nationality?.name],

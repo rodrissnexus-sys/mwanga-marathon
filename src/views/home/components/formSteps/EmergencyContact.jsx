@@ -17,7 +17,7 @@ const EmergencyContact = ({ formData, handleInputChange, errors }) => {
           name="emergencyContactName"
           value={formData.emergencyContactName}
           onChange={handleInputChange}
-          className={`w-full px-4 py-2 bg-tertiary/50 border ${errors.emergencyContactName ? 'border-red-500' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-tertiary placeholder-primary/70`}
+          className={`w-full px-4 py-2 bg-tertiary border ${errors.emergencyContactName ? 'border-secondary ring-2 ring-secondary' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-primary placeholder-primary/70`}
           placeholder={t("enterEmergencyContactName")}
         />
         {errors.emergencyContactName && <p className="text-secondary text-xs mt-1">{errors.emergencyContactName}</p>}
@@ -33,7 +33,7 @@ const EmergencyContact = ({ formData, handleInputChange, errors }) => {
           name="emergencyContactNumber"
           value={formData.emergencyContactNumber}
           onChange={handleInputChange}
-          className={`w-full px-4 py-2 bg-tertiary/50 border ${errors.emergencyContactNumber ? 'border-red-500' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-tertiary placeholder-primary/70`}
+          className={`w-full px-4 py-2 bg-tertiary border ${errors.emergencyContactNumber ? 'border-secondary ring-2 ring-secondary' : 'border-tertiary'} rounded-sm focus:border-secondary focus:outline-none text-primary placeholder-primary/70`}
           placeholder={t("enterEmergencyContactNumber")}
         />
         {errors.emergencyContactNumber && <p className="text-secondary text-xs mt-1">{errors.emergencyContactNumber}</p>}
@@ -49,7 +49,7 @@ const EmergencyContact = ({ formData, handleInputChange, errors }) => {
           name="postalCode"
           value={formData.postalCode}
           onChange={handleInputChange}
-          className="w-full px-4 py-2 bg-tertiary/50 border border-tertiary rounded-sm focus:border-secondary focus:outline-none text-tertiary placeholder-primary/70"
+          className="w-full px-4 py-2 bg-tertiary border border-tertiary rounded-sm focus:border-secondary focus:outline-none text-primary placeholder-primary/70"
           placeholder={t("enterPostalCode")}
         />
       </div>

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PARTICIPANT_CATEGORIES, ageOnRaceDay, categoriesForAge } from "./payments";
 
 // Validation for the public forms. Shared by the server actions and the tests.
 
@@ -6,7 +7,8 @@ const id = z.coerce.number().int().positive();
 const optionalText = (max: number) =>
   z.preprocess((v) => (typeof v === "string" && v.trim() === "" ? null : v), z.string().trim().max(max).nullish());
 
-// Mirrors the Laravel validation rules for /marathon/register.
+// Mirrors the Laravel validation rules for /marathon/register, plus the 2026
+// participant category, which must fit the age on race day.
 export const registrationSchema = z.object({
   first_name: z.string().trim().min(1).max(255),
   last_name: z.string().trim().min(1).max(255),
@@ -27,6 +29,10 @@ export const registrationSchema = z.object({
   emergency_contact_number: z.string().trim().min(1).max(20),
   postal_code: optionalText(20),
   voucher_code: optionalText(50),
+  participant_category: z.enum(PARTICIPANT_CATEGORIES),
+}).refine((v) => categoriesForAge(ageOnRaceDay(v.date_of_birth)).includes(v.participant_category), {
+  path: ["participant_category"],
+  message: "This participant type doesn't match the date of birth.",
 });
 
 const contactSchema = z.object({

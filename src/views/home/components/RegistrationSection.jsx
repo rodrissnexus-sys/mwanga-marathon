@@ -7,6 +7,7 @@ import PersonalInfo from "./formSteps/PersonalInfo";
 import EventDetails from "./formSteps/EventDetails";
 import AdditionalInfo from "./formSteps/AdditionalInfo";
 import EmergencyContact from "./formSteps/EmergencyContact";
+import { ageOnRaceDay, categoriesForAge } from "@/lib/payments";
 import { useMarathonRegistration } from "../../../hooks/useMarathonRegistration";
 import { useDropdowns } from "../../../hooks/useDropdowns";
 
@@ -50,6 +51,7 @@ const RegistrationSection = () => {
     collectionVenue: "",
     collection_venue_id: "",
     voucherCode: "",
+    participantCategory: "",
     emergencyContactName: "",
     emergencyContactNumber: ""
   });
@@ -122,9 +124,6 @@ const RegistrationSection = () => {
 
     setErrors(prev => ({ ...prev, [name]: "" }));
 
-    if (name === "event") {
-      setShowKidsSizes(Boolean(events.find((event) => event.name === value)?.isKidsEvent));
-    }
     if (name === "shirtSize") {
       setSelectedSize(value);
     }
@@ -135,7 +134,16 @@ const RegistrationSection = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showKidsSizes, setShowKidsSizes] = useState(false);
+  // Children (10 and under on race day) get kids' sizes; the participant type
+  // is chosen from the types allowed for the age (one choice: picked for them).
+  const allowedCategories = categoriesForAge(ageOnRaceDay(formData.dateOfBirth));
+  const showKidsSizes = allowedCategories[0] === 'child';
+  useEffect(() => {
+    setFormData((prev) => {
+      if (allowedCategories.includes(prev.participantCategory)) return prev;
+      return { ...prev, participantCategory: allowedCategories.length === 1 ? allowedCategories[0] : "" };
+    });
+  }, [allowedCategories.join()]); // eslint-disable-line react-hooks/exhaustive-deps
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedKidsSize, setSelectedKidsSize] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -166,10 +174,10 @@ const RegistrationSection = () => {
   ];
 
   const benefits = [
-    t("eventEntryAndOfficial"),
-    t("exclusiveFestivalAccessFor"),
-    t("commemorativeTShirtAnd"),
-    t("foodAndDrinkVouchers")
+    t("kitTShirt"),
+    t("kitBag"),
+    t("kitBib"),
+    t("kitMedal")
   ];
 
   const validateStep = (step) => {
@@ -185,10 +193,13 @@ const RegistrationSection = () => {
           newErrors.email = t("emailIsInvalid");
         }
         if (!formData.phoneNumber.trim()) newErrors.phoneNumber = t("phoneNumberIsRequired");
+        if (!formData.dateOfBirth) newErrors.dateOfBirth = t("errors.dobRequired");
+        else if (ageOnRaceDay(formData.dateOfBirth) < 0) newErrors.dateOfBirth = t("errors.dobInvalid");
         break;
       case 2:
         if (!formData.collection_venue_id) newErrors.collectionVenue = t("collectionVenueIsRequired");
         if (!formData.event_id) newErrors.event = t("eventIsRequired");
+        if (!formData.participantCategory) newErrors.participantCategory = t("participantTypeRequired");
         if (showKidsSizes ? !formData.kids_shirt_size_id : !formData.shirt_size_id) {
           newErrors.shirtSize = t("shirtSizeIsRequired");
         }
@@ -218,7 +229,6 @@ const RegistrationSection = () => {
             newErrors.nationality = t("errors.nationalityAndCountry");
           }
         }
-        if (!formData.dateOfBirth) newErrors.dateOfBirth = t("errors.dobRequired");
         if (!formData.gender) newErrors.gender = t("errors.genderRequired");
         break;
       case 4:
@@ -315,7 +325,8 @@ const RegistrationSection = () => {
           country_id: "",
           emergencyContactName: "",
           emergencyContactNumber: "",
-          voucherCode: ""
+          voucherCode: "",
+          participantCategory: ""
         });
         setCurrentStep(1);
         setSuccessMessage(t("registrationSuccessfulThankYou"));

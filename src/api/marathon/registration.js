@@ -42,6 +42,7 @@ export const registerParticipant = async (registrationData) => {
             emergency_contact_number: registrationData.emergencyContactNumber,
             postal_code: registrationData.postalCode,
             voucher_code: registrationData.voucherCode,
+            participant_category: registrationData.participantCategory,
         }, currentLocale());
     } catch (error) {
         return failure(error, 'An error occurred during registration');
@@ -189,6 +190,7 @@ const CSV_COLUMNS = [
     ['Email', (r) => r.email],
     ['Phone', (r) => r.phone_number],
     ['Event', (r) => r.event?.name],
+    ['Participant type', (r) => r.participant_category],
     ['T-shirt', (r) => r.shirt_size?.code],
     ['Kids t-shirt', (r) => r.kids_shirt_size?.code],
     ['Collection venue', (r) => r.collection_venue?.name],

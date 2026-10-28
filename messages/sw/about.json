@@ -13,7 +13,7 @@
     "organization": "Waandaaji:",
     "organizationText": "Tukio hili limeandaliwa kwa fahari na <link>Kisangara Tours Ltd</link>, kampuni ya utalii ya Kitanzania, kwa kushirikiana na <org>Mberesero Group</org>, <org>Osaka Royal Classic</org>, <org>Ofisi ya Wilaya ya Mwanga</org>, na wanajamii wa <org>Mwanga</org>.",
     "purpose": "Lengo:",
-    "purposeText": "Lengo kuu ni kukuza utalii wa ndani katika wilaya ya Mwanga, kuonyesha vivutio vya eneo hili kwa wakazi wa Tanzania na kusaidia afya ya akina mama na watoto.",
+    "purposeText": "Zaidi ya mbio: Mwanga Marathon inatumia michezo kuunganisha utalii, utamaduni, uhifadhi wa mazingira, elimu na maendeleo ya jamii, ili watu wavijue vivutio vya Tanzania na wajifunze namna utalii unavyoweza kunufaisha jamii yao.",
     "distinction": "Utofauti:",
     "distinctionText": "Tukio hili ni tofauti na Kilimanjaro Marathon inayojulikana sana. Mwanga Festival and Marathon ni tukio la kipekee la kijamii linalojitegemea."
   },
@@ -28,9 +28,9 @@
     "titleFirst": "Lengo",
     "titleSecond": "Letu",
     "mission": "Dhamira Yetu",
-    "missionText": "Kujenga uzoefu usiosahaulika unaosherehekea ubora wa michezo huku tukikuza ubadilishanaji wa tamaduni na maendeleo ya jamii katika Mwanga na kwingineko.",
+    "missionText": "Kutumia nguvu ya michezo na burudani kuwafikia wananchi na wageni wengi zaidi, kuwajengea uelewa kuhusu thamani ya utalii wa Tanzania, kuhifadhi mazingira na urithi wa kitamaduni, na kufungua fursa za ajira na biashara za utalii kwa wananchi wa Mwanga.",
     "vision": "Maono Yetu",
-    "visionText": "Kuwa tukio bora zaidi la marathon nchini Tanzania, linalojulikana kwa mchanganyiko wake wa kipekee wa michezo, utamaduni, na ushiriki wa jamii, likihamasisha vizazi vijavyo."
+    "visionText": "Kila anayekuja Mwanga kwa ajili ya marathon apate sababu ya kukaa zaidi — kutembelea vivutio, kujifunza utamaduni na kufanya biashara na jamii — na tamasha likue mwaka hadi mwaka kuwa sehemu muhimu ya kalenda ya utalii, michezo na utamaduni Tanzania."
   },
   "cta": {
     "title": "Uko Tayari Kujiunga na Marathon?",
@@ -53,5 +53,80 @@
     "joinOurGrowingFamily": "Jiunge na familia yetu inayokua ya wadhamini na uwe sehemu ya safari hii ya kipekee. Pamoja, tunaweza kuwa na athari ya kudumu kwenye michezo na utamaduni nchini Tanzania.",
     "partnerWithUs": "Shiriki Nasi",
     "goToSponsor": "Nenda kwa mdhamini {number}"
+  },
+  "programme": {
+    "titleFirst": "Ratiba ya",
+    "titleSecond": "Tamasha",
+    "intro": "Mbio ndizo kiini cha siku, lakini tamasha linaleta pia utalii, utamaduni, vyakula na elimu katika Uwanja wa C.D. Msuya.",
+    "packageTitle": "Kila mshiriki aliyelipia anapata",
+    "communityTitle": "Kurudisha kwa jamii ya Mwanga",
+    "slogan": "“Tukijua Tanzania, tutaitembelea; tukiitembelea Tanzania, tutaithamini; tukiithamini, tutailinda.”",
+    "sloganTranslation": "",
+    "items": [
+      {
+        "title": "Mbio",
+        "text": "Nusu Marathon km 21.1, Trail Run km 10, Fun Run km 5, na Walking Safari / Fun Run km 2.5 kwa watoto na familia."
+      },
+      {
+        "title": "Kuvuta kamba na michezo ya jadi",
+        "text": "Mchezo wa kuvuta kamba uwanjani na michezo ya jadi kwa timu na familia."
+      },
+      {
+        "title": "Utamaduni",
+        "text": "Maonesho ya mavazi ya asili, ngoma, muziki wa asili, mila na desturi na historia za jamii."
+      },
+      {
+        "title": "Vivutio vya Mwanga",
+        "text": "Picha, video na matembezi yanayoonyesha vivutio vya utalii vya Mwanga na Kilimanjaro."
+      },
+      {
+        "title": "Kazi za mikono",
+        "text": "Kazi za mikono na bidhaa za utalii kutoka kwa mafundi wa ndani."
+      },
+      {
+        "title": "Vyakula vya asili",
+        "text": "Maonesho na uonjaji wa vyakula vya kitamaduni kutoka kwa wanawake na wajasiriamali wa vyakula."
+      },
+      {
+        "title": "Elimu ya utalii",
+        "text": "Vipindi kuhusu utalii wa ndani, utalii wa michezo na wa ekolojia, na fursa za ajira na biashara."
+      },
+      {
+        "title": "Mwanga ya Kijani",
+        "text": "Upandaji wa miti, usafi wa mazingira na elimu ya kutunza vyanzo vya maji na tabianchi."
+      },
+      {
+        "title": "Vijana na watoto",
+        "text": "Michezo ya watoto, mashindano ya vijana, maonesho ya vipaji na elimu ya mazingira shuleni."
+      },
+      {
+        "title": "Maonesho ya biashara",
+        "text": "Hoteli, waongoza watalii, usafiri, mafundi na wawekezaji wakionyesha huduma na bidhaa zao."
+      },
+      {
+        "title": "Sanaa na burudani",
+        "text": "Vipindi vya sanaa, vipaji na burudani za kitamaduni siku nzima."
+      }
+    ],
+    "package": [
+      "T-shirt rasmi ya Mwanga Marathon",
+      "Drawstring bag na wristband",
+      "Namba ya kukimbilia (bib)",
+      "Medali ya ushiriki — pamoja na medali na zawadi kwa washindi"
+    ],
+    "community": [
+      {
+        "title": "Kupanda miti",
+        "text": "Kupanda miti mashuleni na kwenye vituo vya afya ili kuzuia mmomonyoko wa udongo."
+      },
+      {
+        "title": "Mama na watoto wachanga",
+        "text": "Kutembelea wodi za wazazi tukitoa pampers na pads, kuchangia chanjo muhimu za watoto na kutoa mafunzo kwa kina mama wachanga."
+      },
+      {
+        "title": "Kutangaza Mwanga",
+        "text": "Kutembelea na kutangaza vivutio vya utalii vya Mwanga, na kumalizia kwa semina ya mazingira."
+      }
+    ]
   }
 }

@@ -13,7 +13,7 @@
     "organization": "Organizational Involvement:",
     "organizationText": "The event is proudly organized by <link>Kisangara Tours Ltd</link>, a Tanzania-based tour operator, in collaboration with <org>Mberesero Group</org>, <org>Osaka Royal Classic</org>, <org>Mwanga District Office</org>, and <org>Mwanga Community</org> members.",
     "purpose": "Purpose:",
-    "purposeText": "The primary goal is to boost domestic tourism within the Mwanga district, showcasing the region's attractions to Tanzanian residents and promoting health supports to mothers and children.",
+    "purposeText": "More than a race: Mwanga Marathon uses sport to bring tourism, culture, conservation, education and community development together, so people discover Tanzania's attractions and learn how tourism can benefit their community.",
     "distinction": "Distinction:",
     "distinctionText": "This event is distinct from the well-known Kilimanjaro Marathon in Mwanga District. The Mwanga Festival and Marathon is a separate, localized event."
   },
@@ -28,9 +28,9 @@
     "titleFirst": "Our",
     "titleSecond": "Purpose",
     "mission": "Our Mission",
-    "missionText": "To create an unforgettable experience that celebrates athletic excellence while promoting cultural exchange and community development in Mwanga and beyond.",
+    "missionText": "To use sport and entertainment to reach more Tanzanians and visitors, building awareness of the value of Tanzanian tourism, protecting the environment and cultural heritage, and opening up tourism jobs and business for the people of Mwanga.",
     "vision": "Our Vision",
-    "visionText": "To become Tanzania's premier marathon event, known for its unique blend of sports, culture, and community engagement, inspiring future generations."
+    "visionText": "That everyone who comes to Mwanga for the marathon finds reasons to stay longer — to visit its attractions, learn its culture and do business with the community — and that the festival grows into a fixture of Tanzania's tourism, sports and culture calendar."
   },
   "cta": {
     "title": "Ready to Join the Marathon?",
@@ -53,5 +53,80 @@
     "joinOurGrowingFamily": "Join our growing family of sponsors and be part of this extraordinary journey. Together, we can make a lasting impact on sports and culture in Tanzania.",
     "partnerWithUs": "Partner With Us",
     "goToSponsor": "Go to sponsor {number}"
+  },
+  "programme": {
+    "titleFirst": "Festival",
+    "titleSecond": "Programme",
+    "intro": "Races are the heart of the day, but the festival brings tourism, culture, food and learning to C.D. Msuya Stadium too.",
+    "packageTitle": "Every paid participant gets",
+    "communityTitle": "Giving back to Mwanga",
+    "slogan": "“Tukijua Tanzania, tutaitembelea; tukiitembelea Tanzania, tutaithamini; tukiithamini, tutailinda.”",
+    "sloganTranslation": "When we know Tanzania, we will visit it; when we visit Tanzania, we will value it; when we value it, we will protect it.",
+    "items": [
+      {
+        "title": "Races",
+        "text": "Half Marathon 21.1 km, Trail Run 10 km, Fun Run 5 km, and the 2.5 km Walking Safari / Fun Run for children and families."
+      },
+      {
+        "title": "Tug of war & traditional games",
+        "text": "Tug of war in the stadium and traditional games for teams and families."
+      },
+      {
+        "title": "Culture",
+        "text": "Traditional dress, dances and music, customs and community history."
+      },
+      {
+        "title": "Mwanga attractions",
+        "text": "Photos, videos and guided walks showing the tourist attractions of Mwanga and Kilimanjaro."
+      },
+      {
+        "title": "Crafts & local products",
+        "text": "Handicrafts and tourism products made by local artisans."
+      },
+      {
+        "title": "Traditional food",
+        "text": "Tasting traditional dishes from different areas, prepared by local women and food entrepreneurs."
+      },
+      {
+        "title": "Tourism education",
+        "text": "Talks on domestic tourism, sports and eco-tourism, and jobs and business in tourism."
+      },
+      {
+        "title": "Green Mwanga",
+        "text": "Tree planting, clean-ups and lessons on protecting water sources and the climate."
+      },
+      {
+        "title": "Youth & children",
+        "text": "Kids’ games, youth competitions, talent shows and environmental education in schools."
+      },
+      {
+        "title": "Business expo",
+        "text": "Hotels, tour guides, transport, artisans and investors showing their services and products."
+      },
+      {
+        "title": "Arts & entertainment",
+        "text": "Art, talent and traditional entertainment throughout the day."
+      }
+    ],
+    "package": [
+      "Official Mwanga Marathon T-shirt",
+      "Drawstring bag and wristband",
+      "Race number (bib)",
+      "Participation medal — plus medals and prizes for the winners"
+    ],
+    "community": [
+      {
+        "title": "Tree planting",
+        "text": "Planting trees at schools and health centres to prevent soil erosion."
+      },
+      {
+        "title": "Mothers and newborns",
+        "text": "Visiting maternity wards with diapers and sanitary pads, supporting essential child vaccinations and training young mothers."
+      },
+      {
+        "title": "Promoting Mwanga",
+        "text": "Visiting and promoting Mwanga’s tourist attractions, ending with an environmental seminar."
+      }
+    ]
   }
 }

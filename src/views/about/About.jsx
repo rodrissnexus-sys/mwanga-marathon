@@ -12,6 +12,7 @@ import PrimaryButton from '../../components/common/buttons/PrimaryButton';
 import SectionHeader from '../../components/common/SectionHeader';
 import FestivalDescriptionSection from './components/FestivalDescriptionSection';
 import RegistrationCTA from './components/RegistrationCTA';
+import FestivalProgrammeSection from './components/FestivalProgrammeSection';
 
 const About = () => {
   const tp = useTranslations("about.page");
@@ -62,6 +63,9 @@ const About = () => {
 
             {/* Mission & Vision Section */}
             <MissionVisionSection />
+
+            {/* Programme, participant kit and community work (2026 letters) */}
+            <FestivalProgrammeSection />
 
             {/* Event Facts Section */}
             <EventFactsSection />

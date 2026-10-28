@@ -21,6 +21,7 @@ const validRegistration = {
   emergency_contact_number: "+255711111111",
   postal_code: "",
   voucher_code: "",
+  participant_category: "adult",
 };
 
 describe("registrationSchema", () => {
@@ -44,6 +45,18 @@ describe("registrationSchema", () => {
     const result = registrationSchema.safeParse({ ...validRegistration, [field]: value });
     expect(result.success).toBe(false);
     expect(result.error?.issues[0].path[0]).toBe(field);
+  });
+
+  it("requires a participant type that fits the age on race day", () => {
+    const parse = (date_of_birth: string, participant_category: string) =>
+      registrationSchema.safeParse({ ...validRegistration, date_of_birth, participant_category }).success;
+    expect(parse("1995-04-12", "student")).toBe(true);
+    expect(parse("1995-04-12", "child")).toBe(false);
+    expect(parse("2018-01-01", "child")).toBe(true); // 8 on race day
+    expect(parse("2018-01-01", "adult")).toBe(false);
+    expect(parse("1950-01-01", "senior")).toBe(true);
+    expect(parse("1950-01-01", "adult")).toBe(false);
+    expect(parse("1995-04-12", "vip")).toBe(false);
   });
 
   it("rejects missing required fields", () => {

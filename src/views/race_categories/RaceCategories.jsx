@@ -8,9 +8,11 @@ import SectionHeader from '../../components/common/SectionHeader';
 import CategoryCards from './components/CategoryCards';
 import CategoryFAQ from './components/CategoryFAQ';
 import CategoryCTA from './components/CategoryCTA';
+import EntryFees from './components/EntryFees';
 
 const RaceCategories = () => {
   const t = useTranslations("raceCategories.page");
+  const tFees = useTranslations("raceCategories.fees");
   const raceCategoriesHeroData = { ...raceCategoriesHeroDataBase, ...useTranslations("hero").raw("raceCategories") };
   return (
     <>
@@ -42,6 +44,12 @@ const RaceCategories = () => {
               
               {/* Category Cards */}
               <CategoryCards />
+            </div>
+
+            {/* Entry fees */}
+            <div className="mb-20" id="fees">
+              <SectionHeader firstWord={tFees("titleFirst")} secondWord={tFees("titleSecond")} />
+              <EntryFees />
             </div>
 
             {/* FAQ Section (linked from the footer as /race-categories#faq) */}

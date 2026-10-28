@@ -8,33 +8,8 @@ const CategoryFAQ = () => {
   const t = useTranslations("raceCategories.faq");
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const faqs = [
-    {
-      id: 1,
-      question: t("howDoIChoose"),
-      answer: t("considerYourFitnessLevel")
-    },
-    {
-      id: 2,
-      question: t("canISwitchMy"),
-      answer: t("yesYouCanSwitch")
-    },
-    {
-      id: 3,
-      question: t("areThereAgeRestrictions"),
-      answer: t("yesTheFullMarathon")
-    },
-    {
-      id: 4,
-      question: t("whatIsIncludedIn"),
-      answer: t("allRegistrationsIncludeA")
-    },
-    {
-      id: 5,
-      question: t("isThereATime"),
-      answer: t("yesTheFullMarathon2")
-    },
-  ];
+  // questions and answers come from messages/{en,sw}/raceCategories.json
+  const faqs = t.raw("items").map((item, index) => ({ id: index + 1, ...item }));
 
   const toggleFAQ = (index) => {
     setActiveIndex(activeIndex === index ? null : index);

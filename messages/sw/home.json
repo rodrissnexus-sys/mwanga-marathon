@@ -190,10 +190,6 @@
     "currentlyClosed": "Usajili umefungwa kwa sasa"
   },
   "registration": {
-    "eventEntryAndOfficial": "Ushiriki wa tukio na kifaa rasmi cha kupima muda",
-    "exclusiveFestivalAccessFor": "Fursa ya kipekee ya kuhudhuria tamasha kwa siku zote 3",
-    "commemorativeTShirtAnd": "T-shirt ya ukumbusho na medali",
-    "foodAndDrinkVouchers": "Vocha za chakula na vinywaji",
     "firstNameIsRequired": "Jina la kwanza linahitajika",
     "lastNameIsRequired": "Jina la familia linahitajika",
     "emailIsRequired": "Barua pepe inahitajika",
@@ -207,9 +203,9 @@
     "errorLoadingFormOptions": "Hitilafu katika kupakia chaguo za fomu. Tafadhali onyesha upya ukurasa.",
     "titleFirst": "Usajili",
     "titleSecond": "wa Mwanga Festival & Marathon",
-    "registerNowFor": "Jiandikishe Sasa kwa",
-    "earlyBirdDiscounts": "Ofa Kabambe",
-    "secureYourSpotIn": "Jihakikishie nafasi yako katika Mwanga Festival & Marathon. Watakao jisajili mapema watapata ofa za kipekee na nafasi nzuri za kutazama maonyesho yote ya kitamaduni.",
+    "registerNowFor": "Jisajili sasa kwa",
+    "earlyBirdDiscounts": "20 Desemba 2026",
+    "secureYourSpotIn": "Jihakikishie nafasi yako katika Mwanga Marathon 2026, Uwanja wa C.D. Msuya. Kila mshiriki aliyelipia atapata vifaa vilivyo hapa chini, na washindi wa mbio zote watapata medali na zawadi.",
     "personalInformation": "Taarifa Binafsi",
     "eventDetails": "Maelezo ya Tukio",
     "additionalInformation": "Taarifa za Ziada",
@@ -234,13 +230,19 @@
       "genderRequired": "Jinsia inahitajika",
       "emergencyNameRequired": "Jina la mawasiliano ya dharura linahitajika",
       "emergencyNumberRequired": "Namba ya mawasiliano ya dharura inahitajika",
-      "nationalityIncomplete": "Taarifa za utaifa hazijakamilika. Tafadhali rudi nyuma uchague utaifa wako tena."
+      "nationalityIncomplete": "Taarifa za utaifa hazijakamilika. Tafadhali rudi nyuma uchague utaifa wako tena.",
+      "dobInvalid": "Tafadhali hakiki tarehe ya kuzaliwa"
     },
     "nationality": {
       "tz_ea": "Raia wa Tanzania na Afrika Mashariki",
       "tz_resident_sadc": "Wakazi wa Tanzania & Wenye Vibali vya Kazi & Raia wa SADC",
       "international": "Washiriki wa Kimataifa"
-    }
+    },
+    "participantTypeRequired": "Tafadhali chagua anayejisajili",
+    "kitTShirt": "T-shirt rasmi ya Mwanga Marathon",
+    "kitBag": "Drawstring bag na wristband",
+    "kitBib": "Namba ya kukimbilia (bib)",
+    "kitMedal": "Medali ya ushiriki"
   },
   "form": {
     "nationalityCategory": "Utaifa",
@@ -266,9 +268,6 @@
     "enterPhoneNumber": "Ingiza namba ya simu",
     "eventSelection": "Uchaguzi wa Aina Ya Mbio",
     "selectEvent": "Chagua Tukio",
-    "localPrice": "Bei ya Ndani",
-    "foreignPrice": "Bei ya Nje",
-    "kidsPriceLocal": "Bei ya Watoto (Ndani)",
     "collectionVenue": "Kituo cha Kupokea T-shirt",
     "selectCollectionVenue": "Chagua Kituo cha Kupokea T-shirt",
     "address": "Anwani:",
@@ -281,7 +280,24 @@
     "enterEmergencyContactNumber": "Ingiza namba ya mawasiliano ya dharura",
     "postalCode": "Msimbo wa Posta",
     "enterPostalCode": "Ingiza msimbo wa posta",
-    "voucherCode": "Msimbo wa Vocha (Si Lazima)"
+    "voucherCode": "Msimbo wa Vocha (Si Lazima)",
+    "participantType": "Anayejisajili ni nani?",
+    "categories": {
+      "adult": "Mtu mzima / kijana",
+      "club": "Mwanachama wa klabu ya mbio",
+      "student": "Mwanafunzi",
+      "child": "Mtoto",
+      "senior": "Mzee"
+    },
+    "categoryHints": {
+      "adult": "Miaka 11 hadi 64",
+      "club": "Vilabu vya jogging na runners",
+      "student": "Shule, chuo au chuo kikuu",
+      "child": "Miaka 5 hadi 10",
+      "senior": "Miaka 65 na zaidi"
+    },
+    "proofNote": "Wanachama wa vilabu na wanafunzi: leteni kadi ya klabu au kitambulisho cha mwanafunzi mnapochukua vifaa.",
+    "foreignNote": "Washiriki kutoka nje ya Afrika Mashariki na SADC hulipa {fee}."
   },
   "heroEvent": {
     "dateVenue": "20 Desemba 2026 · Uwanja wa C.D. Msuya, Mwanga",

@@ -21,15 +21,6 @@ const CategoryCards = () => {
   const t = useTranslations("raceCategories.cards");
   const [categories, setCategories] = useState([]);
 
-  // Age by race: kids race, then by distance (42 km 18+, 21 km 16+, 10 km 14+, shorter: all ages)
-  const ageLimitFor = (event) => {
-    if (event.is_kids_event) return t("under10");
-    const km = Number(event.distance_km) || 0;
-    if (km >= 42) return t("n18Years");
-    if (km >= 21) return t("n16Years");
-    if (km >= 10) return t("n14Years");
-    return t("allAges");
-  };
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -52,7 +43,6 @@ const CategoryCards = () => {
               description: event.description || t("defaultDescription"),
               price: formatMoney('TZS', event.local_price),
               foreignPrice: formatMoney('USD', event.foreign_price),
-              ageLimit: ageLimitFor(event),
             };
           });
           
@@ -109,41 +99,10 @@ const CategoryCards = () => {
     );
   }
 
-  // Fallback to static data if no categories are returned from API
-  const displayCategories = categories.length > 0 ? categories : [
-    {
-      id: 1,
-      title: t("fullMarathon"),
-      distance: '42.195 km',
-      description: t("fullMarathonDesc"),
-      price: 'TZS 50,000',
-      ageLimit: t("n18Years")
-    },
-    {
-      id: 2,
-      title: t("halfMarathon"),
-      distance: '21.0975 km',
-      description: t("halfMarathonDesc"),
-      price: 'TZS 40,000',
-      ageLimit: t("n16Years")
-    },
-    {
-      id: 3,
-      title: t("race10k"),
-      distance: '10 km',
-      description: t("race10kDesc"),
-      price: 'TZS 30,000',
-      ageLimit: t("n14Years")
-    },
-    {
-      id: 4,
-      title: t("funRun5k"),
-      distance: '5 km',
-      description: t("funRun5kDesc"),
-      price: 'TZS 20,000',
-      ageLimit: t("allAges")
-    },
-  ];
+  if (categories.length === 0) {
+    return <p className="text-center py-10 text-primary">{t("pleaseTryAgainLater")}</p>;
+  }
+  const displayCategories = categories;
 
   return (
     <motion.div
@@ -177,7 +136,6 @@ const CategoryCards = () => {
                 {[
                   [t("entryFee"), category.price],
                   [t("foreignEntryFee"), category.foreignPrice],
-                  [t("ageRequirement"), category.ageLimit],
                 ].filter(([, value]) => value).map(([label, value]) => (
                   <div key={label}>
                     <dt className={`text-xs font-medium uppercase tracking-wide ${theme.muted}`}>{label}</dt>

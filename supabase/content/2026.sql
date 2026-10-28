@@ -1,8 +1,10 @@
--- Mwanga Marathon 2026 content, from the organisers' letters (Oct 2026):
--- 20 December 2026, C.D. Msuya Stadium, Mwanga; races 21.1 / 10 / 5 / 2.5 km;
--- Tsh 40,000 entry; runner package; Mwanga Utalii Festivals programme.
--- Agreed with the organiser: foreigners USD 30, children Tsh 20,000,
--- registration closes 10 December 2026.
+-- Mwanga Marathon 2026 content, from the organisers' letters (latest:
+-- 15 Oct 2026): 20 December 2026, C.D. Msuya Stadium, Mwanga; races 21.1 /
+-- 10 / 5 km and a 2.5 km Walking Safari / Fun Run for children and families;
+-- Mwanga Utalii Festivals programme. Fees depend on the participant type and
+-- live in src/lib/payments.ts (the race prices below are the adult rate).
+-- Agreed with the organiser: foreigners USD 30, registration closes
+-- 10 December 2026.
 -- Items marked TO CONFIRM are placeholders the organiser still has to give.
 --
 -- Needs migration 20261028000001 (schedule time_en/time_sw).
@@ -17,23 +19,19 @@ values
   ('Half Marathon (21.1km)', 'Nusu Marathon (km 21.1)',
    'Half marathon for experienced runners.',
    'Mbio za nusu marathon kwa wanariadha na washiriki wenye uzoefu.',
-   40000, 30, 20000, 21.1, false, true, 1),
+   40000, 30, 15000, 21.1, false, true, 1),
   ('Trail Run (10km)', 'Trail Run (km 10)',
    'Ten kilometres through Mwanga''s natural scenery.',
    'Mbio za kilomita kumi zinazopita katika mandhari nzuri ya asili ya Mwanga.',
-   40000, 30, 20000, 10, false, true, 2),
+   40000, 30, 15000, 10, false, true, 2),
   ('Fun Run (5km)', 'Fun Run (km 5)',
    'Five kilometres for all runners and club members.',
    'Mbio za kilomita tano kwa wakimbiaji wote na wanachama wa vilabu.',
-   40000, 30, 20000, 5, false, true, 3),
-  ('Walking Safari (2.5km)', 'Walking Safari (km 2.5)',
-   'A 2.5 km walk or easy run for families and elders — for health and fun.',
-   'Matembezi na mbio fupi za kilomita 2.5 kwa wazee na familia kwa ajili ya afya na furaha.',
-   40000, 30, 20000, 2.5, false, true, 4),
-  ('Kids Walking Safari (2.5km)', 'Walking Safari ya Watoto (km 2.5)',
-   'The 2.5 km Walking Safari for children (under 10), with a kids'' T-shirt.',
-   'Walking Safari ya kilomita 2.5 kwa watoto (chini ya miaka 10), pamoja na T-shirt ya watoto.',
-   20000, 15, 20000, 2.5, true, true, 5);
+   40000, 30, 15000, 5, false, true, 3),
+  ('Walking Safari / Fun Run (2.5km)', 'Walking Safari / Fun Run (km 2.5)',
+   'A 2.5 km walk or easy run for children, families and elders — for health and fun.',
+   'Matembezi au mbio fupi za kilomita 2.5 kwa watoto, familia na wazee — kwa afya na furaha.',
+   40000, 30, 15000, 2.5, false, true, 4);
 
 -- Home page banner (replaces the photo hero while active and registration is open).
 update public.marathon_banners set is_active = false where is_active;

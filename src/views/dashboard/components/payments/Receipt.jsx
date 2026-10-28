@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { faPrint } from '@fortawesome/free-solid-svg-icons';
 import { getRegistration } from '../../../../api/marathon/registration';
-import { PAYMENT_METHODS, formatMoney } from '@/lib/payments';
+import { CATEGORY_LABELS, PAYMENT_METHODS, formatMoney } from '@/lib/payments';
 import { EVENT } from '@/lib/event';
 import { Alert, Button, Spinner, formatDateTime } from '../ui/kit';
 
@@ -27,6 +27,7 @@ const Receipt = () => {
     ['Participant', `${r.first_name} ${r.last_name}`],
     ['Phone', r.phone_number],
     ['Race', r.event?.name],
+    ['Participant type', CATEGORY_LABELS[r.participant_category]],
     ['T-shirt', (r.kids_shirt_size ?? r.shirt_size)?.name],
     ['Kit collection', r.collection_venue?.name],
     ['Paid by', PAYMENT_METHODS[r.payment_method] ?? '—'],

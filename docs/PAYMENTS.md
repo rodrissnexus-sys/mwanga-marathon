@@ -13,20 +13,29 @@ Admins and moderators confirm payments in the dashboard: **Payments → To check
    find the matching M-Pesa / Tigo Pesa / Airtel Money message or bank
    statement line, and check that:
    - the sender name or phone matches the participant (shown at the top), and
-   - the amount matches the race fee shown in the panel.
+   - the amount matches the fee shown in the panel.
 4. **Confirm.** Choose how they paid, type the transaction ID (e.g. the M-Pesa
    code `QJK3H2L9XP`) and the amount received, then press **Confirm payment**.
    The participant gets a confirmation email, and a printable **Receipt** is
    available.
 
-## Race fees (2026)
+## Entry fees (2026)
 
-| Race | Tanzanians, East Africans, SADC residents | Everyone else |
-|---|---|---|
-| Half Marathon, Trail Run, Fun Run, Walking Safari | TZS 40,000 | USD 30 |
-| Kids Walking Safari | TZS 20,000 | TZS 20,000 |
+The fee depends on who is taking part, not on the race (organiser's letter of
+15 October 2026):
 
-You don't need to work this out: the payment panel always shows the fee for that person.
+| Participant | Fee |
+|---|---|
+| Adults and youth (11–64) | TZS 40,000 |
+| Jogging & running club members | TZS 35,000 |
+| Students (school, college, university) | TZS 25,000 |
+| Children (5–10) and elders (65+) | TZS 15,000 |
+| From outside East Africa and SADC (except children and elders) | USD 30 |
+
+Children and elders are set automatically from the date of birth. Club
+members and students choose their type themselves — check the club card or
+student ID when they collect their kit. The payment panel always shows the
+fee for that person.
 
 ## Special cases
 

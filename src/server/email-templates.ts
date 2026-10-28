@@ -8,11 +8,8 @@ export type RegistrationEmailData = {
   phone: string;
   registrationId: string;
   event: string;
-  isKidsEvent: boolean;
-  isLocal: boolean;
-  localPrice: number;
-  foreignPrice: number;
-  localKidsPrice: number;
+  /** entry fee to pay (see expectedFee) */
+  fee: { amount: number; currency: "TZS" | "USD" } | null;
   shirtSize: string;
   collectionVenue: string;
   gender: string;
@@ -82,8 +79,7 @@ const TEXT = {
 } as const;
 
 function fee(d: RegistrationEmailData) {
-  if (d.isKidsEvent) return money(d.localKidsPrice, "TZS");
-  return d.isLocal ? money(d.localPrice, "TZS") : money(d.foreignPrice, "USD");
+  return d.fee ? money(d.fee.amount, d.fee.currency) : "—";
 }
 
 export function registrationConfirmation(d: RegistrationEmailData, locale: Locale) {

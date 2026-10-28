@@ -190,10 +190,6 @@
     "currentlyClosed": "Registration is currently closed"
   },
   "registration": {
-    "eventEntryAndOfficial": "Event entry and official timing chip",
-    "exclusiveFestivalAccessFor": "Exclusive festival access for all 3 days",
-    "commemorativeTShirtAnd": "Commemorative t-shirt and medal",
-    "foodAndDrinkVouchers": "Food and drink vouchers",
     "firstNameIsRequired": "First name is required",
     "lastNameIsRequired": "Last name is required",
     "emailIsRequired": "Email is required",
@@ -207,9 +203,9 @@
     "errorLoadingFormOptions": "Error loading form options. Please refresh the page.",
     "titleFirst": "Event",
     "titleSecond": "Registration",
-    "registerNowFor": "Register Now for",
-    "earlyBirdDiscounts": "Early Bird Discounts",
-    "secureYourSpotIn": "Secure your spot in the Mwanga Marathon and Festival. Early registrants receive exclusive merchandise and prime viewing spots for all cultural performances.",
+    "registerNowFor": "Register now for",
+    "earlyBirdDiscounts": "20 December 2026",
+    "secureYourSpotIn": "Secure your place in Mwanga Marathon 2026 at C.D. Msuya Stadium. Every paid participant receives the race kit below, and the winners of every race receive medals and prizes.",
     "personalInformation": "Personal Information",
     "eventDetails": "Event Details",
     "additionalInformation": "Additional Information",
@@ -234,13 +230,19 @@
       "genderRequired": "Gender is required",
       "emergencyNameRequired": "Emergency contact name is required",
       "emergencyNumberRequired": "Emergency contact number is required",
-      "nationalityIncomplete": "Nationality information is incomplete. Please go back and select your nationality again."
+      "nationalityIncomplete": "Nationality information is incomplete. Please go back and select your nationality again.",
+      "dobInvalid": "Please check the date of birth"
     },
     "nationality": {
       "tz_ea": "Tanzania and East Africa Citizens",
       "tz_resident_sadc": "Tanzania Residents & Work Permit & SADC Citizens",
       "international": "International Runners"
-    }
+    },
+    "participantTypeRequired": "Please choose who is registering",
+    "kitTShirt": "Official Mwanga Marathon T-shirt",
+    "kitBag": "Drawstring bag and wristband",
+    "kitBib": "Race number (bib)",
+    "kitMedal": "Participation medal"
   },
   "form": {
     "nationalityCategory": "Nationality Category",
@@ -266,9 +268,6 @@
     "enterPhoneNumber": "Enter phone number",
     "eventSelection": "Event Selection",
     "selectEvent": "Select Event",
-    "localPrice": "Local Price",
-    "foreignPrice": "Foreign Price",
-    "kidsPriceLocal": "Kids Price (Local)",
     "collectionVenue": "Collection Venue",
     "selectCollectionVenue": "Select Collection Venue",
     "address": "Address:",
@@ -281,7 +280,24 @@
     "enterEmergencyContactNumber": "Enter emergency contact number",
     "postalCode": "Postal Code",
     "enterPostalCode": "Enter postal code",
-    "voucherCode": "Voucher Code (Optional)"
+    "voucherCode": "Voucher Code (Optional)",
+    "participantType": "Who is registering?",
+    "categories": {
+      "adult": "Adult / youth",
+      "club": "Running club member",
+      "student": "Student",
+      "child": "Child",
+      "senior": "Elder"
+    },
+    "categoryHints": {
+      "adult": "Ages 11 to 64",
+      "club": "Jogging & runners clubs",
+      "student": "School, college or university",
+      "child": "Ages 5 to 10",
+      "senior": "65 and over"
+    },
+    "proofNote": "Club members and students: bring your club card or student ID when you collect your kit.",
+    "foreignNote": "Participants from outside East Africa and SADC pay {fee}."
   },
   "heroEvent": {
     "dateVenue": "20 December 2026 · C.D. Msuya Stadium, Mwanga",

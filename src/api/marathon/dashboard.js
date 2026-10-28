@@ -5,7 +5,7 @@ import { expectedFee } from '@/lib/payments';
 const PAGE = 1000; // Supabase returns at most 1000 rows per request
 
 const COLUMNS = `id, registration_id, first_name, last_name, phone_number, created_at, event_id, locale,
-  payment_status, payment_amount, payment_currency, nationality_category,
+  payment_status, payment_amount, payment_currency, nationality_category, participant_category,
   nationality:countries!registrations_nationality_id_fkey(code), gender:genders(code)`;
 
 /**
