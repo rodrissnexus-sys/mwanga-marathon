@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import React, { useEffect, useRef, useState } from "react";
+import SectionHeader from '@/components/common/SectionHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic, faRunning, faStore, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
 
@@ -57,7 +58,7 @@ const HighlightSection = () => {
         <section 
             id="highlights" 
             ref={sectionRef} 
-            className="py-24 bg-primary text-white relative overflow-hidden"
+            className="py-24 bg-primary text-tertiary relative overflow-hidden"
         >
             {/* Background decorative elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary opacity-5 rounded-full -mr-32 -mt-32"></div>
@@ -65,18 +66,7 @@ const HighlightSection = () => {
             
             <div className="max-w-6xl mx-auto px-6 relative">
                 {/* Header with decorative elements */}
-                <div className={`mb-16 relative transition-all duration-1000 ${isInView ? "opacity-100" : "opacity-0"}`}>
-                    <div className="absolute left-0 top-1/2 w-16 h-px bg-secondary"></div>
-                    <div className="absolute right-0 top-1/2 w-16 h-px bg-secondary"></div>
-                    
-                    <h2 className="text-center text-4xl font-light tracking-widest uppercase">
-                        <span className="inline-block transform -skew-y-3 text-secondary">{t("festival")}</span>
-                        <span className="inline-block ml-3 text-tertiary relative">
-                            {t("highlights")}
-                            <span className="absolute -bottom-2 left-0 w-full h-px bg-secondary"></span>
-                        </span>
-                    </h2>
-                </div>
+                <SectionHeader firstWord={t("festival")} secondWord={t("highlights")} tone="dark" className={`transition-all duration-1000 ${isInView ? "opacity-100" : "opacity-0"}`} />
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {features.map((feature, index) => (
@@ -91,7 +81,7 @@ const HighlightSection = () => {
                                 transitionDelay: `${index * 200}ms`
                             }}
                         >
-                            <div className="p-6 bg-white/5 backdrop-blur-sm border-l-2 border-secondary transform transition-all duration-300 group-hover:translate-x-2 group-hover:bg-white/10">
+                            <div className="p-6 bg-tertiary/5 backdrop-blur-sm border-l-2 border-secondary transform transition-all duration-300 group-hover:translate-x-2 group-hover:bg-tertiary/10">
                                 <div className="flex flex-col items-center text-center relative">
                                     {/* Corner accents */}
                                     <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-secondary opacity-0 group-hover:opacity-100 transition-opacity"></span>

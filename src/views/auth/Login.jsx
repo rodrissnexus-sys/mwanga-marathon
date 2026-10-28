@@ -62,7 +62,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-tertiary text-primary">
-      <div className="max-w-md w-full p-8 rounded-lg bg-white">
+      <div className="max-w-md w-full p-8 rounded-lg bg-tertiary">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">{t("title")}</h2>
           <p className="text-primary/85">
@@ -110,7 +110,7 @@ const Login = () => {
               placeholder="••••••••"
             />
             {formErrors.password && (
-              <p className="mt-1 text-sm text-red-500">{formErrors.password[0]}</p>
+              <p className="mt-1 text-sm text-negative">{formErrors.password[0]}</p>
             )}
           </div>
 

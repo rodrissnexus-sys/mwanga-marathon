@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import React, { useState, useEffect } from "react";
+import SectionHeader from '@/components/common/SectionHeader';
 import {Link} from '@/lib/router';
 import PersonalInfo from "./formSteps/PersonalInfo";
 import EventDetails from "./formSteps/EventDetails";
@@ -397,7 +398,7 @@ const RegistrationSection = () => {
   }
 
   if (dropdownsError) {
-    return <div className="text-center py-8 text-red-500">{t("errorLoadingFormOptions")}</div>;
+    return <div className="text-center py-8 text-negative">{t("errorLoadingFormOptions")}</div>;
   }
 
   return (
@@ -406,18 +407,7 @@ const RegistrationSection = () => {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-tertiary opacity-5 rounded-full -mr-48 -mb-48"></div>
       
       <div className="max-w-6xl mx-auto px-6 relative">
-        <div className="mb-16 relative">
-          <div className="absolute left-0 top-1/2 w-16 h-px bg-secondary"></div>
-          <div className="absolute right-0 top-1/2 w-16 h-px bg-secondary"></div>
-          
-          <h2 className="text-center text-4xl font-light tracking-widest uppercase">
-            <span className="inline-block transform -skew-y-3 text-secondary">{t("titleFirst")}</span>
-            <span className="inline-block ml-3 text-tertiary relative">
-              {t("titleSecond")}
-              <span className="absolute -bottom-2 left-0 w-full h-px bg-tertiary"></span>
-            </span>
-          </h2>
-        </div>
+        <SectionHeader firstWord={t("titleFirst")} secondWord={t("titleSecond")} tone="dark" />
         
         <div className="flex flex-col md:flex-row gap-12">
           <div className="w-full md:w-1/2">

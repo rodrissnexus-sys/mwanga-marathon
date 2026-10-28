@@ -27,8 +27,8 @@ const GradientButton = ({ children, onClick, className = '', gradientFrom = 'fro
       <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-yellow-400 to-yellow-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-0"></span>
       
       {/* Particle effects */}
-      <span className="absolute top-0 right-0 w-2 h-2 rounded-full bg-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-0 group-hover:scale-100 group-hover:animate-float"></span>
-      <span className="absolute bottom-0 left-0 w-1.5 h-1.5 rounded-full bg-blue-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-0 group-hover:scale-100 group-hover:animate-float" style={{animationDelay: "200ms"}}></span>
+      <span className="absolute top-0 right-0 w-2 h-2 rounded-full bg-caution/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-0 group-hover:scale-100 group-hover:animate-float"></span>
+      <span className="absolute bottom-0 left-0 w-1.5 h-1.5 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-0 group-hover:scale-100 group-hover:animate-float" style={{animationDelay: "200ms"}}></span>
     </PrimaryButton>
   );
 
@@ -183,7 +183,7 @@ const Header = () => {
           {/* Language Switcher */}
           <div className="language-switcher relative ml-auto z-[1001]">
             <button 
-              className="relative px-2 py-0.5 group cursor-pointer flex items-center text-black/70 hover:text-primary/90 transition-colors border border-primary/20 rounded-md hover:bg-white/50"
+              className="relative px-2 py-0.5 group cursor-pointer flex items-center text-black/70 hover:text-primary/90 transition-colors border border-primary/20 rounded-md hover:bg-tertiary/50"
               onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
               aria-label={t("switchLanguage")}
             >
@@ -221,8 +221,8 @@ const Header = () => {
       {/* Decorative top bar with enhanced gradient */}
       <div className="h-1 w-full bg-gradient-to-r from-primary/90 via-secondary/40 to-primary/50 overflow-hidden sticky top-[25px] z-[999]">
         <div className="absolute inset-0 w-full h-full">
-          <div className="absolute top-0 left-1/4 w-10 h-1 bg-white/20 animate-slide-right"></div>
-          <div className="absolute top-0 left-2/3 w-6 h-1 bg-white/10 animate-slide-right" style={{ animationDelay: "1s" }}></div>
+          <div className="absolute top-0 left-1/4 w-10 h-1 bg-tertiary/20 animate-slide-right"></div>
+          <div className="absolute top-0 left-2/3 w-6 h-1 bg-tertiary/10 animate-slide-right" style={{ animationDelay: "1s" }}></div>
         </div>
       </div>
       

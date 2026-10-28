@@ -69,7 +69,7 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-2xl' }) => 
         <div className="flex min-h-full items-center justify-center p-4 text-center">
           <motion.div
             ref={modalRef}
-            className={`${maxWidth} w-full bg-white rounded-lg shadow-xl overflow-hidden relative`}
+            className={`${maxWidth} w-full bg-tertiary rounded-lg shadow-xl overflow-hidden relative`}
             variants={modalVariants}
             initial="hidden"
             animate="visible"

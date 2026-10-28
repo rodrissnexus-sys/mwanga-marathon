@@ -16,5 +16,13 @@
   "social": "Mitandao",
   "newsletter": "Jarida",
   "emailPlaceholder": "Barua pepe yako",
-  "rights": "{year} Mwanga Festival and Marathon. Haki zote zimehifadhiwa."
+  "rights": "{year} Mwanga Festival and Marathon. Haki zote zimehifadhiwa.",
+  "newsletterText": "Habari za mbio, usajili na tamasha — bila usumbufu.",
+  "subscribe": "Jiunge",
+  "newsletterThanks": "Asante! Umeongezwa kwenye orodha.",
+  "newsletterErrors": {
+    "invalid": "Tafadhali weka barua pepe sahihi.",
+    "tooMany": "Majaribio mengi mno. Tafadhali jaribu tena baadaye.",
+    "failed": "Kuna tatizo. Tafadhali jaribu tena."
+  }
 }

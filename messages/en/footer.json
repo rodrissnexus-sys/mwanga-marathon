@@ -16,5 +16,13 @@
   "social": "Connect",
   "newsletter": "Newsletter",
   "emailPlaceholder": "Your email address",
-  "rights": "{year} Mwanga Festival and Marathon. All rights reserved."
+  "rights": "{year} Mwanga Festival and Marathon. All rights reserved.",
+  "newsletterText": "News about races, registration and the festival — no spam.",
+  "subscribe": "Subscribe",
+  "newsletterThanks": "Thank you! You are on the list.",
+  "newsletterErrors": {
+    "invalid": "Please enter a valid email address.",
+    "tooMany": "Too many attempts. Please try again later.",
+    "failed": "Something went wrong. Please try again."
+  }
 }

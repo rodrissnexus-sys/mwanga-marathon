@@ -148,7 +148,7 @@ export default function MarathonBanner({ bannerData, isLoading = false }) {
         speed: Math.random() * 15 + 5,
         startPosition: Math.random() * 100,
         delay: Math.random() * 5,
-        color: i % 2 === 0 ? 'bg-secondary' : 'bg-blue-500'
+        color: i % 2 === 0 ? 'bg-secondary' : 'bg-primary'
       });
     }
     setRacingElements(elements);
@@ -593,7 +593,7 @@ export default function MarathonBanner({ bannerData, isLoading = false }) {
         }}
       >
         <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-secondary blur-3xl"></div>
-        <div className="absolute bottom-40 right-20 w-96 h-96 rounded-full bg-blue-500 blur-3xl"></div>
+        <div className="absolute bottom-40 right-20 w-96 h-96 rounded-full bg-primary blur-3xl"></div>
         <div className="absolute top-1/2 left-1/3 w-80 h-80 rounded-full bg-purple-500 blur-3xl"></div>
       </div>
       
@@ -729,7 +729,7 @@ export default function MarathonBanner({ bannerData, isLoading = false }) {
                             </li>
                           ))}
                           {getPackageFeatures().length === 0 && (
-                            <li className="text-center text-gray-300 italic">{t('noPackageDetails')}</li>
+                            <li className="text-center text-primary/75 italic">{t('noPackageDetails')}</li>
                           )}
                         </>
                       )}
@@ -758,13 +758,13 @@ export default function MarathonBanner({ bannerData, isLoading = false }) {
               {/* Registration status */}
               <div className="text-center text-sm">
                 {isRegistrationOpen ? (
-                  <div className="text-green-300">
-                    <span className="inline-block w-2 h-2 bg-green-300 rounded-full mr-2"></span>
+                  <div className="text-positive">
+                    <span className="inline-block w-2 h-2 bg-positive/30 rounded-full mr-2"></span>
                     {t('openUntil', { date: bannerData?.registration_end_date ? new Date(bannerData.registration_end_date).toLocaleDateString(dateLocale === 'en-US' ? 'en-GB' : dateLocale, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Africa/Dar_es_Salaam' }) : 'N/A' })}
                   </div>
                 ) : (
-                  <div className="text-red-300">
-                    <span className="inline-block w-2 h-2 bg-red-300 rounded-full mr-2"></span>
+                  <div className="text-negative">
+                    <span className="inline-block w-2 h-2 bg-negative/30 rounded-full mr-2"></span>
                     {t('currentlyClosed')}
                   </div>
                 )}

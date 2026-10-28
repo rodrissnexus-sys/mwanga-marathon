@@ -100,7 +100,7 @@ const SponsorSection = () => {
               <motion.div
                 key={sponsor.id}
                 whileHover={{ y: -5, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
-                className="bg-white rounded-lg p-4 shadow-md flex items-center justify-center h-24 transition-all duration-300"
+                className="bg-tertiary rounded-lg p-4 shadow-md flex items-center justify-center h-24 transition-all duration-300"
               >
                 <img 
                   src={sponsor.logo} 
@@ -121,12 +121,12 @@ const SponsorSection = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden"
+              className="bg-tertiary rounded-2xl shadow-lg overflow-hidden"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
             >
               <div className="flex flex-col md:flex-row">
-                <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 flex items-center justify-center bg-gray-50">
+                <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 flex items-center justify-center bg-primary/[0.03]">
                   <img 
                     src={sponsorLogos[activeIndex].logo} 
                     alt={sponsorLogos[activeIndex].name}
@@ -144,7 +144,7 @@ const SponsorSection = () => {
                     <button className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base bg-primary text-tertiary rounded-lg hover:bg-primary/90 transition-colors">
                       {t("learnMore")}
                     </button>
-                    <button className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base border-2 border-secondary rounded-lg hover:bg-gray-50 transition-colors">
+                    <button className="px-3 py-1.5 sm:px-4 sm:py-2 text-sm sm:text-base border-2 border-secondary rounded-lg hover:bg-primary/[0.03] transition-colors">
                       {t("visitWebsite")}
                     </button>
                   </div>
@@ -155,7 +155,7 @@ const SponsorSection = () => {
             {/* Navigation arrows - hidden on very small screens, visible from small screens up */}
             <button 
               onClick={prevSponsor}
-              className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 sm:-translate-x-3 md:-translate-x-6 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg items-center justify-center hover:bg-gray-50 transition-colors z-10"
+              className="hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 sm:-translate-x-3 md:-translate-x-6 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-tertiary shadow-lg items-center justify-center hover:bg-primary/[0.03] transition-colors z-10"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -163,7 +163,7 @@ const SponsorSection = () => {
             </button>
             <button 
               onClick={nextSponsor}
-              className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 sm:translate-x-3 md:translate-x-6 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white shadow-lg items-center justify-center hover:bg-gray-50 transition-colors z-10"
+              className="hidden sm:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 sm:translate-x-3 md:translate-x-6 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-tertiary shadow-lg items-center justify-center hover:bg-primary/[0.03] transition-colors z-10"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -191,7 +191,7 @@ const SponsorSection = () => {
               {sponsorLogos.map((sponsor) => (
                 <div
                   key={sponsor.id}
-                  className="flex-shrink-0 w-48 bg-white rounded-lg shadow-md p-4 flex flex-col items-center"
+                  className="flex-shrink-0 w-48 bg-tertiary rounded-lg shadow-md p-4 flex flex-col items-center"
                 >
                   <div className="h-20 flex items-center justify-center mb-3">
                     <img 
@@ -210,7 +210,7 @@ const SponsorSection = () => {
         {/* Become a Sponsor */}
         <div className="relative">
           <div className="absolute inset-0 bg-primary opacity-5 rounded-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-12 shadow-sm border border-gray-100">
+          <div className="relative bg-tertiary rounded-2xl p-8 md:p-12 shadow-sm border border-primary/15">
             <div className="flex flex-col md:flex-row items-center">
               <div className="w-full md:w-2/3 text-center md:text-left mb-8 md:mb-0">
                 <h3 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">{t("becomeASponsor")}</h3>

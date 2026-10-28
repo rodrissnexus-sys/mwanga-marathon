@@ -109,7 +109,7 @@ const FestivalDescriptionSection = () => {
               variants={itemVariants}
               className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8"
             >
-              <div className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 group">
+              <div className="bg-tertiary/50 backdrop-blur-sm p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 group">
                 <h4 className="text-xl font-medium text-primary mb-3 group-hover:text-secondary transition-colors duration-300">{t("communityTitle")}</h4>
                 <p className="text-text-primary/70">
                   {t.rich("communityText", {
@@ -120,7 +120,7 @@ const FestivalDescriptionSection = () => {
                 <div className="w-12 h-0.5 bg-secondary mt-4 group-hover:w-full transition-all duration-500"></div>
               </div>
               
-              <div className="bg-white/50 backdrop-blur-sm p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 group">
+              <div className="bg-tertiary/50 backdrop-blur-sm p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 group">
                 <h4 className="text-xl font-medium text-primary mb-3 group-hover:text-secondary transition-colors duration-300">{t("invitationTitle")}</h4>
                 <p className="text-text-primary/70">
                   {t("invitationText")}

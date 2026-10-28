@@ -63,6 +63,7 @@ export async function deleteE2eUsers() {
 export async function deleteE2eRows() {
   await admin(`/rest/v1/registrations?email=like.${E2E_PREFIX}*`, { method: "DELETE" });
   await admin(`/rest/v1/contact_messages?email=like.${E2E_PREFIX}*`, { method: "DELETE" });
+  await admin(`/rest/v1/newsletter_subscribers?email=like.${E2E_PREFIX}*`, { method: "DELETE" });
   // local requests share one IP; reset the form rate limits between runs
   await admin("/rest/v1/rate_limits?key=neq.__none__", { method: "DELETE" });
 }

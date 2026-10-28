@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import React, { useState, useRef, useEffect } from "react";
+import SectionHeader from '@/components/common/SectionHeader';
 import { Link } from '@/lib/router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -172,18 +173,7 @@ const ScheduleSection = () => {
 
       <div className="max-w-6xl mx-auto px-6 relative">
         {/* Header with decorative elements */}
-        <div className="mb-16 relative">
-          <div className="absolute left-0 top-1/2 w-16 h-px bg-primary/40"></div>
-          <div className="absolute right-0 top-1/2 w-16 h-px bg-primary/40"></div>
-          
-          <h2 className="text-center text-4xl font-light tracking-widest uppercase">
-            <span className="inline-block transform -skew-y-3 text-primary">{t("titleFirst")}</span>
-            <span className="inline-block ml-3 relative text-text-primary">
-              {t("titleSecond")}
-              <span className="absolute -bottom-2 left-0 w-full h-px bg-secondary"></span>
-            </span>
-          </h2>
-        </div>
+        <SectionHeader firstWord={t("titleFirst")} secondWord={t("titleSecond")} />
 
         {loading ? (
           <ScheduleSkeleton />

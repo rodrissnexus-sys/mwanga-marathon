@@ -75,7 +75,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-white relative overflow-hidden">
+    <section id="about" className="py-20 bg-tertiary relative overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <SectionHeader 
@@ -89,7 +89,7 @@ const AboutSection = () => {
           {/* Left column - Content */}
           <div className="space-y-8">
             <div className="prose prose-lg max-w-none">
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-primary/75 leading-relaxed">
                 {t("theMwangaFestivalMarathon")}
               </p>
             </div>
@@ -108,10 +108,10 @@ const AboutSection = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      <h3 className="text-lg font-semibold text-primary mb-2">
                         {feature.title}
                       </h3>
-                      <p className="text-gray-600">
+                      <p className="text-primary/75">
                         {feature.description}
                       </p>
                     </div>
@@ -126,7 +126,7 @@ const AboutSection = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {stats.map((stat, index) => (
                 <div key={index} className="group relative">
-                  <div className="relative z-10 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
+                  <div className="relative z-10 bg-tertiary p-6 rounded-xl shadow-sm border border-primary/15 hover:shadow-md transition-shadow duration-300">
                     <div className="flex items-center space-x-4">
                       <div className="flex-shrink-0">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 flex items-center justify-center group-hover:from-primary/20 group-hover:to-secondary/20 transition-colors duration-300">
@@ -141,7 +141,7 @@ const AboutSection = () => {
                           {stat.value}
                         </h3>
                         <p className="text-primary font-medium">{stat.label}</p>
-                        <p className="text-sm text-gray-500 mt-1">{stat.description}</p>
+                        <p className="text-sm text-primary/75 mt-1">{stat.description}</p>
                       </div>
                     </div>
                     

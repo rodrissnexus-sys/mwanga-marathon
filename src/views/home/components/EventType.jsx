@@ -46,7 +46,7 @@ const EventTypeSkeleton = () => {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {[1, 2, 3, 4].map((item) => (
         <div key={item} className="animate-pulse">
-          <div className="rounded-2xl bg-white shadow-md border border-primary/10 p-8">
+          <div className="rounded-2xl bg-tertiary shadow-md border border-primary/10 p-8">
             <div className="flex items-start justify-between mb-8">
               <div className="flex-1">
                 <div className="flex items-center space-x-4 mb-3">
@@ -184,7 +184,7 @@ const EventTypes = () => {
         {loading ? (
           <EventTypeSkeleton />
         ) : error || !eventTypes || eventTypes.length === 0 || eventTypes[0]?.title === "N/A" ? (
-          <div className="text-center py-16 bg-white rounded-2xl shadow-md border border-primary/10">
+          <div className="text-center py-16 bg-tertiary rounded-2xl shadow-md border border-primary/10">
             <div className="max-w-md mx-auto px-6">
               <div className="mb-6">
                 <FontAwesomeIcon icon={faCalendarCheck} className="text-6xl text-primary/30 mb-4" />
@@ -219,7 +219,7 @@ const EventTypes = () => {
                 {/* Card */}
                 <div 
                   className={`
-                    relative overflow-hidden rounded-2xl bg-white
+                    relative overflow-hidden rounded-2xl bg-tertiary
                     transition-all duration-500 group-hover:shadow-xl
                     border border-primary/10
                     ${activeType === event.id ? 'shadow-lg' : 'shadow-md'}
@@ -248,19 +248,19 @@ const EventTypes = () => {
                             transform transition-transform duration-500
                             group-hover:scale-110 group-hover:rotate-6
                           `}>
-                            <FontAwesomeIcon icon={event.icon} className="text-white text-xl" />
+                            <FontAwesomeIcon icon={event.icon} className="text-tertiary text-xl" />
                           </div>
                           <div>
-                            <h3 className="text-xl font-bold text-gray-900">{event.title}</h3>
-                            <p className="text-sm text-gray-500">{event.subtitle}</p>
+                            <h3 className="text-xl font-bold text-primary">{event.title}</h3>
+                            <p className="text-sm text-primary/75">{event.subtitle}</p>
                           </div>
                         </div>
-                        <p className="text-gray-600 leading-relaxed pr-6">{event.description}</p>
+                        <p className="text-primary/75 leading-relaxed pr-6">{event.description}</p>
                       </div>
                       <button className={`
                         w-8 h-8 rounded-full flex items-center justify-center
                         transition-all duration-500 border border-primary/20
-                        ${activeType === event.id ? 'bg-primary text-white rotate-90' : 'text-gray-400'}
+                        ${activeType === event.id ? 'bg-primary text-tertiary rotate-90' : 'text-primary/75'}
                         group-hover:border-primary/20
                       `}>
                         <FontAwesomeIcon icon={faChevronRight} className="text-sm" />
@@ -275,14 +275,14 @@ const EventTypes = () => {
                       {event.features.map((feature, idx) => (
                         <div 
                           key={idx}
-                          className="relative group/feature p-4 rounded-xl bg-gray-50 hover:bg-primary/10 transition-colors duration-300"
+                          className="relative group/feature p-4 rounded-xl bg-primary/[0.03] hover:bg-primary/10 transition-colors duration-300"
                         >
                           <div className="flex flex-col items-center text-center space-y-2">
                             <FontAwesomeIcon 
                               icon={feature.icon} 
                               className={`text-lg bg-gradient-to-r ${event.color} text-transparent bg-clip-text`}
                             />
-                            <span className="text-sm text-gray-600 group-hover/feature:text-gray-900 transition-colors duration-300">
+                            <span className="text-sm text-primary/75 group-hover/feature:text-primary transition-colors duration-300">
                               {feature.text}
                             </span>
                           </div>
@@ -294,7 +294,7 @@ const EventTypes = () => {
                     <div className={`
                       absolute top-4 right-4 px-4 py-1.5 rounded-full text-xs font-medium
                       transition-all duration-500 bg-gradient-to-r ${event.color}
-                      text-white transform
+                      text-tertiary transform
                       ${activeType === event.id ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}
                     `}>
                       {event.highlight}

@@ -2,14 +2,77 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelopeOpenText, faCheck, faRotateLeft, faReply, faHandshake, faEnvelope, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelopeOpenText, faFileExport, faAt, faCheck, faRotateLeft, faReply, faHandshake, faEnvelope, faPhone, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../../contexts/AuthContext';
-import { getMessages, setMessageHandled } from '../../../../api/messages';
+import { getMessages, setMessageHandled, getSubscribers, exportSubscribersCsv } from '../../../../api/messages';
 import { Alert, Button, Card, EmptyState, PageHeader, Pagination, Select, Spinner, Tabs, formatDateTime, timeAgo } from '../ui/kit';
 
 const PAGE_SIZE = 20;
 
 const TIERS = { tanzanite: 'Tanzanite', platinum: 'Platinum', gold: 'Gold', silver: 'Silver', custom: 'Custom' };
+
+const SUBSCRIBERS_PAGE_SIZE = 50;
+
+/** Footer newsletter sign-ups, with a CSV export for the mailing tool. */
+const SubscribersList = () => {
+  const [rows, setRows] = useState(null);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [error, setError] = useState('');
+  const [exporting, setExporting] = useState(false);
+
+  useEffect(() => {
+    getSubscribers({ page, pageSize: SUBSCRIBERS_PAGE_SIZE }).then((r) => {
+      if (r.success) {
+        setRows(r.data);
+        setTotal(r.total);
+      } else setError(r.error);
+    });
+  }, [page]);
+
+  return (
+    <>
+      {error && <div className="mb-4"><Alert onClose={() => setError('')}>{error}</Alert></div>}
+      <Card
+        padded={false}
+        title={`${total} ${total === 1 ? 'subscriber' : 'subscribers'}`}
+        action={
+          <Button
+            icon={faFileExport}
+            loading={exporting}
+            disabled={!total}
+            onClick={async () => {
+              setExporting(true);
+              const r = await exportSubscribersCsv();
+              if (!r.success) setError(r.error);
+              setExporting(false);
+            }}
+          >
+            Export CSV
+          </Button>
+        }
+      >
+        {rows === null ? (
+          <Spinner />
+        ) : rows.length === 0 ? (
+          <EmptyState icon={faAt} title="No subscribers yet">People who sign up in the website footer appear here.</EmptyState>
+        ) : (
+          <ul className="divide-y divide-primary/10 mt-4">
+            {rows.map((r) => (
+              <li key={r.id} className="px-5 py-3 flex flex-wrap items-center justify-between gap-2 text-sm">
+                <a href={`mailto:${r.email}`} className="font-semibold text-primary break-all hover:underline">{r.email}</a>
+                <span className="text-primary/70">
+                  {r.locale === 'sw' ? 'Swahili site' : 'English site'} · {formatDateTime(r.created_at)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <Pagination page={page} pageSize={SUBSCRIBERS_PAGE_SIZE} total={total} onChange={setPage} />
+      </Card>
+    </>
+  );
+};
 
 const MessagesView = () => {
   const { currentUser } = useAuth();
@@ -28,6 +91,7 @@ const MessagesView = () => {
   const latest = useRef(0);
 
   const load = useCallback(async () => {
+    if (view === 'newsletter') return;
     const request = ++latest.current;
     setLoading(true);
     const result = await getMessages({ page, pageSize: PAGE_SIZE, kind: kind || undefined, handled: view === 'handled' });
@@ -56,7 +120,7 @@ const MessagesView = () => {
 
   return (
     <div>
-      <PageHeader title="Messages" description="Questions from the contact form and sponsorship requests from the Sponsors page." />
+      <PageHeader title="Messages" description="Questions from the contact form, sponsorship requests from the Sponsors page, and newsletter sign-ups." />
 
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
         <Tabs
@@ -68,8 +132,10 @@ const MessagesView = () => {
           tabs={[
             { value: 'open', label: 'To answer' },
             { value: 'handled', label: 'Handled' },
+            { value: 'newsletter', label: 'Newsletter' },
           ]}
         />
+        {view !== 'newsletter' && (
         <div className="sm:ml-auto">
           <Select
             aria-label="Type"
@@ -84,7 +150,10 @@ const MessagesView = () => {
             <option value="partnership">Partnership</option>
           </Select>
         </div>
+        )}
       </div>
+
+      {view === 'newsletter' ? <SubscribersList /> : <>
 
       {error && <div className="mb-4"><Alert onClose={() => setError('')}>{error}</Alert></div>}
 
@@ -174,6 +243,7 @@ const MessagesView = () => {
           )}
         </div>
       )}
+      </>}
     </div>
   );
 };

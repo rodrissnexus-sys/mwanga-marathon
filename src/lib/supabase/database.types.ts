@@ -155,6 +155,20 @@ isOneToOne: false
                   Relationships: [
                     
                   ]
+                },"newsletter_subscribers": {
+                  Row: {
+                    "created_at": string,"email": string,"id": number,"locale": Database["public"]['Enums']["app_locale"]
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"email": string,"id"?: number,"locale"?: Database["public"]['Enums']["app_locale"]
+                  }
+                  Update: {
+                    "created_at"?: string,"email"?: string,"id"?: number,"locale"?: Database["public"]['Enums']["app_locale"]
+                  }
+                  Relationships: [
+                    
+                  ]
                 },"payment_events": {
                   Row: {
                     "actor_id": string | null,"actor_name": string | null,"amount": number | null,"created_at": string,"currency": string | null,"id": number,"method": Database["public"]['Enums']["payment_method"] | null,"notes": string | null,"previous_status": Database["public"]['Enums']["payment_status"] | null,"reference": string | null,"registration_id": number,"status": Database["public"]['Enums']["payment_status"]

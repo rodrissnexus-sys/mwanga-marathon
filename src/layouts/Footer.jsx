@@ -1,4 +1,6 @@
 import React from "react";
+import SectionHeader from '@/components/common/SectionHeader';
+import NewsletterForm from './NewsletterForm';
 import { getTranslations } from "next-intl/server";
 import { Link } from '@/lib/router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,25 +16,14 @@ const Footer = async () => {
   const t = await getTranslations("footer");
   const year = await getCurrentYear();
   return (
-    <footer className="py-20 bg-primary text-white overflow-hidden relative">
+    <footer className="py-20 bg-primary text-tertiary overflow-hidden relative">
       {/* Subtle background decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-secondary opacity-5 rounded-full -mr-32 -mt-32"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-tertiary opacity-5 rounded-full -ml-48 -mb-48"></div>
       
       <div className="max-w-6xl mx-auto px-6 relative">
         {/* Header with consistent styling from highlight section */}
-        <div className="mb-16 relative">
-          <div className="absolute left-0 top-1/2 w-16 h-px bg-secondary"></div>
-          <div className="absolute right-0 top-1/2 w-16 h-px bg-secondary"></div>
-          
-          <h2 className="text-center text-4xl font-light tracking-widest uppercase">
-            <span className="inline-block transform -skew-y-3 text-secondary">{t("connect")}</span>
-            <span className="inline-block ml-3 text-tertiary relative">
-              {t("withUs")}
-              <span className="absolute -bottom-2 left-0 w-full h-px bg-secondary"></span>
-            </span>
-          </h2>
-        </div>
+        <SectionHeader firstWord={t("connect")} secondWord={t("withUs")} tone="dark" />
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* About column */}
@@ -143,32 +134,7 @@ const Footer = async () => {
               </div>
               <div className="mt-6">
                 <h3 className="text-lg font-semibold mb-4 text-tertiary">{t("newsletter")}</h3>
-                <div className="flex relative overflow-hidden group">
-                  <input
-                    type="email"
-                    placeholder={t("emailPlaceholder")}
-                    className="px-4 py-3 rounded-l-md w-full focus:outline-none bg-tertiary/10 backdrop-blur-sm text-tertiary placeholder:text-tertiary"
-                  />
-                  <button className="relative overflow-hidden cursor-pointer active:scale-98 duration-300">
-                    <span className="relative z-10 inline-block px-4 py-3 text-primary bg-secondary rounded-r-md group-hover:text-primary transition-colors duration-300">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        />
-                      </svg>
-                    </span>
-                    <span className="absolute bottom-0 left-0 w-0 h-full bg-tertiary group-hover:w-full transition-all duration-300 ease-out z-0"></span>
-                  </button>
-                </div>
+                <NewsletterForm />
               </div>
             </div>
           </div>

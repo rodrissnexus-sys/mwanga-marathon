@@ -93,7 +93,7 @@ const CategoryCards = () => {
   if (error) {
     return (
       <div className="text-center py-10">
-        <p className="text-red mb-4">{error}</p>
+        <p className="text-negative mb-4">{error}</p>
         <p>{t("pleaseTryAgainLater")}</p>
       </div>
     );

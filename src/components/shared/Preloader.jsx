@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 const Preloader = () => {
   const t = useTranslations("common.preloader");
   return (
-    <div className="fixed inset-0 bg-white flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-tertiary flex items-center justify-center z-50">
       <motion.div 
         className="flex flex-col items-center"
         initial={{ opacity: 0 }}
@@ -46,7 +46,7 @@ const Preloader = () => {
         </motion.p>
         
         {/* Loading bar */}
-        <div className="w-48 h-1 bg-gray-200 rounded-full mt-4 overflow-hidden">
+        <div className="w-48 h-1 bg-primary/10 rounded-full mt-4 overflow-hidden">
           <motion.div 
             className="h-full bg-gradient-to-r from-primary to-secondary"
             initial={{ width: 0 }}

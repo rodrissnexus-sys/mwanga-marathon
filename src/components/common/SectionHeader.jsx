@@ -3,15 +3,16 @@
 import React from 'react';
 
 // Two-word section title: the first word on a lime highlight, the second
-// underlined. Navy text throughout so it reads well on light backgrounds.
-const SectionHeader = ({ firstWord, secondWord, className = '' }) => {
+// underlined. `tone="dark"` for sections on the navy background.
+const SectionHeader = ({ firstWord, secondWord, className = '', tone = 'light' }) => {
+  const dark = tone === 'dark';
   return (
     <div className={`mb-16 relative ${className}`}>
-      <div className="hidden md:block absolute left-4 top-1/2 w-16 h-px bg-primary/40"></div>
-      <div className="hidden md:block absolute right-4 top-1/2 w-16 h-px bg-primary/40"></div>
+      <div className={`hidden md:block absolute left-4 top-1/2 w-16 h-px ${dark ? 'bg-secondary/50' : 'bg-primary/40'}`}></div>
+      <div className={`hidden md:block absolute right-4 top-1/2 w-16 h-px ${dark ? 'bg-secondary/50' : 'bg-primary/40'}`}></div>
 
-      <h2 className="text-center text-3xl md:text-4xl font-extrabold tracking-wider uppercase text-primary leading-snug px-2 md:px-24">
-        <span className="relative inline-block px-3 mx-1">
+      <h2 className={`text-center text-3xl md:text-4xl font-extrabold tracking-wider uppercase leading-snug px-2 md:px-24 ${dark ? 'text-tertiary' : 'text-primary'}`}>
+        <span className="relative inline-block px-3 mx-1 text-primary">
           <span aria-hidden="true" className="absolute inset-x-0 inset-y-0.5 bg-secondary -skew-x-6 rounded-sm"></span>
           <span className="relative">{firstWord}</span>
         </span>
