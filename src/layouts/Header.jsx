@@ -47,6 +47,8 @@ const Header = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [hoverItem, setHoverItem] = useState(null);
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+  // the mobile menu has its own language list
+  const [mobileLanguageOpen, setMobileLanguageOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const t = useTranslations("header");
@@ -94,6 +96,7 @@ const Header = () => {
     const suffix = window.location.search + window.location.hash;
     intlRouter.replace(intlPathname + suffix, { locale: languageCode, scroll: false });
     setLanguageDropdownOpen(false);
+    setMobileLanguageOpen(false);
   };
 
   // Handle scroll after navigation
@@ -178,7 +181,7 @@ const Header = () => {
           </div>
           
           {/* Language Switcher */}
-          <div className="language-switcher ml-auto z-[1001]">
+          <div className="language-switcher relative ml-auto z-[1001]">
             <button 
               className="relative px-2 py-0.5 group cursor-pointer flex items-center text-black/70 hover:text-primary/90 transition-colors border border-primary/20 rounded-md hover:bg-white/50"
               onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
@@ -195,12 +198,12 @@ const Header = () => {
 
             {/* Language Dropdown */}
             {languageDropdownOpen && (
-              <div className="absolute top-full right-0 mt-1 bg-white shadow-lg rounded-md overflow-hidden min-w-[140px] border border-tertiary/20 animate-fade-in-down z-[1002]">
+              <div className="absolute top-full right-0 mt-1 bg-tertiary shadow-xl rounded-md overflow-hidden min-w-[160px] border border-primary/15 animate-fade-in-down z-[1002]">
                 {languageOptions.map((lang) => (
                   <button
                     key={lang.code}
                     onClick={() => handleLanguageSwitch(lang.code)}
-                    className={`block w-full text-left px-4 py-2.5 hover:bg-primary/10 transition-colors ${lang.code === locale ? 'bg-tertiary/20 text-primary/90 font-medium' : 'text-black/70 hover:text-primary/90'}`}
+                    className={`block w-full text-left px-4 py-2.5 hover:bg-primary/10 transition-colors ${lang.code === locale ? 'bg-primary/5 text-primary font-medium' : 'text-black/70 hover:text-primary'}`}
                   >
                     <div className="flex items-center">
                       <span className="font-medium mr-2">{lang.name}</span>
@@ -416,22 +419,22 @@ const Header = () => {
           })}
           
           {/* Mobile Language Switcher */}
-          <div className="pt-2 pb-1">
+          <div className="language-switcher pt-2 pb-1">
             <button
-              onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
+              onClick={() => setMobileLanguageOpen(!mobileLanguageOpen)}
               className="flex items-center w-full py-3 px-4 text-primary/90 hover:bg-black/5 rounded-md transition-colors border border-primary/20"
             >
               <FontAwesomeIcon icon={faGlobe} className="mr-3 text-primary/80 opacity-80" />
               <span>{t("currentLanguage")}</span>
               <FontAwesomeIcon 
                 icon={faChevronDown} 
-                className={`ml-auto text-xs transition-transform duration-300 ${languageDropdownOpen ? 'rotate-180' : ''}`} 
+                className={`ml-auto text-xs transition-transform duration-300 ${mobileLanguageOpen ? 'rotate-180' : ''}`} 
               />
             </button>
             
             {/* Mobile Language Options */}
-            {languageDropdownOpen && (
-              <div className="ml-4 mr-4 mt-1 space-y-1 bg-white/80 rounded-md overflow-hidden shadow-sm">
+            {mobileLanguageOpen && (
+              <div className="ml-4 mr-4 mt-1 space-y-1 bg-tertiary rounded-md overflow-hidden shadow-md border border-primary/15">
                 {languageOptions.map((lang) => (
                   <button
                     key={lang.code}
