@@ -114,6 +114,21 @@ const Header = () => {
     }
   }, [location, navigate]);
 
+  // While the phone menu is open the page behind it must not scroll;
+  // Escape closes the menu.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = 'hidden';
+    const onKey = (e) => e.key === 'Escape' && setMobileMenuOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      root.style.overflow = previous;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [mobileMenuOpen]);
+
   // Close language dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -239,7 +254,7 @@ const Header = () => {
       <nav 
         className={`py-1 px-2 md:px-8 flex justify-between items-center w-full z-[998] transition-all duration-500 backdrop-blur-md fixed ${
           scrolled ? "bg-tertiary/95 shadow-sm py-1" : "bg-tertiary/90"
-        } ${showHeader ? "top-[26px]" : "-top-24"}`}
+        } ${showHeader || mobileMenuOpen ? "top-[26px]" : "-top-24"}`}
       >
         {/* Logo area with active-link-style design */}
         <div 
@@ -373,10 +388,19 @@ const Header = () => {
         </div>
       </nav>
 
+      {/* Backdrop behind the phone menu: tap to close */}
+      <div
+        aria-hidden="true"
+        onClick={() => setMobileMenuOpen(false)}
+        className={`fixed inset-0 top-[90px] z-30 bg-primary/60 backdrop-blur-[2px] transition-opacity duration-300 ${
+          mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      />
+
       {/* Enhanced Mobile Menu Dropdown */}
       <div
         id="mobile-menu"
-        className={`fixed inset-x-0 top-[90px] z-40 max-h-[calc(100dvh-90px)] overflow-y-auto bg-tertiary rounded-b-2xl shadow-xl border-b border-primary/10 transition-all duration-300 transform ${
+        className={`fixed inset-x-0 top-[90px] z-40 max-h-[calc(100dvh-90px)] overflow-y-auto overscroll-contain bg-tertiary rounded-b-2xl shadow-xl border-b border-primary/10 transition-all duration-300 transform ${
           mobileMenuOpen ? "translate-y-0 opacity-100 visible" : "-translate-y-full opacity-0 invisible pointer-events-none"
         }`}
       >

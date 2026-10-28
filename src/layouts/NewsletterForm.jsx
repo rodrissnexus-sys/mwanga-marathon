@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faCheck, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { subscribeToNewsletter } from "@/server/newsletter";
 
-// Footer sign-up box: email field and a joined lime button of the same height.
+// Footer sign-up box: email field with a full-width lime button below it.
 const NewsletterForm = () => {
   const t = useTranslations("footer");
   const locale = useLocale();
@@ -40,7 +40,8 @@ const NewsletterForm = () => {
   return (
     <form onSubmit={submit} noValidate>
       <label htmlFor={id} className="block text-sm text-tertiary/85 mb-2">{t("newsletterText")}</label>
-      <div className="flex h-12 rounded-lg overflow-hidden ring-1 ring-tertiary/30 focus-within:ring-2 focus-within:ring-secondary bg-tertiary/10">
+      {/* field and button stacked: both full width, so the button always has room for its label */}
+      <div className="space-y-2">
         <input
           id={id}
           type="email"
@@ -54,17 +55,19 @@ const NewsletterForm = () => {
           placeholder={t("emailPlaceholder")}
           aria-invalid={status === "error" || undefined}
           aria-describedby={status === "error" ? `${id}-error` : undefined}
-          className="flex-1 min-w-0 h-full px-4 bg-transparent text-tertiary placeholder:text-tertiary/70 focus:outline-none"
+          className="w-full h-12 px-4 rounded-lg bg-tertiary/10 ring-1 ring-tertiary/30 text-tertiary placeholder:text-tertiary/70 focus:outline-none focus:ring-2 focus:ring-secondary"
         />
         <button
           type="submit"
           disabled={status === "sending"}
-          aria-label={t("subscribe")}
-          className="h-full px-4 md:px-3.5 flex items-center gap-2 shrink-0 bg-secondary text-primary font-bold hover:bg-tertiary transition-colors cursor-pointer disabled:opacity-70"
+          className="w-full h-12 px-4 rounded-lg flex items-center justify-center gap-2 bg-secondary text-primary font-bold uppercase tracking-wide text-sm hover:bg-tertiary transition-colors cursor-pointer disabled:opacity-70 group"
         >
-          {/* the label fits when the footer column is full width (phones and tablets) */}
-          <span className="md:hidden">{t("subscribe")}</span>
-          <FontAwesomeIcon icon={status === "sending" ? faSpinner : faArrowRight} spin={status === "sending"} />
+          {t("subscribe")}
+          <FontAwesomeIcon
+            icon={status === "sending" ? faSpinner : faArrowRight}
+            spin={status === "sending"}
+            className="transition-transform group-hover:translate-x-1"
+          />
         </button>
       </div>
       {status === "error" && (
