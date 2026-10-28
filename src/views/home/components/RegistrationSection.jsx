@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faCheck, faCircleInfo, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import SectionHeader from "@/components/common/SectionHeader";
 import { ageOnRaceDay, categoriesForAge, categoryFee, formatMoney } from "@/lib/payments";
+import { EVENT } from "@/lib/event";
 import RegistrationConfirmation from "./RegistrationConfirmation";
 import { useMarathonRegistration } from "../../../hooks/useMarathonRegistration";
 import { useDropdowns } from "../../../hooks/useDropdowns";
@@ -240,7 +241,7 @@ const RegistrationSection = () => {
         <Field name="lastName" label={tf("lastName")} value={form.lastName} onChange={onInput} error={errors.lastName} autoComplete="family-name" />
         <Field name="phoneNumber" label={tf("phoneNumber")} value={form.phoneNumber} onChange={onInput} error={errors.phoneNumber} type="tel" inputMode="tel" autoComplete="tel" placeholder="07XX XXX XXX" />
         <Field name="email" label={tf("email")} value={form.email} onChange={onInput} error={errors.email} type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" />
-        <Field name="dateOfBirth" label={tf("dateOfBirth")} value={form.dateOfBirth} onChange={onInput} error={errors.dateOfBirth} type="date" max={new Date().toISOString().slice(0, 10)} autoComplete="bday" />
+        <Field name="dateOfBirth" label={tf("dateOfBirth")} value={form.dateOfBirth} onChange={onInput} error={errors.dateOfBirth} type="date" max={EVENT.startsAt.slice(0, 10)} autoComplete="bday" />
         <Choices
           name="gender_id"
           legend={tf("gender")}
