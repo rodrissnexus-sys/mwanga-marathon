@@ -113,7 +113,8 @@
     "aboutMwafem": "Kuhusu MWAFEM",
     "previousImage": "Picha iliyotangulia",
     "nextImage": "Picha inayofuata",
-    "goToImage": "Nenda kwa picha {number}"
+    "goToImage": "Nenda kwa picha {number}",
+    "slideOf": "Picha {current} kati ya {total}"
   },
   "about": {
     "participants": "Washiriki",

@@ -113,7 +113,8 @@
     "aboutMwafem": "About MWAFEM",
     "previousImage": "Previous image",
     "nextImage": "Next image",
-    "goToImage": "Go to image {number}"
+    "goToImage": "Go to image {number}",
+    "slideOf": "Slide {current} of {total}"
   },
   "about": {
     "participants": "Participants",

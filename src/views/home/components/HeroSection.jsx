@@ -103,7 +103,7 @@ const HeroSection = () => {
           <div className="hidden lg:block">
             <div className="relative max-w-sm ml-8 group">
               {/* Glass background */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-tertiary/5 to-tertiary/[0.02] backdrop-blur-2xl border border-tertiary/10 rounded-lg z-0"></div>
+              <div className="absolute -inset-4 glass-card rounded-xl z-0"></div>
               
               {/* Decorative corner accents - inspired by AboutSection */}
               <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-secondary/60 rounded-tl-lg opacity-80 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
@@ -117,30 +117,31 @@ const HeroSection = () => {
               <div className="relative px-5 py-6 rounded-lg overflow-hidden z-10">
                 {/* Overline */}
                 <div className="flex items-center justify-between mb-3">
-                  <p className="text-secondary text-[9px] font-medium tracking-[0.3em] uppercase">
+                  <p className="text-secondary text-xs font-semibold tracking-[0.2em] uppercase">
                     {t("experience")}
                   </p>
                   <div className="flex items-center gap-1">
-                    <span className="text-secondary text-lg font-light">{images[activeIndex].subtitle}</span>
-                    <span className="text-tertiary/30 text-[10px]">/{String(images.length).padStart(2, '0')}</span>
+                    <span className="sr-only">{t("slideOf", { current: activeIndex + 1, total: images.length })}</span>
+                    <span aria-hidden="true" className="text-secondary text-lg font-normal">{images[activeIndex].subtitle}</span>
+                    <span aria-hidden="true" className="text-tertiary/75 text-xs">/{String(images.length).padStart(2, '0')}</span>
                   </div>
                 </div>
 
                 {/* Headline */}
                 <h1 className="text-tertiary text-2xl font-light leading-tight mb-3 tracking-tight">
                   Mwanga<br />
-                  <span className="font-extralight text-tertiary/80">Festival</span><br />
+                  <span className="font-light text-tertiary/90">Festival</span><br />
                   <span className="font-bold text-secondary">& Marathon</span>
                 </h1>
 
                 {/* Current view */}
                 <div className="mb-3">
-                  <p className="text-tertiary/40 text-[8px] uppercase tracking-[0.2em] mb-0.5">{t("currentView")}</p>
-                  <h2 className="text-tertiary text-base font-light">{images[activeIndex].title}</h2>
+                  <p className="text-tertiary/75 text-xs font-medium uppercase tracking-[0.15em] mb-0.5">{t("currentView")}</p>
+                  <h2 className="text-tertiary text-base font-normal">{images[activeIndex].title}</h2>
                 </div>
 
                 {/* Description */}
-                <p className="text-tertiary/70 text-xs leading-relaxed mb-4 font-light">
+                <p className="text-tertiary/90 text-sm leading-relaxed mb-4">
                   {t("tagline")}
                 </p>
 
@@ -149,10 +150,10 @@ const HeroSection = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col gap-2">
-                  <Link to="/register" className="px-5 py-2.5 bg-secondary text-black font-semibold text-[11px] uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary">
+                  <Link to="/register" className="min-h-11 flex items-center justify-center px-5 py-3 bg-secondary text-black font-bold text-xs uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("registerNow")}
                   </Link>
-                  <Link to="/about" className="px-5 py-2.5 text-tertiary font-semibold text-[11px] uppercase tracking-wider border border-tertiary/20 backdrop-blur-sm text-center transition-all duration-300 hover:border-secondary/50">
+                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-tertiary/5 text-center transition-all duration-300 hover:border-secondary hover:bg-tertiary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("aboutMwafem")}
                   </Link>
                 </div>
@@ -164,7 +165,7 @@ const HeroSection = () => {
           <div className="hidden md:block lg:hidden">
             <div className="relative max-w-xs ml-4 group">
               {/* Glass background */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-tertiary/5 to-tertiary/[0.02] backdrop-blur-2xl border border-tertiary/10 rounded-lg z-0"></div>
+              <div className="absolute -inset-4 glass-card rounded-xl z-0"></div>
               
               {/* Decorative corner accents */}
               <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-secondary/60 rounded-tl-lg opacity-80 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
@@ -178,30 +179,31 @@ const HeroSection = () => {
               <div className="relative px-4 py-5 rounded-lg overflow-hidden z-10">
                 {/* Overline */}
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-secondary text-[8px] font-medium tracking-[0.25em] uppercase">
+                  <p className="text-secondary text-xs font-semibold tracking-[0.2em] uppercase">
                     {t("experience")}
                   </p>
                   <div className="flex items-center gap-1">
-                    <span className="text-secondary text-sm font-light">{images[activeIndex].subtitle}</span>
-                    <span className="text-tertiary/30 text-[9px]">/{String(images.length).padStart(2, '0')}</span>
+                    <span className="sr-only">{t("slideOf", { current: activeIndex + 1, total: images.length })}</span>
+                    <span aria-hidden="true" className="text-secondary text-sm font-normal">{images[activeIndex].subtitle}</span>
+                    <span aria-hidden="true" className="text-tertiary/75 text-xs">/{String(images.length).padStart(2, '0')}</span>
                   </div>
                 </div>
 
                 {/* Headline */}
                 <h1 className="text-tertiary text-xl font-light leading-tight mb-2 tracking-tight">
                   Mwanga<br />
-                  <span className="font-extralight text-tertiary/80">Festival</span><br />
+                  <span className="font-light text-tertiary/90">Festival</span><br />
                   <span className="font-bold text-secondary">& Marathon</span>
                 </h1>
 
                 {/* Current view */}
                 <div className="mb-2">
-                  <p className="text-tertiary/40 text-[7px] uppercase tracking-[0.2em] mb-0.5">{t("currentView")}</p>
-                  <h2 className="text-tertiary text-sm font-light">{images[activeIndex].title}</h2>
+                  <p className="text-tertiary/75 text-xs font-medium uppercase tracking-[0.15em] mb-0.5">{t("currentView")}</p>
+                  <h2 className="text-tertiary text-base font-normal">{images[activeIndex].title}</h2>
                 </div>
 
                 {/* Description */}
-                <p className="text-tertiary/70 text-[11px] leading-relaxed mb-3 font-light">
+                <p className="text-tertiary/90 text-sm leading-relaxed mb-3">
                   {t("tagline")}
                 </p>
 
@@ -210,10 +212,10 @@ const HeroSection = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col gap-2">
-                  <Link to="/register" className="px-4 py-2 bg-secondary text-black font-semibold text-[10px] uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary">
+                  <Link to="/register" className="min-h-11 flex items-center justify-center px-5 py-3 bg-secondary text-black font-bold text-xs uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("registerNow")}
                   </Link>
-                  <Link to="/about" className="px-4 py-2 text-tertiary font-semibold text-[10px] uppercase tracking-wider border border-tertiary/20 backdrop-blur-sm text-center transition-all duration-300 hover:border-secondary/50">
+                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-tertiary/5 text-center transition-all duration-300 hover:border-secondary hover:bg-tertiary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("aboutMwafem")}
                   </Link>
                 </div>
@@ -225,7 +227,7 @@ const HeroSection = () => {
           <div className="md:hidden w-full pb-16">
             <div className="relative max-w-xs mx-auto group">
               {/* Glass background */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-tertiary/5 to-tertiary/[0.02] backdrop-blur-xl border border-tertiary/10 rounded-lg z-0"></div>
+              <div className="absolute -inset-4 glass-card rounded-xl z-0"></div>
               
               {/* Decorative corner accents */}
               <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-secondary/70 rounded-tl-lg opacity-90 z-10"></div>
@@ -239,30 +241,31 @@ const HeroSection = () => {
               <div className="relative px-4 py-5 rounded-lg overflow-hidden z-10">
                 {/* Overline */}
                 <div className="flex items-center justify-between mb-3">
-                  <p className="text-secondary text-[8px] font-medium tracking-[0.3em] uppercase">
+                  <p className="text-secondary text-xs font-semibold tracking-[0.2em] uppercase">
                     {t("experience")}
                   </p>
                   <div className="flex items-center gap-1">
-                    <span className="text-secondary text-base font-light">{images[activeIndex].subtitle}</span>
-                    <span className="text-tertiary/30 text-[10px]">/{String(images.length).padStart(2, '0')}</span>
+                    <span className="sr-only">{t("slideOf", { current: activeIndex + 1, total: images.length })}</span>
+                    <span aria-hidden="true" className="text-secondary text-base font-normal">{images[activeIndex].subtitle}</span>
+                    <span aria-hidden="true" className="text-tertiary/75 text-xs">/{String(images.length).padStart(2, '0')}</span>
                   </div>
                 </div>
 
                 {/* Headline */}
                 <h1 className="text-tertiary text-xl font-light leading-tight mb-2 tracking-tight">
                   Mwanga<br />
-                  <span className="font-extralight text-tertiary/80">Festival</span><br />
+                  <span className="font-light text-tertiary/90">Festival</span><br />
                   <span className="font-bold text-secondary">& Marathon</span>
                 </h1>
 
                 {/* Current view */}
                 <div className="mb-2">
-                  <p className="text-tertiary/40 text-[7px] uppercase tracking-[0.15em] mb-0.5">{t("currentView")}</p>
-                  <h2 className="text-tertiary text-sm font-light">{images[activeIndex].title}</h2>
+                  <p className="text-tertiary/75 text-xs font-medium uppercase tracking-[0.15em] mb-0.5">{t("currentView")}</p>
+                  <h2 className="text-tertiary text-base font-normal">{images[activeIndex].title}</h2>
                 </div>
 
                 {/* Description */}
-                <p className="text-tertiary/70 text-[10px] leading-relaxed mb-3 font-light">
+                <p className="text-tertiary/90 text-sm leading-relaxed mb-3">
                   {t("tagline")}
                 </p>
 
@@ -271,10 +274,10 @@ const HeroSection = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col gap-1.5">
-                  <Link to="/register" className="px-4 py-2 bg-secondary text-black font-semibold text-[9px] uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary">
+                  <Link to="/register" className="min-h-11 flex items-center justify-center px-5 py-3 bg-secondary text-black font-bold text-xs uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("registerNow")}
                   </Link>
-                  <Link to="/about" className="px-4 py-2 text-tertiary font-semibold text-[9px] uppercase tracking-wider border border-tertiary/20 backdrop-blur-sm text-center transition-all duration-300 hover:border-secondary/50">
+                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-tertiary/5 text-center transition-all duration-300 hover:border-secondary hover:bg-tertiary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("aboutMwafem")}
                   </Link>
                 </div>
@@ -288,7 +291,7 @@ const HeroSection = () => {
       <div className="hidden md:block absolute right-6 lg:right-12 top-1/2 transform -translate-y-1/2 z-20">
         <div className="relative">
           {/* Glass background container */}
-          <div className="absolute -inset-3 bg-gradient-to-br from-tertiary/5 to-tertiary/[0.02] backdrop-blur-xl border border-tertiary/10 rounded-full"></div>
+          <div className="absolute -inset-3 glass-card glass-card--light rounded-full"></div>
           
           {/* Navigation buttons */}
           <div className="relative flex flex-col items-center gap-3 py-4 px-2">
