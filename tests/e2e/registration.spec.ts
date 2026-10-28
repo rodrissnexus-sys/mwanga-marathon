@@ -2,8 +2,8 @@ import { expect, test, type Page } from "@playwright/test";
 import { admin, E2E_PREFIX } from "./supabase";
 
 const TEXT = {
-  en: { next: "Next", country: "Select Country", submit: "Complete Registration", done: "You are registered, E2E!", check: "Check status", status: "Waiting for payment", notFound: /couldn.t find a registration/ },
-  sw: { next: "Endelea", country: "Chagua Nchi", submit: "Kamilisha Usajili", done: "Umesajiliwa, E2E!", check: "Angalia hali", status: "Inasubiri malipo", notFound: /Hatukupata usajili/ },
+  en: { next: "Next", submit: "Complete Registration", done: "You are registered, E2E!", check: "Check status", status: "Waiting for payment", notFound: /couldn.t find a registration/ },
+  sw: { next: "Endelea", submit: "Kamilisha Usajili", done: "Umesajiliwa, E2E!", check: "Angalia hali", status: "Inasubiri malipo", notFound: /Hatukupata usajili/ },
 };
 
 // English: an adult choosing "club member"; Swahili: a child (type and kids'
@@ -18,41 +18,39 @@ async function register(page: Page, locale: "en" | "sw", email: string) {
   await page.goto(locale === "sw" ? "/sw/register" : "/register", { waitUntil: "networkidle" });
   const form = page.locator("section#register form");
 
-  // 1. personal information
+  // 1. about you (choices are radio buttons inside tap-cards)
+  const choose = (name: string, value?: string) =>
+    form.locator("label", { has: page.locator(`input[name="${name}"]${value ? `[value="${value}"]` : ""}`) }).first().click();
   await form.locator('input[name="firstName"]').fill("E2E");
   await form.locator('input[name="lastName"]').fill(locale.toUpperCase());
-  await form.locator('input[name="email"]').fill(email);
   await form.locator('input[name="phoneNumber"]').fill("+255700000001");
+  await form.locator('input[name="email"]').fill(email);
   await form.locator('input[name="dateOfBirth"]').fill(PERSON[locale].dateOfBirth);
+  await choose("gender_id");
+  await choose("nationality", "tz_ea");
+  await expect(form.locator('select[name="country_id"] option:checked')).toHaveText("Tanzania"); // filled in for them
+  await form.locator('input[name="idOrPassport"]').fill("E2E-ID-1");
   await form.getByRole("button", { name: t.next }).click();
 
-  // 2. event details (wait for the options loaded from the database)
-  await expect(form.locator('select[name="event"] option').nth(2)).toBeAttached({ timeout: 15_000 });
-  await form.locator('select[name="event"]').selectOption({ index: 2 });
-  // radios are visually hidden inside styled labels
+  // 2. your race
+  await expect(form.locator('input[name="event_id"]').nth(1)).toBeAttached();
+  await choose("event_id");
   const category = form.locator('input[name="participantCategory"]');
   if (PERSON[locale].category === "child") {
     await expect(category).toHaveCount(1); // only "child" is offered, already chosen
     await expect(category).toBeChecked();
-    await form.locator('label', { has: page.locator('input[name="kidsShirtSize"]') }).first().click();
+    await choose("kidsShirtSize");
   } else {
-    await form.locator('label', { has: page.locator(`input[name="participantCategory"][value="${PERSON[locale].category}"]`) }).click();
-    await form.locator('label', { has: page.locator('input[name="shirtSize"][value="L"]') }).click();
+    await choose("participantCategory", PERSON[locale].category);
+    await choose("shirtSize", "L");
   }
-  await form.locator('select[name="collectionVenue"]').selectOption({ index: 1 });
+  await choose("collection_venue_id");
   await form.getByRole("button", { name: t.next }).click();
 
-  // 3. additional information
-  await form.locator('select[name="nationality"]').selectOption("tz_ea");
-  await form.getByText(t.country, { exact: true }).click();
-  await form.getByText("Tanzania", { exact: true }).click();
-  await form.locator('select[name="gender"]').selectOption({ index: 1 });
-  await form.locator('input[name="idNumber"]').fill("E2E-ID-1");
-  await form.getByRole("button", { name: t.next }).click();
-
-  // 4. emergency contact
+  // 3. emergency contact + summary
   await form.locator('input[name="emergencyContactName"]').fill("E2E Contact");
   await form.locator('input[name="emergencyContactNumber"]').fill("+255700000002");
+  await expect(form.getByText(`E2E ${locale.toUpperCase()}`)).toBeVisible(); // summary
   await form.getByRole("button", { name: t.submit }).click();
 
   // the confirmation shows the registration ID (the payment reference)

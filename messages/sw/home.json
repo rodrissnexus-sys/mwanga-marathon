@@ -231,7 +231,10 @@
       "emergencyNameRequired": "Jina la mawasiliano ya dharura linahitajika",
       "emergencyNumberRequired": "Namba ya mawasiliano ya dharura inahitajika",
       "nationalityIncomplete": "Taarifa za utaifa hazijakamilika. Tafadhali rudi nyuma uchague utaifa wako tena.",
-      "dobInvalid": "Tafadhali hakiki tarehe ya kuzaliwa"
+      "dobInvalid": "Tafadhali hakiki tarehe ya kuzaliwa",
+      "phoneInvalid": "Tafadhali andika namba kamili ya simu",
+      "countryRequired": "Tafadhali chagua nchi yako",
+      "submitFailed": "Hatukuweza kuhifadhi usajili wako. Tafadhali hakiki taarifa zako ujaribu tena."
     },
     "nationality": {
       "tz_ea": "Raia wa Tanzania na Afrika Mashariki",
@@ -255,6 +258,34 @@
       "howToPay": "Jinsi ya kulipa",
       "checkStatus": "Angalia usajili wangu",
       "registerAnother": "Sajili mtu mwingine"
+    },
+    "steps": {
+      "aboutYou": "Taarifa zako",
+      "yourRace": "Mbio zako",
+      "confirm": "Thibitisha"
+    },
+    "stepOf": "Hatua {current} kati ya {total}",
+    "progress": "Hatua za usajili",
+    "optional": "si lazima",
+    "kitTitle": "Vifaa vya mbio utakavyopata",
+    "haveVoucher": "Una msimbo wa vocha?",
+    "emergencyText": "Tumpigie nani ikitokea dharura siku ya mbio?",
+    "tooMany": "Majaribio mengi mno. Tafadhali jaribu tena baada ya dakika {minutes}.",
+    "nationalityHints": {
+      "tz_ea": "Unalipa kwa shilingi za Kitanzania",
+      "tz_resident_sadc": "Unalipa kwa shilingi za Kitanzania",
+      "international": "Unalipa USD 30 (watoto na wazee hulipa kwa shilingi)"
+    },
+    "summary": {
+      "title": "Hakiki taarifa zako",
+      "name": "Jina",
+      "race": "Mbio",
+      "type": "Mshiriki",
+      "size": "T-shirt",
+      "venue": "Kituo cha kuchukua vifaa",
+      "phone": "Simu",
+      "fee": "Ada ya kushiriki",
+      "payAfter": "Unalipa baada ya kujisajili — utapata namba ya usajili ya kutumia kama kumbukumbu ya malipo."
     }
   },
   "form": {

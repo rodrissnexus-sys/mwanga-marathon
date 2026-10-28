@@ -231,7 +231,10 @@
       "emergencyNameRequired": "Emergency contact name is required",
       "emergencyNumberRequired": "Emergency contact number is required",
       "nationalityIncomplete": "Nationality information is incomplete. Please go back and select your nationality again.",
-      "dobInvalid": "Please check the date of birth"
+      "dobInvalid": "Please check the date of birth",
+      "phoneInvalid": "Please enter a full phone number",
+      "countryRequired": "Please choose your country",
+      "submitFailed": "We could not save your registration. Please check your details and try again."
     },
     "nationality": {
       "tz_ea": "Tanzania and East Africa Citizens",
@@ -255,6 +258,34 @@
       "howToPay": "How to pay",
       "checkStatus": "Check my registration",
       "registerAnother": "Register another person"
+    },
+    "steps": {
+      "aboutYou": "About you",
+      "yourRace": "Your race",
+      "confirm": "Confirm"
+    },
+    "stepOf": "Step {current} of {total}",
+    "progress": "Registration progress",
+    "optional": "optional",
+    "kitTitle": "Your race kit",
+    "haveVoucher": "Have a voucher code?",
+    "emergencyText": "Who should we call if something happens on race day?",
+    "tooMany": "Too many attempts. Please try again in {minutes} minutes.",
+    "nationalityHints": {
+      "tz_ea": "Pay in Tanzanian shillings",
+      "tz_resident_sadc": "Pay in Tanzanian shillings",
+      "international": "Pay USD 30 (children and elders pay in shillings)"
+    },
+    "summary": {
+      "title": "Check your details",
+      "name": "Name",
+      "race": "Race",
+      "type": "Participant",
+      "size": "T-shirt",
+      "venue": "Kit collection",
+      "phone": "Phone",
+      "fee": "Entry fee",
+      "payAfter": "You pay after registering — you will get your registration ID to use as the payment reference."
     }
   },
   "form": {

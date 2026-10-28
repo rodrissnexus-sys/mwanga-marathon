@@ -44,7 +44,7 @@ const RegistrationPage = () => {
         </HeroSection>
 
         {/* Main Content */}
-        <section className="py-20 relative overflow-hidden" id="register">
+        <section className="py-12 md:py-20 relative overflow-hidden" id="register-page">
           {/* Background decorative elements */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-secondary opacity-5 rounded-full -mr-32 -mt-32" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary opacity-5 rounded-full -ml-32 -mb-32" />
@@ -52,7 +52,8 @@ const RegistrationPage = () => {
           <div className="mx-auto px-4 md:px-8 relative z-10">
 
             {/* Registration Form Section */}
-            <div className="mt-12">
+            {/* edge to edge on phones, a rounded panel on larger screens */}
+            <div className="mt-4 md:mt-12 -mx-4 md:mx-0 md:rounded-3xl overflow-hidden">
               <RegistrationSection />
             </div>
 

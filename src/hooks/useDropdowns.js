@@ -85,6 +85,7 @@ export const useDropdowns = () => {
                 if (countriesResponse.success) {
                     setCountries(countriesResponse.data.map(country => ({
                         id: country.id,
+                        code: country.code,
                         name: country.name
                     })));
                 }
