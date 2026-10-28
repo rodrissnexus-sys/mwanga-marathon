@@ -43,7 +43,7 @@ const iconMap = {
 // Skeleton loader for event types
 const EventTypeSkeleton = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
       {[1, 2, 3, 4].map((item) => (
         <div key={item} className="animate-pulse">
           <div className="rounded-2xl bg-tertiary shadow-md border border-primary/10 p-8">
@@ -207,7 +207,7 @@ const EventTypes = () => {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             {eventTypes.map((event, index) => (
               <div
                 key={event.id}
