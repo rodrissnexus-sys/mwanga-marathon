@@ -110,29 +110,34 @@ const Footer = async () => {
               <h3 className="text-xl font-semibold mb-4 text-tertiary">
                 {t("social")}
               </h3>
-              <div className="flex space-x-4">
+              <div className="flex gap-3">
                 {[
                   {
                     icon: faInstagram,
+                    name: "Instagram",
                     url: "https://www.instagram.com/mwangafestivalandmarathon/"
                   },
                   {
                     icon: faFacebook,
+                    name: "Facebook",
                     url: "https://web.facebook.com/profile.php?id=61566560950056"
                   },
                   {
                     icon: faTiktok,
+                    name: "TikTok",
                     url: "https://www.tiktok.com/@mwangamarathonfestival"
                   },
-                ].map((social, index) => (
+                ].map((social) => (
                   <a
-                    key={index}
+                    key={social.name}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="h-9 w-9 flex items-center justify-center rounded-full bg-primary/20 hover:bg-secondary text-tertiary hover:text-primary transition-colors duration-300"
+                    aria-label={social.name}
+                    title={social.name}
+                    className="h-11 w-11 flex items-center justify-center rounded-full bg-tertiary/10 ring-1 ring-tertiary/25 text-tertiary hover:bg-secondary hover:ring-secondary hover:text-primary hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary transition-all duration-300"
                   >
-                    <FontAwesomeIcon icon={social.icon} className="h-5 w-5" />
+                    <FontAwesomeIcon icon={social.icon} className="text-lg" />
                   </a>
                 ))}
               </div>
