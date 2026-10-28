@@ -122,7 +122,7 @@ const SponsorshipTiers = () => {
                     </div>
                   )}
                   <h3 className="text-2xl font-bold text-primary mb-2">{tier.name}</h3>
-                  <p className="text-xl font-semibold text-secondary mb-4">{tier.price}</p>
+                  <p className="mb-4"><span className="inline-block px-2.5 py-0.5 rounded-sm bg-secondary text-primary text-xl font-bold">{tier.price}</span></p>
                   <p className="text-text-primary/70 mb-6">{tier.description}</p>
                   <ul className="space-y-4 mb-8">
                     {tier.benefits.map((benefit, i) => (

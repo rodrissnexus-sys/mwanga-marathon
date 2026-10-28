@@ -33,7 +33,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-tertiary to-primary/5">
-      <HeroSection title={hero.title} subtitle={hero.subtitle} backgroundImage="/assets/images/handshake.jpg" />
+      <HeroSection title={hero.title} subtitle={hero.subtitle} backgroundImage="/assets/images/2026/medal-presentation.jpg" />
 
       <section className="py-20 relative overflow-hidden" id="contact">
         <div className="max-w-6xl mx-auto px-4 md:px-8">

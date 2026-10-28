@@ -336,7 +336,7 @@ const EventTypeForm = ({ eventType, onClose, onSubmit }) => {
               value={formData.image}
               onChange={handleChange}
               className={`flex-1 p-3 rounded-l-lg border ${theme === 'dark' ? 'bg-primary/50 border-secondary/20 text-tertiary' : 'bg-tertiary border-gray-200 text-primary'}`}
-              placeholder="e.g., /assets/images/runners_1.jpg"
+              placeholder="e.g., /assets/images/2026/runners-group.jpg"
             />
             <div className={`p-3 rounded-r-lg border-t border-r border-b ${theme === 'dark' ? 'bg-primary/70 border-secondary/20 text-tertiary' : 'bg-gray-100 border-gray-200 text-primary'}`}>
               <FontAwesomeIcon icon={faImage} />

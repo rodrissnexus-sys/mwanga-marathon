@@ -42,7 +42,7 @@ const fallbackEventTypes = [
       { text: "Live Music & Entertainment (4:00pm)", icon: "faMusic" }
     ],
     highlight: "Main Event Day",
-    image: "/assets/images/runners_1.jpg"
+    image: "/assets/images/2026/runners-group.jpg"
   },
   {
     id: "2",
@@ -57,7 +57,7 @@ const fallbackEventTypes = [
       { text: "Culinary Showcase (12:00pm - 6:00pm)", icon: "faUtensils" }
     ],
     highlight: "Cultural Day",
-    image: "/assets/images/cultural_event.jpg"
+    image: "/assets/images/2026/maasai-culture.jpg"
   }
 ];
 

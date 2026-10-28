@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { galleryPhotos } from '../data/galleryPhotos';
 import { motion, AnimatePresence, useMotionValue } from 'framer-motion';
 import SectionHeader from '../../../components/common/SectionHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -35,129 +36,12 @@ const EventGallery = () => {
   const galleryRef = useRef(null);
   const dragX = useMotionValue(0);
   
-  // Enhanced gallery with all available images
-  const galleryImages = [
-    {
-      src: '/assets/images/runners_1.jpg',
-      alt: t("marathonRunnersCompeting"),
-      category: 'Marathon',
-      featured: true
-    },
-    {
-      src: '/assets/images/award.jpg',
-      alt: t("awardCeremony"),
-      category: t("celebration"),
-      featured: false
-    },
-    {
-      src: '/assets/images/runners_2.jpg',
-      alt: t("runnersCrossingFinishLine"),
-      category: 'Marathon',
-      featured: true
-    },
-    {
-      src: '/assets/images/yas_and_runner_while_running.jpg',
-      alt: t("yasAndRunnerWhile"),
-      category: 'Marathon',
-      featured: true
-    },
-    {
-      src: '/assets/images/runners_3.jpg',
-      alt: t("runnersPreparingForThe"),
-      category: 'Marathon',
-      featured: false
-    },
-    {
-      src: '/assets/images/runners_4.jpg',
-      alt: t("runnersCompetingOnThe"),
-      category: 'Marathon',
-      featured: true
-    },
-    {
-      src: '/assets/images/yas_sponsor_picture_1.jpg',
-      alt: t("yasSponsorPartnership"),
-      category: t("sponsors"),
-      featured: false
-    },
-    {
-      src: '/assets/images/finish_arch.jpg',
-      alt: t("finishLineArch"),
-      category: t("infrastructure"),
-      featured: false
-    },
-    {
-      src: '/assets/images/yas_sponsor_picture_2.jpg',
-      alt: t("yasSponsorSupport"),
-      category: t("sponsors"),
-      featured: false
-    },
-    {
-      src: '/assets/images/giving_awards.jpg',
-      alt: t("presentingAwardsToWinners"),
-      category: t("celebration"),
-      featured: true
-    },
-    {
-      src: '/assets/images/participant_celebration.jpg',
-      alt: t("participantCelebration"),
-      category: t("celebration"),
-      featured: true
-    },
-    {
-      src: '/assets/images/handshake.jpg',
-      alt: t("handshakeAfterVictory"),
-      category: t("celebration"),
-      featured: false
-    },
-    {
-      src: '/assets/images/yas_sponsor_picture_3.jpg',
-      alt: t("yasSponsorTogether"),
-      category: t("sponsors"),
-      featured: false
-    },
-    {
-      src: '/assets/images/team.jpg',
-      alt: t("eventOrganizingTeam"),
-      category: t("team"),
-      featured: false
-    },
-    {
-      src: '/assets/images/yas_sponsor_picture_4.jpg',
-      alt: t("yasSponsorUnity"),
-      category: t("sponsors"),
-      featured: false
-    },
-    {
-      src: '/assets/images/team_2.jpg',
-      alt: t("eventOrganizersTogether"),
-      category: t("team"),
-      featured: true
-    },
-    {
-      src: '/assets/images/participant_celebration_2.jpg',
-      alt: t("participantCelebration2"),
-      category: t("celebration"),
-      featured: false
-    },
-    {
-      src: '/assets/images/sponsors.jpg',
-      alt: t("eventSponsors"),
-      category: t("sponsors"),
-      featured: false
-    },
-    {
-      src: '/assets/images/yas_sponsor_picture_5.jpg',
-      alt: t("yasSponsorSpirit"),
-      category: t("sponsors"),
-      featured: false
-    },
-    {
-      src: '/assets/images/dancing_participants.jpg',
-      alt: t("dancingParticipants"),
-      category: t("celebration"),
-      featured: true
-    }
-  ];
+  // Photos with captions and category names in the page language
+  const galleryImages = galleryPhotos.map((photo) => ({
+    ...photo,
+    alt: t(`captions.${photo.key}`),
+    category: t(`categories.${photo.category}`),
+  }));
 
   // Get unique categories for filter
   const categories = ['all', ...new Set(galleryImages.map(img => img.category))];

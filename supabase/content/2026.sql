@@ -85,25 +85,25 @@ with types as (
      'Half Marathon, a Trail Run through Mwanga''s natural scenery, a Fun Run, and the 2.5 km Walking Safari for children, elders and families.',
      'Nusu Marathon, Trail Run katika mandhari ya asili ya Mwanga, Fun Run, na Walking Safari ya kilomita 2.5 kwa watoto, wazee na familia.',
      'A medal for every finisher', 'Medali kwa kila atakayemaliza',
-     'faRunning', 'from-primary to-secondary', '/assets/images/runners_1.jpg', 1),
+     'faRunning', 'from-primary to-secondary', '/assets/images/2026/runners-group.jpg', 1),
     ('utalii-festival', 'Mwanga Utalii Festival', 'Mwanga Utalii Festivals',
      'Music, culture & food', 'Muziki, utamaduni na vyakula',
      'Performances by new-generation artists, traditional ngoma and music, traditional food and the Ndafu Zone — celebrating our culture and showcasing Mwanga.',
      'Burudani kutoka kwa wasanii wa kizazi kipya, ngoma za asili, maonyesho ya vyakula vya asili pamoja na Ndafu Zone — kuenzi utamaduni wetu na kutangaza utalii wa Mwanga.',
      'Ndafu Zone', 'Ndafu Zone',
-     'faMusic', 'from-secondary to-primary', '/assets/images/dancing_participants.jpg', 2),
+     'faMusic', 'from-secondary to-primary', '/assets/images/2026/maasai-culture.jpg', 2),
     ('tourism-environment', 'Tourism & Environment', 'Utalii na Mazingira',
      'Mwanga yetu, utalii wetu', 'Mwanga yetu, utalii wetu',
      'Exhibitions of Mwanga and Kilimanjaro attractions, tree planting, clean-up campaigns and education on conservation and domestic tourism.',
      'Maonesho ya vivutio vya utalii vya Mwanga na Kilimanjaro, upandaji wa miti, kampeni za usafi na elimu kuhusu uhifadhi wa mazingira na utalii wa ndani.',
      'Tree planting', 'Upandaji wa miti',
-     'faTree', 'from-primary to-secondary', '/assets/images/runners_4.jpg', 3),
+     'faTree', 'from-primary to-secondary', '/assets/images/2026/runner-scenic-road.jpg', 3),
     ('community-health', 'Community & Health', 'Jamii na Afya',
      'Mothers, children and youth', 'Akina mama, watoto na vijana',
      'Part of the festival supports mothers and children in Mwanga — visiting maternity wards, supporting child vaccinations and training young mothers — alongside activities for youth and children.',
      'Sehemu ya tamasha inasaidia akina mama na watoto Mwanga — kutembelea wodi za wazazi, kusaidia chanjo za watoto na kutoa mafunzo kwa kina mama wachanga — pamoja na shughuli za vijana na watoto.',
      'Support for maternity wards', 'Msaada kwa wodi za wazazi',
-     'faHospital', 'from-secondary to-primary', '/assets/images/participant_celebration.jpg', 4)
+     'faHospital', 'from-secondary to-primary', '/assets/images/2026/family-walk.jpg', 4)
   returning id, slug
 )
 insert into public.event_features (event_type_id, text_en, text_sw, icon, sort_order)

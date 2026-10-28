@@ -9,7 +9,7 @@ const HeroSection = ({
   title,
   subtitle,
   backgroundImage,
-  overlayOpacity = 0.6,
+  overlayOpacity = 0.7,
   textColor = 'text-tertiary',
   textAlignment = 'text-center',
   height = 'min-h-[600px]',

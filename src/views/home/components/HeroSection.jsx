@@ -157,7 +157,7 @@ const HeroSection = () => {
                   <Link to="/register" className="min-h-11 flex items-center justify-center px-5 py-3 bg-secondary text-black font-bold text-xs uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("registerNow")}
                   </Link>
-                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-tertiary/5 text-center transition-all duration-300 hover:border-secondary hover:bg-tertiary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
+                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-primary/85 text-center transition-all duration-300 hover:border-secondary hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("aboutMwafem")}
                   </Link>
                 </div>
@@ -219,7 +219,7 @@ const HeroSection = () => {
                   <Link to="/register" className="min-h-11 flex items-center justify-center px-5 py-3 bg-secondary text-black font-bold text-xs uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("registerNow")}
                   </Link>
-                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-tertiary/5 text-center transition-all duration-300 hover:border-secondary hover:bg-tertiary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
+                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-primary/85 text-center transition-all duration-300 hover:border-secondary hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("aboutMwafem")}
                   </Link>
                 </div>
@@ -281,7 +281,7 @@ const HeroSection = () => {
                   <Link to="/register" className="min-h-11 flex items-center justify-center px-5 py-3 bg-secondary text-black font-bold text-xs uppercase tracking-wider text-center transition-all duration-300 hover:bg-tertiary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("registerNow")}
                   </Link>
-                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-tertiary/5 text-center transition-all duration-300 hover:border-secondary hover:bg-tertiary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
+                  <Link to="/about" className="min-h-11 flex items-center justify-center px-5 py-3 text-tertiary font-semibold text-xs uppercase tracking-wider border border-tertiary/45 bg-primary/85 text-center transition-all duration-300 hover:border-secondary hover:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary">
                     {t("aboutMwafem")}
                   </Link>
                 </div>

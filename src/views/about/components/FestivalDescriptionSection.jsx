@@ -142,7 +142,7 @@ const FestivalDescriptionSection = () => {
               
               <ul className="space-y-4">
                 <li className="flex items-start">
-                  <span className="text-secondary mr-2">•</span>
+                  <span aria-hidden="true" className="text-primary mr-2">•</span>
                   <div>
                     <span className="font-medium text-lg text-primary">{t("regionalFocus")}</span>
                     <p className="text-text-primary/70 ml-1">{t("regionalFocusText")}</p>
@@ -150,7 +150,7 @@ const FestivalDescriptionSection = () => {
                 </li>
                 
                 <li className="flex items-start">
-                  <span className="text-secondary mr-2">•</span>
+                  <span aria-hidden="true" className="text-primary mr-2">•</span>
                   <div>
                     <span className="font-medium text-lg text-primary">{t("organization")}</span>
                     <p className="text-text-primary/70 ml-1">
@@ -163,7 +163,7 @@ const FestivalDescriptionSection = () => {
                 </li>
                 
                 <li className="flex items-start">
-                  <span className="text-secondary mr-2">•</span>
+                  <span aria-hidden="true" className="text-primary mr-2">•</span>
                   <div>
                     <span className="font-medium text-lg text-primary">{t("purpose")}</span>
                     <p className="text-text-primary/70 ml-1">
@@ -173,7 +173,7 @@ const FestivalDescriptionSection = () => {
                 </li>
                 
                 <li className="flex items-start">
-                  <span className="text-secondary mr-2">•</span>
+                  <span aria-hidden="true" className="text-primary mr-2">•</span>
                   <div>
                     <span className="font-medium text-lg text-primary">{t("distinction")}</span>
                     <p className="text-text-primary/70 ml-1">{t("distinctionText")}</p>

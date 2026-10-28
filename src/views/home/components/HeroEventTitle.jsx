@@ -68,7 +68,7 @@ const HeroEventTitle = () => {
   return (
     <>
       {/* Desktop: right side of the photo, with a fade behind it for contrast */}
-      <div aria-hidden="true" className="hidden lg:block absolute inset-y-0 right-0 w-3/5 bg-gradient-to-l from-primary/80 via-primary/45 to-transparent z-[1]" />
+      <div aria-hidden="true" className="hidden lg:block absolute inset-y-0 right-0 w-3/5 bg-gradient-to-l from-primary/90 via-primary/65 to-transparent z-[1]" />
       <motion.div
         initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}

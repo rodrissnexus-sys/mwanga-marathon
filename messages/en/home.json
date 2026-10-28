@@ -2,106 +2,106 @@
   "heroImages": {
     "desktop": [
       {
-        "alt": "Marathon Challenge",
-        "title": "Excellence"
+        "alt": "Runners celebrating at the finish",
+        "title": "Celebration"
       },
       {
-        "alt": "YAS and Runner While Running",
-        "title": "Athletic"
-      },
-      {
-        "alt": "Community Spirit",
-        "title": "Community"
-      },
-      {
-        "alt": "YAS Sponsor Picture 1",
-        "title": "Partnership"
-      },
-      {
-        "alt": "Athletic Pride",
-        "title": "Pride"
-      },
-      {
-        "alt": "YAS Sponsor Picture 2",
-        "title": "Support"
-      },
-      {
-        "alt": "Marathon Awards",
-        "title": "Excellence"
-      },
-      {
-        "alt": "YAS Sponsor Picture 3",
+        "alt": "Runners filling the road",
         "title": "Together"
       },
       {
-        "alt": "YAS Sponsor Picture 4",
-        "title": "Unity"
+        "alt": "A group of runners in race shirts",
+        "title": "Energy"
       },
       {
-        "alt": "Participant Celebration",
-        "title": "Victory"
+        "alt": "Runners on the road through Mwanga",
+        "title": "Journey"
       },
       {
-        "alt": "Marathon Finish",
-        "title": "Triumph"
+        "alt": "Participants gathered at the finish arch",
+        "title": "Community"
       },
       {
-        "alt": "YAS Sponsor Picture 5",
-        "title": "Spirit"
+        "alt": "Aerobics warm-up with Yas",
+        "title": "Warm-up"
       },
       {
-        "alt": "Participant Celebration 2",
-        "title": "Joy"
+        "alt": "Runners at the start",
+        "title": "Start"
       },
       {
-        "alt": "Dancing Participants",
-        "title": "Festival"
+        "alt": "A runner on a scenic road",
+        "title": "Determination"
+      },
+      {
+        "alt": "Three runners through Mwanga town",
+        "title": "Friendship"
+      },
+      {
+        "alt": "Runners arriving at the finish line",
+        "title": "Arrival"
+      },
+      {
+        "alt": "Traditional food at the festival",
+        "title": "Heritage"
+      },
+      {
+        "alt": "Participants with our sponsors",
+        "title": "Partnership"
+      },
+      {
+        "alt": "Yas team on stage",
+        "title": "Support"
+      },
+      {
+        "alt": "A family on the walking safari",
+        "title": "Family"
       }
     ],
     "mobile": [
       {
-        "alt": "Marathon Challenge",
+        "alt": "A runner in full stride",
         "title": "Excellence"
       },
       {
-        "alt": "YAS Sponsor Picture 6",
-        "title": "Partnership"
+        "alt": "Celebrating at the finish line",
+        "title": "Celebration"
       },
       {
-        "alt": "Community Spirit",
-        "title": "Community"
+        "alt": "Two participants in race shirts",
+        "title": "Friendship"
       },
       {
-        "alt": "YAS Sponsor Picture 7",
-        "title": "Spirit"
+        "alt": "A runner on a mountain road",
+        "title": "Determination"
       },
       {
-        "alt": "Start Picture Together",
-        "title": "Together"
+        "alt": "Aerobics warm-up with Yas",
+        "title": "Warm-up"
       },
       {
-        "alt": "Athletic Pride",
-        "title": "Athletic"
+        "alt": "Runners on the course",
+        "title": "Energy"
       },
       {
-        "alt": "Finish Line Picture",
+        "alt": "A runner pushing to the finish",
+        "title": "Journey"
+      },
+      {
+        "alt": "Dancing during the warm-up",
+        "title": "Joy"
+      },
+      {
+        "alt": "A participant celebrating",
         "title": "Victory"
       },
       {
-        "alt": "Marathon Awards",
-        "title": "Achievement"
+        "alt": "Participants running together",
+        "title": "Together"
       },
       {
-        "alt": "MWAFEM Event",
-        "title": "Festival"
-      },
-      {
-        "alt": "Marathon Finish",
-        "title": "Triumph"
-      },
-      {
-        "alt": "MWAFEM Members",
-        "title": "Unity"
+        "alt": "Traditional dancers",
+        "title": "Heritage"
       }
     ]
   },

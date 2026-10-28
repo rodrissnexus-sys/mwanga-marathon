@@ -93,8 +93,10 @@ const MwafemLanding = () => {
 
       <div className="bg-gradient-to-b from-blue-50 to-transparent">
         {/* Show banner if active or loading, otherwise show hero section */}
-        {(bannerStatus.status === 'active' || bannerStatus.status === 'loading') ? (
-          <MarathonBanner bannerData={bannerStatus.data || {}} isLoading={bannerStatus.status === 'loading'} />
+        {/* The photo hero shows while we check for an active marathon banner,
+            so visitors never wait on an empty placeholder */}
+        {bannerStatus.status === 'active' ? (
+          <MarathonBanner bannerData={bannerStatus.data || {}} />
         ) : (
           <HeroSection />
         )}

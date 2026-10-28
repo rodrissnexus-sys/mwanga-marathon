@@ -9,14 +9,14 @@ import PrimaryButton from "../components/common/buttons/PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faHome, faCalendar, faEnvelope, faGift, faInfoCircle, faHighlighter, faRunning, faGlobe, faChevronDown, faPhone, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
-const GradientButton = ({ children, onClick, className = '', gradientFrom = 'from-primary/20', gradientTo = 'to-secondary/50', to, compact = false }) => {
+const GradientButton = ({ children, onClick, className = '', gradientFrom = 'from-secondary/80', gradientTo = 'to-secondary', to, compact = false }) => {
   const ButtonContent = (
     <PrimaryButton 
       onClick={onClick}
       className={`group ${className}`}
       compact={compact}
     >
-      <span className="relative z-10 text-white">
+      <span className="relative z-10 text-primary font-semibold">
         {children}
       </span>
       
@@ -316,7 +316,7 @@ const Header = () => {
                   className={`relative text-sm font-medium transition-all duration-300 ${
                     isActive 
                       ? "text-primary/90" 
-                      : "text-black/70 hover:text-primary/90"
+                      : "text-black/85 hover:text-primary"
                   }`}
                 >
                   {item.label}

@@ -2,106 +2,106 @@
   "heroImages": {
     "desktop": [
       {
-        "alt": "Changamoto ya Marathon",
-        "title": "Ubora"
+        "alt": "Wakimbiaji wakisherehekea kwenye mstari wa mwisho",
+        "title": "Sherehe"
       },
       {
-        "alt": "YAS na Mkimbiaji Wakati wa Kukimbia",
-        "title": "Michezo"
-      },
-      {
-        "alt": "Roho ya Jamii",
-        "title": "Jamii"
-      },
-      {
-        "alt": "Picha ya Mdhamini YAS 1",
-        "title": "Ushirikiano"
-      },
-      {
-        "alt": "Fahari ya Michezo",
-        "title": "Fahari"
-      },
-      {
-        "alt": "Picha ya Mdhamini YAS 2",
-        "title": "Msaada"
-      },
-      {
-        "alt": "Tuzo za Marathon",
-        "title": "Ubora"
-      },
-      {
-        "alt": "Picha ya Mdhamini YAS 3",
+        "alt": "Wakimbiaji wakijaza barabara",
         "title": "Pamoja"
       },
       {
-        "alt": "Picha ya Mdhamini YAS 4",
-        "title": "Umoja"
+        "alt": "Kundi la wakimbiaji wakiwa na fulana za mbio",
+        "title": "Nguvu"
       },
       {
-        "alt": "Sherehe za Washiriki",
-        "title": "Ushindi"
+        "alt": "Wakimbiaji barabarani kupitia Mwanga",
+        "title": "Safari"
       },
       {
-        "alt": "Mwisho wa Marathon",
-        "title": "Mafanikio"
+        "alt": "Washiriki wakiwa pamoja kwenye tao la mwisho",
+        "title": "Jamii"
       },
       {
-        "alt": "Picha ya Mdhamini YAS 5",
-        "title": "Roho"
+        "alt": "Mazoezi ya viungo pamoja na Yas",
+        "title": "Maandalizi"
       },
       {
-        "alt": "Sherehe za Washiriki 2",
-        "title": "Furaha"
+        "alt": "Wakimbiaji wakianza mbio",
+        "title": "Mwanzo"
       },
       {
-        "alt": "Washiriki Wanaocheza",
-        "title": "Tamasha"
+        "alt": "Mkimbiaji kwenye barabara yenye mandhari nzuri",
+        "title": "Ari"
+      },
+      {
+        "alt": "Wakimbiaji watatu wakipita mjini Mwanga",
+        "title": "Urafiki"
+      },
+      {
+        "alt": "Wakimbiaji wakiwasili mstari wa mwisho",
+        "title": "Kuwasili"
+      },
+      {
+        "alt": "Vyakula vya asili kwenye tamasha",
+        "title": "Urithi"
+      },
+      {
+        "alt": "Washiriki pamoja na wadhamini wetu",
+        "title": "Ushirikiano"
+      },
+      {
+        "alt": "Timu ya Yas jukwaani",
+        "title": "Msaada"
+      },
+      {
+        "alt": "Familia kwenye walking safari",
+        "title": "Familia"
       }
     ],
     "mobile": [
       {
-        "alt": "Changamoto ya Marathon",
+        "alt": "Mkimbiaji akikimbia kwa kasi",
         "title": "Ubora"
       },
       {
-        "alt": "Picha ya Mdhamini YAS 6",
-        "title": "Ushirikiano"
+        "alt": "Sherehe kwenye mstari wa mwisho",
+        "title": "Sherehe"
       },
       {
-        "alt": "Roho ya Jamii",
-        "title": "Jamii"
+        "alt": "Washiriki wawili wakiwa na fulana za mbio",
+        "title": "Urafiki"
       },
       {
-        "alt": "Picha ya Mdhamini YAS 7",
-        "title": "Roho"
+        "alt": "Mkimbiaji kwenye barabara ya milimani",
+        "title": "Ari"
       },
       {
-        "alt": "Picha ya Kuanza Pamoja",
-        "title": "Pamoja"
+        "alt": "Mazoezi ya viungo pamoja na Yas",
+        "title": "Maandalizi"
       },
       {
-        "alt": "Fahari ya Michezo",
-        "title": "Michezo"
+        "alt": "Wakimbiaji njiani",
+        "title": "Nguvu"
       },
       {
-        "alt": "Picha ya Mstari wa Mwisho",
+        "alt": "Mkimbiaji akielekea mwisho",
+        "title": "Safari"
+      },
+      {
+        "alt": "Kucheza wakati wa maandalizi",
+        "title": "Furaha"
+      },
+      {
+        "alt": "Mshiriki akisherehekea",
         "title": "Ushindi"
       },
       {
-        "alt": "Tuzo za Marathon",
-        "title": "Mafanikio"
+        "alt": "Washiriki wakikimbia pamoja",
+        "title": "Pamoja"
       },
       {
-        "alt": "Tukio la MWAFEM",
-        "title": "Tamasha"
-      },
-      {
-        "alt": "Mwisho wa Marathon",
-        "title": "Mafanikio"
-      },
-      {
-        "alt": "Wanachama wa MWAFEM",
-        "title": "Umoja"
+        "alt": "Wachezaji wa ngoma za asili",
+        "title": "Urithi"
       }
     ]
   },

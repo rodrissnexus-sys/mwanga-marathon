@@ -136,7 +136,7 @@ const EventTypes = () => {
         { text: "N/A", icon: faMusic }
       ],
       highlight: "N/A",
-      image: "/assets/images/runners_1.jpg"
+      image: "/assets/images/2026/runners-group.jpg"
     }
   ];
 
