@@ -58,9 +58,10 @@ const Visit = () => {
         <div className="max-w-6xl mx-auto">
           <SectionHeader firstWord={t('exploreFirst')} secondWord={t('exploreSecond')} tone="dark" />
           <p className="text-center text-tertiary/85 max-w-3xl mx-auto -mt-8 mb-10">{t('exploreText')}</p>
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {/* flex so an incomplete last row is centred */}
+          <ul className="flex flex-wrap justify-center gap-5">
             {t.raw('explore').map((item, i) => (
-              <li key={item.title} className="rounded-2xl overflow-hidden bg-tertiary/5 border border-tertiary/15 flex flex-col">
+              <li key={item.title} className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)] rounded-2xl overflow-hidden bg-tertiary/5 border border-tertiary/15 flex flex-col">
                 {EXPLORE[i]?.image ? (
                   <div className="relative h-44">
                     <Image src={EXPLORE[i].image} alt="" fill sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="object-cover" />
