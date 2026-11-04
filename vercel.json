@@ -1,18 +1,36 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "regions": ["dub1"],
+  "regions": [
+    "dub1"
+  ],
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "sw.mwafem.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "sw.mwafem.com"
+        }
+      ],
       "destination": "https://mwafem.com/sw/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.mwafem.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.mwafem.com"
+        }
+      ],
       "destination": "https://mwafem.com/:path*",
       "permanent": true
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/keep-alive",
+      "schedule": "0 6 * * *"
     }
   ]
 }
