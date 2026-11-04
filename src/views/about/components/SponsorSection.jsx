@@ -35,6 +35,7 @@ const SponsorSection = () => {
     { id: 19, name: 'Kapricon', logo: '/assets/sponsors/kapricon_logo.webp' },
     { id: 20, name: 'Safi Medics Hospital', logo: '/assets/sponsors/safi_medics_hospital.png' },
     { id: 21, name: 'nayma Tours safari', logo: '/assets/sponsors/nayma_tours_&_safari.jpg' },
+    { id: 22, name: 'Kilimanjaro Biochem Ltd (KBL)', logo: '/assets/sponsors/kilimanjaro_biochem_ltd.webp' },
   ];
 
   // Function to navigate through sponsors
