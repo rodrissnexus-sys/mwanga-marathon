@@ -15,6 +15,12 @@ export async function sendEmail({ to, subject, html, replyTo }: Email): Promise<
     console.info(`[email] not configured, skipped "${subject}" to ${to}`);
     return false;
   }
+  // Never email the reserved test domain (automated tests use it): bounces hurt
+  // the sending domain's reputation.
+  if (/@example\.(com|org|net)$/i.test(to)) {
+    console.info(`[email] test address, skipped "${subject}" to ${to}`);
+    return false;
+  }
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
