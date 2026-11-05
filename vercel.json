@@ -5,6 +5,17 @@
   ],
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "sw.mwafem.com"
+        }
+      ],
+      "destination": "https://mwafem.com/sw",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
