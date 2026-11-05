@@ -49,24 +49,6 @@ const PaymentInformation = () => {
       ),
     },
     {
-      name: "PESAPAL",
-      description: t("multiplePaymentOptionsIn"),
-      link: "https://payments.pesapal.com/kisangaratours",
-      linkText: t("payWithPesapal"),
-      instructions: [
-        t("clickOnThePay"),
-        t("chooseYourPreferredPayment"),
-        t("enterTheAmountFor"),
-        t("completeTheTransaction"),
-      ],
-      icon: (
-        <svg className="w-8 h-8 text-secondary" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-        </svg>
-      ),
-      isWebLink: true,
-    },
-    {
       name: t("bankTransfer"),
       description: t("bankTransferDesc"),
       link: "mailto:info@mwafem.com?subject=Mwanga%20Marathon%202026%20payment",
@@ -124,7 +106,7 @@ const PaymentInformation = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-12 items-stretch"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 items-stretch"
         >
           {paymentMethods.map((method) => (
             <motion.div

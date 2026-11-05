@@ -91,7 +91,6 @@ const button = (href: string, text: string) =>
 const PAYMENT_METHODS = [
   { name: "M-PESA", lines: ["*150*00#", "Lipa Namba: 58136742"] },
   { name: "MIXX BY YAS", lines: ["*150*01#", "Lipa Namba: 18403062"] },
-  { name: "PESAPAL", lines: ["payments.pesapal.com/kisangaratours"] },
   { name: "BANK / BENKI", lines: ["Mwanga Hakika Bank: 2290060000001", "CRDB: 015C948979800", "TCB: 215404000076", "Kisangara Tours Ltd"] },
 ];
 
