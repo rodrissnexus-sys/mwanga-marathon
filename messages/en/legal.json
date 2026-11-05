@@ -23,7 +23,7 @@
         "items": [
           "Registration: first and last name, email, phone number, date of birth, gender, nationality category, country, ID or passport number (optional), chosen race, participant type, T-shirt size, kit collection point, emergency contact name and number, and voucher code if you have one.",
           "Payments: whether you have paid, the payment method, the payment reference, the amount, and which staff member confirmed it. We never receive your mobile money PIN, bank login or card details.",
-          "Messages: your name, email, phone and message when you use the contact, partnership or volunteer forms.",
+          "Messages: your name, email, phone and message when you use the contact or partnership forms.",
           "Newsletter: your email address and preferred language.",
           "Technical information: your IP address is kept for a few minutes to stop repeated or automated attempts; anonymous visit statistics (no advertising cookies); and a cookie that remembers your language."
         ]

@@ -29,7 +29,8 @@ test("the footer newsletter box saves a subscriber once", async ({ page }) => {
   expect(json).toEqual([{ locale: "sw" }]);
 });
 
-test("a volunteer sign-up reaches the dashboard inbox", async ({ page }) => {
+// Skipped while the volunteer page is hidden.
+test.skip("a volunteer sign-up reaches the dashboard inbox", async ({ page }) => {
   const email = `${E2E_PREFIX}volunteer-${Date.now()}@example.com`;
   await page.goto("/volunteer", { waitUntil: "networkidle" });
   await page.locator("#vol-name").fill("E2E Volunteer");

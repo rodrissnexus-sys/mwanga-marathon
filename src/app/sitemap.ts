@@ -12,7 +12,6 @@ const PAGES = [
   { href: "/sponsors", priority: 0.7, changeFrequency: "monthly" },
   { href: "/race-day", priority: 0.8, changeFrequency: "weekly" },
   { href: "/visit", priority: 0.6, changeFrequency: "monthly" },
-  { href: "/volunteer", priority: 0.6, changeFrequency: "monthly" },
   { href: "/registration-status", priority: 0.5, changeFrequency: "yearly" },
   { href: "/contact", priority: 0.6, changeFrequency: "yearly" },
   { href: "/privacy", priority: 0.3, changeFrequency: "yearly" },

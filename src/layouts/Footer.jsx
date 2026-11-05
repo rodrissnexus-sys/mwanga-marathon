@@ -54,7 +54,6 @@ const Footer = async () => {
                   { name: t("links.status"), path: "/registration-status" },
                   { name: t("links.raceDay"), path: "/race-day" },
                   { name: t("links.visit"), path: "/visit" },
-                  { name: t("links.volunteer"), path: "/volunteer" },
                   { name: t("links.contact"), path: "/contact" },
                   { name: t("links.sponsors"), path: "/sponsors" },
                   { name: t("links.faqs"), path: "/race-categories#faq" }

@@ -1,13 +1,8 @@
-import type { Metadata } from "next";
-import { locale as rootLocale } from "next/root-params";
-import type { Locale } from "@/i18n/routing";
-import { pageMetadata } from "@/lib/metadata";
-import Volunteer from "@/views/volunteer/Volunteer";
+import { notFound } from "next/navigation";
 
-export async function generateMetadata(): Promise<Metadata> {
-  return pageMetadata((await rootLocale()) as Locale, "/volunteer", "volunteer", "volunteer");
-}
-
+// The volunteer page is hidden for now (organisers' request). To bring it back,
+// restore the previous version of this file from git, plus the footer link
+// in src/layouts/Footer.jsx and the entry in src/app/sitemap.ts.
 export default function Page() {
-  return <Volunteer />;
+  notFound();
 }
