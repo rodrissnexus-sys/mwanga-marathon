@@ -13,29 +13,27 @@ const SponsorSection = () => {
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef(null);
   
+  // 2026 sponsors, in the order the organisers sent them.
   const sponsorLogos = [
-    { id: 1, name: 'Parrot Hotel', logo: '/assets/sponsors/Parrot_hotel_logo.webp' },
-    { id: 2, name: 'Osaka Classic', logo: '/assets/sponsors/osaka_classic_logo.png' },
-    { id: 3, name: 'Wasafi Media', logo: '/assets/sponsors/wasafi_media_logo.png' },
-    { id: 4, name: 'Coca-Cola', logo: '/assets/sponsors/Coca_cola_logo.png' },
-    { id: 5, name: 'Al Bayanu ECO Ltd', logo: '/assets/sponsors/Al_Bayanu_ECO_Ltd.png' },
+    { id: 1, name: 'Nakiete Pharmacy (T) Ltd', logo: '/assets/sponsors/nakiete_pharmacy.webp' },
+    { id: 2, name: 'Yas Tanzania', logo: '/assets/sponsors/Yas_Tanzania.png' },
+    { id: 3, name: 'Kilimanjaro Biochem Ltd (KBL)', logo: '/assets/sponsors/kilimanjaro_biochem_ltd.webp' },
+    { id: 4, name: 'CRDB Bank', logo: '/assets/sponsors/crdb_bank.webp' },
+    { id: 5, name: 'Mberesero VIP', logo: '/assets/sponsors/mberesero_vip.webp' },
     { id: 6, name: 'Dongodo Panorama Park', logo: '/assets/sponsors/Dongodo_Panorama_Park.png' },
-    { id: 7, name: 'Kilimanjaro Light', logo: '/assets/sponsors/Kilimanjaro_Light.png' },
-    { id: 8, name: 'Kilimanjaro Premium Lager', logo: '/assets/sponsors/Kilimanjaro_Premium_Lager.png' },
-    { id: 9, name: 'Kisangara Tours Ltd', logo: '/assets/sponsors/Kisangara_Tours_Ltd.png' },
-    { id: 10, name: 'Taasisi ya Ustawi wa Jamii', logo: '/assets/sponsors/Taasisi_ya_Ustawi_wa_Jamii.png' },
-    { id: 11, name: 'Tanzania Forest Agency', logo: '/assets/sponsors/Tanzania_forest_agency.png' },
-    { id: 12, name: 'Nangai Engineering and Contractor', logo: '/assets/sponsors/nangai_engineering_and_contractor.png' },
-    { id: 13, name: 'Roadpuma (RCL)', logo: '/assets/sponsors/Roadpuma(RCL).png' },
-    { id: 14, name: 'Yas Tanzania', logo: '/assets/sponsors/Yas_Tanzania.png' },
-    { id: 15, name: 'Kiwamwaku Foundation', logo: '/assets/sponsors/kiwamwaku_foundation.png' },
+    { id: 7, name: 'Kisangara Tours Ltd', logo: '/assets/sponsors/Kisangara_Tours_Ltd.png' },
+    { id: 8, name: 'Kilimanjaro Light', logo: '/assets/sponsors/Kilimanjaro_Light.png' },
+    { id: 9, name: 'Makumbusho ya Wapare Mbambua', logo: '/assets/sponsors/makumbusho_mbambua.webp' },
+    { id: 10, name: 'Tanzania National Parks (TANAPA)', logo: '/assets/sponsors/tanapa.webp' },
+    { id: 11, name: 'Taasisi ya Ustawi wa Jamii', logo: '/assets/sponsors/Taasisi_ya_Ustawi_wa_Jamii.png' },
+    { id: 12, name: 'Kiwamwaku Foundation', logo: '/assets/sponsors/kiwamwaku_foundation.png' },
+    { id: 13, name: 'Greenbird English Medium Primary School', logo: '/assets/sponsors/greenbird_school.webp' },
+    { id: 14, name: 'Coca-Cola', logo: '/assets/sponsors/Coca_cola_logo.png' },
+    { id: 15, name: 'Roadpuma (RCL)', logo: '/assets/sponsors/Roadpuma(RCL).png' },
     { id: 16, name: 'Neloyt', logo: '/assets/sponsors/neloyt.png' },
-    { id: 17, name: 'Nasy Point', logo: '/assets/sponsors/nasy_point.png' },
-    { id: 18, name: 'Tesha\'s Investment', logo: '/assets/sponsors/Tesha_s_investment_logo.png' },
-    { id: 19, name: 'Kapricon', logo: '/assets/sponsors/kapricon_logo.webp' },
-    { id: 20, name: 'Safi Medics Hospital', logo: '/assets/sponsors/safi_medics_hospital.png' },
-    { id: 21, name: 'nayma Tours safari', logo: '/assets/sponsors/nayma_tours_&_safari.jpg' },
-    { id: 22, name: 'Kilimanjaro Biochem Ltd (KBL)', logo: '/assets/sponsors/kilimanjaro_biochem_ltd.webp' },
+    { id: 17, name: 'Safi Medics Hospital', logo: '/assets/sponsors/safi_medics_hospital.png' },
+    { id: 18, name: 'Nangai Engineering and Contractors', logo: '/assets/sponsors/nangai_engineering_and_contractor.png' },
+    { id: 19, name: 'Nasy Point', logo: '/assets/sponsors/nasy_point.png' },
   ];
 
   // Function to navigate through sponsors
