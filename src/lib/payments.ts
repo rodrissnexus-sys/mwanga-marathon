@@ -32,6 +32,9 @@ export type PaymentMethod = keyof typeof PAYMENT_METHODS;
 // and elders.
 export const PARTICIPANT_CATEGORIES = ["adult", "club", "student", "child", "senior"] as const;
 export type ParticipantCategory = (typeof PARTICIPANT_CATEGORIES)[number];
+// Types new runners can choose. "club" was withdrawn by the organisers in
+// November 2026; it stays above so earlier club registrations keep their fee.
+export const OPEN_CATEGORIES = PARTICIPANT_CATEGORIES.filter((c) => c !== "club");
 
 export const CATEGORY_FEES: Record<ParticipantCategory, number> = {
   adult: 40000, // adults and youth, 11 to 64
@@ -69,7 +72,7 @@ export function categoriesForAge(age: number | null): ParticipantCategory[] {
   if (age === null) return [];
   if (age <= CHILD_MAX_AGE) return ["child"];
   if (age >= SENIOR_MIN_AGE) return ["senior"];
-  return ["adult", "club", "student"];
+  return ["adult", "student"];
 }
 
 /** Local rate for Tanzanians, East Africans and SADC residents; USD for everyone else. */

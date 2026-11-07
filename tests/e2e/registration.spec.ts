@@ -6,10 +6,10 @@ const TEXT = {
   sw: { next: "Endelea", submit: "Kamilisha Usajili", done: "Umesajiliwa, E2E!", check: "Angalia hali", status: "Inasubiri malipo", notFound: /Hatukupata usajili/ },
 };
 
-// English: an adult choosing "club member"; Swahili: a child (type and kids'
+// English: an adult choosing "student"; Swahili: a child (type and kids'
 // T-shirt sizes follow from the date of birth).
 const PERSON = {
-  en: { dateOfBirth: "1990-05-05", category: "club" },
+  en: { dateOfBirth: "1990-05-05", category: "student" },
   sw: { dateOfBirth: "2018-03-01", category: "child" },
 } as const;
 

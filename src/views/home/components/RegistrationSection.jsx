@@ -311,7 +311,7 @@ const RegistrationSection = () => {
           value={form.participantCategory}
           onChange={set}
           error={errors.participantCategory}
-          columns={allowedCategories.length > 1 ? "sm:grid-cols-3" : ""}
+          columns={allowedCategories.length > 1 ? "sm:grid-cols-2" : ""}
           options={allowedCategories.map((c) => {
             const price = categoryFee(c, local);
             return { value: c, label: tf(`categories.${c}`), hint: tf(`categoryHints.${c}`), aside: formatMoney(price.amount, price.currency) };

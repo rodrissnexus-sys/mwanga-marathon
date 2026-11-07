@@ -38,8 +38,8 @@ describe("2026 participant categories", () => {
 
   it("limits the choice by age", () => {
     expect(categoriesForAge(10)).toEqual(["child"]);
-    expect(categoriesForAge(11)).toEqual(["adult", "club", "student"]);
-    expect(categoriesForAge(64)).toEqual(["adult", "club", "student"]);
+    expect(categoriesForAge(11)).toEqual(["adult", "student"]);
+    expect(categoriesForAge(64)).toEqual(["adult", "student"]);
     expect(categoriesForAge(65)).toEqual(["senior"]);
   });
 

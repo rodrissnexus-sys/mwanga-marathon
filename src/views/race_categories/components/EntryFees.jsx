@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import React from 'react';
-import { CATEGORY_FEES, FOREIGN_FEE, PARTICIPANT_CATEGORIES, formatMoney } from '@/lib/payments';
+import { CATEGORY_FEES, FOREIGN_FEE, OPEN_CATEGORIES, formatMoney } from '@/lib/payments';
 
 // 2026 entry fees by participant type (the same for every race).
 const EntryFees = () => {
@@ -13,7 +13,7 @@ const EntryFees = () => {
       <div className="rounded-2xl overflow-hidden shadow-lg border border-primary/10 bg-tertiary">
         <table className="w-full text-left">
           <tbody className="divide-y divide-primary/10">
-            {PARTICIPANT_CATEGORIES.map((category) => (
+            {OPEN_CATEGORIES.map((category) => (
               <tr key={category}>
                 <th scope="row" className="px-5 py-4 align-top">
                   <span className="block font-bold text-primary">{t(`rows.${category}.who`)}</span>
