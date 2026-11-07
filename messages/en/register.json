@@ -1,27 +1,73 @@
 {
   "payment": {
-    "fastAndSecureMobile": "Fast and secure mobile money transfer",
-    "dial15000": "Dial *150*00#",
-    "selectPayWithLipa": "Select Pay with Lipa namba",
-    "select1EnterLipa": "Select 1 (Enter Lipa Number)",
-    "enterLipaNumber58136742": "Enter Lipa Number: 58136742",
-    "enterAmountBasedOn": "Enter Amount based on your selected event category",
-    "enterMPesaPin": "Enter M-Pesa pin",
-    "quickAndReliablePayments": "Quick and reliable payments",
-    "dial15001": "Dial *150*01#",
-    "enterLipaNumber18403062": "Enter Lipa Number: 18403062",
-    "confirmWithYourPin": "Confirm with your PIN",
     "titleFirst": "Payment",
     "titleSecond": "Methods",
-    "importantInformation": "Important Information",
-    "keepYourPaymentConfirmation": "Keep your payment confirmation for reference",
-    "paymentConfirmationMayTake": "Payment confirmation may take up to 24 hours",
-    "forSupportInfoMwafem": "For support: info@mwafem.com",
-    "bankTransfer": "BANK TRANSFER",
-    "bankTransferDesc": "Pay into any of our bank accounts",
-    "sendPaymentSlip": "Send payment slip",
+    "intro": "All entry fees are paid to one Lipa Namba. You can pay from any mobile network or bank.",
+    "lipaNamba": "Lipa Namba",
+    "merchant": "KISANGARA TOURS LIMITED",
+    "copy": "Copy number",
+    "copied": "Copied!",
+    "scanTitle": "Or scan with the M-Pesa app",
+    "scanText": "Open the M-Pesa app, tap the QR button and scan this code. Then enter the amount and your M-Pesa PIN.",
+    "dial": "Dial {code}",
+    "networks": {
+      "mpesa": {
+        "name": "Vodacom M-Pesa",
+        "code": "*150*00#",
+        "steps": [
+          "Choose 4 – LIPA kwa M-Pesa",
+          "Choose 1 – LIPA kwa Simu",
+          "Enter Lipa Namba 58136742",
+          "Enter the amount for your race",
+          "Enter your PIN to confirm"
+        ]
+      },
+      "mixx": {
+        "name": "Mixx by Yas (Tigo Pesa)",
+        "code": "*150*01#",
+        "steps": [
+          "Choose 5 – LIPA KWA SIMU",
+          "Choose 3 – Kwenda Mitandao mingine",
+          "Choose 1 – M-Pesa",
+          "Enter M-Pesa Lipa Namba 58136742",
+          "Enter the amount for your race",
+          "Enter your PIN to confirm"
+        ]
+      },
+      "airtel": {
+        "name": "Airtel Money",
+        "code": "*150*60#",
+        "steps": [
+          "Choose 5 – Lipia Bili",
+          "Choose 1 – Lipa kwa simu (Mitandao yote)",
+          "Choose 2 – Lipa kwa Voda Lipa",
+          "Enter the amount for your race",
+          "Enter the reference number 58136742",
+          "Enter your PIN to confirm"
+        ]
+      },
+      "other": {
+        "name": "Other networks & banks",
+        "code": "",
+        "steps": [
+          "Open your network's or bank app's financial services menu",
+          "Choose LIPA KWA SIMU",
+          "Choose Kwenda Mitandao Mingine (other networks)",
+          "Choose M-Pesa",
+          "Enter merchant number 58136742",
+          "Enter the amount and your PIN to confirm"
+        ]
+      }
+    },
+    "bankTitle": "Bank transfer",
+    "bankText": "You can also pay into one of our bank accounts:",
     "accountName": "Account name: Kisangara Tours Ltd",
-    "useRegistrationId": "Use your registration ID (MWF-…) as the payment reference",
-    "sendSlip": "Send the payment slip to info@mwafem.com or 0755 002 886"
+    "afterTitle": "After you pay",
+    "after": [
+      "Send the payment SMS or bank slip together with your registration ID (MWF-…) to info@mwafem.com or 0755 002 886.",
+      "We confirm your payment within 24 hours and email you.",
+      "Keep your payment message until race day."
+    ],
+    "sendSlip": "Send payment proof"
   }
 }

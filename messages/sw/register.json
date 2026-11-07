@@ -1,27 +1,73 @@
 {
   "payment": {
-    "fastAndSecureMobile": "Njia ya haraka na salama ya kutuma pesa",
-    "dial15000": "Bonyeza *150*00#",
-    "selectPayWithLipa": "Chagua Lipa kwa namba ya Lipa",
-    "select1EnterLipa": "Chagua 1 (Ingiza Namba ya Lipa)",
-    "enterLipaNumber58136742": "Ingiza Namba ya Lipa: 58136742",
-    "enterAmountBasedOn": "Ingiza Kiasi kulingana na aina ya tukio ulichochagua",
-    "enterMPesaPin": "Ingiza namba ya siri ya M-Pesa",
-    "quickAndReliablePayments": "Malipo ya haraka na ya kuaminika",
-    "dial15001": "Bonyeza *150*01#",
-    "enterLipaNumber18403062": "Ingiza Namba ya Lipa: 18403062",
-    "confirmWithYourPin": "Thibitisha kwa PIN yako",
     "titleFirst": "Njia za",
     "titleSecond": "Malipo",
-    "importantInformation": "Taarifa Muhimu",
-    "keepYourPaymentConfirmation": "Hifadhi uthibitisho wa malipo yako kwa ajili ya kumbukumbu",
-    "paymentConfirmationMayTake": "Uthibitisho wa malipo unaweza kuchukua hadi masaa 24",
-    "forSupportInfoMwafem": "Kwa msaada: info@mwafem.com",
-    "bankTransfer": "BENKI",
-    "bankTransferDesc": "Lipa kupitia akaunti zetu za benki",
-    "sendPaymentSlip": "Tuma risiti ya malipo",
+    "intro": "Ada zote za ushiriki zinalipwa kwa Lipa Namba moja. Unaweza kulipa kutoka mtandao wowote wa simu au benki.",
+    "lipaNamba": "Lipa Namba",
+    "merchant": "KISANGARA TOURS LIMITED",
+    "copy": "Nakili namba",
+    "copied": "Imenakiliwa!",
+    "scanTitle": "Au scan kupitia M-Pesa App",
+    "scanText": "Fungua M-Pesa App, bonyeza kitufe cha QR kisha scan picha hii. Weka kiasi na PIN ya M-Pesa kukamilisha malipo.",
+    "dial": "Piga {code}",
+    "networks": {
+      "mpesa": {
+        "name": "Vodacom M-Pesa",
+        "code": "*150*00#",
+        "steps": [
+          "Chagua 4 – LIPA kwa M-Pesa",
+          "Chagua 1 – LIPA kwa Simu",
+          "Weka Lipa Namba 58136742",
+          "Weka kiasi cha mbio yako",
+          "Weka namba ya siri kuthibitisha"
+        ]
+      },
+      "mixx": {
+        "name": "Mixx by Yas (Tigo Pesa)",
+        "code": "*150*01#",
+        "steps": [
+          "Chagua 5 – LIPA KWA SIMU",
+          "Chagua 3 – Kwenda Mitandao mingine",
+          "Chagua 1 – M-Pesa",
+          "Weka M-Pesa Lipa Namba 58136742",
+          "Weka kiasi cha mbio yako",
+          "Weka namba ya siri"
+        ]
+      },
+      "airtel": {
+        "name": "Airtel Money",
+        "code": "*150*60#",
+        "steps": [
+          "Chagua 5 – Lipia Bili",
+          "Chagua 1 – Lipa kwa simu (Mitandao yote)",
+          "Chagua 2 – Lipa kwa Voda Lipa",
+          "Ingiza kiasi cha pesa",
+          "Ingiza namba ya kumbukumbu 58136742",
+          "Weka namba ya siri"
+        ]
+      },
+      "other": {
+        "name": "Mitandao mingine na benki",
+        "code": "",
+        "steps": [
+          "Ingia kwenye menyu ya huduma za kifedha ya mtandao au benki yako",
+          "Chagua LIPA KWA SIMU",
+          "Chagua Kwenda Mitandao Mingine",
+          "Chagua M-Pesa",
+          "Ingiza namba ya mfanyabiashara 58136742",
+          "Ingiza kiasi na namba ya siri kuthibitisha"
+        ]
+      }
+    },
+    "bankTitle": "Benki",
+    "bankText": "Unaweza pia kulipa kwenye moja ya akaunti zetu za benki:",
     "accountName": "Jina la akaunti: Kisangara Tours Ltd",
-    "useRegistrationId": "Tumia namba yako ya usajili (MWF-…) kama kumbukumbu ya malipo",
-    "sendSlip": "Tuma risiti ya malipo kwa info@mwafem.com au 0755 002 886"
+    "afterTitle": "Baada ya kulipa",
+    "after": [
+      "Tuma ujumbe wa malipo au risiti ya benki pamoja na namba yako ya usajili (MWF-…) kwa info@mwafem.com au 0755 002 886.",
+      "Tunathibitisha malipo yako ndani ya saa 24 na kukutumia barua pepe.",
+      "Hifadhi ujumbe wa malipo hadi siku ya mbio."
+    ],
+    "sendSlip": "Tuma uthibitisho wa malipo"
   }
 }

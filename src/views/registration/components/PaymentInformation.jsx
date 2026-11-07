@@ -1,211 +1,155 @@
 "use client";
 
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import React from 'react';
-import { motion } from 'framer-motion';
-import SectionHeader from '../../../components/common/SectionHeader';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone, faCopy, faCheck, faEnvelope, faBuildingColumns, faMobileScreen, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import SectionHeader from "../../../components/common/SectionHeader";
+
+// One M-Pesa Lipa Namba takes payments from every network and bank (TIPS),
+// as on the organisers' "Pesa ni M-Pesa" table talker.
+const LIPA_NAMBA = "58136742";
+const QR = "/assets/payment/lipa-namba-qr.png";
+const NETWORKS = [
+  { key: "mpesa", accent: "bg-[#e60000]" },
+  { key: "mixx", accent: "bg-[#00377b]" },
+  { key: "airtel", accent: "bg-[#ed1c24]" },
+  { key: "other", accent: "bg-primary" },
+];
+const BANKS = [
+  ["Mwanga Hakika Bank", "2290060000001"],
+  ["CRDB", "015C948979800"],
+  ["TCB", "215404000076"],
+];
 
 const PaymentInformation = () => {
   const t = useTranslations("register.payment");
-  const paymentMethods = [
-    {
-      name: "M-PESA",
-      description: t("fastAndSecureMobile"),
-      link: "tel:*150*00%23",
-      buttonIcon: "phone",
-      linkText: t("dial15000"),
-      instructions: [
-        t("dial15000"),
-        t("selectPayWithLipa"),
-        t("select1EnterLipa"),
-        t("enterLipaNumber58136742"),
-        t("enterAmountBasedOn"),
-        t("enterMPesaPin")
-      ],
-      icon: (
-        <svg className="w-8 h-8 text-secondary" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-    },
-    {
-      name: "MIXX BY YAS",
-      description: t("quickAndReliablePayments"),
-      link: "tel:*150*01%23",
-      buttonIcon: "phone",
-      linkText: t("dial15001"),
-      instructions: [
-        t("dial15001"),
-        t("selectPayWithLipa"),
-        t("select1EnterLipa"),
-        t("enterLipaNumber18403062"),
-        t("enterAmountBasedOn"),
-        t("confirmWithYourPin"),
-      ],
-      icon: (
-        <svg className="w-8 h-8 text-secondary" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      ),
-    },
-    {
-      name: t("bankTransfer"),
-      description: t("bankTransferDesc"),
-      link: "mailto:info@mwafem.com?subject=Mwanga%20Marathon%202026%20payment",
-      buttonIcon: "mail",
-      linkText: t("sendPaymentSlip"),
-      instructions: [
-        "Mwanga Hakika Bank: 2290060000001",
-        "CRDB: 015C948979800",
-        "TCB: 215404000076",
-        t("accountName"),
-        t("useRegistrationId"),
-        t("sendSlip"),
-      ],
-      icon: (
-        <svg className="w-8 h-8 text-secondary" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10l9-6 9 6M4 10v8m4-8v8m4-8v8m4-8v8m4-8v8M3 20h18" />
-        </svg>
-      ),
-    },
-  ];
+  const [copied, setCopied] = useState(false);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(LIPA_NAMBA);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard blocked: the number is on screen anyway */
     }
   };
 
   return (
-    <section id="payment" className="py-20 relative overflow-hidden bg-gradient-to-b from-tertiary to-tertiary/5">
-      {/* Enhanced Background decorative elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-secondary opacity-5 rounded-full -mr-48 -mt-48 blur-2xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary opacity-5 rounded-full -ml-48 -mb-48 blur-2xl" />
-      <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-tertiary opacity-5 rounded-full transform -translate-x-1/2 -translate-y-1/2 blur-xl" />
+    <section id="payment" className="py-16 md:py-20 bg-gradient-to-b from-tertiary to-primary/5">
+      <div className="max-w-6xl mx-auto px-4 md:px-8">
+        <SectionHeader firstWord={t("titleFirst")} secondWord={t("titleSecond")} className="!mb-6" />
+        <p className="text-center text-primary/80 max-w-2xl mx-auto mb-10">{t("intro")}</p>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-        <SectionHeader firstWord={t("titleFirst")} secondWord={t("titleSecond")} />
-        
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 items-stretch"
-        >
-          {paymentMethods.map((method) => (
-            <motion.div
-              key={method.name}
-              variants={itemVariants}
-              className="h-full bg-tertiary rounded-2xl p-6 shadow-lg border border-primary/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-secondary/60 flex flex-col"
-            >
-              <div>
-                <div className="flex flex-col items-center text-center mb-6">
-                  <div className="mb-4 bg-primary p-3 rounded-full shadow-md">
-                    {method.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-primary mb-2 tracking-wide">{method.name}</h3>
-                  <p className="text-sm text-primary/75 min-h-[2.5rem]">{method.description}</p>
-                </div>
-                <div className="space-y-3">
-                  {method.instructions.map((instruction, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <span className="shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-primary text-secondary text-xs font-semibold">{idx + 1}</span>
-                      <p className="text-primary/85 text-sm leading-6 break-words min-w-0">{instruction}</p>
+        {/* The one number to pay to, plus the QR code */}
+        <div className="rounded-3xl bg-primary text-tertiary overflow-hidden shadow-xl grid md:grid-cols-[minmax(0,1fr)_auto]">
+          <div className="p-6 md:p-10 flex flex-col justify-center">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-secondary">{t("lipaNamba")}</p>
+            <p className="mt-2 text-5xl md:text-6xl font-extrabold tracking-wider tabular-nums">{LIPA_NAMBA}</p>
+            <p className="mt-2 font-semibold text-tertiary/85">{t("merchant")}</p>
+            <div className="mt-6 flex flex-col sm:flex-row gap-3">
+              <button
+                type="button"
+                onClick={copy}
+                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 rounded-full bg-secondary text-primary font-bold hover:bg-secondary/90"
+                aria-live="polite"
+              >
+                <FontAwesomeIcon icon={copied ? faCheck : faCopy} /> {copied ? t("copied") : t("copy")}
+              </button>
+              <a
+                href="tel:*150*00%23"
+                className="inline-flex items-center justify-center gap-2 min-h-12 px-5 rounded-full border border-tertiary/40 font-semibold hover:border-secondary md:hidden"
+              >
+                <FontAwesomeIcon icon={faPhone} /> {t("dial", { code: "*150*00#" })}
+              </a>
+            </div>
+          </div>
+          <div className="bg-tertiary/[0.06] border-t md:border-t-0 md:border-l border-tertiary/15 p-6 md:p-8 flex flex-row md:flex-col items-center gap-5 md:max-w-[280px]">
+            <img src={QR} alt={`QR: Lipa Namba ${LIPA_NAMBA}`} width={180} height={180} className="w-28 h-28 md:w-44 md:h-44 rounded-xl bg-tertiary p-1.5 shrink-0" />
+            <div className="md:text-center">
+              <p className="font-bold text-secondary">{t("scanTitle")}</p>
+              <p className="mt-1 text-sm text-tertiary/80 leading-relaxed">{t("scanText")}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Step by step for each network */}
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {NETWORKS.map(({ key, accent }) => {
+            const code = t(`networks.${key}.code`);
+            return (
+              <div key={key} className="rounded-2xl bg-tertiary border border-primary/10 shadow-sm overflow-hidden flex flex-col">
+                <div className={`h-1.5 ${accent}`} />
+                <div className="p-5 flex flex-col flex-1">
+                  <div className="flex items-center gap-3">
+                    <span className="w-10 h-10 shrink-0 rounded-full bg-primary text-secondary flex items-center justify-center">
+                      <FontAwesomeIcon icon={key === "other" ? faBuildingColumns : faMobileScreen} />
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="font-bold text-primary leading-tight">{t(`networks.${key}.name`)}</h3>
+                      {code && <p className="text-sm font-mono font-semibold text-primary/70">{code}</p>}
                     </div>
-                  ))}
+                  </div>
+                  <ol className="mt-4 space-y-2.5">
+                    {t.raw(`networks.${key}.steps`).map((step, i) => (
+                      <li key={step} className="flex gap-3 text-sm text-primary/85 leading-6">
+                        <span className="shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
+                        <span className="min-w-0">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  {code && (
+                    <a href={`tel:${code.replace(/#/g, "%23")}`} className="mt-auto pt-5 group">
+                      <span className="flex items-center justify-center gap-2 min-h-11 rounded-full border-2 border-primary/20 text-primary text-sm font-semibold group-hover:bg-primary group-hover:text-tertiary group-hover:border-primary transition-colors">
+                        <FontAwesomeIcon icon={faPhone} /> {t("dial", { code })}
+                      </span>
+                    </a>
+                  )}
                 </div>
               </div>
-              
-              <div className="mt-auto pt-6">
-                {method.isWebLink ? (
-                  <a 
-                    href={method.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="w-full min-h-12 px-5 py-3 rounded-full bg-secondary text-primary text-sm font-semibold whitespace-nowrap shadow-md hover:shadow-lg hover:bg-secondary/90 transition-all duration-300 flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                  >
-                    {method.linkText}
-                    <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </a>
-                ) : (
-                  <a 
-                    href={method.link}
-                    className="w-full min-h-12 px-5 py-3 rounded-full border-2 border-primary/25 text-primary text-sm font-semibold whitespace-nowrap hover:border-primary hover:bg-primary hover:text-tertiary transition-all duration-300 flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                  >
-                    {method.buttonIcon === "mail" ? (
-                      <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    ) : (
-                      <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    )}
-                    {method.linkText}
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            );
+          })}
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-16 bg-gradient-to-r from-primary to-primary/90 rounded-2xl p-8 text-tertiary shadow-xl border border-primary/20"
-        >
-          <h4 className="font-bold text-xl mb-6 flex items-center gap-2">
-            <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            {t("importantInformation")}
-          </h4>
-          <ul className="space-y-4">
-            <li className="flex items-center gap-3">
-              <div className="bg-tertiary/20 p-2 rounded-full">
-                <svg className="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <span className="text-tertiary/90">{t("keepYourPaymentConfirmation")}</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <div className="bg-tertiary/20 p-2 rounded-full">
-                <svg className="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <span className="text-tertiary/90">{t("paymentConfirmationMayTake")}</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <div className="bg-tertiary/20 p-2 rounded-full">
-                <svg className="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <span className="text-tertiary/90">{t("forSupportInfoMwafem")}</span>
-            </li>
-          </ul>
-        </motion.div>
+        {/* Bank accounts + what to do after paying */}
+        <div className="mt-8 grid gap-5 lg:grid-cols-2">
+          <div className="rounded-2xl bg-tertiary border border-primary/10 shadow-sm p-6">
+            <h3 className="flex items-center gap-2 font-bold text-primary text-lg">
+              <FontAwesomeIcon icon={faBuildingColumns} className="text-primary/70" /> {t("bankTitle")}
+            </h3>
+            <p className="mt-1 text-sm text-primary/75">{t("bankText")}</p>
+            <dl className="mt-4 divide-y divide-primary/10 rounded-xl bg-primary/[0.04]">
+              {BANKS.map(([bank, account]) => (
+                <div key={bank} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-3">
+                  <dt className="text-sm text-primary/75">{bank}</dt>
+                  <dd className="font-mono font-bold text-primary tracking-wide">{account}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-3 text-sm font-semibold text-primary">{t("accountName")}</p>
+          </div>
+
+          <div className="rounded-2xl bg-primary text-tertiary p-6">
+            <h3 className="flex items-center gap-2 font-bold text-lg">
+              <FontAwesomeIcon icon={faCircleInfo} className="text-secondary" /> {t("afterTitle")}
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {t.raw("after").map((line) => (
+                <li key={line} className="flex gap-3 text-sm text-tertiary/90 leading-6">
+                  <FontAwesomeIcon icon={faCheck} className="text-secondary mt-1.5 shrink-0" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="mailto:info@mwafem.com?subject=Mwanga%20Marathon%202026%20payment"
+              className="mt-6 inline-flex items-center justify-center gap-2 min-h-12 px-5 rounded-full bg-secondary text-primary font-bold w-full sm:w-auto"
+            >
+              <FontAwesomeIcon icon={faEnvelope} /> {t("sendSlip")}
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

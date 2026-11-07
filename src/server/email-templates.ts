@@ -88,9 +88,12 @@ const button = (href: string, text: string) =>
   `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px auto 4px"><tr><td align="center" style="border-radius:10px;background:${NAVY}">
   <a href="${href}" style="display:inline-block;padding:14px 26px;color:#ffffff;font-size:15px;font-weight:700;text-decoration:none;border-radius:10px">${escape(text)} &rarr;</a></td></tr></table>`;
 
+// Same as the Register page: one M-Pesa Lipa Namba that every network and bank can pay to.
 const PAYMENT_METHODS = [
-  { name: "M-PESA", lines: ["*150*00#", "Lipa Namba: 58136742"] },
-  { name: "MIXX BY YAS", lines: ["*150*01#", "Lipa Namba: 18403062"] },
+  { name: "LIPA NAMBA 58136742", lines: ["KISANGARA TOURS LIMITED"] },
+  { name: "VODACOM M-PESA · *150*00#", lines: ["4 LIPA kwa M-Pesa → 1 LIPA kwa Simu → 58136742"] },
+  { name: "MIXX BY YAS (TIGO PESA) · *150*01#", lines: ["5 LIPA KWA SIMU → 3 Kwenda Mitandao mingine → 1 M-Pesa → 58136742"] },
+  { name: "AIRTEL MONEY · *150*60#", lines: ["5 Lipia Bili → 1 Lipa kwa simu → 2 Lipa kwa Voda Lipa → 58136742"] },
   { name: "BANK / BENKI", lines: ["Mwanga Hakika Bank: 2290060000001", "CRDB: 015C948979800", "TCB: 215404000076", "Kisangara Tours Ltd"] },
 ];
 
