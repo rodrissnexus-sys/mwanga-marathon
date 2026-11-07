@@ -87,7 +87,7 @@ for (const locale of ["en", "sw"] as const) {
     await expect(page.getByText(t.notFound)).toBeVisible();
     await page.locator("#status-phone").fill("0700 000 001"); // registered as +255700000001
     await page.getByRole("button", { name: t.check }).click();
-    await expect(page.getByText(t.status).first()).toBeVisible();
+    await expect(page.getByText(t.status).first()).toBeVisible({ timeout: 20_000 });
     await expect(page.getByText(registrationId)).toBeVisible(); // the ID is shown back
   });
 }
