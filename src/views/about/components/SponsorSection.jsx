@@ -34,6 +34,7 @@ const SponsorSection = () => {
     { id: 17, name: 'Safi Medics Hospital', logo: '/assets/sponsors/safi_medics_hospital.png' },
     { id: 18, name: 'Nangai Engineering and Contractors', logo: '/assets/sponsors/nangai_engineering_and_contractor.png' },
     { id: 19, name: 'Nasy Point', logo: '/assets/sponsors/nasy_point.png' },
+    { id: 20, name: 'Al Bayanu E-Co. Ltd', logo: '/assets/sponsors/al_bayanu.webp' },
   ];
 
   // Function to navigate through sponsors
