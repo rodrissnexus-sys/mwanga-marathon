@@ -15,9 +15,11 @@ export async function sendEmail({ to, subject, html, replyTo }: Email): Promise<
     console.info(`[email] not configured, skipped "${subject}" to ${to}`);
     return false;
   }
-  // Never email the reserved test domain (automated tests use it): bounces hurt
-  // the sending domain's reputation.
-  if (/@example\.(com|org|net)$/i.test(to)) {
+  // Automated tests use the reserved example.com domain. Never email it
+  // (bounces hurt the sending domain), and don't send the organisers a
+  // notification about a test registration or message either.
+  const isTest = (address?: string) => !!address && /@example\.(com|org|net)$/i.test(address);
+  if (isTest(to) || isTest(replyTo)) {
     console.info(`[email] test address, skipped "${subject}" to ${to}`);
     return false;
   }
