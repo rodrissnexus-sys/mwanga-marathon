@@ -225,15 +225,15 @@
       "nationalityRequired": "Utaifa unahitajika",
       "nationalityAgain": "Tafadhali chagua kundi la utaifa tena",
       "nationalityAndCountry": "Tafadhali chagua kundi la utaifa na nchi",
-      "dobRequired": "Tarehe ya kuzaliwa inahitajika",
       "genderRequired": "Jinsia inahitajika",
       "emergencyNameRequired": "Jina la mawasiliano ya dharura linahitajika",
       "emergencyNumberRequired": "Namba ya mawasiliano ya dharura inahitajika",
       "nationalityIncomplete": "Taarifa za utaifa hazijakamilika. Tafadhali rudi nyuma uchague utaifa wako tena.",
-      "dobInvalid": "Tafadhali hakiki tarehe ya kuzaliwa",
       "phoneInvalid": "Tafadhali andika namba kamili ya simu",
       "countryRequired": "Tafadhali chagua nchi yako",
-      "submitFailed": "Hatukuweza kuhifadhi usajili wako. Tafadhali hakiki taarifa zako ujaribu tena."
+      "submitFailed": "Hatukuweza kuhifadhi usajili wako. Tafadhali hakiki taarifa zako ujaribu tena.",
+      "ageRequired": "Umri unahitajika",
+      "ageInvalid": "Tafadhali andika umri wako kwa miaka"
     },
     "nationality": {
       "tz_ea": "Raia wa Tanzania na Afrika Mashariki",
@@ -282,7 +282,6 @@
     "enterIdNumber": "Ingiza namba ya kitambulisho",
     "passportNumber": "Namba ya Pasipoti",
     "enterPassportNumber": "Ingiza namba ya pasipoti",
-    "dateOfBirth": "Tarehe ya Kuzaliwa",
     "gender": "Jinsia",
     "selectGender": "Chagua Jinsia",
     "country": "Nchi",
@@ -332,7 +331,9 @@
     "genders": {
       "M": "Mwanaume",
       "F": "Mwanamke"
-    }
+    },
+    "age": "Umri",
+    "agePlaceholder": "mf. 28"
   },
   "heroEvent": {
     "dateVenue": "20 Desemba 2026 · Uwanja wa C.D. Msuya, Mwanga",

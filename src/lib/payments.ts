@@ -67,6 +67,22 @@ export function ageOnRaceDay(dateOfBirth: string | null | undefined, raceDay = E
   return ry - y - (rm < m || (rm === m && rd < d) ? 1 : 0);
 }
 
+export const MIN_AGE = 1;
+export const MAX_AGE = 110;
+
+/** The age typed into the form, or null when it isn't a whole number in range. */
+export function parseAge(value: unknown) {
+  const text = String(value ?? "").trim();
+  if (!/^\d{1,3}$/.test(text)) return null;
+  const age = Number(text);
+  return age >= MIN_AGE && age <= MAX_AGE ? age : null;
+}
+
+/** A registration's age: given directly since November 2026, worked out from the date of birth before. */
+export function registrationAge(r: { age?: number | null; date_of_birth?: string | null }) {
+  return r.age ?? ageOnRaceDay(r.date_of_birth);
+}
+
 /** The categories someone of this age can register in. */
 export function categoriesForAge(age: number | null): ParticipantCategory[] {
   if (age === null) return [];

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { PARTICIPANT_CATEGORIES, ageOnRaceDay, categoriesForAge } from "./payments";
+import { MAX_AGE, MIN_AGE, PARTICIPANT_CATEGORIES, categoriesForAge } from "./payments";
 
 // Validation for the public forms. Shared by the server actions and the tests.
 
@@ -22,7 +22,7 @@ export const registrationSchema = z.object({
   nationality_category: z.enum(["tz_ea", "tz_resident_sadc", "international"]).nullish(),
   id_number: optionalText(50),
   passport_number: optionalText(50),
-  date_of_birth: z.iso.date(),
+  age: z.coerce.number().int().min(MIN_AGE).max(MAX_AGE),
   gender_id: id,
   country_id: id,
   emergency_contact_name: z.string().trim().min(1).max(255),
@@ -30,9 +30,9 @@ export const registrationSchema = z.object({
   postal_code: optionalText(20),
   voucher_code: optionalText(50),
   participant_category: z.enum(PARTICIPANT_CATEGORIES),
-}).refine((v) => categoriesForAge(ageOnRaceDay(v.date_of_birth)).includes(v.participant_category), {
+}).refine((v) => categoriesForAge(v.age).includes(v.participant_category), {
   path: ["participant_category"],
-  message: "This participant type doesn't match the date of birth.",
+  message: "This participant type doesn't match the age.",
 });
 
 const contactSchema = z.object({

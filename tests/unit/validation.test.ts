@@ -14,7 +14,7 @@ const validRegistration = {
   nationality_category: "tz_ea",
   id_number: "",
   passport_number: "",
-  date_of_birth: "1995-04-12",
+  age: "31",
   gender_id: 2,
   country_id: 1,
   emergency_contact_name: "Baraka Mushi",
@@ -38,7 +38,9 @@ describe("registrationSchema", () => {
     ["email", "not-an-email"],
     ["phone_number", "1".repeat(21)],
     ["event_id", "abc"],
-    ["date_of_birth", "12/04/1995"],
+    ["age", "abc"],
+    ["age", "0"],
+    ["age", "12.5"],
     ["nationality_category", "martian"],
     ["voucher_code", "x".repeat(51)],
   ])("rejects an invalid %s", (field, value) => {
@@ -47,16 +49,18 @@ describe("registrationSchema", () => {
     expect(result.error?.issues[0].path[0]).toBe(field);
   });
 
-  it("requires a participant type that fits the age on race day", () => {
-    const parse = (date_of_birth: string, participant_category: string) =>
-      registrationSchema.safeParse({ ...validRegistration, date_of_birth, participant_category }).success;
-    expect(parse("1995-04-12", "student")).toBe(true);
-    expect(parse("1995-04-12", "child")).toBe(false);
-    expect(parse("2018-01-01", "child")).toBe(true); // 8 on race day
-    expect(parse("2018-01-01", "adult")).toBe(false);
-    expect(parse("1950-01-01", "senior")).toBe(true);
-    expect(parse("1950-01-01", "adult")).toBe(false);
-    expect(parse("1995-04-12", "vip")).toBe(false);
+  it("requires a participant type that fits the age", () => {
+    const parse = (age: string, participant_category: string) =>
+      registrationSchema.safeParse({ ...validRegistration, age, participant_category }).success;
+    expect(parse("31", "student")).toBe(true);
+    expect(parse("31", "child")).toBe(false);
+    expect(parse("8", "child")).toBe(true);
+    expect(parse("8", "adult")).toBe(false);
+    expect(parse("10", "child")).toBe(true);
+    expect(parse("11", "adult")).toBe(true);
+    expect(parse("65", "senior")).toBe(true);
+    expect(parse("76", "adult")).toBe(false);
+    expect(parse("31", "vip")).toBe(false);
   });
 
   it("rejects missing required fields", () => {

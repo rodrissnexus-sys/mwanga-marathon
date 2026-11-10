@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ageOnRaceDay, categoriesForAge, expectedFee, formatMoney } from "@/lib/payments";
+import { ageOnRaceDay, categoriesForAge, expectedFee, formatMoney, parseAge, registrationAge } from "@/lib/payments";
 
 const event = { is_kids_event: false, local_price: 40000, foreign_price: 30, local_kids_price: 20000 };
 
@@ -34,6 +34,21 @@ describe("2026 participant categories", () => {
     expect(ageOnRaceDay("2016-12-21")).toBe(9);
     expect(ageOnRaceDay("1961-12-20")).toBe(65);
     expect(ageOnRaceDay("")).toBeNull();
+  });
+
+  it("reads the age typed into the form", () => {
+    expect(parseAge("28")).toBe(28);
+    expect(parseAge(" 7 ")).toBe(7);
+    expect(parseAge("")).toBeNull();
+    expect(parseAge("0")).toBeNull();
+    expect(parseAge("111")).toBeNull();
+    expect(parseAge("2.5")).toBeNull();
+    expect(parseAge("-3")).toBeNull();
+  });
+
+  it("uses the given age, or the date of birth for older registrations", () => {
+    expect(registrationAge({ age: 30, date_of_birth: null })).toBe(30);
+    expect(registrationAge({ age: null, date_of_birth: "1961-12-20" })).toBe(65);
   });
 
   it("limits the choice by age", () => {

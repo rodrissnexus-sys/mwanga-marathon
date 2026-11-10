@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../../contexts/AuthContext';
 import { confirmPayment, markPaymentFailed, reopenPayment, getPaymentHistory } from '../../../../api/marathon/registration';
-import { CATEGORY_LABELS, expectedFee, formatMoney, PAYMENT_METHODS } from '@/lib/payments';
+import { CATEGORY_LABELS, expectedFee, formatMoney, PAYMENT_METHODS, registrationAge } from '@/lib/payments';
 import { Alert, Button, DetailList, Drawer, Field, StatusBadge, formatDate, formatDateTime } from '../ui/kit';
 
 const EVENT_TEXT = {
@@ -333,7 +333,8 @@ const RegistrationDrawer = ({ registration, onClose, onChange }) => {
             ['Registered', formatDateTime(r.created_at)],
             ['Site language', r.locale === 'sw' ? 'Kiswahili' : 'English'],
             ['Participant type', CATEGORY_LABELS[r.participant_category]],
-            ['Date of birth', formatDate(r.date_of_birth)],
+            ['Age', registrationAge(r)],
+            r.date_of_birth && ['Date of birth', formatDate(r.date_of_birth)],
             ['Gender', r.gender?.name],
             ['Nationality', r.nationality?.name],
             ['Country', r.country?.name],

@@ -6,8 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight, faCheck, faCircleExclamation, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import SectionHeader from "@/components/common/SectionHeader";
 import { Link } from "@/lib/router";
-import { ageOnRaceDay, categoriesForAge, categoryFee, formatMoney } from "@/lib/payments";
-import { EVENT } from "@/lib/event";
+import { categoriesForAge, categoryFee, formatMoney, parseAge, MAX_AGE } from "@/lib/payments";
 import RegistrationConfirmation from "./RegistrationConfirmation";
 import { useMarathonRegistration } from "../../../hooks/useMarathonRegistration";
 import { useDropdowns } from "../../../hooks/useDropdowns";
@@ -17,7 +16,7 @@ const EMPTY = {
   lastName: "",
   phoneNumber: "",
   email: "",
-  dateOfBirth: "",
+  age: "",
   gender_id: "",
   event_id: "",
   participantCategory: "",
@@ -151,7 +150,7 @@ const RegistrationSection = () => {
 
   const tanzania = countries.find((c) => c.code === "TZA") || countries.find((c) => c.name === "Tanzania");
   const local = form.nationality !== "international";
-  const allowedCategories = categoriesForAge(ageOnRaceDay(form.dateOfBirth));
+  const allowedCategories = categoriesForAge(parseAge(form.age));
   const isChild = allowedCategories[0] === "child";
   const sizes = isChild ? rawData.kidsShirtSizes : rawData.shirtSizes;
 
@@ -196,8 +195,8 @@ const RegistrationSection = () => {
       if (form.phoneNumber.trim() && form.phoneNumber.replace(/\D/g, "").length < 9) e.phoneNumber = t("errors.phoneInvalid");
       if (!form.email.trim()) e.email = t("emailIsRequired");
       else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = t("emailIsInvalid");
-      if (!form.dateOfBirth) e.dateOfBirth = t("errors.dobRequired");
-      else if (ageOnRaceDay(form.dateOfBirth) < 0) e.dateOfBirth = t("errors.dobInvalid");
+      if (!form.age.trim()) e.age = t("errors.ageRequired");
+      else if (parseAge(form.age) === null) e.age = t("errors.ageInvalid");
       required("gender_id", t("errors.genderRequired"));
     }
     if (index === 1) {
@@ -282,7 +281,7 @@ const RegistrationSection = () => {
       <Field name="lastName" label={tf("lastName")} value={form.lastName} onChange={onInput} error={errors.lastName} autoComplete="family-name" placeholder={tf("enterLastName")} />
       <Field name="phoneNumber" label={tf("phoneNumber")} value={form.phoneNumber} onChange={onInput} error={errors.phoneNumber} type="tel" inputMode="tel" autoComplete="tel" placeholder="07XX XXX XXX" />
       <Field name="email" label={tf("email")} value={form.email} onChange={onInput} error={errors.email} type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" />
-      <Field name="dateOfBirth" label={tf("dateOfBirth")} value={form.dateOfBirth} onChange={onInput} error={errors.dateOfBirth} type="date" max={EVENT.startsAt.slice(0, 10)} autoComplete="bday" />
+      <Field name="age" label={tf("age")} value={form.age} onChange={onInput} error={errors.age} type="number" inputMode="numeric" min={1} max={MAX_AGE} step={1} placeholder={tf("agePlaceholder")} />
       <Choices
         name="gender_id"
         legend={tf("gender")}

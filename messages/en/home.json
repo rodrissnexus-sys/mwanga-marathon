@@ -225,15 +225,15 @@
       "nationalityRequired": "Nationality category is required",
       "nationalityAgain": "Please select a nationality category again",
       "nationalityAndCountry": "Please select a nationality category and country",
-      "dobRequired": "Date of birth is required",
       "genderRequired": "Gender is required",
       "emergencyNameRequired": "Emergency contact name is required",
       "emergencyNumberRequired": "Emergency contact number is required",
       "nationalityIncomplete": "Nationality information is incomplete. Please go back and select your nationality again.",
-      "dobInvalid": "Please check the date of birth",
       "phoneInvalid": "Please enter a full phone number",
       "countryRequired": "Please choose your country",
-      "submitFailed": "We could not save your registration. Please check your details and try again."
+      "submitFailed": "We could not save your registration. Please check your details and try again.",
+      "ageRequired": "Age is required",
+      "ageInvalid": "Please enter your age in years"
     },
     "nationality": {
       "tz_ea": "Tanzania and East Africa Citizens",
@@ -282,7 +282,6 @@
     "enterIdNumber": "Enter ID number",
     "passportNumber": "Passport Number",
     "enterPassportNumber": "Enter passport number",
-    "dateOfBirth": "Date of Birth",
     "gender": "Gender",
     "selectGender": "Select Gender",
     "country": "Country",
@@ -332,7 +331,9 @@
     "genders": {
       "M": "Male",
       "F": "Female"
-    }
+    },
+    "age": "Age",
+    "agePlaceholder": "e.g. 28"
   },
   "heroEvent": {
     "dateVenue": "20 December 2026 · C.D. Msuya Stadium, Mwanga",

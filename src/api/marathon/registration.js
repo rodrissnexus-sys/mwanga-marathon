@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/client';
 import { currentLocale, failure, localize } from '@/lib/content';
 import * as server from '@/server/registrations';
+import { registrationAge } from '@/lib/payments';
 
 // Same nested shape the Laravel API returned (event, shirt_size, …).
 const RELATIONS = `*,
@@ -35,7 +36,7 @@ export const registerParticipant = async (registrationData) => {
             nationality_category: registrationData.nationality || null,
             id_number: registrationData.idNumber,
             passport_number: registrationData.passportNumber,
-            date_of_birth: registrationData.dateOfBirth,
+            age: registrationData.age,
             gender_id: registrationData.gender_id,
             country_id: registrationData.country_id,
             emergency_contact_name: registrationData.emergencyContactName,
@@ -195,6 +196,7 @@ const CSV_COLUMNS = [
     ['Kids t-shirt', (r) => r.kids_shirt_size?.code],
     ['Collection venue', (r) => r.collection_venue?.name],
     ['Gender', (r) => r.gender?.name],
+    ['Age', (r) => registrationAge(r)],
     ['Date of birth', (r) => r.date_of_birth],
     ['Nationality', (r) => r.nationality?.name],
     ['Country', (r) => r.country?.name],

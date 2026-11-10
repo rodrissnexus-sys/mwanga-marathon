@@ -33,7 +33,7 @@ async function createRegistration(tag: string) {
     body: JSON.stringify({
       first_name: "Payment", last_name: "Check", email, phone_number: "000",
       event_id: 2, shirt_size_id: 1, collection_venue_id: 1, country_id: 1, nationality_id: 1,
-      gender_id: 1, date_of_birth: "1990-01-01", emergency_contact_name: "X", emergency_contact_number: "000",
+      gender_id: 1, age: 36, emergency_contact_name: "X", emergency_contact_number: "000",
     }),
   });
   expect(created.status).toBe(201);

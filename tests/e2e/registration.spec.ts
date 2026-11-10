@@ -9,8 +9,8 @@ const TEXT = {
 // English: an adult choosing "student"; Swahili: a child (type and kids'
 // T-shirt sizes follow from the date of birth).
 const PERSON = {
-  en: { dateOfBirth: "1990-05-05", category: "student" },
-  sw: { dateOfBirth: "2018-03-01", category: "child" },
+  en: { age: "36", category: "student" },
+  sw: { age: "8", category: "child" },
 } as const;
 
 async function register(page: Page, locale: "en" | "sw", email: string) {
@@ -27,7 +27,7 @@ async function register(page: Page, locale: "en" | "sw", email: string) {
   await form.locator('input[name="lastName"]').fill(locale.toUpperCase());
   await form.locator('input[name="phoneNumber"]').fill("+255700000001");
   await form.locator('input[name="email"]').fill(email);
-  await form.locator('input[name="dateOfBirth"]').fill(PERSON[locale].dateOfBirth);
+  await form.locator('input[name="age"]').fill(PERSON[locale].age);
   await expect(form.locator('input[name="gender_id"]')).toHaveCount(2); // male and female only
   await choose("gender_id");
   await form.getByRole("button", { name: t.next }).click();
